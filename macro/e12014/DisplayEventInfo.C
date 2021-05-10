@@ -199,7 +199,7 @@ void plotInfoVsEvent(int tpcRun = 206)
 	 
 
 
-   const int numEvents = 200;
+   const int numEvents = 1000;
    int FissionEvents = 0; //To count events that pass certain criteria
    int indexEvents[200]; //To plot against event number
    double maxADCs[200]; //To store max ADC signal in any pad for each event

@@ -14,8 +14,7 @@ void unpack(int runNumber)
   TString inputFile = TString::Format("/mnt/rawdata/e12014_attpc/h5/run_%04d.h5", runNumber);
 
   //Set the output file
-  TString outputFile = TString::Format("/mnt/analysis/e12014/TPC/unpacked/run_%04d.root", runNumber);
-  
+  TString outputFile = TString::Format("/mnt/analysis/hira_collaboration/e12014/Joe/UnpackedRuns/run_%04d.root", runNumber);
   std::cout << "Unpacking run " << runNumber << " from: " << inputFile << std::endl;
   std::cout << "Saving in: " << outputFile << std::endl;
 
@@ -108,7 +107,7 @@ void unpack(int runNumber)
   auto numEvents = HDFParserTask->GetNumEvents()/2;
 
   //numEvents = 1700;//217;
-  numEvents = 10;
+  //numEvents = 10;
   
   std::cout << "Unpacking " << numEvents << " events. " << std::endl;
 

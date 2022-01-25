@@ -26,7 +26,7 @@ Set(DEPENDENCIES
   Base
   FairTools
   ROOT::Core
-  AtData
+  AtSimulationData
 )
 
 generate_target_root_library(${LIBRARY_NAME}

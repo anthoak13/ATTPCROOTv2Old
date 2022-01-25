@@ -30,7 +30,7 @@ Set(DEPENDENCIES
   AtAnalysis
   AtTpcMap
   AtParameter
-  AtData
+  AtSimulationData
   
   ROOT::Spectrum
   ROOT::Core

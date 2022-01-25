@@ -1,6 +1,6 @@
-# Create a library called "libAtData"
+# Create a library called "libAtSimulationData"
 
-Set(target AtData)
+Set(target AtSimulationData)
 Set(LINKDEF MCStackLinkDef.h)
 
 set(sources

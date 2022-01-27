@@ -8,10 +8,10 @@ Set(DEPENDENCIES
 
   ROOT::Core
   ROOT::GenVector
-  
+
   AtSimulationData
+  AtData
   AtParameter
-  AtReconstruction
   AtTpcMap
 )
 

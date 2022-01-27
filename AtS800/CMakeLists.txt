@@ -41,8 +41,8 @@ Set(DEPENDENCIES
     FairTools
     ROOT::Core
     ROOT::TreePlayer
-
-    AtReconstruction
+    AtData
+#    AtReconstruction
 )
 
 generate_target_root_library(${LIBRARY_NAME}

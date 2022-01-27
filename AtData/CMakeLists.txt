@@ -16,8 +16,6 @@ Set(DEPENDENCIES
   Base
   FairTools
 
-  #AtReconstruction
-
   ROOT::Spectrum
   ROOT::Core
   ROOT::GenVector

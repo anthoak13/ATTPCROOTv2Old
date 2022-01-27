@@ -28,6 +28,7 @@ Set(DEPENDENCIES
     EventDisplay
     ROOT::Eve
 
+    AtData
     AtReconstruction
     AtTpcMap
     AtS800

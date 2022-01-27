@@ -31,7 +31,8 @@ Set(DEPENDENCIES
   AtTpcMap
   AtParameter
   AtSimulationData
-  
+  AtData
+
   ROOT::Spectrum
   ROOT::Core
   
@@ -52,17 +53,6 @@ set(LINK_DIRECTORIES
 set(SRCS
   # Add all the source files below this line. Those must have cxx for their extension.
 
-  AtDecoder/AtPad.cxx
-  AtDecoder/AtRawEvent.cxx
-  AtDecoder/AtHit.cxx
-  AtDecoder/AtHitCluster.cxx
-  AtDecoder/AtEvent.cxx
-  AtDecoder/AtProtoEvent.cxx
-  AtDecoder/AtProtoEventAna.cxx
-  AtDecoder/AtTrackingEventAna.cxx
-  AtDecoder/AtPatternEvent.cxx
-  AtDecoder/AtProtoQuadrant.cxx
-  AtDecoder/AtTrack.cxx
   AtDecoder/AtHDFParser.cxx
 
   AtPulseAnalyzer/AtPSA.cxx
@@ -84,7 +74,7 @@ set(SRCS
   AtFilterTask.cxx
   AtAuxFilterTask.cxx
   AtDataReductionTask.cxx
-  
+
   )
 
 ### Add additional sources and libraries if we found certain modules ###

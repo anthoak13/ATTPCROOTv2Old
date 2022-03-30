@@ -62,10 +62,8 @@ public:
    void SetInputBranchName(TString inputName);
    void SetOutputBranchName(TString outputName);
 
-
    virtual InitStatus Init() override;
    virtual void Exec(Option_t *opt) override;
-
 
    ClassDefOverride(AtRansacTask, 2);
 };

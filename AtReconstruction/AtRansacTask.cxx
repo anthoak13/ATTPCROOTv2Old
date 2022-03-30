@@ -10,7 +10,6 @@
 
 ClassImp(AtRansacTask);
 
-
 AtRansacTask::AtRansacTask() : fInputBranchName("AtEventH"), fOutputBranchName("AtRansac")
 
 {
@@ -91,14 +90,12 @@ void AtRansacTask::SetVertexMode(Int_t value)
 }
 void AtRansacTask::SetInputBranchName(TString inputName)
 {
-	fInputBranchName = inputName;
+   fInputBranchName = inputName;
 }
 void AtRansacTask::SetOutputBranchName(TString outputName)
 {
-	fOutputBranchName = outputName;
+   fOutputBranchName = outputName;
 }
-
-
 
 InitStatus AtRansacTask::Init()
 {
@@ -122,7 +119,6 @@ InitStatus AtRansacTask::Init()
       return kERROR;
    }
 
-
    fEventArray = (TClonesArray *)ioMan->GetObject(fInputBranchName);
    if (fEventArray == nullptr) {
 
@@ -135,7 +131,6 @@ InitStatus AtRansacTask::Init()
    if (kIsReprocess) {
 
       ioMan->Register("AtEventH", "AtTPC", fEventArray, kIsPersistence);
-
    }
 
    return kSUCCESS;

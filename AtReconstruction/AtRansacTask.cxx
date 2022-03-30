@@ -10,7 +10,9 @@
 
 ClassImp(AtRansacTask);
 
+
 AtRansacTask::AtRansacTask() : fInputBranchName("AtEventH"), fOutputBranchName("AtRansac")
+
 {
 
    kIsPersistence = kFALSE;
@@ -87,6 +89,16 @@ void AtRansacTask::SetVertexMode(Int_t value)
 {
    fVertexMode = value;
 }
+void AtRansacTask::SetInputBranchName(TString inputName)
+{
+	fInputBranchName = inputName;
+}
+void AtRansacTask::SetOutputBranchName(TString outputName)
+{
+	fOutputBranchName = outputName;
+}
+
+
 
 InitStatus AtRansacTask::Init()
 {
@@ -110,8 +122,10 @@ InitStatus AtRansacTask::Init()
       return kERROR;
    }
 
+
    fEventArray = (TClonesArray *)ioMan->GetObject(fInputBranchName);
    if (fEventArray == nullptr) {
+
       LOG(error) << "Cannot find AtEvent array!";
       return kERROR;
    }
@@ -119,7 +133,9 @@ InitStatus AtRansacTask::Init()
    ioMan->Register(fOutputBranchName, "AtTPC", fRansacArray, kIsPersistence);
 
    if (kIsReprocess) {
+
       ioMan->Register("AtEventH", "AtTPC", fEventArray, kIsPersistence);
+
    }
 
    return kSUCCESS;

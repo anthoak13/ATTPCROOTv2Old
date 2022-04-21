@@ -19,6 +19,7 @@
 class TBuffer;
 class TClass;
 class TMemberInspector;
+class TH1D;
 
 class AtPad : public TObject {
 public:
@@ -65,6 +66,9 @@ public:
 
    const trace &GetADC() const;
    Double_t GetADC(Int_t idx) const;
+   // std::unique_ptr<TH1D> GetADCHistrogram() const;
+   TH1D *GetADCHistrogram() const;
+
    const rawTrace &GetRawADC() const { return fRawAdc; }
    Int_t GetRawADC(Int_t idx) const { return fRawAdc[idx]; }
 

@@ -6,10 +6,11 @@
 
 Double_t AtPadFFT::GetPointRe(int i)
 {
+
    if (i < fRe.size())
       return fRe[i];
    else
-      return fRe.at(i - fRe.size());
+      return fRe.at(fAdc.size() - i);
 }
 
 Double_t AtPadFFT::GetPointIm(int i)
@@ -17,21 +18,21 @@ Double_t AtPadFFT::GetPointIm(int i)
    if (i < fIm.size())
       return fIm[i];
    else
-      return -fIm.at(i - fIm.size());
+      return -fIm.at(fAdc.size() - i);
 }
 void AtPadFFT::SetPointRe(int i, Double_t val)
 {
    if (i < fRe.size())
       fRe[i] = val;
    else
-      fRe.at(i - fRe.size()) = val;
+      fRe.at(fAdc.size() - i) = val;
 }
 void AtPadFFT::SetPointIm(int i, Double_t val)
 {
    if (i < fIm.size())
       fIm[i] = val;
    else
-      fIm.at(i - fIm.size()) = -val;
+      fIm.at(fAdc.size() - i) = -val;
 }
 
 void AtPadFFT::SetData(TraceTrans re, TraceTrans im)
@@ -46,7 +47,7 @@ void AtPadFFT::GetDataFromFFT(TVirtualFFT *fft)
    fft->GetPointsComplex(fRe.data(), fIm.data());
    for (auto &re : fRe)
       re /= fft->GetN()[0];
-   for (auto &im : fRe)
+   for (auto &im : fIm)
       im /= fft->GetN()[0];
 }
 

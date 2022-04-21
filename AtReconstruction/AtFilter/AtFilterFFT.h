@@ -28,7 +28,7 @@
 
 class AtPadFFT;
 
-class AtFFTFilter : public AtFilter {
+class AtFilterFFT : public AtFilter {
 
    // Forward declares and alias declerations
 public:
@@ -55,8 +55,8 @@ protected:
    TClonesArray fTransformArray{"AtRawEvent", 1};
 
 public:
-   AtFFTFilter() = default;
-   ~AtFFTFilter() = default;
+   AtFilterFFT() = default;
+   ~AtFilterFFT() = default;
 
    bool AddFreqRange(AtFreqRange range); // Range is inclusive
    void SetSaveTransform(bool saveTransform) { fSaveTransform = saveTransform; }

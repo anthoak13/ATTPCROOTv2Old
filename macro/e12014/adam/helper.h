@@ -24,14 +24,16 @@
 #endif
 
 // "public functions"
-void loadRun(TString filePath, TString rawEventBranchName = "AtRawEventFiltered",
-             TString eventBranchName = "AtEventFiltered", TString ransacBranchName = "AtRansac");
+void loadRun(TString filePath, TString rawEventBranchName = "AtRawEvent",
+             TString rawEventFilteredBranchName = "AtRawEventFiltered", TString eventBranchName = "AtEventFiltered",
+             TString ransacBranchName = "AtRansac");
 bool loadEvent(ULong64_t eventNumber);
 bool loadPad(int padNum);
 bool nextEvent();
 
 /**** "public" variables ******/
 AtRawEvent *rawEventPtr;
+AtRawEvent *rawEventFilteredPtr;
 AtEvent *eventPtr;
 AtRANSACN::AtRansac *ransacPtr;
 AtTpcMap *tpcMap = nullptr;
@@ -40,12 +42,14 @@ AtTpcMap *tpcMap = nullptr;
 TChain *tpcTree = nullptr;
 TTreeReader *reader = nullptr;
 TTreeReaderValue<TClonesArray> *rawEventReader = nullptr;
+TTreeReaderValue<TClonesArray> *eventFilteredReader = nullptr;
 TTreeReaderValue<TClonesArray> *eventReader = nullptr;
 TTreeReaderValue<TClonesArray> *ransacReader = nullptr;
 
 TH1F *hTrace = new TH1F("trace", "Trace", 512, 0, 511);
 
-void loadRun(TString filePath, TString rawEventBranchName, TString eventBranchName, TString ransacBranchName)
+void loadRun(TString filePath, TString rawEventBranchName, TString rawEventFilteredBranchName, TString eventBranchName,
+             TString ransacBranchName)
 {
    if (tpcMap == nullptr) {
       tpcMap = new AtTpcMap();
@@ -74,12 +78,20 @@ void loadRun(TString filePath, TString rawEventBranchName, TString eventBranchNa
       delete eventReader;
    eventReader = new TTreeReaderValue<TClonesArray>(*reader, eventBranchName);
 
+   if (eventFilteredReader != nullptr)
+      delete eventFilteredReader;
+   if (tpcTree->GetBranch(rawEventFilteredBranchName) != nullptr)
+      eventFilteredReader = new TTreeReaderValue<TClonesArray>(*reader, rawEventFilteredBranchName);
+   else
+      LOG(error) << "Could not find filtered raw event branch " << rawEventFilteredBranchName;
+
    if (ransacReader != nullptr)
       delete ransacReader;
    if (tpcTree->GetBranch(ransacBranchName) != nullptr)
       ransacReader = new TTreeReaderValue<TClonesArray>(*reader, ransacBranchName);
    else
       LOG(error) << "Could not find RANSAC branch " << ransacBranchName;
+   loadEvent(0);
 }
 
 bool loadEvent(ULong64_t eventNumber)
@@ -92,6 +104,8 @@ bool loadEvent(ULong64_t eventNumber)
 
    rawEventPtr = dynamic_cast<AtRawEvent *>((*rawEventReader)->At(0));
    eventPtr = dynamic_cast<AtEvent *>((*eventReader)->At(0));
+   if (eventFilteredReader != nullptr)
+      rawEventFilteredPtr = dynamic_cast<AtRawEvent *>((*eventFilteredReader)->At(0));
    if (ransacReader != nullptr)
       ransacPtr = dynamic_cast<AtRANSACN::AtRansac *>((*ransacReader)->At(0));
 
@@ -116,6 +130,8 @@ bool nextEvent()
    auto ret = reader->Next();
    rawEventPtr = dynamic_cast<AtRawEvent *>((*rawEventReader)->At(0));
    eventPtr = dynamic_cast<AtEvent *>((*eventReader)->At(0));
+   if (eventFilteredReader != nullptr)
+      rawEventFilteredPtr = dynamic_cast<AtRawEvent *>((*eventFilteredReader)->At(0));
    if (ransacReader != nullptr)
       ransacPtr = dynamic_cast<AtRANSACN::AtRansac *>((*ransacReader)->At(0));
 

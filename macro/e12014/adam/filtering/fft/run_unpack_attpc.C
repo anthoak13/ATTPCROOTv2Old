@@ -83,7 +83,7 @@ void run_unpack_attpc(int runNumber = 210)
    filter->SetIsGood(false);
    */
 
-   AtFFTFilter *filter = new AtFFTFilter();
+   auto *filter = new AtFilterFFT();
    filter->SetSaveTransform(true);
    filter->SetSaveFilteredTransform(true);
    filter->AddFreqRange({0, 0.3, 20, 1});

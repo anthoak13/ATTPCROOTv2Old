@@ -1,4 +1,4 @@
-#include "AtFFTFilter.h"
+#include "AtFilterFFT.h"
 
 #include "AtPad.h"
 #include "AtPadFFT.h"
@@ -8,10 +8,11 @@
 #include <FairRootManager.h>
 
 #include <Rtypes.h>
+#include <TCanvas.h>
 #include <TH1.h>
 #include <TVirtualFFT.h>
 
-bool AtFFTFilter::AddFreqRange(AtFreqRange range)
+bool AtFilterFFT::AddFreqRange(AtFreqRange range)
 {
    auto canAdd = isValidFreqRange(range);
    if (canAdd) {
@@ -23,7 +24,7 @@ bool AtFFTFilter::AddFreqRange(AtFreqRange range)
    return canAdd;
 }
 
-void AtFFTFilter::Init()
+void AtFilterFFT::Init()
 {
    std::vector<Int_t> dimSize = {512};
 
@@ -38,7 +39,7 @@ void AtFFTFilter::Init()
    FairRootManager::Instance()->Register("AtEventFFT", "AtTPC", &fTransformArray, fSaveTransform);
 }
 
-AtRawEvent *AtFFTFilter::ConstructOutputEvent(TClonesArray *outputEventArray, AtRawEvent *inputEvent)
+AtRawEvent *AtFilterFFT::ConstructOutputEvent(TClonesArray *outputEventArray, AtRawEvent *inputEvent)
 {
    // Just do a copy if we're not intrested in saving the transformed output
    if (!fSaveCutTransform)
@@ -54,14 +55,14 @@ AtRawEvent *AtFFTFilter::ConstructOutputEvent(TClonesArray *outputEventArray, At
    return coppiedEvt;
 }
 
-void AtFFTFilter::InitEvent(AtRawEvent *event)
+void AtFilterFFT::InitEvent(AtRawEvent *event)
 {
    fTransformArray.Clear();
    auto transformedEvent = dynamic_cast<AtRawEvent *>(fTransformArray.ConstructedAt(0));
    transformedEvent->CopyAllButData(event);
 }
 
-void AtFFTFilter::Filter(AtPad *pad)
+void AtFilterFFT::Filter(AtPad *pad)
 {
    // Get the event we will use to store the transformation as we go
    auto transformedEvent = dynamic_cast<AtRawEvent *>(fTransformArray.ConstructedAt(0));
@@ -83,9 +84,35 @@ void AtFFTFilter::Filter(AtPad *pad)
    fFFTbackward->Transform();
    for (int i = 0; i < filteredPad->GetADC().size(); ++i)
       filteredPad->SetADC(i, fFFTbackward->GetPointReal(i));
+
+   if (pad->GetPadNum() == 10) {
+      auto canv = new TCanvas();
+      canv->Divide(2, 2);
+      auto hist = transfPad->GetADCHistrogram();
+      auto histFiltered = filteredPad->GetADCHistrogram();
+      auto histMag = new TH1D("mag", "Mag", 512, 0, 512);
+      auto histMagFiltered = new TH1D("magFilt", "Mag", 512, 0, 512);
+      for (int i = 0; i < 512; ++i) {
+         auto mag = std::sqrt(transfPad->GetPointRe(i) * transfPad->GetPointRe(i) +
+                              transfPad->GetPointIm(i) * transfPad->GetPointIm(i));
+         auto magFilter = std::sqrt(filteredPad->GetPointRe(i) * filteredPad->GetPointRe(i) +
+                                    filteredPad->GetPointIm(i) * filteredPad->GetPointIm(i));
+         histMag->SetBinContent(i + 1, mag);
+         histMagFiltered->SetBinContent(1 + i, magFilter);
+      }
+
+      canv->cd(1);
+      hist->Draw();
+      canv->cd(2);
+      histMag->Draw();
+      canv->cd(3);
+      histFiltered->Draw();
+      canv->cd(4);
+      histMagFiltered->Draw();
+   }
 }
 
-bool AtFFTFilter::isValidFreqRange(const AtFreqRange &range)
+bool AtFilterFFT::isValidFreqRange(const AtFreqRange &range)
 {
    bool isValid = true;
    isValid &= range.fBeginFreq <= range.fEndFreq;
@@ -95,7 +122,7 @@ bool AtFFTFilter::isValidFreqRange(const AtFreqRange &range)
    return isValid;
 }
 
-bool AtFFTFilter::doesFreqRangeOverlap(const AtFreqRange &newRange)
+bool AtFilterFFT::doesFreqRangeOverlap(const AtFreqRange &newRange)
 {
    for (auto &range : fFreqRanges) {
       // Check to make sure the minimum frequency does not exist within the bounds
@@ -117,7 +144,7 @@ bool AtFFTFilter::doesFreqRangeOverlap(const AtFreqRange &newRange)
    return false;
 }
 
-void AtFFTFilter::applyFrequencyCuts(AtPadFFT *pad)
+void AtFilterFFT::applyFrequencyCuts(AtPadFFT *pad)
 {
    for (const auto &pair : fFactors) {
       auto i = pair.first;
@@ -126,12 +153,12 @@ void AtFFTFilter::applyFrequencyCuts(AtPadFFT *pad)
    }
 }
 
-bool operator<(const AtFFTFilter::AtFreqRange &lhs, const AtFFTFilter::AtFreqRange &rhs)
+bool operator<(const AtFilterFFT::AtFreqRange &lhs, const AtFilterFFT::AtFreqRange &rhs)
 {
    return lhs.fBeginFreq < rhs.fBeginFreq;
 }
 
-void AtFFTFilter::DumpFactors()
+void AtFilterFFT::DumpFactors()
 {
    for (const auto &pair : fFactors)
       std::cout << pair.first << " " << pair.second << std::endl;

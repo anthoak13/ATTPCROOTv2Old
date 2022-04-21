@@ -46,7 +46,7 @@ set(SRCS
   AtFilter/AtFilterDivide.cxx
   AtFilter/AtTrapezoidFilter.cxx
   AtFilter/AtFilterCalibrate.cxx
-  AtFilter/AtFFTFilter.cxx
+  AtFilter/AtFilterFFT.cxx
   
   AtPSAtask.cxx
   AtFilterTask.cxx

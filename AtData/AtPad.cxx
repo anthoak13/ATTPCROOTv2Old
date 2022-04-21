@@ -14,11 +14,7 @@
 
 ClassImp(AtPad);
 
-AtPad::AtPad(Int_t PadNum) : fPadNum(PadNum)
-{
-   // fIsAux = kFALSE;
-   // fAuxName = "noname";
-}
+AtPad::AtPad(Int_t PadNum) : fPadNum(PadNum) {}
 
 const AtPad::trace &AtPad::GetADC() const
 {

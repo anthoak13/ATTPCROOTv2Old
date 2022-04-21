@@ -14,18 +14,20 @@
 #include <TSystem.h>
 #include <TTreeReader.h>
 
-#include "../../../build/include/AtDecoder/AtAuxPad.h"
-#include "../../../build/include/AtDecoder/AtEvent.h"
-#include "../../../build/include/AtDecoder/AtPad.h"
-#include "../../../build/include/AtDecoder/AtRawEvent.h"
-#include "../../../build/include/AtRansac/AtRansac.h"
+#ifndef __CLING__
+#include "../../../build/include/AtAuxPad.h"
+#include "../../../build/include/AtEvent.h"
+#include "../../../build/include/AtPad.h"
+#include "../../../build/include/AtRansac.h"
+#include "../../../build/include/AtRawEvent.h"
 #include "../../../build/include/AtTpcMap.h"
+#endif
 
 // "public functions"
 void loadRun(TString filePath, TString rawEventBranchName = "AtRawEventFiltered",
              TString eventBranchName = "AtEventFiltered", TString ransacBranchName = "AtRansac");
 bool loadEvent(ULong64_t eventNumber);
-void loadPad(int padNum);
+bool loadPad(int padNum);
 bool nextEvent();
 
 /**** "public" variables ******/
@@ -52,7 +54,7 @@ void loadRun(TString filePath, TString rawEventBranchName, TString eventBranchNa
       tpcMap->AddAuxPad({10, 0, 0, 34}, "TPC_Mesh");
       tpcMap->AddAuxPad({10, 0, 1, 0}, "MCP_DS");
       tpcMap->AddAuxPad({10, 0, 2, 34}, "IC");
-      tpcMap->GenerateAtTpc();
+      tpcMap->GeneratePadPlane();
    }
 
    if (tpcTree != nullptr)
@@ -96,16 +98,17 @@ bool loadEvent(ULong64_t eventNumber)
    return true;
 }
 
-void loadPad(int padNum)
+bool loadPad(int padNum)
 {
    auto pad = rawEventPtr->GetPad(padNum);
    if (pad == nullptr) {
       std::cout << "Pad number " << padNum << " is not valid for this event." << std::endl;
-      return;
+      return false;
    }
 
    for (int i = 0; i < 512; ++i)
       hTrace->SetBinContent(i + 1, pad->GetADC(i));
+   return true;
 }
 
 bool nextEvent()

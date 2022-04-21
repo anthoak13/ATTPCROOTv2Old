@@ -36,9 +36,6 @@ protected:
    rawTrace fRawAdc{};
    trace fAdc{};
 
-   // Bool_t fIsAux;
-   // std::string fAuxName;
-
 public:
    AtPad(Int_t PadNum = -1);
    AtPad(const AtPad &obj) = default;

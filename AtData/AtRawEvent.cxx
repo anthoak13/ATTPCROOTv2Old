@@ -28,6 +28,13 @@ AtRawEvent::AtRawEvent(const AtRawEvent &obj)
    for (const auto &pad : obj.fPadList)
       fPadList.push_back(std::make_unique<AtPad>(*pad));
 }
+void AtRawEvent::CopyAllButData(AtRawEvent *event)
+{
+   fEventID = event->fEventID;
+   fTimestamp = event->fTimestamp;
+   fIsGood = event->fIsGood;
+   fIsInGate = event->fIsInGate;
+}
 
 void AtRawEvent::Clear(Option_t *opt)
 {

@@ -12,6 +12,8 @@
 
 #include "AtAuxPad.h"
 
+#include <FairLogger.h>
+
 #include <Rtypes.h>
 #include <TNamed.h>
 
@@ -53,13 +55,21 @@ public:
    AtRawEvent(const AtRawEvent &object);
    ~AtRawEvent() = default;
 
+   // Copy everything but the data (pads, aux pads, and MCPointMap) to this event
+   void CopyAllButData(AtRawEvent *event);
+
    void Clear(Option_t *opt = nullptr) override;
 
-   // As an input takes parameters for any constructor of AtPad
+   // As an input takes parameters for any constructor of AtPad, or a unique_ptr<AtPad>
    template <typename... Ts>
    AtPad *AddPad(Ts &&...params)
    {
       fPadList.push_back(std::make_unique<AtPad>(std::forward<Ts>(params)...));
+      return fPadList.back().get();
+   }
+   AtPad *AddPad(AtPadPtr ptr)
+   {
+      fPadList.push_back(std::move(ptr));
       return fPadList.back().get();
    }
    // Returns a pointer to the newly added pad, or existing pad if auxName is already used

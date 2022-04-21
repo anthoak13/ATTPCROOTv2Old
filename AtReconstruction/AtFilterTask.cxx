@@ -13,6 +13,7 @@
 // Root Classes
 #include "AtFilter.h"
 #include "AtRawEvent.h"
+
 // AtTPCRoot Classes
 #include "AtAuxPad.h"
 
@@ -69,8 +70,8 @@ void AtFilterTask::Exec(Option_t *opt)
    if (fInputEventArray->GetEntriesFast() == 0)
       return;
 
-   auto *rawEvent = dynamic_cast<AtRawEvent *>(fInputEventArray->At(0));
-   auto *filteredEvent = (AtRawEvent *)new ((*fOutputEventArray)[0]) AtRawEvent(*rawEvent);
+   auto rawEvent = dynamic_cast<AtRawEvent *>(fInputEventArray->At(0));
+   auto filteredEvent = fFilter->ConstructOutputEvent(fOutputEventArray, rawEvent);
 
    if (!rawEvent->IsGood())
       return;

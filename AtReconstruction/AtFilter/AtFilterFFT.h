@@ -53,6 +53,8 @@ protected:
    Bool_t fSaveCutTransform{false};
 
    TClonesArray fTransformArray{"AtRawEvent", 1};
+   AtRawEvent *fTransformedEvent{nullptr};
+   AtRawEvent *fFilteredEvent{nullptr};
 
 public:
    AtFilterFFT() = default;
@@ -75,7 +77,7 @@ public:
    void DumpFactors();
 
 protected:
-   virtual void applyFrequencyCuts(AtPadFFT *pad);
+   virtual void applyFrequencyCutsAndSetInverseFFT();
 
 private:
    bool isValidFreqRange(const AtFreqRange &range);

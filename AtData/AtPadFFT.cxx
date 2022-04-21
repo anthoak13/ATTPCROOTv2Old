@@ -44,7 +44,8 @@ void AtPadFFT::SetData(TraceTrans re, TraceTrans im)
 void AtPadFFT::GetDataFromFFT(TVirtualFFT *fft)
 {
    assert(fft->GetN()[0] / 2 + 1 == fRe.size());
-   fft->GetPointsComplex(fRe.data(), fIm.data());
+   for (int i = 0; i < fRe.size(); ++i)
+      fft->GetPointComplex(i, fRe.at(i), fIm.at(i));
    for (auto &re : fRe)
       re /= fft->GetN()[0];
    for (auto &im : fIm)

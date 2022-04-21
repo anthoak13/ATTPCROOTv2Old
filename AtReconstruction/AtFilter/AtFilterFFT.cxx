@@ -9,6 +9,7 @@
 
 #include <Rtypes.h>
 #include <TCanvas.h>
+#include <TComplex.h>
 #include <TH1.h>
 #include <TVirtualFFT.h>
 
@@ -17,8 +18,8 @@ bool AtFilterFFT::AddFreqRange(AtFreqRange range)
    auto canAdd = isValidFreqRange(range);
    if (canAdd) {
       fFreqRanges.push_back(std::move(range));
-      auto dFact = (range.fEndFact - range.fBeginFact) / (range.fEndFreq - range.fBeginFreq - 1);
-      for (int i = range.fBeginFreq; i < range.fEndFreq; ++i)
+      auto dFact = (range.fEndFact - range.fBeginFact) / (range.fEndFreq - range.fBeginFreq);
+      for (int i = range.fBeginFreq; i <= range.fEndFreq; ++i)
          fFactors[i] = range.fBeginFact + dFact * (i - range.fBeginFreq);
    }
    return canAdd;
@@ -36,7 +37,8 @@ void AtFilterFFT::Init()
    // and is a backwards transform from complex to Reak ("C2R")
    fFFTbackward = std::unique_ptr<TVirtualFFT>(TVirtualFFT::FFT(1, dimSize.data(), "C2R M K"));
 
-   FairRootManager::Instance()->Register("AtEventFFT", "AtTPC", &fTransformArray, fSaveTransform);
+   if(fSaveTransform) // Hide this in an if so it can run outside of a FairRoot instance
+      FairRootManager::Instance()->Register("AtEventFFT", "AtTPC", &fTransformArray, true);
 }
 
 AtRawEvent *AtFilterFFT::ConstructOutputEvent(TClonesArray *outputEventArray, AtRawEvent *inputEvent)
@@ -46,70 +48,42 @@ AtRawEvent *AtFilterFFT::ConstructOutputEvent(TClonesArray *outputEventArray, At
       return new ((*outputEventArray)[0]) AtRawEvent(*inputEvent);
 
    // Make a copy of the event changing the pad type to AtPadFFT (for trasnformation information)
-   auto coppiedEvt = dynamic_cast<AtRawEvent *>(new ((*outputEventArray)[0]) AtRawEvent());
-   coppiedEvt->CopyAllButData(inputEvent);
+   // and return that
+   fFilteredEvent = dynamic_cast<AtRawEvent *>(new ((*outputEventArray)[0]) AtRawEvent());
+   fFilteredEvent->CopyAllButData(inputEvent);
    for (auto &pad : inputEvent->GetPads())
-      coppiedEvt->AddPad(std::unique_ptr<AtPad>(new AtPadFFT(*pad)));
-   std::cout << "Copied raw event to " << coppiedEvt << std::endl;
-
-   return coppiedEvt;
+      fFilteredEvent->AddPad(std::unique_ptr<AtPad>(new AtPadFFT(*pad)));
+   return fFilteredEvent;
 }
 
 void AtFilterFFT::InitEvent(AtRawEvent *event)
 {
    fTransformArray.Clear();
-   auto transformedEvent = dynamic_cast<AtRawEvent *>(fTransformArray.ConstructedAt(0));
-   transformedEvent->CopyAllButData(event);
+   fTransformedEvent = dynamic_cast<AtRawEvent *>(fTransformArray.ConstructedAt(0));
+   fTransformedEvent->CopyAllButData(event);
 }
 
 void AtFilterFFT::Filter(AtPad *pad)
 {
-   // Get the event we will use to store the transformation as we go
-   auto transformedEvent = dynamic_cast<AtRawEvent *>(fTransformArray.ConstructedAt(0));
-
-   // Add the pad to the transformed event, and then fill it with the transformed data
-   auto transfPad = dynamic_cast<AtPadFFT *>(transformedEvent->AddPad(std::unique_ptr<AtPad>(new AtPadFFT(*pad))));
-   fFFT->SetPoints(transfPad->GetADC().data());
+   // Get data and transform
+   fFFT->SetPoints(pad->GetADC().data());
    fFFT->Transform();
-   transfPad->GetDataFromFFT(fFFT.get());
-
-   auto filteredPad = dynamic_cast<AtPadFFT *>(pad);
-
-   // Apply the frequency cuts and setup the FFT with the filtered data
-   filteredPad->GetDataFromFFT(fFFT.get());
-   applyFrequencyCuts(filteredPad);
-   filteredPad->SetFFTData(fFFTbackward.get());
-
-   // Transform back to time-space and update the trace
+   applyFrequencyCutsAndSetInverseFFT();
    fFFTbackward->Transform();
-   for (int i = 0; i < filteredPad->GetADC().size(); ++i)
-      filteredPad->SetADC(i, fFFTbackward->GetPointReal(i));
 
-   if (pad->GetPadNum() == 10) {
-      auto canv = new TCanvas();
-      canv->Divide(2, 2);
-      auto hist = transfPad->GetADCHistrogram();
-      auto histFiltered = filteredPad->GetADCHistrogram();
-      auto histMag = new TH1D("mag", "Mag", 512, 0, 512);
-      auto histMagFiltered = new TH1D("magFilt", "Mag", 512, 0, 512);
-      for (int i = 0; i < 512; ++i) {
-         auto mag = std::sqrt(transfPad->GetPointRe(i) * transfPad->GetPointRe(i) +
-                              transfPad->GetPointIm(i) * transfPad->GetPointIm(i));
-         auto magFilter = std::sqrt(filteredPad->GetPointRe(i) * filteredPad->GetPointRe(i) +
-                                    filteredPad->GetPointIm(i) * filteredPad->GetPointIm(i));
-         histMag->SetBinContent(i + 1, mag);
-         histMagFiltered->SetBinContent(1 + i, magFilter);
-      }
-
-      canv->cd(1);
-      hist->Draw();
-      canv->cd(2);
-      histMag->Draw();
-      canv->cd(3);
-      histFiltered->Draw();
-      canv->cd(4);
-      histMagFiltered->Draw();
+   if (fSaveTransform) {
+      // Copy the pad to the unfiltered event before updating pad's adc values
+      auto transformedPad =
+         dynamic_cast<AtPadFFT *>(fTransformedEvent->AddPad(std::unique_ptr<AtPad>(new AtPadFFT(*pad))));
+      // Add the result of the transformation
+      transformedPad->GetDataFromFFT(fFFT.get());
    }
+
+   if (fSaveCutTransform)
+      dynamic_cast<AtPadFFT *>(pad)->GetDataFromFFT(fFFTbackward.get());
+
+   for (int i = 0; i < pad->GetADC().size(); ++i)
+      pad->SetADC(i, fFFTbackward->GetPointReal(i));
 }
 
 bool AtFilterFFT::isValidFreqRange(const AtFreqRange &range)
@@ -144,12 +118,16 @@ bool AtFilterFFT::doesFreqRangeOverlap(const AtFreqRange &newRange)
    return false;
 }
 
-void AtFilterFFT::applyFrequencyCuts(AtPadFFT *pad)
+void AtFilterFFT::applyFrequencyCutsAndSetInverseFFT()
 {
-   for (const auto &pair : fFactors) {
-      auto i = pair.first;
-      pad->SetPointIm(i, pad->GetPointIm(i) * pair.second);
-      pad->SetPointRe(i, pad->GetPointRe(i) * pair.second);
+   for (int i = 0; i < fFFT->GetN()[0]; ++i) {
+      Double_t re, im;
+      fFFT->GetPointComplex(i, re, im);
+      if (fFactors.find(i) != fFactors.end()) {
+         re *= fFactors[i];
+         im *= fFactors[i];
+      }
+      fFFTbackward->SetPoint(i, re, im);
    }
 }
 

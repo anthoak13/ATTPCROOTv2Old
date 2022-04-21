@@ -56,7 +56,7 @@ public:
    ~AtRawEvent() = default;
 
    // Copy everything but the data (pads, aux pads, and MCPointMap) to this event
-   void CopyAllButData(AtRawEvent *event);
+   void CopyAllButData(const AtRawEvent *event);
 
    void Clear(Option_t *opt = nullptr) override;
 

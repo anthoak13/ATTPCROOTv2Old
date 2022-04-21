@@ -36,54 +36,38 @@ void AtFilterFFT::Init()
    // Create a FFT object that we own ("K"), that will optimize the transform ("M"),
    // and is a backwards transform from complex to Reak ("C2R")
    fFFTbackward = std::unique_ptr<TVirtualFFT>(TVirtualFFT::FFT(1, dimSize.data(), "C2R M K"));
-
-   if(fSaveTransform) // Hide this in an if so it can run outside of a FairRoot instance
-      FairRootManager::Instance()->Register("AtEventFFT", "AtTPC", &fTransformArray, true);
 }
 
-AtRawEvent *AtFilterFFT::ConstructOutputEvent(TClonesArray *outputEventArray, AtRawEvent *inputEvent)
+void AtFilterFFT::InitEvent(AtRawEvent *inputEvent)
 {
-   // Just do a copy if we're not intrested in saving the transformed output
-   if (!fSaveCutTransform)
-      return new ((*outputEventArray)[0]) AtRawEvent(*inputEvent);
-
-   // Make a copy of the event changing the pad type to AtPadFFT (for trasnformation information)
-   // and return that
-   fFilteredEvent = dynamic_cast<AtRawEvent *>(new ((*outputEventArray)[0]) AtRawEvent());
-   fFilteredEvent->CopyAllButData(inputEvent);
-   for (auto &pad : inputEvent->GetPads())
-      fFilteredEvent->AddPad(std::unique_ptr<AtPad>(new AtPadFFT(*pad)));
-   return fFilteredEvent;
-}
-
-void AtFilterFFT::InitEvent(AtRawEvent *event)
-{
-   fTransformArray.Clear();
-   fTransformedEvent = dynamic_cast<AtRawEvent *>(fTransformArray.ConstructedAt(0));
-   fTransformedEvent->CopyAllButData(event);
+   if (fSaveTransform) {
+      replacePadWithPadFFT(inputEvent);
+      fTransformedEvent = inputEvent;
+   }
 }
 
 void AtFilterFFT::Filter(AtPad *pad)
 {
    // Get data and transform
+   if (!pad->IsPedestalSubtracted()) {
+      LOG(error) << "Skipping FFT on pad " << pad->GetPadNum() << " at " << pad << " because not pedestal subtracted.";
+      return;
+   }
+
    fFFT->SetPoints(pad->GetADC().data());
    fFFT->Transform();
    applyFrequencyCutsAndSetInverseFFT();
    fFFTbackward->Transform();
 
-   if (fSaveTransform) {
-      // Copy the pad to the unfiltered event before updating pad's adc values
-      auto transformedPad =
-         dynamic_cast<AtPadFFT *>(fTransformedEvent->AddPad(std::unique_ptr<AtPad>(new AtPadFFT(*pad))));
-      // Add the result of the transformation
-      transformedPad->GetDataFromFFT(fFFT.get());
-   }
-
-   if (fSaveCutTransform)
-      dynamic_cast<AtPadFFT *>(pad)->GetDataFromFFT(fFFTbackward.get());
-
    for (int i = 0; i < pad->GetADC().size(); ++i)
       pad->SetADC(i, fFFTbackward->GetPointReal(i));
+
+   if (fSaveTransform) {
+      auto inputPad = dynamic_cast<AtPadFFT *>(fTransformedEvent->GetPad(pad->GetPadNum()));
+      inputPad->GetDataFromFFT(fFFT.get());
+      auto outputPad = dynamic_cast<AtPadFFT *>(pad);
+      outputPad->GetDataFromFFT(fFFTbackward.get());
+   }
 }
 
 bool AtFilterFFT::isValidFreqRange(const AtFreqRange &range)
@@ -140,4 +124,10 @@ void AtFilterFFT::DumpFactors()
 {
    for (const auto &pair : fFactors)
       std::cout << pair.first << " " << pair.second << std::endl;
+}
+
+void AtFilterFFT::replacePadWithPadFFT(AtRawEvent *event)
+{
+   for (auto &pad : event->fPadList)
+      pad = std::make_unique<AtPadFFT>(*pad);
 }

@@ -40,7 +40,8 @@ protected:
 public:
    AtPad(Int_t PadNum = -1);
    AtPad(const AtPad &obj) = default;
-   ~AtPad() = default;
+   virtual ~AtPad() = default;
+   virtual std::unique_ptr<AtPad> Clone(); // Create a copy of sub-type
 
    void SetValidPad(Bool_t val = kTRUE) { fIsValid = val; }
    void SetPadNum(Int_t padNum) { fPadNum = padNum; }

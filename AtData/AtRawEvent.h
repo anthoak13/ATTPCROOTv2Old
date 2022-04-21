@@ -47,6 +47,7 @@ private:
    std::multimap<Int_t, std::size_t> fSimMCPointMap; //<! Monte Carlo Point - Hit map for kinematics
 
    friend class AtFilterTask;
+   friend class AtFilterFFT;
 
 public:
    AtRawEvent();

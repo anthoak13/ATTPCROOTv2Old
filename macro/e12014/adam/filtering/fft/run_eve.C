@@ -39,7 +39,7 @@ void run_eve(int runNum = 210, TString OutputDataFile = "./output/output.reco_di
    eve->Set3DHitStyleBox();
    eve->SetMultiHit(100); // Set the maximum number of multihits in the visualization
    // eve->SetSaveTextData();
-   eve->SetRawEventBranch("AtRawEventFiltered");
+   eve->SetRawEventBranch("AtRawEventSubTransform");
    eve->SetEventBranch("AtEventH");
 
    eveMan->AddTask(eve);

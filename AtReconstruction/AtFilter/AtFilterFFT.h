@@ -8,7 +8,7 @@
  *  The output of this filter is an AtRawEvent where the fPadList is filled with pads of the type
  *  AtPadFFT so the fourier-space representation of the filtered data is saved.
  *  If you wish to save the unfiltered data with the fourier-space represetation, the set the flag
- *  fSaveTransform and a new branch named "AtEventFFT" will be created and filled with AtPadFFTs.
+ *  fSaveTransform and the input branch will be modified to contain AtPadFFTs.
  *
  *  Adam Anthony 4/20/22
  */
@@ -50,9 +50,7 @@ protected:
    std::unique_ptr<TVirtualFFT> fFFTbackward{nullptr};
 
    Bool_t fSaveTransform{false};
-   Bool_t fSaveCutTransform{false};
 
-   TClonesArray fTransformArray{"AtRawEvent", 1};
    AtRawEvent *fTransformedEvent{nullptr};
    AtRawEvent *fFilteredEvent{nullptr};
 
@@ -62,19 +60,15 @@ public:
 
    bool AddFreqRange(AtFreqRange range); // Range is inclusive
    void SetSaveTransform(bool saveTransform) { fSaveTransform = saveTransform; }
-   void SetSaveFilteredTransform(bool saveTransform) { fSaveCutTransform = saveTransform; }
 
    bool GetSaveTransform() { return fSaveTransform; }
-   bool GetSaveFilteredTransform() { return fSaveCutTransform; }
    const FreqRanges &GetFreqRanges() { return fFreqRanges; }
+   void DumpFactors();
 
    void Init() override;
-   AtRawEvent *ConstructOutputEvent(TClonesArray *outputEventArray, AtRawEvent *inputEvent) override;
    void InitEvent(AtRawEvent *event = nullptr) override;
    void Filter(AtPad *pad) override;
    bool IsGoodEvent() override { return true; }
-
-   void DumpFactors();
 
 protected:
    virtual void applyFrequencyCutsAndSetInverseFFT();
@@ -82,16 +76,7 @@ protected:
 private:
    bool isValidFreqRange(const AtFreqRange &range);
    bool doesFreqRangeOverlap(const AtFreqRange &range);
-
-   template <typename T>
-   void fillHermitianSymmetric(std::vector<T> &re, std::vector<T> &im)
-   {
-      assert(re.size() == im.size());
-      for (int i = re.size() / 2 + 1; i < re.size(); ++i) {
-         re[i] = re[re.size() - i];
-         im[i] = -im[re.size() - i];
-      }
-   }
+   void replacePadWithPadFFT(AtRawEvent *event);
 };
 
 #endif //#ifndef ATFFTFILTER_H

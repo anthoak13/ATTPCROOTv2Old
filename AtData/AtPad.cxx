@@ -19,6 +19,11 @@ ClassImp(AtPad);
 
 AtPad::AtPad(Int_t PadNum) : fPadNum(PadNum) {}
 
+std::unique_ptr<AtPad> AtPad::Clone()
+{
+   return std::make_unique<AtPad>(*this);
+}
+
 const AtPad::trace &AtPad::GetADC() const
 {
    if (!fIsPedestalSubtracted)

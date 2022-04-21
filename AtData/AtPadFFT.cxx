@@ -3,6 +3,10 @@
 #include <TVirtualFFT.h>
 
 #include <cassert>
+std::unique_ptr<AtPad> AtPadFFT::Clone()
+{
+   return std::make_unique<AtPadFFT>(*this);
+}
 
 Double_t AtPadFFT::GetPointRe(int i)
 {

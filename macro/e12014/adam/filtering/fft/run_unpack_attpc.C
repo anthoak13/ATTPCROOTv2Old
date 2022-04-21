@@ -13,8 +13,8 @@ void run_unpack_attpc(int runNumber = 210)
    timer.Start();
 
    // Set the input/output directories
-   // TString inputDir = "/mnt/rawdata/e12014_attpc/h5";
-   TString inputDir = "/mnt/analysis/attpc";
+   TString inputDir = "/mnt/rawdata/e12014_attpc/h5";
+   // TString inputDir = "/mnt/analysis/attpc";
    TString outDir = "/mnt/analysis/e12014/TPC/unpacked";
 
    // Set the in/out files
@@ -70,47 +70,55 @@ void run_unpack_attpc(int runNumber = 210)
 
    auto unpackTask = new AtUnpackTask(std::move(unpacker));
    unpackTask->SetPersistence(true);
+   run->AddTask(unpackTask);
 
    // Create data reduction task
    AtDataReductionTask *reduceTask = new AtDataReductionTask();
    reduceTask->SetInputBranch("AtRawEvent");
    reduceTask->SetReductionFunction(&reduceFunc);
+   // run->AddTask(reduceTask);
 
-   auto threshold = 45;
+   auto threshold = 0;
 
-   /*AtFilterSubtraction *filter = new AtFilterSubtraction(fAtMapPtr);
-   filter->SetThreshold(threshold);
-   filter->SetIsGood(false);
-   */
+   auto *filterCh0 = new AtFilterSubtraction(fAtMapPtr);
+   filterCh0->SetThreshold(45);
+   filterCh0->SetIsGood(false);
 
-   auto *filter = new AtFilterFFT();
-   filter->SetSaveTransform(true);
-   filter->SetSaveFilteredTransform(true);
-   filter->AddFreqRange({0, 0.3, 20, 1});
-   filter->DumpFactors();
-   AtFilterTask *filterTask = new AtFilterTask(filter);
-   filterTask->SetPersistence(kTRUE);
+   AtFilterTask *filterTask = new AtFilterTask(filterCh0, "filterCh0");
+   filterTask->SetPersistence(true);
    filterTask->SetFilterAux(false);
+   filterTask->SetInputBranch("AtRawEvent");
+   filterTask->SetOutputBranch("AtRawEventSubtracted");
+   run->AddTask(filterTask);
+
+   auto *filterFFTRaw = new AtFilterFFT();
+   filterFFTRaw->SetSaveTransform(true);
+   filterFFTRaw->DumpFactors();
+
+   AtFilterTask *fftTaskRaw = new AtFilterTask(filterFFTRaw);
+   fftTaskRaw->SetPersistence(false);
+   fftTaskRaw->SetFilterAux(false);
+   fftTaskRaw->SetInputBranch("AtRawEvent");
+   fftTaskRaw->SetOutputBranch("AtRawEventFFTRaw");
+   run->AddTask(fftTaskRaw);
+
+   auto *filterFFTSub = new AtFilterFFT();
+   filterFFTSub->SetSaveTransform(true);
+   filterFFTSub->DumpFactors();
+
+   AtFilterTask *fftTaskSub = new AtFilterTask(filterFFTSub);
+   fftTaskRaw->SetPersistence(false);
+   fftTaskRaw->SetFilterAux(false);
+   fftTaskRaw->SetInputBranch("AtRawEventSubtracted");
+   fftTaskRaw->SetOutputBranch("AtRawEventFFTSub");
+   run->AddTask(fftTaskSub);
 
    AtPSASimple2 *psa = new AtPSASimple2();
-   psa->SetThreshold(threshold);
+   psa->SetThreshold(0);
    psa->SetMaxFinder();
-
-   // Create PSA task
-   AtPSAtask *psaTaskFiltered = new AtPSAtask(psa);
-   psaTaskFiltered->SetInputBranch("AtRawEventFiltered");
-   psaTaskFiltered->SetOutputBranch("AtEventFiltered");
-   psaTaskFiltered->SetPersistence(kTRUE);
-
    AtPSAtask *psaTask = new AtPSAtask(psa);
-   psaTask->SetPersistence(kTRUE);
-
-   // Add unpacker to the run
-   run->AddTask(unpackTask);
-   // run->AddTask(reduceTask);
-   run->AddTask(filterTask);
+   psaTask->SetPersistence(true);
    run->AddTask(psaTask);
-   // run->AddTask(psaTaskFiltered);
 
    std::cout << "***** Starting Init ******" << std::endl;
    run->Init();
@@ -120,7 +128,7 @@ void run_unpack_attpc(int runNumber = 210)
    auto numEvents = unpackTask->GetNumEvents();
 
    // numEvents = 1700;//217;
-   numEvents = 1;
+   numEvents = 100;
 
    std::cout << "Unpacking " << numEvents << " events. " << std::endl;
 

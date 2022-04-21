@@ -51,7 +51,7 @@ void AtHDFUnpacker::FillRawEvent(AtRawEvent &event)
    processData();
 
    fRawEvent->SetIsGood(kTRUE);
-
+   LOG(info) << " Unpacked " << fRawEvent->GetNumPads() << " pads";
    fEventID++;
    fDataEventID++;
 }

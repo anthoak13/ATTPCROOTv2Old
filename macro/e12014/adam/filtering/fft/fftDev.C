@@ -26,14 +26,14 @@ void fftDev(int runNum = 195)
 void loadRun(int runNum)
 {
    TString filePath = "/mnt/analysis/e12014/TPC/unpacked/run_%04d.root";
-   loadRun(TString::Format(filePath, runNum), "AtEventFFT", "AtRawEventFiltered", "AtEventH");
+   loadRun(TString::Format(filePath, runNum), "AtRawEvent", "AtRawEventSubtracted", "AtEventH");
 
    if (dynamic_cast<AtPadFFT *>(rawEventPtr->GetPads().back().get()) == nullptr)
       LOG(error) << "Raw event branch does not contain FFT pads!";
    if (dynamic_cast<AtPadFFT *>(rawEventFilteredPtr->GetPads().back().get()) == nullptr)
       LOG(error) << "Filtered raw event branch does not contain FFT pads!";
 
-   if(oFile != nullptr)
+   if (oFile != nullptr)
       delete oFile;
    oFile = new TFile(TString::Format("output/traces-%d.root", runNum), "RECREATE");
 }

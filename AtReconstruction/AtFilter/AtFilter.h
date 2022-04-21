@@ -18,7 +18,7 @@ public:
    virtual AtRawEvent *ConstructOutputEvent(TClonesArray *outputEventArray, AtRawEvent *inputEvent);
 
    // Called once for each event at the start of the Exec phase
-   virtual void InitEvent(AtRawEvent *event) = 0;
+   virtual void InitEvent(AtRawEvent *inputEvent) = 0;
 
    // Called on each pad
    virtual void Filter(AtPad *pad) = 0;

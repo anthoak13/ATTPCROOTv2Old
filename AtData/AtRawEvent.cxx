@@ -26,7 +26,7 @@ AtRawEvent::AtRawEvent(const AtRawEvent &obj)
 {
    std::cout << "Copying AtRawEvent " << obj.fEventID << " with " << obj.fPadList.size() << " pads" << std::endl;
    for (const auto &pad : obj.fPadList)
-      fPadList.push_back(std::make_unique<AtPad>(*pad));
+      fPadList.push_back(pad->Clone());
 }
 
 void AtRawEvent::CopyAllButData(const AtRawEvent *event)

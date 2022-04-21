@@ -22,21 +22,9 @@
 
 class AtPad;
 
-AtFilterTask::AtFilterTask(AtFilter *filter)
-   : fOutputEventArray(new TClonesArray("AtRawEvent")), fFilter(filter), fIsPersistent(false), fFilterAux(false),
-     fInputBranchName("AtRawEvent"), fOutputBranchName("AtRawEventFiltered")
+AtFilterTask::AtFilterTask(AtFilter *filter, const char *name)
+   : FairTask(name), fOutputEventArray(new TClonesArray("AtRawEvent")), fFilter(filter)
 {
-}
-
-AtFilterTask::~AtFilterTask() = default;
-
-void AtFilterTask::SetPersistence(Bool_t value)
-{
-   fIsPersistent = value;
-}
-void AtFilterTask::SetFilterAux(Bool_t value)
-{
-   fFilterAux = value;
 }
 
 InitStatus AtFilterTask::Init()
@@ -71,12 +59,11 @@ void AtFilterTask::Exec(Option_t *opt)
       return;
 
    auto rawEvent = dynamic_cast<AtRawEvent *>(fInputEventArray->At(0));
+   fFilter->InitEvent(rawEvent); // Can modify rawEvent if necessary (shouldn't touch traces)
    auto filteredEvent = fFilter->ConstructOutputEvent(fOutputEventArray, rawEvent);
 
    if (!rawEvent->IsGood())
       return;
-
-   fFilter->InitEvent(filteredEvent);
 
    if (fFilterAux)
       for (auto &padIt : filteredEvent->fAuxPadMap) {
@@ -84,6 +71,7 @@ void AtFilterTask::Exec(Option_t *opt)
          fFilter->Filter(pad);
       }
 
+   // This is destroying data in next pad in the array
    for (auto &pad : filteredEvent->fPadList)
       fFilter->Filter(pad.get());
 

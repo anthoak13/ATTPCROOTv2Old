@@ -22,6 +22,7 @@ public:
    AtPadFFT(const AtPadFFT &obj) = default;
    AtPadFFT(const AtPad &obj) : AtPad(obj) {}
    virtual ~AtPadFFT() = default;
+   virtual std::unique_ptr<AtPad> Clone() override;
 
    Double_t GetPointRe(int i);
    Double_t GetPointIm(int i);

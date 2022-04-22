@@ -24,6 +24,15 @@ Double_t AtPadFFT::GetPointIm(int i)
    else
       return -fIm.at(fAdc.size() - i);
 }
+Double_t AtPadFFT::GetPointMag(int i)
+{
+   return std::sqrt(GetPointRe(i) * GetPointRe(i) + GetPointIm(i) * GetPointIm(i));
+}
+Double_t AtPadFFT::GetPointPhase(int i)
+{
+   return std::atan2(GetPointIm(i), GetPointRe(i));
+}
+
 void AtPadFFT::SetPointRe(int i, Double_t val)
 {
    if (i < fRe.size())

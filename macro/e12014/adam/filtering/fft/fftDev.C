@@ -1,7 +1,8 @@
-#include "TCanvas.h"
-#include "TFile.h"
-#include "TVirtualFFT.h"
-
+#include <TCanvas.h>
+#include <TFile.h>
+#include <TH2.h>
+#include <TRandom3.h>
+#include <TVirtualFFT.h>
 #ifndef __CLING__
 #include "../build/include/AtPadFFT.h"
 #include "../build/include/AtRawEvent.h"
@@ -12,21 +13,67 @@
 
 /***** "Public" functions ******/
 void loadRun(int runNum);
-void runFFT(int padNum);
+void viewFFT(int eventNum, int padNum);
+// Get the ratio of magnitude of fourier representation for hits with a charge between
+// qMin and qMax
+void getRatioMagnitudes(int runNum, double_t qMin = 45, double_t qMax = MAXFLOAT);
 
 /***** "Private" variables *****/
 
 TFile *oFile = nullptr;
 TCanvas *cFFT = nullptr;
+TCanvas *cRatio = nullptr;
+TH1F *hFilteredTrace = new TH1F("filteredTrace", "Filtered Trace", 512, 0, 511);
+TH1F *hFilteredMag = new TH1F("filtereMag", "Filtered Magnitude", 512 / 2 + 1, 0, 512 / 2);
+TH1F *hMag = new TH1F("mag", "Magnitude", 512 / 2 + 1, 0, 512 / 2);
+TH1F *hRatio = new TH1F("ratio", "Ratio of Magnitudes", 512 / 2 + 1, 0, 512 / 2);
+TH2F *hRatioSummary = new TH2F("ratioSummary", "|filtered|/|unfiltered|", 512 / 2 + 1, 0, 512 / 2, 200, 0, 2);
+TH2F *hRatioPhase = new TH2F("ratioPhase", "Arg(filtered)/Arg(unfiltered)", 512 / 2 + 1, 0, 512 / 2, 100, -2, 2);
 
+/******** Implementation ********/
 void fftDev(int runNum = 195)
 {
-   loadRun(runNum);
+   // loadRun(runNum);
 }
+
+void getRatioMagnitudes(int runNum, double_t qMin, double_t qMax)
+{
+   loadRun(runNum);
+   hRatioSummary->Clear();
+   hRatioPhase->Clear();
+   while (nextEvent()) {
+      if (reader->GetCurrentEntry() % 100 == 0)
+         std::cout << "Entry: " << reader->GetCurrentEntry() << " of " << reader->GetEntries() << std::endl;
+      if (reader->GetCurrentEntry() > 10000)
+         break;
+      for (auto &hit : eventPtr->GetHitArray())
+         if (hit.GetCharge() >= qMin && hit.GetCharge() <= qMax) {
+            auto padRaw = dynamic_cast<AtPadFFT *>(rawEventPtr->GetPad(hit.GetPadNum()));
+            auto pad = dynamic_cast<AtPadFFT *>(rawEventFilteredPtr->GetPad(hit.GetPadNum()));
+            for (int i = 0; i < 512 / 2 + 1; ++i) {
+               auto ratio = pad->GetPointMag(i) / padRaw->GetPointMag(i);
+               auto ratioPhase = pad->GetPointPhase(i) / padRaw->GetPointPhase(i);
+               if (ratio == 1)
+                  continue;
+               hRatioSummary->Fill(i, ratio);
+               hRatioPhase->Fill(i, ratioPhase);
+            }
+         }
+   }
+   std::cout << "Done processing tree" << std::endl;
+   cRatio->SetLogz();
+   // hRatioSummary->Draw("colz");
+   hRatioPhase->Draw("colz");
+   // cRatio->cd(1);
+   // cRatio->cd(2);
+   // hRatioSummaryInverse->Draw("colz");
+}
+
 void loadRun(int runNum)
 {
    TString filePath = "/mnt/analysis/e12014/TPC/unpacked/run_%04d.root";
    loadRun(TString::Format(filePath, runNum), "AtRawEvent", "AtRawEventSubtracted", "AtEventH");
+   loadEvent(0);
 
    if (dynamic_cast<AtPadFFT *>(rawEventPtr->GetPads().back().get()) == nullptr)
       LOG(error) << "Raw event branch does not contain FFT pads!";
@@ -35,7 +82,16 @@ void loadRun(int runNum)
 
    if (oFile != nullptr)
       delete oFile;
-   oFile = new TFile(TString::Format("output/traces-%d.root", runNum), "RECREATE");
+   oFile = new TFile(TString::Format("output/histo-%d.root", runNum), "RECREATE");
+
+   if (cFFT == nullptr) {
+      cFFT = new TCanvas("cFFT", "FFT", 900, 900);
+      cFFT->Divide(2, 2);
+   }
+   if (cRatio == nullptr) {
+      cRatio = new TCanvas("cRatio", "Ratio", 600, 400);
+      // cRatio->Divide(1, 2);
+   }
 }
 
 void viewFFT(int eventNum, int padNum)
@@ -45,27 +101,21 @@ void viewFFT(int eventNum, int padNum)
    if (!loadPad(padNum))
       return;
 
-   if (cFFT == nullptr) {
-      cFFT = new TCanvas("cFFT", "FFT", 900, 900);
-      cFFT->Divide(2, 2);
-   }
-
    auto pad = dynamic_cast<AtPadFFT *>(rawEventPtr->GetPad(padNum));
    auto padFiltered = dynamic_cast<AtPadFFT *>(rawEventFilteredPtr->GetPad(padNum));
-
-   TH1F *hFilteredTrace = new TH1F("filteredTrace", "Filtered Trace", 512, 0, 511);
-   TH1F *hFilteredMag = new TH1F("filtereMag", "Filtered Magnitude", 512 / 2 + 1, 0, 512 / 2);
-   TH1F *hMag = new TH1F("mag", "Magnitude", 512 / 2 + 1, 0, 512 / 2);
 
    for (int i = 0; i < 512 / 2 + 1; ++i) {
       auto point = pad->GetPoint(i);
       auto mag = std::sqrt(point.first * point.first + point.second * point.second);
       hMag->SetBinContent(i + 1, mag);
 
-      point = padFiltered->GetPoint(i);
-      mag = std::sqrt(point.first * point.first + point.second * point.second);
-      hFilteredMag->SetBinContent(i + 1, mag);
+      auto pointFilter = padFiltered->GetPoint(i);
+      auto magFilter = std::sqrt(pointFilter.first * pointFilter.first + pointFilter.second * pointFilter.second);
+      hFilteredMag->SetBinContent(i + 1, magFilter);
+
+      hRatio->SetBinContent(i + 1, magFilter / mag);
    }
+
    for (int i = 0; i < 512; ++i)
       hFilteredTrace->SetBinContent(i + 1, padFiltered->GetADC(i));
 
@@ -77,4 +127,6 @@ void viewFFT(int eventNum, int padNum)
    hMag->Draw();
    cFFT->cd(4);
    hFilteredMag->Draw();
+   cRatio->cd();
+   hRatio->Draw();
 }

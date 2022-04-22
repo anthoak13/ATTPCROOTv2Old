@@ -26,6 +26,8 @@ public:
 
    Double_t GetPointRe(int i);
    Double_t GetPointIm(int i);
+   Double_t GetPointMag(int i);
+   Double_t GetPointPhase(int i);
    std::pair<Double_t, Double_t> GetPoint(int i) { return {GetPointRe(i), GetPointIm(i)}; }
 
    void SetPointRe(int i, Double_t val);

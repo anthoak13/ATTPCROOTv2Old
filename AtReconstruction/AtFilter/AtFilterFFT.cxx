@@ -27,7 +27,7 @@ bool AtFilterFFT::AddFreqRange(AtFreqRange range)
 
 void AtFilterFFT::Init()
 {
-   std::vector<Int_t> dimSize = {512};
+   std::vector<Int_t> dimSize = {fTransformSize};
 
    // Create a FFT object that we own ("K"), that will optimize the transform ("M"),
    // and is a forward transform from real data to complex ("R2C")
@@ -74,6 +74,7 @@ bool AtFilterFFT::isValidFreqRange(const AtFreqRange &range)
 {
    bool isValid = true;
    isValid &= range.fBeginFreq <= range.fEndFreq;
+   isValid &= range.fEndFreq <= fTransformSize / 2 + 1;
    isValid &= range.fBeginFact >= 0 && range.fBeginFact <= 1;
    isValid &= range.fEndFact >= 0 && range.fEndFact <= 1;
    isValid &= !doesFreqRangeOverlap(range);

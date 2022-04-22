@@ -1,6 +1,6 @@
 bool reduceFunc(AtRawEvent *evt)
 {
-   return (evt->GetNumPads() > 0) && evt->IsGood();
+   return (evt->GetNumPads() > 300) && evt->IsGood();
 }
 
 // Requires the TPC run number
@@ -15,7 +15,7 @@ void run_unpack_attpc(int runNumber = 210)
    // Set the input/output directories
    TString inputDir = "/mnt/rawdata/e12014_attpc/h5";
    // TString inputDir = "/mnt/analysis/attpc";
-   TString outDir = "/mnt/analysis/e12014/TPC/unpacked";
+   TString outDir = "/mnt/analysis/e12014/TPC/filterTesting";
 
    // Set the in/out files
    TString inputFile = inputDir + TString::Format("/run_%04d.h5", runNumber);
@@ -76,12 +76,12 @@ void run_unpack_attpc(int runNumber = 210)
    AtDataReductionTask *reduceTask = new AtDataReductionTask();
    reduceTask->SetInputBranch("AtRawEvent");
    reduceTask->SetReductionFunction(&reduceFunc);
-   // run->AddTask(reduceTask);
+   run->AddTask(reduceTask);
 
-   auto threshold = 0;
+   auto threshold = 45;
 
    auto *filterCh0 = new AtFilterSubtraction(fAtMapPtr);
-   filterCh0->SetThreshold(45);
+   filterCh0->SetThreshold(threshold);
    filterCh0->SetIsGood(false);
 
    AtFilterTask *filterTask = new AtFilterTask(filterCh0, "filterCh0");
@@ -93,10 +93,15 @@ void run_unpack_attpc(int runNumber = 210)
 
    auto *filterFFTRaw = new AtFilterFFT();
    filterFFTRaw->SetSaveTransform(true);
+   filterFFTRaw->AddFreqRange({0, 0.4, 1, 0.95});
+   filterFFTRaw->AddFreqRange({1, 0.95, 4, 1});
+   filterFFTRaw->AddFreqRange({4, 1, 25, 1});
+   filterFFTRaw->AddFreqRange({25, 1, 90, 0.7});
+   filterFFTRaw->AddFreqRange({90, 0.7, 257, 0.7});
    filterFFTRaw->DumpFactors();
 
    AtFilterTask *fftTaskRaw = new AtFilterTask(filterFFTRaw);
-   fftTaskRaw->SetPersistence(false);
+   fftTaskRaw->SetPersistence(true);
    fftTaskRaw->SetFilterAux(false);
    fftTaskRaw->SetInputBranch("AtRawEvent");
    fftTaskRaw->SetOutputBranch("AtRawEventFFTRaw");
@@ -128,7 +133,7 @@ void run_unpack_attpc(int runNumber = 210)
    auto numEvents = unpackTask->GetNumEvents();
 
    // numEvents = 1700;//217;
-   numEvents = 100;
+   // numEvents = 100;
 
    std::cout << "Unpacking " << numEvents << " events. " << std::endl;
 

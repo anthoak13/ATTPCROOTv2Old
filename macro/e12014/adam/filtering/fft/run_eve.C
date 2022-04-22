@@ -9,7 +9,9 @@
 
 void run_eve(int runNum = 210, TString OutputDataFile = "./output/output.reco_display.root")
 {
+
    TString filePath = "/mnt/analysis/e12014/TPC/unpacked/run_%04d.root";
+   filePath = "/mnt/analysis/e12014/TPC/filterTesting/run_%04d.root";
    TString InputDataFile = TString::Format(filePath, runNum);
    std::cout << "Opening: " << InputDataFile << std::endl;
 
@@ -39,7 +41,7 @@ void run_eve(int runNum = 210, TString OutputDataFile = "./output/output.reco_di
    eve->Set3DHitStyleBox();
    eve->SetMultiHit(100); // Set the maximum number of multihits in the visualization
    // eve->SetSaveTextData();
-   eve->SetRawEventBranch("AtRawEventSubTransform");
+   eve->SetRawEventBranch("AtRawEventSubtracted");
    eve->SetEventBranch("AtEventH");
 
    eveMan->AddTask(eve);

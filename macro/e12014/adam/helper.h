@@ -15,12 +15,12 @@
 #include <TTreeReader.h>
 
 #ifndef __CLING__
-#include "../../../build/include/AtAuxPad.h"
-#include "../../../build/include/AtEvent.h"
-#include "../../../build/include/AtPad.h"
-#include "../../../build/include/AtRansac.h"
-#include "../../../build/include/AtRawEvent.h"
-#include "../../../build/include/AtTpcMap.h"
+#include "../build/include/AtAuxPad.h"
+#include "../build/include/AtEvent.h"
+#include "../build/include/AtPad.h"
+#include "../build/include/AtRansac.h"
+#include "../build/include/AtRawEvent.h"
+#include "../build/include/AtTpcMap.h"
 #endif
 
 // "public functions"
@@ -91,7 +91,7 @@ void loadRun(TString filePath, TString rawEventBranchName, TString rawEventFilte
       ransacReader = new TTreeReaderValue<TClonesArray>(*reader, ransacBranchName);
    else
       LOG(error) << "Could not find RANSAC branch " << ransacBranchName;
-   loadEvent(0);
+   // loadEvent(0);
 }
 
 bool loadEvent(ULong64_t eventNumber)

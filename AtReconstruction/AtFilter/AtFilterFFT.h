@@ -53,6 +53,7 @@ protected:
 
    AtRawEvent *fTransformedEvent{nullptr};
    AtRawEvent *fFilteredEvent{nullptr};
+   static constexpr Int_t fTransformSize = 512;
 
 public:
    AtFilterFFT() = default;

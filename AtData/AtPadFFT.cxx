@@ -3,6 +3,8 @@
 #include <TVirtualFFT.h>
 
 #include <cassert>
+#include <cmath>
+
 std::unique_ptr<AtPad> AtPadFFT::Clone()
 {
    return std::make_unique<AtPadFFT>(*this);

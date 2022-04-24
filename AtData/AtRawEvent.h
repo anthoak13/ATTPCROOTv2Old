@@ -12,8 +12,6 @@
 
 #include "AtAuxPad.h"
 
-#include <FairLogger.h>
-
 #include <Rtypes.h>
 #include <TNamed.h>
 
@@ -98,8 +96,8 @@ public:
    Bool_t IsGood() const { return fIsGood; }
    Bool_t GetIsExtGate() const { return fIsInGate; }
 
-   const PadVector &GetPads() { return fPadList; }
-   const AuxPadMap &GetAuxPads() { return fAuxPadMap; }
+   const PadVector &GetPads() const { return fPadList; }
+   const AuxPadMap &GetAuxPads() const { return fAuxPadMap; }
    std::multimap<Int_t, std::size_t> &GetSimMCPointMap() { return fSimMCPointMap; }
 
    ClassDefOverride(AtRawEvent, 5);

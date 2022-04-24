@@ -17,9 +17,10 @@ void viewFFT(int eventNum, int padNum);
 // Get the ratio of magnitude of fourier representation for hits with a charge between
 // qMin and qMax
 void getRatioMagnitudes(int runNum, double_t qMin = 45, double_t qMax = MAXFLOAT);
+void getChargeRatio(int runNum, double_t qMin = 45, double_t qMax = MAXFLOAT);
 
 /***** "Private" variables *****/
-
+Int_t fCurrentRunNum = -1;
 TFile *oFile = nullptr;
 TCanvas *cFFT = nullptr;
 TCanvas *cRatio = nullptr;
@@ -29,13 +30,82 @@ TH1F *hMag = new TH1F("mag", "Magnitude", 512 / 2 + 1, 0, 512 / 2);
 TH1F *hRatio = new TH1F("ratio", "Ratio of Magnitudes", 512 / 2 + 1, 0, 512 / 2);
 TH2F *hRatioSummary = new TH2F("ratioSummary", "|filtered|/|unfiltered|", 512 / 2 + 1, 0, 512 / 2, 200, 0, 2);
 TH2F *hRatioPhase = new TH2F("ratioPhase", "Arg(filtered)/Arg(unfiltered)", 512 / 2 + 1, 0, 512 / 2, 100, -2, 2);
-
+TH1F *hQRatio = new TH1F("hQRatio", "Ratio between max adc", 1000, 0, 1000);
+TH1F *hQ = new TH1F("hQ", "Q", 1000, 0, 4092);
+TH1F *hQRaw = new TH1F("hQRaw", "Q Raw", 1000, 0, 4092);
 /******** Implementation ********/
 void fftDev(int runNum = 195)
 {
    // loadRun(runNum);
 }
+void getChargePad(int runNum, int padNum)
+{
+   loadRun(runNum);
+   hQ->Reset();
+   hQRaw->Reset();
+   while (nextEvent()) {
+      if (reader->GetCurrentEntry() % 1 == 0)
+         std::cout << "Entry: " << reader->GetCurrentEntry() << " of " << reader->GetEntries() << std::endl;
+      if (reader->GetCurrentEntry() > 100)
+         break;
 
+      for (auto &hit : eventPtr->GetHitArray())
+         if (hit.GetPadNum() == padNum) {
+            auto padRaw = rawEventPtr->GetPad(hit.GetPadNum());
+            auto pad = rawEventFilteredPtr->GetPad(hit.GetPadNum());
+            auto qRaw = *std::max_element(padRaw->GetADC().begin(), padRaw->GetADC().end());
+            auto q = *std::max_element(pad->GetADC().begin(), pad->GetADC().end());
+            if (q != qRaw) {
+               hQ->Fill(q);
+               hQRaw->Fill(qRaw);
+            }
+         }
+   }
+   cFFT->cd(1);
+   hQ->Draw();
+   cFFT->cd(3);
+   hQRaw->Draw();
+   oFile->cd();
+   hQ->Write();
+   hQRaw->Write();
+}
+
+void getChargeRatio(int runNum, double_t qMin, double_t qMax)
+{
+   loadRun(runNum);
+   hQRatio->Reset();
+   hQ->Reset();
+   hQRaw->Reset();
+   while (nextEvent()) {
+      if (reader->GetCurrentEntry() % 100 == 0)
+         std::cout << "Entry: " << reader->GetCurrentEntry() << " of " << reader->GetEntries() << std::endl;
+      if (reader->GetCurrentEntry() > 1000000)
+         break;
+
+      for (auto &hit : eventPtr->GetHitArray())
+         if (hit.GetCharge() >= qMin && hit.GetCharge() <= qMax) {
+            auto padRaw = rawEventPtr->GetPad(hit.GetPadNum());
+            auto pad = rawEventFilteredPtr->GetPad(hit.GetPadNum());
+            auto qRaw = *std::max_element(padRaw->GetADC().begin(), padRaw->GetADC().end());
+            auto q = *std::max_element(pad->GetADC().begin(), pad->GetADC().end());
+            if (q != qRaw) {
+               hQRatio->Fill(q / qRaw);
+               hQ->Fill(q);
+               hQRaw->Fill(qRaw);
+            }
+         }
+   }
+   cRatio->cd();
+   hQRatio->Draw();
+   cFFT->cd(1);
+   hQ->Draw();
+   cFFT->cd(3);
+   hQRaw->Draw();
+   oFile->cd();
+   hQRatio->Write();
+   hQ->Write();
+   hQRaw->Write();
+}
 void getRatioMagnitudes(int runNum, double_t qMin, double_t qMax)
 {
    loadRun(runNum);
@@ -71,8 +141,11 @@ void getRatioMagnitudes(int runNum, double_t qMin, double_t qMax)
 
 void loadRun(int runNum)
 {
-   TString filePath = "/mnt/analysis/e12014/TPC/unpacked/run_%04d.root";
-   loadRun(TString::Format(filePath, runNum), "AtRawEvent", "AtRawEventSubtracted", "AtEventH");
+   if (runNum == fCurrentRunNum)
+      return;
+
+   TString filePath = "/mnt/analysis/e12014/TPC/filterTesting/run_%04d.root";
+   loadRun(TString::Format(filePath, runNum), "AtRawEvent", "AtRawEventFFTRaw", "AtEventH");
    loadEvent(0);
 
    if (dynamic_cast<AtPadFFT *>(rawEventPtr->GetPads().back().get()) == nullptr)
@@ -92,6 +165,7 @@ void loadRun(int runNum)
       cRatio = new TCanvas("cRatio", "Ratio", 600, 400);
       // cRatio->Divide(1, 2);
    }
+   fCurrentRunNum = runNum;
 }
 
 void viewFFT(int eventNum, int padNum)

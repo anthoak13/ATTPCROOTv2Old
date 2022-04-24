@@ -18,15 +18,14 @@
 #include "AtFilter.h"
 
 #include <Rtypes.h>
-#include <TClonesArray.h>
 #include <TVirtualFFT.h> // Annoyingly required for ROOT to generate a dictionary (even without IO)
 
-#include <cassert>
 #include <map>
 #include <memory>
 #include <vector>
 
-class AtPadFFT;
+class AtPad;
+class AtRawEvent;
 
 class AtFilterFFT : public AtFilter {
 

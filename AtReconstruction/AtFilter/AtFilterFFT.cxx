@@ -5,13 +5,12 @@
 #include "AtRawEvent.h"
 
 #include <FairLogger.h>
-#include <FairRootManager.h>
 
 #include <Rtypes.h>
-#include <TCanvas.h>
-#include <TComplex.h>
-#include <TH1.h>
 #include <TVirtualFFT.h>
+
+#include <iostream>
+#include <utility>
 
 bool AtFilterFFT::AddFreqRange(AtFreqRange range)
 {
@@ -112,7 +111,7 @@ void AtFilterFFT::applyFrequencyCutsAndSetInverseFFT()
          re *= fFactors[i];
          im *= fFactors[i];
       }
-      fFFTbackward->SetPoint(i, re, im);
+      fFFTbackward->SetPoint(i, re / fFFT->GetN()[0], im / fFFT->GetN()[0]);
    }
 }
 

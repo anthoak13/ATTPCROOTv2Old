@@ -89,7 +89,7 @@ void run_unpack_attpc(int runNumber = 210)
    filterTask->SetFilterAux(false);
    filterTask->SetInputBranch("AtRawEvent");
    filterTask->SetOutputBranch("AtRawEventSubtracted");
-   run->AddTask(filterTask);
+   // run->AddTask(filterTask);
 
    auto *filterFFTRaw = new AtFilterFFT();
    filterFFTRaw->SetSaveTransform(true);
@@ -104,26 +104,41 @@ void run_unpack_attpc(int runNumber = 210)
    fftTaskRaw->SetPersistence(true);
    fftTaskRaw->SetFilterAux(false);
    fftTaskRaw->SetInputBranch("AtRawEvent");
-   fftTaskRaw->SetOutputBranch("AtRawEventFFTRaw");
+   fftTaskRaw->SetOutputBranch("AtRawEventFFT");
    run->AddTask(fftTaskRaw);
 
+   /*
    auto *filterFFTSub = new AtFilterFFT();
    filterFFTSub->SetSaveTransform(true);
    filterFFTSub->DumpFactors();
 
    AtFilterTask *fftTaskSub = new AtFilterTask(filterFFTSub);
-   fftTaskRaw->SetPersistence(false);
-   fftTaskRaw->SetFilterAux(false);
-   fftTaskRaw->SetInputBranch("AtRawEventSubtracted");
-   fftTaskRaw->SetOutputBranch("AtRawEventFFTSub");
-   run->AddTask(fftTaskSub);
+   fftTaskSub->SetPersistence(false);
+   fftTaskSub->SetFilterAux(false);
+   fftTaskSub->SetInputBranch("AtRawEventSubtracted");
+   fftTaskSub->SetOutputBranch("AtRawEventFFTSub");
+   // run->AddTask(fftTaskSub);
+   */
 
    AtPSASimple2 *psa = new AtPSASimple2();
    psa->SetThreshold(0);
    psa->SetMaxFinder();
+
    AtPSAtask *psaTask = new AtPSAtask(psa);
    psaTask->SetPersistence(true);
    run->AddTask(psaTask);
+
+   AtPSAtask *psaTaskSub = new AtPSAtask(psa);
+   psaTaskSub->SetPersistence(true);
+   psaTaskSub->SetInputBranch("AtRawEventSubtracted");
+   psaTaskSub->SetOutputBranch("AtEventSubstracted");
+   run->AddTask(psaTaskSub);
+
+   AtPSAtask *psaTaskFFT = new AtPSAtask(psa);
+   psaTaskFFT->SetPersistence(true);
+   psaTaskFFT->SetInputBranch("AtRawEventFFT");
+   psaTaskFFT->SetOutputBranch("AtEventFFT");
+   run->AddTask(psaTaskFFT);
 
    std::cout << "***** Starting Init ******" << std::endl;
    run->Init();

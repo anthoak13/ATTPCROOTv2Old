@@ -4,6 +4,14 @@
 
 #include "AtPad.h"
 
+#include <Rtypes.h> // for Double_t, THashConsistencyHolder, ClassDefOverride
+
+#include <array>  // for array
+#include <memory> // for unique_ptr
+class TBuffer;
+class TClass;
+class TMemberInspector;
+
 #include <utility>
 
 class TVirtualFFT;

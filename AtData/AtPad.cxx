@@ -37,11 +37,12 @@ Double_t AtPad::GetADC(Int_t idx) const
    return GetADC()[idx];
 }
 
-TH1D *AtPad::GetADCHistrogram() const
+std::unique_ptr<TH1D> AtPad::GetADCHistrogram() const
 {
    auto histName = "adc" + std::to_string(GetPadNum());
    auto histTitle = "ADC " + std::to_string(GetPadNum());
-   auto hist = new TH1D(histName.data(), histTitle.data(), fAdc.size(), 0, fAdc.size());
+   auto hist = std::make_unique<TH1D>(histName.data(), histTitle.data(), fAdc.size(), 0, fAdc.size() - 1);
+   hist->SetDirectory(nullptr); // Pass ownership to the pointer instead of current ROOT directory
    for (int i = 0; i < fAdc.size(); ++i)
       hist->SetBinContent(i + 1, fAdc[i]);
    return hist;

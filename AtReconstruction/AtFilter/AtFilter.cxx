@@ -6,5 +6,5 @@
 
 AtRawEvent *AtFilter::ConstructOutputEvent(TClonesArray *fOutputEventArray, AtRawEvent *inputEvent)
 {
-   return new ((*fOutputEventArray)[0]) AtRawEvent(*inputEvent);
+   return new ((*fOutputEventArray)[0]) AtRawEvent(*inputEvent); // NOLINT (ROOT owns memory)
 }

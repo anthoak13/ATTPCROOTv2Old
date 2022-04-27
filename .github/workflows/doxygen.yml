@@ -1,0 +1,23 @@
+name: Doxygen Action
+
+on:
+  push:
+    branches: [develop, doxygen]
+
+jobs:
+  build-and-publish-doxygen:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run Doxygen
+      uses: mattnotmitt/doxygen-action@v1.8
+      with:
+        doxyfile-path: "./Doxyfile"
+	working-directory: "./doxygen"
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+	publish_dir: ./html
+    

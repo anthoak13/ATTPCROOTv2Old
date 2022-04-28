@@ -86,8 +86,12 @@ public:
       fPadList.push_back(std::move(ptr));
       return fPadList.back().get();
    }
-   // Returns a pointer to the newly added pad, or existing pad if auxName is already used
-   // bool returned is true if insert occurred.
+   /**
+    * @brief Add new auxilary pad (AtAuxPad) to event
+    * @param Name of new auxiliary pad
+    * @return Returns a pointer to the newly added pad, or existing pad if auxName is already used,
+    * bool returned is true if insert occurred.
+    */
    std::pair<AtAuxPad *, bool> AddAuxPad(std::string auxName);
    AtPad *GetPad(Int_t padNum);
    AtPad *GetAuxPad(std::string auxPad);

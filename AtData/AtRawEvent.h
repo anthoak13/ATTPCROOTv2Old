@@ -59,8 +59,8 @@ public:
 
    void Clear(Option_t *opt = nullptr) override;
 
-   /** Create a new pad in this event.
-    *
+   /**
+    * @brief Create a new pad in this event.
     * Adds a new pad, calling a constructor of AtPad using the passed parameters.
     *
     * @param params Parameters to perfect-forward to the constructor of AtPad
@@ -73,8 +73,8 @@ public:
       return fPadList.back().get();
    }
 
-   /** Move a pad into the event
-    *
+   /**
+    * @brief Move a pad into the event
     * Moves a std::unique_ptr of AtPad, or any type derived from AtPad, into the event.
     *
     * @param params std::unique_ptr of pad to move into the event

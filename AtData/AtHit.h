@@ -56,8 +56,8 @@ protected:
    std::vector<AtHit::MCSimPoint> fMCSimPointArray;
 
 public:
-   AtHit(Int_t hitID = -1);                                 //< Default constructor for IO
-   AtHit(Int_t padNum, XYZPoint location, Double_t charge); //< Primary constructor
+   AtHit(Int_t hitID = -1);                                              //< Default constructor for IO
+   AtHit(Int_t padNum, XYZPoint location, Double_t charge);              //< Primary constructor
    AtHit(Int_t hitID, Int_t padNum, XYZPoint location, Double_t charge); //< Specify hit ID on creation
    AtHit(const AtHit &) = default;                                       //< Copy constructor
    AtHit(AtHit &&) = default;                                            //< Move constructor

@@ -54,8 +54,8 @@ public:
    // Copies everything except the hit array from the passed AtEvent
    void CopyFrom(const AtEvent &event);
 
-   /** Create a new hit in this event
-    *
+   /**
+    * @brief Create a new hit in this event
     * Adds a new hit, calling a constructor of AtHit using the passed parameters.
     * Will set the hitID to the next availible if it was not set by the
     * AtHit constructor. Allowing this function to handle hitIDs will ensure they

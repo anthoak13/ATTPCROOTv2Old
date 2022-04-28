@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['hc_2841',['hc',['../namespacehc.html',1,'']]]
+  ['hc_2842',['hc',['../namespacehc.html',1,'']]]
 ];

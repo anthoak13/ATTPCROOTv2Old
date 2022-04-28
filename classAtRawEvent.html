@@ -110,9 +110,11 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac5a7c3fe0493548a8e53f0ae3400462f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae7bd0551a1f6898dd05d7db9544dbaeb"><td class="memTemplParams" colspan="2">template&lt;typename... Ts&gt; </td></tr>
 <tr class="memitem:ae7bd0551a1f6898dd05d7db9544dbaeb"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classAtPad.html">AtPad</a> *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classAtRawEvent.html#ae7bd0551a1f6898dd05d7db9544dbaeb">AddPad</a> (Ts &amp;&amp;...params)</td></tr>
+<tr class="memdesc:ae7bd0551a1f6898dd05d7db9544dbaeb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new pad in this event.  <a href="classAtRawEvent.html#ae7bd0551a1f6898dd05d7db9544dbaeb">More...</a><br /></td></tr>
 <tr class="separator:ae7bd0551a1f6898dd05d7db9544dbaeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21e68286c144a5e73782dd8df1f03a39"><td class="memTemplParams" colspan="2">template&lt;typename T , typename  = std::enable_if_t&lt;std::is_base_of&lt;AtPad, std::decay_t&lt;T&gt;&gt;::value&gt;&gt; </td></tr>
 <tr class="memitem:a21e68286c144a5e73782dd8df1f03a39"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classAtPad.html">AtPad</a> *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classAtRawEvent.html#a21e68286c144a5e73782dd8df1f03a39">AddPad</a> (std::unique_ptr&lt; T &gt; ptr)</td></tr>
+<tr class="memdesc:a21e68286c144a5e73782dd8df1f03a39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move a pad into the event.  <a href="classAtRawEvent.html#a21e68286c144a5e73782dd8df1f03a39">More...</a><br /></td></tr>
 <tr class="separator:a21e68286c144a5e73782dd8df1f03a39"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9dc7fa1e265190ea140575a6626d6b4a"><td class="memItemLeft" align="right" valign="top">std::pair&lt; <a class="el" href="classAtAuxPad.html">AtAuxPad</a> *, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtRawEvent.html#a9dc7fa1e265190ea140575a6626d6b4a">AddAuxPad</a> (std::string auxName)</td></tr>
 <tr class="separator:a9dc7fa1e265190ea140575a6626d6b4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -304,7 +306,8 @@ template&lt;typename T , typename  = std::enable_if_t&lt;std::is_base_of&lt;AtPa
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Move a pad into the event</p>
+
+<p>Move a pad into the event. </p>
 <p>Moves a std::unique_ptr of <a class="el" href="classAtPad.html">AtPad</a>, or any type derived from <a class="el" href="classAtPad.html">AtPad</a>, into the event.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -343,7 +346,8 @@ template&lt;typename... Ts&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Create a new pad in this event.</p>
+
+<p>Create a new pad in this event. </p>
 <p>Adds a new pad, calling a constructor of <a class="el" href="classAtPad.html">AtPad</a> using the passed parameters.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -1016,7 +1020,7 @@ template&lt;typename... Ts&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Apr 28 2022 20:00:56 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Apr 28 2022 20:08:40 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

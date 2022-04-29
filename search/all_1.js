@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['a_8',['A',['../structAtHit_1_1MCSimPoint.html#abd2bef624d42a4bc4570dfdd08222150',1,'AtHit::MCSimPoint::A()'],['../structhc__params.html#a18df3ec1f600b7e49c89ea829a940fe6',1,'hc_params::a()']]],
+  ['a_8',['a',['../structhc__params.html#a18df3ec1f600b7e49c89ea829a940fe6',1,'hc_params::a()'],['../structAtHit_1_1MCSimPoint.html#abd2bef624d42a4bc4570dfdd08222150',1,'AtHit::MCSimPoint::A()']]],
   ['add_9',['Add',['../classGETMath2.html#a872d4fe0fa88c574f558948458de68cd',1,'GETMath2']]],
   ['addauxpad_10',['AddAuxPad',['../classAtEvent.html#ab4942933cb856e955710b3ca880214dc',1,'AtEvent::AddAuxPad()'],['../classAtRawEvent.html#a9dc7fa1e265190ea140575a6626d6b4a',1,'AtRawEvent::AddAuxPad()'],['../classAtMap.html#a8addc8f00efa9c67d11721db00168d4f',1,'AtMap::AddAuxPad()'],['../classAtAuxFilterTask.html#a87141c56b599a365a31727b58f7ec8dd',1,'AtAuxFilterTask::AddAuxPad()']]],
   ['addclusterhit_11',['AddClusterHit',['../classAtTrack.html#af803b786438eeec6d5bc6d5bcef8fd8c',1,'AtTrack']]],

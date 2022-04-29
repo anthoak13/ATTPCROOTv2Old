@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['knn_4015',['kNN',['../classAtPATTERN_1_1AtPRA.html#aafe5292b09419947f1fed4b9f10a87b2',1,'AtPATTERN::AtPRA']]]
+  ['knn_4012',['kNN',['../classAtPATTERN_1_1AtPRA.html#aafe5292b09419947f1fed4b9f10a87b2',1,'AtPATTERN::AtPRA']]]
 ];

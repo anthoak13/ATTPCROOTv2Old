@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['direction_4740',['direction',['../structhc_1_1triplet.html#a6ba146358e60533480a31a5eacf49077',1,'hc::triplet']]],
-  ['dist_4741',['dist',['../structnode.html#ab3f61c2d6dc0e59f726cc87859ba4458',1,'node']]],
-  ['distance_4742',['distance',['../structmst_1_1edge.html#a4f2477d5089e3625c8ff1221e01697a9',1,'mst::edge']]]
+  ['direction_4745',['direction',['../structhc_1_1triplet.html#a6ba146358e60533480a31a5eacf49077',1,'hc::triplet']]],
+  ['dist_4746',['dist',['../structnode.html#ab3f61c2d6dc0e59f726cc87859ba4458',1,'node']]],
+  ['distance_4747',['distance',['../structmst_1_1edge.html#a4f2477d5089e3625c8ff1221e01697a9',1,'mst::edge']]]
 ];

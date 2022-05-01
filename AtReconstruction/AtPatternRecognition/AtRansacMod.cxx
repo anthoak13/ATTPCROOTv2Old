@@ -21,25 +21,6 @@ using namespace std;
 
 ClassImp(AtRansacMod);
 
-AtRansacMod::AtRansacMod()
-{
-
-   fRANSACMaxIteration = 500;
-   fRANSACMinPoints = 30;
-   fRANSACThreshold = 15;
-   fLineDistThreshold = 40.0; // 6.
-   fRandSamplMode = 0;
-
-   fVertex_1.SetXYZ(-10000, -10000, -10000);
-   fVertex_2.SetXYZ(-10000, -10000, -10000);
-   fVertexTime = -1000.0;
-   fMinimum = -1.0;
-   fChargeThres = 0;
-   // fVertexMod = 0;
-}
-
-AtRansacMod::~AtRansacMod() = default;
-
 void AtRansacMod::Init(AtEvent *event)
 {
 
@@ -71,7 +52,6 @@ void AtRansacMod::Init(AtEvent *event)
 
 void AtRansacMod::Reset()
 {
-
    vX.clear();
    vY.clear();
    vZ.clear();
@@ -277,7 +257,7 @@ void AtRansacMod::Solve()
          IdxMod2.emplace_back(scale, Rsamples[1]);
       } // if a cluster was found
 
-   } // for RANSAC interactions
+   } // for RANSAC iterations
 
    // sort clusters
    sort(IdxMod1.begin(), IdxMod1.end());

@@ -45,12 +45,12 @@ void AtMlesacMod::Solve()
          break;
 
       auto Rsamples = sampleModelPoints(remainIndex, fRandSamplMode);
-      EstimModel(Rsamples);
+      setModel(Rsamples);
 
       // Calculate squared errors
       double minError = 1e5, maxError = -1e5;
       for (int &j : remainIndex) {
-         double error = EstimError(j);
+         double error = distanceToModel(j);
          if (error < minError)
             minError = error;
          if (error > maxError)
@@ -66,7 +66,7 @@ void AtMlesacMod::Solve()
          const double probInlierCoeff = gamma / sqrt(2 * TMath::Pi() * dataSigma2);
 
          for (int &j : remainIndex) {
-            double error = EstimError(j);
+            double error = distanceToModel(j);
             double probInlier = probInlierCoeff * exp(-0.5 * error * error / dataSigma2);
             sumPosteriorProb += probInlier / (probInlier + probOutlier);
          }
@@ -82,7 +82,7 @@ void AtMlesacMod::Solve()
       const double probOutlier = (1 - gamma) / nu;
       const double probInlierCoeff = gamma / sqrt(2 * TMath::Pi() * dataSigma2);
       for (int &j : remainIndex) {
-         double error = EstimError(j);
+         double error = distanceToModel(j);
          double probInlier = probInlierCoeff * exp(-0.5 * error * error / dataSigma2);
          // if((probInlier + probOutlier)>0) sumLogLikelihood = sumLogLikelihood - log(probInlier + probOutlier);
 
@@ -119,7 +119,7 @@ void AtMlesacMod::Solve()
    // extract inliers using the models
    for (int i = 0; i < IdxMod1.size(); ++i) {
       std::pair<int, int> ModInx = {IdxMod1[i].second, IdxMod2[i].second};
-      EstimModel(ModInx);
+      setModel(ModInx);
       std::vector<int> inlIdxR;
 
       if (remainIndex.size() < fRANSACMinPoints)
@@ -128,7 +128,7 @@ void AtMlesacMod::Solve()
       int counter = 0;
 
       for (int &j : remainIndex) {
-         double error = EstimError(j);
+         double error = distanceToModel(j);
 
          if ((error * error) < (fRANSACThreshold * fRANSACThreshold)) {
             inlIdxR.push_back(j);

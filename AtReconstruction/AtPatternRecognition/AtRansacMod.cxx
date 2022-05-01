@@ -232,7 +232,7 @@ std::pair<int, int> AtRansacMod::sampleModelPoints(vector<int> indX, SampleMetho
    }
 }
 
-void AtRansacMod::EstimModel(const std::pair<int, int> samplesIdx)
+void AtRansacMod::setModel(const std::pair<int, int> samplesIdx)
 {
 
    // line from two points
@@ -245,7 +245,7 @@ void AtRansacMod::EstimModel(const std::pair<int, int> samplesIdx)
    Ps = Po1;
 }
 
-double AtRansacMod::EstimError(int i)
+double AtRansacMod::distanceToModel(int i)
 {
    // distance point to line
    TVector3 newPoint = {vX[i], vY[i], vZ[i]};
@@ -256,105 +256,103 @@ double AtRansacMod::EstimError(int i)
    return dist;
 }
 
-void AtRansacMod::Solve()
+void AtRansacMod::doIteration(std::vector<std::pair<double, int>> &IdxModel1,
+                              std::vector<std::pair<double, int>> &IdxModel2)
 {
-
-   // std::cout << "numero de puntos  "<<vX.size()<< '\n';
    std::vector<int> remainIndex;
    for (size_t i = 0; i < vX.size(); i++)
       remainIndex.push_back(i);
 
-   std::vector<std::pair<double, int>> IdxMod1;
-   std::vector<std::pair<double, int>> IdxMod2;
+   if (remainIndex.size() < fRANSACMinPoints)
+      return;
 
-   // In this loop remainIndex is a vector where vec[i] = i
-   for (int i = 0; i < fRANSACMaxIteration; i++) {
+   // Sample 2 points from all availible. Store the indices of the points in a std::pair
+   auto Rsamples = sampleModelPoints(remainIndex, fRandSamplMode); // random sampling
 
-      std::cout << i << " RemainIndex size " << remainIndex.size() << std::endl;
-      if (remainIndex.size() < fRANSACMinPoints)
-         break;
+   // Set two vectors defining a line between the points (Vs and Ps)
+   setModel(Rsamples); // estimate the linear model
 
-      // Sample 2 points from all availible. Store the indices of the points in a std::pair
-      auto Rsamples = sampleModelPoints(remainIndex, fRandSamplMode); // random sampling
+   int nbInliers = 0;
+   double weight = 0;
 
-      // Set two vectors defining a line between the points (Vs and Ps)
-      EstimModel(Rsamples); // estimate the linear model
+   // Loop through point and if it is an inlier, then add the error**2 to weight
+   for (auto index : remainIndex) {
 
-      int nbInliers = 0;
-      double weight = 0;
-
-      // Loop through point and if it is an inlier, then add the error**2 to weight
-      for (int &j : remainIndex) {
-
-         double error = EstimError(j); // error of each point relative to the model
-         error = error * error;
-         if (error < (fRANSACThreshold * fRANSACThreshold)) {
-            // inlIdxR.push_back(*j);
-            nbInliers++;
-            weight += error;
-         }
+      double error = distanceToModel(index);
+      error = error * error;
+      if (error < (fRANSACThreshold * fRANSACThreshold)) {
+         nbInliers++;
+         weight += error;
       }
+   }
 
-      // If there are enough inliers for this to be a potential line, save the indices defining the
-      // model with a "scale" indicating the "goodness" of the model
-      // scale = sum(error**2)/nPoints
-      if (nbInliers > fRANSACMinPoints) {
-         // getting the best models
-         double scale = weight / nbInliers;
-         IdxMod1.emplace_back(scale, Rsamples.first);
-         IdxMod2.emplace_back(scale, Rsamples.second);
-      } // if a cluster was found
+   // If there are enough inliers for this to be a potential line, save the indices defining the
+   // model with a "scale" indicating the "goodness" of the model
+   // scale = sum(error**2)/nPoints
+   if (nbInliers > fRANSACMinPoints) {
+      // getting the best models
+      double scale = weight / nbInliers;
+      IdxModel1.emplace_back(scale, Rsamples.first);
+      IdxModel2.emplace_back(scale, Rsamples.second);
+   }
+}
+void AtRansacMod::Solve()
+{
+   // Vectors to store the indices used to define the model and their
+   // "scale" of the model
+   std::vector<std::pair<double, int>> IdxModel1;
+   std::vector<std::pair<double, int>> IdxModel2;
 
-   } // for RANSAC
+   // Populate vectors of randomly sampled potential models
+   for (int i = 0; i < fRANSACMaxIteration; i++)
+      doIteration(IdxModel1, IdxModel2);
 
-   // sort clusters
-   sort(IdxMod1.begin(), IdxMod1.end());
-   sort(IdxMod2.begin(), IdxMod2.end());
+   // sort clusters by "goodness" of the models
+   sort(IdxModel1.begin(), IdxModel1.end());
+   sort(IdxModel2.begin(), IdxModel2.end());
 
-   remainIndex.clear(); // track remaining points
-
+   std::vector<int> remainIndex;
    for (size_t i = 0; i < vX.size(); i++)
       remainIndex.push_back(i);
 
-   // extract inliers using the models
-   // After each loop, inliers are removed before fitting the other lines
-   for (int i = 0; i < IdxMod1.size(); ++i) {
-      std::pair<int, int> ModInx = {IdxMod1[i].second, IdxMod2[i].second};
-      EstimModel(ModInx);
-      std::vector<int> inlIdxR;
+   // Loop through each model, and extract the points that fit each model
+   for (int i = 0; i < IdxModel1.size(); ++i) {
+      setModel({IdxModel1[i].second, IdxModel2[i].second});
 
       if (remainIndex.size() < fRANSACMinPoints)
          break;
 
-      int counter = 0; // defined equal to inlIdxR.size()
+      // Get a vector of every point that fits this model
+      std::vector<int> inlIdxR = getPointsInModel(remainIndex);
 
-      for (int &j : remainIndex) {
-         double error = EstimError(j);
-
-         if ((error * error) < (fRANSACThreshold * fRANSACThreshold)) {
-            inlIdxR.push_back(j);
-            counter++;
-         }
-      }
-
-      if (counter > fRANSACMinPoints) {
+      // If there are enough points that fit the model save it
+      if (inlIdxR.size() > fRANSACMinPoints) {
          TVector3 v1, v2;
          double chi2 = Fit3D(inlIdxR, v1, v2);
-         SetCluster(inlIdxR, IdxMod1[i].first, chi2, v1, v2);
-         v1.Clear();
-         v2.Clear();
+         SetCluster(inlIdxR, IdxModel1[i].first, chi2, v1, v2);
       }
-      std::vector<int> tempRemain;
-      std::set_difference(remainIndex.begin(), remainIndex.end(), inlIdxR.begin(), inlIdxR.end(),
-                          std::inserter(tempRemain, tempRemain.begin()));
-      remainIndex = tempRemain;
-      inlIdxR.clear();
-      tempRemain.clear();
-   }
 
-   IdxMod1.clear();
-   IdxMod2.clear();
-   remainIndex.clear();
+      // Remove all the points that fit this model (even if it wasn't saved?)
+      removePoints(remainIndex, inlIdxR);
+   }
+}
+void AtRansacMod::removePoints(std::vector<int> &toModify, const std::vector<int> &toRemove)
+{
+   std::vector<int> tempRemain;
+   std::set_difference(toModify.begin(), toModify.end(), toRemove.begin(), toRemove.end(),
+                       std::inserter(tempRemain, tempRemain.begin()));
+   toModify = std::move(tempRemain);
+}
+
+std::vector<int> AtRansacMod::getPointsInModel(const std::vector<int> &indexes)
+{
+   std::vector<int> retVec;
+   for (auto index : indexes) {
+      double error = distanceToModel(index);
+      if ((error * error) < (fRANSACThreshold * fRANSACThreshold))
+         retVec.push_back(index);
+   }
+   return retVec;
 }
 
 void AtRansacMod::CalcRANSACMod(AtEvent *event)

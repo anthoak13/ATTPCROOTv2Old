@@ -100,36 +100,41 @@ public:
    void SetNumItera(Int_t niterations) { fRANSACMaxIteration = niterations; };
    void SetChargeThres(double value) { fChargeThres = value; };
    void SetVertexMod(Int_t mode) { fVertexMod = mode; };
-   void SetCluster(const std::vector<int> samplesIdx, const double cost, const double Chi2, TVector3 CP1, TVector3 CP2);
 
 protected:
    // Virtual behavior functions
    // virtual void DoRansacIteration();
    virtual void Reset();
    virtual void Solve();
-
+   virtual void doIteration(std::vector<std::pair<double, int>> &IdxMod1, std::vector<std::pair<double, int>> &IdxMod2);
+   std::vector<int> getPointsInModel(const std::vector<int> &indexes);
+   void removePoints(std::vector<int> &vectorToModify, const std::vector<int> &pointsToRemove);
    void Init(AtEvent *event);
 
    /***** Begining of model-specific methods *****/
+   // This pair<int, int> that is being passed around will be a member of the
+   // model (and probably a vector not a pair for models that require more than two
+   // points to define. Will also have to be an XYZPoint instead of an index)
    std::pair<int, int> sampleModelPoints(std::vector<int> indX, SampleMethod mode);
    std::pair<int, int> sampleUniform(const std::vector<int> &indX);
    std::pair<int, int> sampleGaussian(const std::vector<int> &indX);
    std::pair<int, int> sampleWeighted(const std::vector<int> &indX);
    std::pair<int, int> sampleWeightedGaussian(const std::vector<int> &indX);
-   void EstimModel(const std::pair<int, int> samplesIdx);
+   void setModel(const std::pair<int, int> samplesIdx);
+   double Fit3D(std::vector<int> inliners, TVector3 &V1, TVector3 &V2);
+   double distanceToModel(int i);
    /***** End of model-specific methods ******/
 
    /***** Begining of model methods (in base class) *****/
    std::vector<double> GetPDF(const std::vector<int> samplesIdx);
+
    /***** Begining of model methods (in base class) *****/
 
-   double EstimError(int i);
-   double Fit3D(std::vector<int> inliners, TVector3 &V1, TVector3 &V2);
    TVector3 ClosestPoint2Lines(TVector3 d1, TVector3 pt1, TVector3 d2, TVector3 pt2);
    std::vector<AtTrack *> Clusters2Tracks(AllClusters NClusters, AtEvent *event);
-
    void FindVertex(std::vector<AtTrack *> tracks);
    void FindVertexOneTrack(std::vector<AtTrack *> tracks);
+   void SetCluster(const std::vector<int> samplesIdx, const double cost, const double Chi2, TVector3 CP1, TVector3 CP2);
 
    ClassDef(AtRansacMod, 1);
 };

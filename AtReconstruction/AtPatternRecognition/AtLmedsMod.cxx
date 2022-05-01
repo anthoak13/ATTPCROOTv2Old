@@ -46,14 +46,14 @@ void AtLmedsMod::Solve()
          break;
 
       auto Rsamples = sampleModelPoints(remainIndex, fRandSamplMode); // random sampling
-      EstimModel(Rsamples);                                           // estimate the linear model
+      setModel(Rsamples);                                             // estimate the linear model
 
       // std::vector<int> inlIdxR;
       int nbInliers = 0;
 
       for (int &j : remainIndex) {
 
-         double error = EstimError(j); // error of each point relative to the model
+         double error = distanceToModel(j); // error of each point relative to the model
          error = error * error;
 
          if (error < (fRANSACThreshold * fRANSACThreshold)) {
@@ -86,7 +86,7 @@ void AtLmedsMod::Solve()
    // extract inliers using the models
    for (int i = 0; i < IdxMod1.size(); ++i) {
       std::pair<int, int> ModInx = {IdxMod1[i].second, IdxMod2[i].second};
-      EstimModel(ModInx);
+      setModel(ModInx);
       std::vector<int> inlIdxR;
 
       if (remainIndex.size() < fRANSACMinPoints)
@@ -95,7 +95,7 @@ void AtLmedsMod::Solve()
       int counter = 0;
 
       for (int &j : remainIndex) {
-         double error = EstimError(j);
+         double error = distanceToModel(j);
 
          if ((error * error) < (fRANSACThreshold * fRANSACThreshold)) {
             inlIdxR.push_back(j);

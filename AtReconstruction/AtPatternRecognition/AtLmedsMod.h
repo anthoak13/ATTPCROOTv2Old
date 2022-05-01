@@ -29,16 +29,14 @@ class TClass;
 class TMemberInspector;
 
 class AtLmedsMod : public AtRansacMod {
-protected:
-   std::vector<double> errorsVec;
-
 public:
    AtLmedsMod() = default;
    ~AtLmedsMod() = default;
 
 protected:
-   virtual void Reset() override;
-   virtual void Solve() override;
+   virtual void
+   doIteration(std::vector<std::pair<double, int>> &IdxMod1, std::vector<std::pair<double, int>> &IdxMod2) override;
+
    double GetMedian(std::vector<double> errvec);
    ClassDefOverride(AtLmedsMod, 2);
 };

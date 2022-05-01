@@ -21,106 +21,45 @@ using namespace std;
 
 ClassImp(AtLmedsMod);
 
-void AtLmedsMod::Reset()
+void AtLmedsMod::doIteration(std::vector<std::pair<double, int>> &IdxModel1,
+                             std::vector<std::pair<double, int>> &IdxModel2)
 {
-   AtRansacMod::Reset();
-   errorsVec.clear();
-}
-void AtLmedsMod::Solve()
-{
-
-   // std::cout << "numero de puntos  "<<vX.size()<< '\n';
    std::vector<int> remainIndex;
    for (size_t i = 0; i < vX.size(); i++)
       remainIndex.push_back(i);
 
-   TVector3 V1, V2;
-   std::vector<int> inliners;
-   inliners.clear();
-   std::vector<std::pair<double, int>> IdxMod1;
-   std::vector<std::pair<double, int>> IdxMod2;
+   if (remainIndex.size() < fRANSACMinPoints)
+      return;
 
-   for (int i = 0; i < fRANSACMaxIteration; i++) {
+   // Sample 2 points from all availible. Store the indices of the points in a std::pair
+   auto Rsamples = sampleModelPoints(remainIndex, fRandSamplMode); // random sampling
 
-      if (remainIndex.size() < fRANSACMinPoints)
-         break;
+   // Set two vectors defining a line between the points (Vs and Ps)
+   setModel(Rsamples); // estimate the linear model
 
-      auto Rsamples = sampleModelPoints(remainIndex, fRandSamplMode); // random sampling
-      setModel(Rsamples);                                             // estimate the linear model
+   int nbInliers = 0;
+   std::vector<double> errorsVec;
+   // Loop through point and if it is an inlier, then add the error**2 to weight
+   for (auto index : remainIndex) {
 
-      // std::vector<int> inlIdxR;
-      int nbInliers = 0;
-
-      for (int &j : remainIndex) {
-
-         double error = distanceToModel(j); // error of each point relative to the model
-         error = error * error;
-
-         if (error < (fRANSACThreshold * fRANSACThreshold)) {
-            // inlIdxR.push_back(*j);
-            nbInliers++;
-            errorsVec.push_back(error);
-         }
+      double error = distanceToModel(index);
+      error = error * error;
+      if (error < (fRANSACThreshold * fRANSACThreshold)) {
+         nbInliers++;
+         errorsVec.push_back(error);
       }
-
-      double med = GetMedian(errorsVec);
-      errorsVec.clear();
-
-      if (nbInliers > fRANSACMinPoints) {
-         // getting the best models
-         double scale = med / nbInliers;
-         IdxMod1.emplace_back(scale, Rsamples.first);
-         IdxMod2.emplace_back(scale, Rsamples.second);
-      } // if a cluster was found
-
-   } // for Lmeds interactions
-
-   // sort clusters
-   sort(IdxMod1.begin(), IdxMod1.end());
-   sort(IdxMod2.begin(), IdxMod2.end());
-
-   remainIndex.clear(); // track remaining points
-   for (size_t i = 0; i < vX.size(); i++)
-      remainIndex.push_back(i);
-
-   // extract inliers using the models
-   for (int i = 0; i < IdxMod1.size(); ++i) {
-      std::pair<int, int> ModInx = {IdxMod1[i].second, IdxMod2[i].second};
-      setModel(ModInx);
-      std::vector<int> inlIdxR;
-
-      if (remainIndex.size() < fRANSACMinPoints)
-         break;
-
-      int counter = 0;
-
-      for (int &j : remainIndex) {
-         double error = distanceToModel(j);
-
-         if ((error * error) < (fRANSACThreshold * fRANSACThreshold)) {
-            inlIdxR.push_back(j);
-            counter++;
-         }
-      }
-
-      if (counter > fRANSACMinPoints) {
-         TVector3 v1, v2;
-         double chi2 = Fit3D(inlIdxR, v1, v2);
-         SetCluster(inlIdxR, IdxMod1[i].first, chi2, v1, v2);
-         v1.Clear();
-         v2.Clear();
-      }
-      std::vector<int> tempRemain;
-      std::set_difference(remainIndex.begin(), remainIndex.end(), inlIdxR.begin(), inlIdxR.end(),
-                          std::inserter(tempRemain, tempRemain.begin()));
-      remainIndex = tempRemain;
-      inlIdxR.clear();
-      tempRemain.clear();
    }
 
-   IdxMod1.clear();
-   IdxMod2.clear();
-   remainIndex.clear();
+   // If there are enough inliers for this to be a potential line, save the indices defining the
+   // model with a "scale" indicating the "goodness" of the model
+   // scale = median(error_i**2)/nPoints
+   double med = GetMedian(errorsVec);
+   if (nbInliers > fRANSACMinPoints) {
+      // getting the best models
+      double scale = med / nbInliers;
+      IdxModel1.emplace_back(scale, Rsamples.first);
+      IdxModel2.emplace_back(scale, Rsamples.second);
+   }
 }
 
 double AtLmedsMod::GetMedian(std::vector<double> errvec)

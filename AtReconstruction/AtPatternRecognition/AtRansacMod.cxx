@@ -275,6 +275,10 @@ void AtRansacMod::doIteration(std::vector<std::pair<double, int>> &IdxModel1,
    int nbInliers = 0;
    double weight = 0;
 
+   // TODO: The only difference between this and AtLmedsMod version is how the "scale" is set
+   // the rest of the code is essentially identical. Could replace this next loop with a function
+   // double scale = getGoodnessOfModel(remainIndex)
+
    // Loop through point and if it is an inlier, then add the error**2 to weight
    for (auto index : remainIndex) {
 

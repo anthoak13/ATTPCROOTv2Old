@@ -74,7 +74,7 @@ public:
    static void SelectPad(const char *rawevt);
    void DrawWave(Int_t PadNum);
    void SetMultiHit(Int_t hitMax);
-   void SetAlgorithm(Int_t val) { fRANSACAlg = val; };
+   void SetUnifiedRansac(Bool_t val) { fRansacUnified = val; };
 
 private:
    void DrawPadPlane();
@@ -236,7 +236,7 @@ private:
    Bool_t fSaveTextData;
    Float_t f3DThreshold;
    Bool_t fIsRawData;
-   Int_t fRANSACAlg;
+   Bool_t fRansacUnified;
    Int_t fDetNumPads;
    TF1 *fHoughLinearFit;
    TF1 *fRansacLinearFit;

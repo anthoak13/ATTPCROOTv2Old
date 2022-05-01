@@ -162,7 +162,7 @@ void AtRansacTask::Exec(Option_t *opt)
       Rantest->SetDistanceThreshold(fRANSACThreshold);
       Rantest->SetMinHitsLine(fMinHitsLine);
       Rantest->SetNumItera(fNumItera);
-      Rantest->SetRanSamMode(fRandSamplMode);
+      Rantest->SetRanSamMode(static_cast<AtRansacMod::SampleMethod>(fRandSamplMode));
       Rantest->CalcRANSACMod(fEvent);
       Rantest->SetChargeThres(fCharThres);
       Rantest->SetVertexMod(fVertexMode);
@@ -174,7 +174,7 @@ void AtRansacTask::Exec(Option_t *opt)
       Rantest->SetDistanceThreshold(fRANSACThreshold);
       Rantest->SetMinHitsLine(fMinHitsLine);
       Rantest->SetNumItera(fNumItera);
-      Rantest->SetRanSamMode(fRandSamplMode);
+      Rantest->SetRanSamMode(static_cast<AtRansacMod::SampleMethod>(fRandSamplMode));
       Rantest->CalcRANSACMod(fEvent);
       Rantest->SetChargeThres(fCharThres);
       Rantest->SetVertexMod(fVertexMode);
@@ -186,7 +186,7 @@ void AtRansacTask::Exec(Option_t *opt)
       Rantest->SetDistanceThreshold(fRANSACThreshold);
       Rantest->SetMinHitsLine(fMinHitsLine);
       Rantest->SetNumItera(fNumItera);
-      Rantest->SetRanSamMode(fRandSamplMode);
+      Rantest->SetRanSamMode(static_cast<AtRansacMod::SampleMethod>(fRandSamplMode));
       Rantest->CalcRANSACMod(fEvent);
       Rantest->SetChargeThres(fCharThres);
       Rantest->SetVertexMod(fVertexMode);

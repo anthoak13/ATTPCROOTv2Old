@@ -5,11 +5,13 @@
 
 #include <Rtypes.h>  // for Int_t, Bool_t, Double_t, THashConsistencyHolder
 #include <TString.h> // for TString
+
 class AtEvent;
 class TBuffer;
 class TClass;
 class TClonesArray;
 class TMemberInspector;
+enum class SampleMethod;
 
 class AtRansacTask : public FairTask {
 private:

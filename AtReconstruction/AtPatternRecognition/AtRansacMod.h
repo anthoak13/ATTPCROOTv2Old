@@ -39,7 +39,7 @@ public:
       TVector3 ClusterFitP2;         //< point 2 from the fitted line
    };
    using AllClusters = std::vector<Cluster>;
-
+   enum class SampleMethod;
    AllClusters cluster_vector;
 
 protected:
@@ -48,7 +48,7 @@ protected:
    float fRANSACMinPoints{30};
    float fRANSACThreshold{15};
    Int_t fLineDistThreshold{40};
-   Int_t fRandSamplMode{0};
+   SampleMethod fRandSamplMode{0};
 
    TVector3 fVertex_1{-10000, -10000, -10000};
    TVector3 fVertex_2{-10000, -10000, -10000};
@@ -80,22 +80,10 @@ public:
    AtRansacMod() = default;
    virtual ~AtRansacMod() = default;
 
-   // Virtual behavior functions
-   virtual void Reset();
-   virtual void Solve();
-
    // Behavior
-   void Init(AtEvent *event);
-   std::vector<int> RandSam(std::vector<int> indX, Int_t mode);
-   void EstimModel(const std::vector<int> samplesIdx);
-   double EstimError(int i);
    void CalcRANSACMod(AtEvent *event);
-   double Fit3D(std::vector<int> inliners, TVector3 &V1, TVector3 &V2);
-   TVector3 ClosestPoint2Lines(TVector3 d1, TVector3 pt1, TVector3 d2, TVector3 pt2);
-   std::vector<AtTrack *> Clusters2Tracks(AllClusters NClusters, AtEvent *event);
 
    // Getters
-   std::vector<double> GetPDF(const std::vector<int> samplesIdx);
    double GetAvCharge() const { return Avcharge; };
    TVector3 GetVertex1() const { return fVertex_1; };
    TVector3 GetVertex2() const { return fVertex_2; };
@@ -106,7 +94,7 @@ public:
 
    // Setters
    void SetAvCharge(double charge) { Avcharge = charge; };
-   void SetRanSamMode(Int_t mode) { fRandSamplMode = mode; };
+   void SetRanSamMode(SampleMethod mode) { fRandSamplMode = mode; };
    void SetDistanceThreshold(Float_t threshold) { fRANSACThreshold = threshold; };
    void SetMinHitsLine(Int_t nhits) { fRANSACMinPoints = nhits; };
    void SetNumItera(Int_t niterations) { fRANSACMaxIteration = niterations; };
@@ -115,6 +103,31 @@ public:
    void SetCluster(const std::vector<int> samplesIdx, const double cost, const double Chi2, TVector3 CP1, TVector3 CP2);
 
 protected:
+   // Virtual behavior functions
+   // virtual void DoRansacIteration();
+   virtual void Reset();
+   virtual void Solve();
+
+   void Init(AtEvent *event);
+
+   /***** Begining of model-specific methods *****/
+   std::pair<int, int> sampleModelPoints(std::vector<int> indX, SampleMethod mode);
+   std::pair<int, int> sampleUniform(const std::vector<int> &indX);
+   std::pair<int, int> sampleGaussian(const std::vector<int> &indX);
+   std::pair<int, int> sampleWeighted(const std::vector<int> &indX);
+   std::pair<int, int> sampleWeightedGaussian(const std::vector<int> &indX);
+   void EstimModel(const std::pair<int, int> samplesIdx);
+   /***** End of model-specific methods ******/
+
+   /***** Begining of model methods (in base class) *****/
+   std::vector<double> GetPDF(const std::vector<int> samplesIdx);
+   /***** Begining of model methods (in base class) *****/
+
+   double EstimError(int i);
+   double Fit3D(std::vector<int> inliners, TVector3 &V1, TVector3 &V2);
+   TVector3 ClosestPoint2Lines(TVector3 d1, TVector3 pt1, TVector3 d2, TVector3 pt2);
+   std::vector<AtTrack *> Clusters2Tracks(AllClusters NClusters, AtEvent *event);
+
    void FindVertex(std::vector<AtTrack *> tracks);
    void FindVertexOneTrack(std::vector<AtTrack *> tracks);
 

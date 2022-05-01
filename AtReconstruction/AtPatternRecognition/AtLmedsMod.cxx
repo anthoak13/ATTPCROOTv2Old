@@ -45,8 +45,8 @@ void AtLmedsMod::Solve()
       if (remainIndex.size() < fRANSACMinPoints)
          break;
 
-      std::vector<int> Rsamples = RandSam(remainIndex, fRandSamplMode); // random sampling
-      EstimModel(Rsamples);                                             // estimate the linear model
+      auto Rsamples = sampleModelPoints(remainIndex, fRandSamplMode); // random sampling
+      EstimModel(Rsamples);                                           // estimate the linear model
 
       // std::vector<int> inlIdxR;
       int nbInliers = 0;
@@ -69,8 +69,8 @@ void AtLmedsMod::Solve()
       if (nbInliers > fRANSACMinPoints) {
          // getting the best models
          double scale = med / nbInliers;
-         IdxMod1.emplace_back(scale, Rsamples[0]);
-         IdxMod2.emplace_back(scale, Rsamples[1]);
+         IdxMod1.emplace_back(scale, Rsamples.first);
+         IdxMod2.emplace_back(scale, Rsamples.second);
       } // if a cluster was found
 
    } // for Lmeds interactions
@@ -85,10 +85,9 @@ void AtLmedsMod::Solve()
 
    // extract inliers using the models
    for (int i = 0; i < IdxMod1.size(); ++i) {
-      std::vector<int> ModInx = {IdxMod1[i].second, IdxMod2[i].second};
+      std::pair<int, int> ModInx = {IdxMod1[i].second, IdxMod2[i].second};
       EstimModel(ModInx);
       std::vector<int> inlIdxR;
-      ModInx.clear();
 
       if (remainIndex.size() < fRANSACMinPoints)
          break;

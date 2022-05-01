@@ -44,7 +44,7 @@ void AtMlesacMod::Solve()
       if (remainIndex.size() < fRANSACMinPoints)
          break;
 
-      std::vector<int> Rsamples = RandSam(remainIndex, fRandSamplMode);
+      auto Rsamples = sampleModelPoints(remainIndex, fRandSamplMode);
       EstimModel(Rsamples);
 
       // Calculate squared errors
@@ -102,8 +102,8 @@ void AtMlesacMod::Solve()
          if (sumLogLikelihood < 0 || std::isinf(sumLogLikelihood))
             scale = 0;
          // std::cout <<sumLogLikelihood<< " Likelihood  "<< scale<< << '\n';
-         IdxMod1.emplace_back(scale, Rsamples[0]);
-         IdxMod2.emplace_back(scale, Rsamples[1]);
+         IdxMod1.emplace_back(scale, Rsamples.first);
+         IdxMod2.emplace_back(scale, Rsamples.second);
       }
 
    } // for Mlesac interactions
@@ -118,10 +118,9 @@ void AtMlesacMod::Solve()
 
    // extract inliers using the models
    for (int i = 0; i < IdxMod1.size(); ++i) {
-      std::vector<int> ModInx = {IdxMod1[i].second, IdxMod2[i].second};
+      std::pair<int, int> ModInx = {IdxMod1[i].second, IdxMod2[i].second};
       EstimModel(ModInx);
       std::vector<int> inlIdxR;
-      ModInx.clear();
 
       if (remainIndex.size() < fRANSACMinPoints)
          break;

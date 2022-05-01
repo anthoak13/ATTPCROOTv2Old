@@ -34,6 +34,7 @@ public:
    AtMlesacMod() = default;
    ~AtMlesacMod() = default;
 
+protected:
    virtual void Solve() override;
 
    ClassDefOverride(AtMlesacMod, 2);

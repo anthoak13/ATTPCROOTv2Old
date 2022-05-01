@@ -21,6 +21,8 @@ using namespace std;
 
 ClassImp(AtRansacMod);
 
+enum class AtRansacMod::SampleMethod { kUniform = 0, kGaussian = 1, kWeighted = 2, kWeightedGaussian = 3 };
+
 void AtRansacMod::Init(AtEvent *event)
 {
 
@@ -63,140 +65,181 @@ void AtRansacMod::Reset()
 
 vector<double> AtRansacMod::GetPDF(const std::vector<int> samplesIdx)
 {
-
    size_t pclouds = samplesIdx.size();
    double Tcharge = 0;
-   for (int i = 0; i < pclouds; i++)
-      Tcharge += vQ[samplesIdx[i]];
+   for (auto index : samplesIdx)
+      Tcharge += vQ[index];
 
    SetAvCharge(Tcharge / pclouds);
    std::vector<double> w;
    if (Tcharge > 0)
-      for (int i = 0; i < pclouds; i++)
-         w.push_back(vQ[samplesIdx[i]] / Tcharge);
+      for (auto index : samplesIdx)
+         w.push_back(vQ[index] / Tcharge);
 
    return w;
 }
 
-vector<int> AtRansacMod::RandSam(vector<int> indX, Int_t mode)
+/**
+ * @brief Sample two random points from indX
+ */
+std::pair<int, int> AtRansacMod::sampleUniform(const std::vector<int> &indX)
 {
-   size_t pclouds = indX.size();
-   std::vector<double> Proba = GetPDF(indX);
-   int p1, p2;
-   double w1, w2;
-   vector<int> ranpair;
-   ranpair.resize(2);
+   //-------Uniform sampling
+   int p1 = gRandom->Uniform(0, indX.size());
+   int p2;
+   do {
+      p2 = gRandom->Uniform(0, indX.size());
+   } while (p2 == p1);
 
-   if (mode == 0) {
-      //-------Uniform sampling
-      p1 = (int)(gRandom->Uniform(0, pclouds));
-
-      do {
-         p2 = (int)(gRandom->Uniform(0, pclouds));
-      } while (p2 == p1);
-
-      ranpair[0] = indX[p1];
-      ranpair[1] = indX[p2];
-   }
-
-   if (mode == 1) {
-      //--------Gaussian sampling
-      double dist = 0;
-      double sigma = 30.0;
-      double y = 0;
-      double gauss = 0;
-      int counter = 0;
-      p1 = (int)(gRandom->Uniform(0, pclouds));
-      TVector3 P1 = {vX[indX[p1]], vY[indX[p1]], vZ[indX[p1]]};
-      do {
-         p2 = (int)(gRandom->Uniform(0, pclouds));
-         TVector3 P2 = {vX[indX[p2]], vY[indX[p2]], vZ[indX[p2]]};
-         TVector3 dif = P2 - P1;
-         dist = dif.Mag();
-         gauss = 1.0 * exp(-1.0 * pow(dist / sigma, 2.0));
-         y = (gRandom->Uniform(0, 1));
-         counter++;
-         if (counter > 20 && p2 != p1)
-            break;
-      } while (p2 == p1 || y > gauss);
-
-      ranpair[0] = indX[p1];
-      ranpair[1] = indX[p2];
-   }
-
-   if (mode == 2) {
-      //-------Weighted sampling
-      bool cond = false;
-      int counter = 0;
-      p1 = (int)(gRandom->Uniform(0, pclouds));
-      do {
-         counter++;
-         if (counter > 30 && p2 != p1)
-            break;
-         p2 = (int)(gRandom->Uniform(0, pclouds));
-         cond = false;
-         double TwiceAvCharge = 2 * GetAvCharge();
-         if (Proba.size() == pclouds) {
-            w2 = gRandom->Uniform(0, TwiceAvCharge);
-            if (Proba[p2] >= w2)
-               cond = true;
-         } else {
-            // w2 = 1; never used
-            cond = true;
-         }
-      } while (p2 == p1 || cond == false);
-
-      ranpair[0] = indX[p1];
-      ranpair[1] = indX[p2];
-   }
-
-   if (mode == 3) {
-      //-------Weighted sampling + Gauss dist.
-      bool cond = false;
-      double dist = 0;
-      double sigma = 30.0;
-      double y = 0;
-      double gauss = 0;
-      int counter = 0;
-      p1 = (int)(gRandom->Uniform(0, pclouds));
-      TVector3 P1 = {vX[indX[p1]], vY[indX[p1]], vZ[indX[p1]]};
-      do {
-         p2 = (int)(gRandom->Uniform(0, pclouds));
-         TVector3 P2 = {vX[indX[p2]], vY[indX[p2]], vZ[indX[p2]]};
-         TVector3 dif = P2 - P1;
-         dist = dif.Mag();
-         gauss = 1.0 * exp(-1.0 * pow(dist / sigma, 2));
-         y = (gRandom->Uniform(0, 1));
-         counter++;
-         if (counter > 30 && p2 != p1)
-            break;
-
-         cond = false;
-         double TwiceAvCharge = 2 * GetAvCharge();
-         if (Proba.size() == pclouds) {
-            w2 = gRandom->Uniform(0, TwiceAvCharge);
-            if (Proba[p2] >= w2)
-               cond = true;
-         } else {
-            // w2 = 1; never used
-            cond = true;
-         }
-
-      } while (p2 == p1 || cond == false || y > gauss);
-
-      ranpair[0] = indX[p1];
-      ranpair[1] = indX[p2];
-   }
-
-   return ranpair;
+   return {indX[p1], indX[p2]};
 }
 
-void AtRansacMod::EstimModel(const std::vector<int> samplesIdx)
+/**
+ * @brief Sample two points from indX
+ *
+ * The first point is sampled randomly. The second points is sampled according to
+ * a gaussian distribition around the first point with a sigma of 30. If in 20 samples it
+ * doesn't find a point close enough, it defaults to a uniform sample.
+ *
+ * @TODO We should probably set sigma so it scales with the size of the pad plane or make it
+ * a tunable parameter.
+ */
+std::pair<int, int> AtRansacMod::sampleGaussian(const std::vector<int> &indX)
+{
+   //--------Gaussian sampling
+   double sigma = 30.0;
+   double y = 0;
+   double gauss = 0;
+   int counter = 0;
+   int p1 = gRandom->Uniform(0, indX.size());
+   int p2;
+   TVector3 P1 = {vX[indX[p1]], vY[indX[p1]], vZ[indX[p1]]};
+
+   do {
+      p2 = gRandom->Uniform(0, indX.size());
+      TVector3 P2 = {vX[indX[p2]], vY[indX[p2]], vZ[indX[p2]]};
+      TVector3 dif = P2 - P1;
+      auto dist = dif.Mag();
+
+      gauss = 1.0 * exp(-1.0 * pow(dist / sigma, 2.0));
+      y = (gRandom->Uniform(0, 1));
+      counter++;
+      if (counter > 20 && p2 != p1)
+         break;
+   } while (p2 == p1 || y > gauss);
+
+   return {indX[p1], indX[p2]};
+}
+/**
+ * @ brief Sample two points based on charge
+ */
+std::pair<int, int> AtRansacMod::sampleWeighted(const std::vector<int> &indX)
+{
+   //-------Weighted sampling
+   auto Proba = GetPDF(indX);
+   bool validSecondPoint = false;
+   int counter = 0;
+   int p1 = gRandom->Uniform(0, indX.size());
+   int p2 = p1;
+
+   do {
+      validSecondPoint = false;
+      counter++;
+      if (counter > 30 && p2 != p1)
+         break;
+
+      p2 = gRandom->Uniform(0, indX.size());
+      double TwiceAvCharge = 2 * GetAvCharge();
+
+      if (Proba.size() == indX.size())
+         validSecondPoint = (Proba[p2] >= gRandom->Uniform(0, TwiceAvCharge));
+      else
+         validSecondPoint = true;
+
+   } while (p2 == p1 || validSecondPoint == false);
+
+   return {indX[p1], indX[p2]};
+}
+
+/**
+ * @brief Sample two points from indX
+ *
+ * The first point is sampled randomly by charge. The second points is sampled according to
+ * a gaussian distribition around the first point with a sigma of 30. If in 20 samples it
+ * doesn't find a point close enough, it defaults to a charge weighted sample.
+ *
+ * @TODO We should probably set sigma so it scales with the size of the pad plane or make it
+ * a tunable parameter.
+ */
+std::pair<int, int> AtRansacMod::sampleWeightedGaussian(const std::vector<int> &indX)
+{
+   //-------Weighted sampling + Gauss dist.
+   auto Proba = GetPDF(indX);
+   bool validSecondPoint = false;
+   double sigma = 30.0;
+   double y = 0;
+   double gauss = 0;
+   int counter = 0;
+
+   int p1 = gRandom->Uniform(0, indX.size());
+   int p2 = p1;
+   TVector3 P1 = {vX[indX[p1]], vY[indX[p1]], vZ[indX[p1]]};
+
+   do {
+      p2 = gRandom->Uniform(0, indX.size());
+      TVector3 P2 = {vX[indX[p2]], vY[indX[p2]], vZ[indX[p2]]};
+
+      auto dist = (P2 - P1).Mag();
+
+      gauss = 1.0 * exp(-1.0 * pow(dist / sigma, 2));
+      y = (gRandom->Uniform(0, 1));
+
+      counter++;
+      if (counter > 30 && p2 != p1)
+         break;
+
+      validSecondPoint = false;
+      double TwiceAvCharge = 2 * GetAvCharge();
+
+      if (Proba.size() == indX.size())
+         validSecondPoint = (Proba[p2] >= gRandom->Uniform(0, TwiceAvCharge));
+      else
+         validSecondPoint = true;
+
+   } while (p2 == p1 || validSecondPoint == false || y > gauss);
+
+   return {indX[p1], indX[p2]};
+}
+
+/**
+ * @brief Sample points required to define a model
+ *
+ * Sample N points, where N is the minimum number of points required to define
+ * the model being used (right now, that's a linear model so N = 2)
+ *
+ * @param[in] indX vector of all valid indices to sample
+ * @param[in] mode flag instructing what sampling algorithm to use
+ * @return pair of indices of the points describing the model
+ */
+std::pair<int, int> AtRansacMod::sampleModelPoints(vector<int> indX, SampleMethod mode)
+{
+   switch (mode) {
+   case (SampleMethod::kUniform): return sampleUniform(indX);
+   case (SampleMethod::kGaussian): return sampleGaussian(indX);
+   case (SampleMethod::kWeighted): return sampleWeighted(indX);
+   case (SampleMethod::kWeightedGaussian): return sampleWeightedGaussian(indX);
+   default: return {0, 0};
+   }
+}
+
+void AtRansacMod::EstimModel(const std::pair<int, int> samplesIdx)
 {
 
    // line from two points
-   TVector3 Po1 = {vX[samplesIdx[0]], vY[samplesIdx[0]], vZ[samplesIdx[0]]};
-   TVector3 Po2 = {vX[samplesIdx[1]], vY[samplesIdx[1]], vZ[samplesIdx[1]]};
+   auto ind1 = samplesIdx.first;
+   auto ind2 = samplesIdx.second;
+   TVector3 Po1 = {vX[ind1], vY[ind1], vZ[ind1]};
+   TVector3 Po2 = {vX[ind2], vY[ind2], vZ[ind2]};
 
    Vs = Po2 - Po1;
    Ps = Po1;
@@ -221,24 +264,26 @@ void AtRansacMod::Solve()
    for (size_t i = 0; i < vX.size(); i++)
       remainIndex.push_back(i);
 
-   TVector3 V1, V2;
-   std::vector<int> inliners;
-   inliners.clear();
    std::vector<std::pair<double, int>> IdxMod1;
    std::vector<std::pair<double, int>> IdxMod2;
 
+   // In this loop remainIndex is a vector where vec[i] = i
    for (int i = 0; i < fRANSACMaxIteration; i++) {
 
+      std::cout << i << " RemainIndex size " << remainIndex.size() << std::endl;
       if (remainIndex.size() < fRANSACMinPoints)
          break;
 
-      std::vector<int> Rsamples = RandSam(remainIndex, fRandSamplMode); // random sampling
-      EstimModel(Rsamples);                                             // estimate the linear model
+      // Sample 2 points from all availible. Store the indices of the points in a std::pair
+      auto Rsamples = sampleModelPoints(remainIndex, fRandSamplMode); // random sampling
 
-      // std::vector<int> inlIdxR;
+      // Set two vectors defining a line between the points (Vs and Ps)
+      EstimModel(Rsamples); // estimate the linear model
+
       int nbInliers = 0;
       double weight = 0;
 
+      // Loop through point and if it is an inlier, then add the error**2 to weight
       for (int &j : remainIndex) {
 
          double error = EstimError(j); // error of each point relative to the model
@@ -250,35 +295,38 @@ void AtRansacMod::Solve()
          }
       }
 
+      // If there are enough inliers for this to be a potential line, save the indices defining the
+      // model with a "scale" indicating the "goodness" of the model
+      // scale = sum(error**2)/nPoints
       if (nbInliers > fRANSACMinPoints) {
          // getting the best models
          double scale = weight / nbInliers;
-         IdxMod1.emplace_back(scale, Rsamples[0]);
-         IdxMod2.emplace_back(scale, Rsamples[1]);
+         IdxMod1.emplace_back(scale, Rsamples.first);
+         IdxMod2.emplace_back(scale, Rsamples.second);
       } // if a cluster was found
 
-   } // for RANSAC iterations
+   } // for RANSAC
 
    // sort clusters
    sort(IdxMod1.begin(), IdxMod1.end());
    sort(IdxMod2.begin(), IdxMod2.end());
 
    remainIndex.clear(); // track remaining points
+
    for (size_t i = 0; i < vX.size(); i++)
       remainIndex.push_back(i);
 
    // extract inliers using the models
+   // After each loop, inliers are removed before fitting the other lines
    for (int i = 0; i < IdxMod1.size(); ++i) {
-      std::vector<int> ModInx = {IdxMod1[i].second, IdxMod2[i].second};
+      std::pair<int, int> ModInx = {IdxMod1[i].second, IdxMod2[i].second};
       EstimModel(ModInx);
       std::vector<int> inlIdxR;
-      // inlIdxR.clear();
-      ModInx.clear();
 
       if (remainIndex.size() < fRANSACMinPoints)
          break;
 
-      int counter = 0;
+      int counter = 0; // defined equal to inlIdxR.size()
 
       for (int &j : remainIndex) {
          double error = EstimError(j);

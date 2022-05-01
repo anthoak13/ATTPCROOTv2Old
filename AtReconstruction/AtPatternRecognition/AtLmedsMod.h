@@ -36,10 +36,9 @@ public:
    AtLmedsMod() = default;
    ~AtLmedsMod() = default;
 
+protected:
    virtual void Reset() override;
    virtual void Solve() override;
-
-protected:
    double GetMedian(std::vector<double> errvec);
    ClassDefOverride(AtLmedsMod, 2);
 };

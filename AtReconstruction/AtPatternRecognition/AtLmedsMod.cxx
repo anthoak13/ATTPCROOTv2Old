@@ -32,7 +32,7 @@ std::pair<double, int> AtLmedsMod::evaluateModel(const std::vector<int> &pointsT
       if (error < (fRANSACThreshold * fRANSACThreshold))
          errorsVec.push_back(error);
    }
-   return {GetMedian(errorsVec), errorsVec.size()};
+   return {GetMedian(errorsVec) / errorsVec.size(), errorsVec.size()};
 }
 
 /**

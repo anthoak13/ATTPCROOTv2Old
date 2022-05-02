@@ -12,6 +12,7 @@
 #endif
 
 #include "AtModelFactory.h"
+#include "AtRandomSample.h"
 #include "AtTrack.h" // for AtTrack
 #include "AtTrackModel.h"
 
@@ -41,16 +42,12 @@ public:
    };
 
    using AllClusters = std::vector<Cluster>;
-   // pair.first is "goodness"
-   // pair.second is indices defining the model
    using PotentialModels = std::vector<std::unique_ptr<AtTrackModel>>;
-
-   enum class SampleMethod;
 
 protected:
    AtModelType fModelType{AtModelType::kLINE};
-   SampleMethod fRandSamplMode{0};               //!
-   const std::vector<AtHit> *fHitArray{nullptr}; //!
+   AtRandomSample::SampleMethod fRandSamplMode{0}; //!
+   const std::vector<AtHit> *fHitArray{nullptr};   //!
 
    // Set in constructor
    float fRANSACMaxIteration{500};
@@ -59,9 +56,7 @@ protected:
    Int_t fLineDistThreshold{40};
    double fChargeThres{0};
 
-   TVector3 fVertex_1{-10000, -10000, -10000};
-   TVector3 fVertex_2{-10000, -10000, -10000};
-   TVector3 fVertex_mean;
+   TVector3 fVertex{-10000, -10000, -10000};
    Double_t fVertexTime{-10000};
    std::pair<Int_t, Int_t> fVertex_tracks; // ID of the tracks that form the best vertex
    Int_t fVertexMode{};
@@ -78,17 +73,13 @@ public:
    void CalcRANSACMod(AtEvent *event);
 
    // Getters
-   // double GetAvCharge() const { return Avcharge; };
-   TVector3 GetVertex1() const { return fVertex_1; };
-   TVector3 GetVertex2() const { return fVertex_2; };
+   TVector3 GetVertex() const { return fVertex; };
    Double_t GetVertexTime() const { return fVertexTime; };
-   TVector3 GetVertexMean() const { return fVertex_mean; };
    std::vector<AtTrack> GetTrackCand() const { return fTrackCand; };
    inline AllClusters GetClusters() const { return cluster_vector; }
 
    // Setters
-   // void SetAvCharge(double charge) { Avcharge = charge; };
-   void SetRanSamMode(SampleMethod mode) { fRandSamplMode = mode; };
+   void SetRanSamMode(AtRandomSample::SampleMethod mode) { fRandSamplMode = mode; };
    void SetModelType(AtModelType type) { fModelType = type; }
    void SetDistanceThreshold(Float_t threshold) { fRANSACThreshold = threshold; };
    void SetMinHitsLine(Int_t nhits) { fRANSACMinPoints = nhits; };
@@ -113,16 +104,7 @@ protected:
    void FindVertexOneTrack(std::vector<AtTrack *> tracks);
    void SetCluster(const std::vector<int> samplesIdx, const double cost, const double Chi2, std::vector<double> fitPar);
 
-   /***** Sampling info - to be moved to own class *****/
-   std::vector<XYZPoint> sampleModelPoints(int numPoints, SampleMethod mode);
-   std::vector<XYZPoint> sampleUniform(int numPoints);
-   std::vector<XYZPoint> sampleGaussian(int numPoints);
-   std::vector<XYZPoint> sampleWeighted(int numPoints);
-   std::vector<XYZPoint> sampleWeightedGaussian(int numPoints);
-   std::vector<double> getPDF(); //< Returns the PDF weighted by charge for fHitArray.
-   Double_t fAvgCharge;
-
-   ClassDef(AtRansacMod, 1);
+   ClassDef(AtRansacMod, 2);
 };
 
 #endif

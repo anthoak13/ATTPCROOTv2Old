@@ -28,7 +28,7 @@ std::pair<double, int> AtMlesacMod::evaluateModel(const std::vector<int> &points
    // Calculate min and max errors
    double minError = 1e5, maxError = -1e5;
    for (int j : pointsToCheck) {
-      double error = distanceToModel(j);
+      double error = fModel->DistanceToModel(j);
       if (error < minError)
          minError = error;
       if (error > maxError)
@@ -44,7 +44,7 @@ std::pair<double, int> AtMlesacMod::evaluateModel(const std::vector<int> &points
       const double probInlierCoeff = gamma / sqrt(2 * TMath::Pi() * dataSigma2);
 
       for (int j : pointsToCheck) {
-         double error = distanceToModel(j);
+         double error = fModel->DistanceToModel(j);
          double probInlier = probInlierCoeff * exp(-0.5 * error * error / dataSigma2);
          sumPosteriorProb += probInlier / (probInlier + probOutlier);
       }
@@ -58,7 +58,7 @@ std::pair<double, int> AtMlesacMod::evaluateModel(const std::vector<int> &points
    const double probOutlier = (1 - gamma) / nu;
    const double probInlierCoeff = gamma / sqrt(2 * TMath::Pi() * dataSigma2);
    for (int j : pointsToCheck) {
-      double error = distanceToModel(j);
+      double error = fModel->DistanceToModel(j);
       double probInlier = probInlierCoeff * exp(-0.5 * error * error / dataSigma2);
       // if((probInlier + probOutlier)>0) sumLogLikelihood = sumLogLikelihood - log(probInlier + probOutlier);
 

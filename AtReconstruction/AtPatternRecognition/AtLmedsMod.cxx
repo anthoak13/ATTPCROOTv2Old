@@ -27,7 +27,7 @@ std::pair<double, int> AtLmedsMod::evaluateModel(const std::vector<int> &pointsT
    // Loop through point and if it is an inlier, then add the error**2 to weight
    for (auto index : pointsToCheck) {
 
-      double error = distanceToModel(index);
+      double error = fModel->DistanceToModel(index);
       error = error * error;
       if (error < (fRANSACThreshold * fRANSACThreshold))
          errorsVec.push_back(error);

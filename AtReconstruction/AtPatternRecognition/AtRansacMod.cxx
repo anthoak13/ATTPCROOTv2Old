@@ -2,7 +2,7 @@
 
 #include "AtEvent.h" // for AtEvent
 #include "AtHit.h"   // for AtHit
-#include "AtModelLine.h"
+#include "AtModelFactory.h"
 
 #include <Math/Point3D.h> // for PositionVector3D
 #include <TMath.h>        // for Pi
@@ -75,7 +75,7 @@ void AtRansacMod::doIteration(PotentialModels &IdxModel)
    if (remainIndex.size() < fRANSACMinPoints)
       return;
 
-   auto testModel = std::make_unique<AtModelLine>();
+   auto testModel = AtModelFactory::CreateModel(fModelType);
 
    auto randPoints = sampleModelPoints(testModel->GetNumPoints(), fRandSamplMode);
    testModel->ConstructModel(randPoints);

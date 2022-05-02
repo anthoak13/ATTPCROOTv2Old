@@ -11,6 +11,7 @@
 #include <omp.h>
 #endif
 
+#include "AtModelFactory.h"
 #include "AtTrack.h" // for AtTrack
 #include "AtTrackModel.h"
 
@@ -47,8 +48,9 @@ public:
    enum class SampleMethod;
 
 protected:
-   SampleMethod fRandSamplMode{0};                //!
-   const std::vector<AtHit> *fHitArray{nullptr};  //!
+   AtModelType fModelType{AtModelType::kLINE};
+   SampleMethod fRandSamplMode{0};               //!
+   const std::vector<AtHit> *fHitArray{nullptr}; //!
 
    // Set in constructor
    float fRANSACMaxIteration{500};
@@ -56,8 +58,6 @@ protected:
    float fRANSACThreshold{15};
    Int_t fLineDistThreshold{40};
    double fChargeThres{0};
-   // float fRANSACPointThreshold{};
-   // float fRANSACChargeThreshold{};
 
    TVector3 fVertex_1{-10000, -10000, -10000};
    TVector3 fVertex_2{-10000, -10000, -10000};
@@ -89,6 +89,7 @@ public:
    // Setters
    // void SetAvCharge(double charge) { Avcharge = charge; };
    void SetRanSamMode(SampleMethod mode) { fRandSamplMode = mode; };
+   void SetModelType(AtModelType type) { fModelType = type; }
    void SetDistanceThreshold(Float_t threshold) { fRANSACThreshold = threshold; };
    void SetMinHitsLine(Int_t nhits) { fRANSACMinPoints = nhits; };
    void SetNumItera(Int_t niterations) { fRANSACMaxIteration = niterations; };

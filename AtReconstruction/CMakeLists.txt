@@ -72,8 +72,6 @@ if(PCL_FOUND)
     AtPatternRecognition/AtRansacMod.cxx
     AtPatternRecognition/AtMlesacMod.cxx
     AtPatternRecognition/AtLmedsMod.cxx
-    AtPatternRecognition/AtTrackModel.cxx
-    AtPatternRecognition/AtModelLine.cxx
     AtRansac/AtRansac.cxx
     AtPRAtask.cxx
     AtRansacTask.cxx

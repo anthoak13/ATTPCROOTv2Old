@@ -23,6 +23,9 @@ ClassImp(AtRansacMod);
 
 enum class AtRansacMod::SampleMethod { kUniform = 0, kGaussian = 1, kWeighted = 2, kWeightedGaussian = 3 };
 
+AtRansacMod::AtRansacMod() = default;
+AtRansacMod::~AtRansacMod() = default;
+
 void AtRansacMod::Init(AtEvent *event)
 {
 
@@ -256,6 +259,32 @@ double AtRansacMod::distanceToModel(int i)
    return dist;
 }
 
+/**
+ * @brief Check the goodness of the model
+ *
+ * Evaluates how good the model is in comparison to the points in pointsToCheck.
+ *
+ * @param[in] pointsToCheck List of indices of points to compare to the model
+ *
+ * @return A pair where the the smaller the first number, the better the model
+ * and the second element is the number of inliers defined by fRANSACThreshold
+ */
+std::pair<double, int> AtRansacMod::evaluateModel(const std::vector<int> &pointsToCheck)
+{
+   int nbInliers = 0;
+   double weight = 0;
+
+   for (auto index : pointsToCheck) {
+      double error = distanceToModel(index);
+      error = error * error;
+      if (error < (fRANSACThreshold * fRANSACThreshold)) {
+         nbInliers++;
+         weight += error;
+      }
+   }
+   return {weight / nbInliers, nbInliers};
+}
+
 void AtRansacMod::doIteration(std::vector<std::pair<double, int>> &IdxModel1,
                               std::vector<std::pair<double, int>> &IdxModel2)
 {
@@ -266,36 +295,15 @@ void AtRansacMod::doIteration(std::vector<std::pair<double, int>> &IdxModel1,
    if (remainIndex.size() < fRANSACMinPoints)
       return;
 
-   // Sample 2 points from all availible. Store the indices of the points in a std::pair
-   auto Rsamples = sampleModelPoints(remainIndex, fRandSamplMode); // random sampling
+   // Sample and set the model (rn linear)
+   auto Rsamples = sampleModelPoints(remainIndex, fRandSamplMode);
+   setModel(Rsamples);
 
-   // Set two vectors defining a line between the points (Vs and Ps)
-   setModel(Rsamples); // estimate the linear model
+   auto evaluation = evaluateModel(remainIndex);
 
-   int nbInliers = 0;
-   double weight = 0;
-
-   // TODO: The only difference between this and AtLmedsMod version is how the "scale" is set
-   // the rest of the code is essentially identical. Could replace this next loop with a function
-   // double scale = getGoodnessOfModel(remainIndex)
-
-   // Loop through point and if it is an inlier, then add the error**2 to weight
-   for (auto index : remainIndex) {
-
-      double error = distanceToModel(index);
-      error = error * error;
-      if (error < (fRANSACThreshold * fRANSACThreshold)) {
-         nbInliers++;
-         weight += error;
-      }
-   }
-
-   // If there are enough inliers for this to be a potential line, save the indices defining the
-   // model with a "scale" indicating the "goodness" of the model
-   // scale = sum(error**2)/nPoints
-   if (nbInliers > fRANSACMinPoints) {
-      // getting the best models
-      double scale = weight / nbInliers;
+   // If the model is consistent with enough points, save it
+   if (evaluation.second > fRANSACMinPoints) {
+      double scale = evaluation.first;
       IdxModel1.emplace_back(scale, Rsamples.first);
       IdxModel2.emplace_back(scale, Rsamples.second);
    }

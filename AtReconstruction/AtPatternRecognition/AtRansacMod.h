@@ -38,9 +38,9 @@ public:
       TVector3 ClusterFitP1;         //< point 1 from the fitted line
       TVector3 ClusterFitP2;         //< point 2 from the fitted line
    };
+
    using AllClusters = std::vector<Cluster>;
    enum class SampleMethod;
-   AllClusters cluster_vector;
 
 protected:
    // Set in constructor
@@ -75,10 +75,11 @@ protected:
 
    TVector3 Vs;
    TVector3 Ps;
+   AllClusters cluster_vector;
 
 public:
-   AtRansacMod() = default;
-   virtual ~AtRansacMod() = default;
+   AtRansacMod();
+   virtual ~AtRansacMod();
 
    // Behavior
    void CalcRANSACMod(AtEvent *event);
@@ -103,10 +104,11 @@ public:
 
 protected:
    // Virtual behavior functions
-   // virtual void DoRansacIteration();
-   virtual void Reset();
-   virtual void Solve();
-   virtual void doIteration(std::vector<std::pair<double, int>> &IdxMod1, std::vector<std::pair<double, int>> &IdxMod2);
+   virtual std::pair<double, int> evaluateModel(const std::vector<int> &pointsToCheck);
+
+   void Reset();
+   void Solve();
+   void doIteration(std::vector<std::pair<double, int>> &IdxMod1, std::vector<std::pair<double, int>> &IdxMod2);
    std::vector<int> getPointsInModel(const std::vector<int> &indexes);
    void removePoints(std::vector<int> &vectorToModify, const std::vector<int> &pointsToRemove);
    void Init(AtEvent *event);
@@ -127,8 +129,7 @@ protected:
 
    /***** Begining of model methods (in base class) *****/
    std::vector<double> GetPDF(const std::vector<int> samplesIdx);
-
-   /***** Begining of model methods (in base class) *****/
+   /***** End of model methods (in base class) *****/
 
    TVector3 ClosestPoint2Lines(TVector3 d1, TVector3 pt1, TVector3 d2, TVector3 pt2);
    std::vector<AtTrack *> Clusters2Tracks(AllClusters NClusters, AtEvent *event);

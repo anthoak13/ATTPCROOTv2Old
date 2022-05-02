@@ -29,13 +29,8 @@ class TClass;
 class TMemberInspector;
 
 class AtMlesacMod : public AtRansacMod {
-
-public:
-   AtMlesacMod() = default;
-   ~AtMlesacMod() = default;
-
 protected:
-   virtual void Solve() override;
+   virtual std::pair<double, int> evaluateModel(const std::vector<int> &pointsToCheck) override;
 
    ClassDefOverride(AtMlesacMod, 2);
 };

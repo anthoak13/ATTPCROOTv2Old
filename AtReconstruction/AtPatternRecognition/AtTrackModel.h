@@ -10,80 +10,53 @@
 #include <TObject.h>
 
 class AtTrackModel : public TObject {
-public:
-   enum class SampleMethod;
-
 protected:
-   Double_t fAvgCharge;
-
-   const std::vector<AtHit> *fHitArray; //< Pointer to the hit cloud we are working with
-   std::vector<int> fIndices;           //< Vector containing the indcices of fHitArray defining the model
-   const Int_t fNumPoints;              //< Number of points that define the model (i.e. size of fIndices)
+   std::vector<Double_t> fModelPar; //< Description of model
+   Double_t fChi2{NAN};             //< How good the model is at describing the data
+   const Int_t fNumPoints;          //< Number of 3D points that define the model (i.e. size of fIndices)
 
 public:
    AtTrackModel(Int_t numPoints = 0);
-   /**
-    * @brief Set the hit array (point cloud) for this model.
-    */
-   void SetHitArray(const std::vector<AtHit> *hitArray);
-   /**
-    * @brief Indices of fHitArray that define the model
-    */
-   std::vector<int> GetIndices() const { return fIndices; };
 
-   Int_t GetNumHits() { return fHitArray->size(); }
-   /**
-    * @brief Construct a model by randomly sampling fHitArray.
-    *
-    * Will randomly sample fHitArray and set-up the model using the sampled points.
-    *
-    * @param[in] mode The method to use while sampling
-    */
-   virtual void ConstructRandomModel(SampleMethod mode);
    /**
     * @brief Construct a model.
     *
-    * Will set-up the model using using the passed indices of fHitArray.
+    * Will set-up the model using the vector of XYZPoints. Assumes the size of points
+    * is equal to fNumPoints
     *
-    * @param[in] mode The method to use while sampling
+    * @param[in] points 3D points to use when constructing the model
     */
-   virtual void ConstructModel(const std::vector<int> &idx) = 0;
+   virtual void ConstructModel(const std::vector<XYZPoint> &points) = 0;
 
    /**
-    * @brief Closest distance from hit to model.
+    * @brief Closest distance to model.
     *
-    * @param[in] hit AtHit to get the distance from.
+    * Note: An XYZPoint can be constructed from any vector-like object (T) that supports the interface
+    * `T.X(); T.Y(); T.Z()`.
+    *
+    * @param[in] point Point to get the distance from.
     */
-   virtual Double_t DistanceToModel(const AtHit &hit) = 0;
+   virtual Double_t DistanceToModel(const XYZPoint &point) = 0;
+
+   Double_t FitModel(const std::vector<AtHit> &pointsToFit);
+   Double_t FitModel(const std::vector<XYZPoint> &pointsToFit);
+
    /**
-    * @brief Closest distance from hit to model.
+    * @brief Number of points to define the model.
     *
-    * @param[in] hitIndex Index of AtHit in fHitArray to get the distance from.
+    * The minimum number of unique points needed to define the model.
     */
-   virtual Double_t DistanceToModel(Int_t hitIndex) { return DistanceToModel(fHitArray->at(hitIndex)); }
-   /**
-    * @brief Fit the model shape.
-    *
-    * Fit the model shape using all points in idx.
-    *
-    * @param[in] idx Indices of fHitArray to fit3d
-    * @param[out] fitPar Fit parameters for this model
-    * @return Chi-squared of the fit
-    */
-   virtual Double_t Fit3D(const std::vector<int> idx, std::vector<double> &fitPar) = 0;
+   Int_t GetNumPoints() const { return fNumPoints; }
+   Double_t GetChi2() const { return fChi2; }
+   std::vector<double> GetModelPar() const { return fModelPar; }
+   void SetChi2(double chi2) { fChi2 = chi2; }
 
 protected:
-   std::vector<int> sampleModelPoints(SampleMethod mode);
-   std::vector<int> sampleUniform();
-   std::vector<int> sampleGaussian();
-   std::vector<int> sampleWeighted();
-   std::vector<int> sampleWeightedGaussian();
-   std::vector<double> getPDF(); //< Returns the PDF weighted by charge for fHitArray.
-
    /**
-    * Set the internal model parameters used by other functions based on fIndices
+    * Called by other versions of FitModel. If pointCharge is not empty does charge weighted fit.
+    * Sets fModelPar, and fChi2
     */
-   virtual void Reset();
+   virtual void FitModel(const std::vector<XYZPoint> &pointsToFit, const std::vector<double> &pointCharge) = 0;
 };
 
 #endif //#ifndef ATTRACKMODEL_H

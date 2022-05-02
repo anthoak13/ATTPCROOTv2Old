@@ -5,30 +5,24 @@
 #include <TMath.h>
 AtModelLine::AtModelLine() : AtTrackModel(2) {}
 
-Double_t AtModelLine::DistanceToModel(const AtHit &hit)
+Double_t AtModelLine::DistanceToModel(const XYZPoint &point)
 {
-   auto pos = hit.GetPosition();
-   auto vec = fPoint - pos;
+   auto vec = fPoint - point;
    auto nD = fDirection.Cross(vec);
    double dist2 = nD.Mag2() / fDirection.Mag2();
    return std::sqrt(dist2);
 }
 
-void AtModelLine::ConstructModel(const std::vector<int> &idx)
+void AtModelLine::ConstructModel(const std::vector<XYZPoint> &points)
 {
-   if (idx.size() != fNumPoints)
-      LOG(error) << "Trying to create model with wrong number of points " << idx.size();
-   fIndices = idx;
-   auto ind1 = idx.at(0);
-   auto ind2 = idx.at(1);
-   auto P1 = fHitArray->at(ind1).GetPosition();
-   auto P2 = fHitArray->at(ind2).GetPosition();
+   if (points.size() != fNumPoints)
+      LOG(error) << "Trying to create model with wrong number of points " << points.size();
 
-   fPoint = P1;
-   fDirection = P2 - P1;
+   fPoint = points[0];
+   fDirection = points[1] - points[0];
 }
 
-Double_t AtModelLine::Fit3D(const std::vector<int> idx, std::vector<double> &fitPar)
+void AtModelLine::FitModel(const std::vector<XYZPoint> &points, const std::vector<double> &charge)
 {
    //------3D Line Regression
    //----- adapted from: http://fr.scribd.com/doc/31477970/Regressions-et-trajectoires-3D
@@ -47,10 +41,11 @@ Double_t AtModelLine::Fit3D(const std::vector<int> idx, std::vector<double> &fit
    Q = Xm = Ym = Zm = 0.;
    double total_charge = 0;
    Sxx = Syy = Szz = Sxy = Sxz = Syz = 0.;
+   bool doChargeWeight = points.size() == charge.size();
 
-   for (auto i : idx) {
-      auto hitQ = fHitArray->at(i).GetCharge();
-      auto &pos = fHitArray->at(i).GetPosition();
+   for (int i = 0; i < points.size(); ++i) {
+      const auto hitQ = doChargeWeight ? charge[i] : 1;
+      const auto &pos = points[i];
       Q += hitQ / 10.;
       Xm += pos.X() * hitQ / 10.;
       Ym += pos.Y() * hitQ / 10.;
@@ -114,6 +109,6 @@ Double_t AtModelLine::Fit3D(const std::vector<int> idx, std::vector<double> &fit
    Zh = ((a * a + b * b) * Zm + a * Xm + b * Ym) / (1. + a * a + b * b);
 
    // First 3 are point1. Second 3 are point 2
-   fitPar = {Xm, Ym, Zm, Xh, Yh, Zh};
-   return (fabs(dm2 / Q));
+   fModelPar = {Xm, Ym, Zm, Xh, Yh, Zh};
+   fChi2 = (fabs(dm2 / Q));
 }

@@ -23,15 +23,13 @@ ClassImp(AtRansacMod);
 
 enum class AtRansacMod::SampleMethod { kUniform = 0, kGaussian = 1, kWeighted = 2, kWeightedGaussian = 3 };
 
-AtRansacMod::AtRansacMod() : fModel(std::make_unique<AtModelLine>()) {}
+AtRansacMod::AtRansacMod() = default;
 AtRansacMod::~AtRansacMod() = default;
 
 void AtRansacMod::Init(AtEvent *event)
 {
    Reset();
-
-   auto hitArray = event->GetHitArray();
-   fModel->SetHitArray(&(event->GetHitArray()));
+   fHitArray = &(event->GetHitArray());
 }
 
 void AtRansacMod::Reset()
@@ -49,45 +47,45 @@ void AtRansacMod::Reset()
  * @return A pair where the the smaller the first number, the better the model
  * and the second element is the number of inliers defined by fRANSACThreshold
  */
-std::pair<double, int> AtRansacMod::evaluateModel(const std::vector<int> &pointsToCheck)
+int AtRansacMod::evaluateModel(AtTrackModel *model, const std::vector<int> &pointsToCheck)
 {
    int nbInliers = 0;
    double weight = 0;
 
    for (auto index : pointsToCheck) {
       // double error = distanceToModel(index);
-      double error = fModel->DistanceToModel(index);
+      auto &pos = fHitArray->at(index).GetPosition();
+      double error = model->DistanceToModel(pos);
       error = error * error;
       if (error < (fRANSACThreshold * fRANSACThreshold)) {
          nbInliers++;
          weight += error;
       }
    }
-   return {weight / nbInliers, nbInliers};
+   model->SetChi2(weight / nbInliers);
+   return nbInliers;
 }
 
 void AtRansacMod::doIteration(PotentialModels &IdxModel)
 {
    std::vector<int> remainIndex;
-   for (size_t i = 0; i < fModel->GetNumHits(); i++)
+   for (size_t i = 0; i < fHitArray->size(); i++)
       remainIndex.push_back(i);
 
    if (remainIndex.size() < fRANSACMinPoints)
       return;
 
-   // Sample and set the model (rn linear)
-   fModel->ConstructRandomModel(fRandSamplMode);
+   auto testModel = std::make_unique<AtModelLine>();
 
-   // auto Rsamples = sampleModelPoints(remainIndex, fRandSamplMode);
-   // setModel(Rsamples);
+   auto randPoints = sampleModelPoints(testModel->GetNumPoints(), fRandSamplMode);
+   testModel->ConstructModel(randPoints);
 
-   auto evaluation = evaluateModel(remainIndex);
+   auto nInliers = evaluateModel(testModel.get(), remainIndex);
 
    // If the model is consistent with enough points, save it
-   if (evaluation.second > fRANSACMinPoints) {
-      LOG(debug) << "Adding model " << evaluation.first;
-      double scale = evaluation.first;
-      IdxModel.emplace_back(scale, fModel->GetIndices());
+   if (nInliers > fRANSACMinPoints) {
+      LOG(debug) << "Adding model with nInliers: " << nInliers;
+      IdxModel.push_back(std::move(testModel));
    }
 }
 void AtRansacMod::Solve()
@@ -102,30 +100,34 @@ void AtRansacMod::Solve()
       doIteration(models);
 
    // sort clusters by "goodness" of the models
-   sort(models.begin(), models.end());
+   sort(models.begin(), models.end(), [](const auto &a, const auto &b) { return a->GetChi2() < b->GetChi2(); });
 
    std::vector<int> remainIndex;
-   for (size_t i = 0; i < fModel->GetNumHits(); i++)
+   for (size_t i = 0; i < fHitArray->size(); i++)
       remainIndex.push_back(i);
 
    // Loop through each model, and extract the points that fit each model
    for (const auto &model : models) {
       if (remainIndex.size() < fRANSACMinPoints)
          break;
-      fModel->ConstructModel(model.second);
+
+      // fModel->ConstructModel(model.second);
 
       // Get a vector of every point that fits this model
-      std::vector<int> inlIdxR = getPointsInModel(remainIndex);
+      auto inliers = getPointsInModel(remainIndex, model.get());
 
       // If there are enough points that fit the model save it
-      if (inlIdxR.size() > fRANSACMinPoints) {
-         std::vector<double> fitPar;
-         double chi2 = fModel->Fit3D(inlIdxR, fitPar);
-         SetCluster(inlIdxR, model.first, chi2, fitPar);
+      if (inliers.size() > fRANSACMinPoints) {
+         std::vector<XYZPoint> pointsIn;
+         for (auto index : inliers)
+            pointsIn.push_back(fHitArray->at(index).GetPosition());
+         auto cost = model->GetChi2();
+         double chi2 = model->FitModel(pointsIn);
+         SetCluster(inliers, cost, chi2, model->GetModelPar());
       }
 
       // Remove all the points that fit this model (even if it wasn't saved?)
-      removePoints(remainIndex, inlIdxR);
+      removePoints(remainIndex, inliers);
    }
 }
 void AtRansacMod::removePoints(std::vector<int> &toModify, const std::vector<int> &toRemove)
@@ -136,11 +138,12 @@ void AtRansacMod::removePoints(std::vector<int> &toModify, const std::vector<int
    toModify = std::move(tempRemain);
 }
 
-std::vector<int> AtRansacMod::getPointsInModel(const std::vector<int> &indexes)
+std::vector<int> AtRansacMod::getPointsInModel(const std::vector<int> &indexes, AtTrackModel *model)
 {
    std::vector<int> retVec;
    for (auto index : indexes) {
-      double error = fModel->DistanceToModel(index);
+      auto pos = fHitArray->at(index).GetPosition();
+      double error = model->DistanceToModel(pos);
       if ((error * error) < (fRANSACThreshold * fRANSACThreshold))
          retVec.push_back(index);
    }
@@ -153,7 +156,7 @@ void AtRansacMod::CalcRANSACMod(AtEvent *event)
    // std::cout << "Inicializa" << '\n';
    Init(event);
    // std::cout << "Resuelve" << '\n';
-   if (fModel->GetNumHits() > fRANSACMinPoints) {
+   if (fHitArray->size() > fRANSACMinPoints) {
       Solve();
       AllClusters myClusters = GetClusters();
       // I know this step is stupid, but this part is meant to be in the future a clustering process
@@ -443,4 +446,174 @@ TVector3 AtRansacMod::ClosestPoint2Lines(TVector3 d1, TVector3 pt1, TVector3 d2,
    TVector3 meanpoint = 0.5 * (c1 + c2);
 
    return meanpoint;
+}
+
+/**** Beginning of Sampling info ******/
+
+/**
+ * @brief Sample points required to define a model.
+ *
+ * Sample N points, where N is the minimum number of points required to define
+ * the model being used (right now, that's a linear model so N = 2)
+ *
+ * @todo Generalize the functions being called so they return and arbitrary number
+ * of points based on the requirements of the model
+ *
+ * @param[in] mode flag instructing what sampling algorithm to use
+ * @return vector of indices of the points describing the model
+ */
+std::vector<XYZPoint> AtRansacMod::sampleModelPoints(int numPoints, SampleMethod mode = SampleMethod::kUniform)
+{
+   switch (mode) {
+   case (SampleMethod::kUniform): return sampleUniform(numPoints);
+   case (SampleMethod::kGaussian): return sampleGaussian(numPoints);
+   case (SampleMethod::kWeighted): return sampleWeighted(numPoints);
+   case (SampleMethod::kWeightedGaussian): return sampleWeightedGaussian(numPoints);
+   default: return {};
+   }
+}
+
+/**
+ * @brief Sample two random points from indX
+ */
+std::vector<XYZPoint> AtRansacMod::sampleUniform(int numPoints)
+{
+   //-------Uniform sampling
+   int ind1 = gRandom->Uniform(0, fHitArray->size());
+   int ind2;
+   do {
+      ind2 = gRandom->Uniform(0, fHitArray->size());
+   } while (ind1 == ind2);
+
+   return {fHitArray->at(ind1).GetPosition(), fHitArray->at(ind2).GetPosition()};
+}
+
+/**
+ * @brief Sample two points from indX
+ *
+ * The first point is sampled randomly. The second points is sampled according to
+ * a gaussian distribition around the first point with a sigma of 30. If in 20 samples it
+ * doesn't find a point close enough, it defaults to a uniform sample.
+ *
+ * @TODO We should probably set sigma so it scales with the size of the pad plane or make it
+ * a tunable parameter.
+ */
+std::vector<XYZPoint> AtRansacMod::sampleGaussian(int numPoints)
+{
+   //--------Gaussian sampling
+   double sigma = 30.0;
+   double y = 0;
+   double gauss = 0;
+   int counter = 0;
+   int p1 = gRandom->Uniform(0, fHitArray->size());
+   int p2;
+   auto &P1 = fHitArray->at(p1).GetPosition();
+
+   do {
+      p2 = gRandom->Uniform(0, fHitArray->size());
+      auto &P2 = fHitArray->at(p2).GetPosition();
+      auto dist = std::sqrt((P2 - P1).Mag2());
+
+      gauss = 1.0 * exp(-1.0 * pow(dist / sigma, 2.0));
+      y = (gRandom->Uniform(0, 1));
+      counter++;
+      if (counter > 20 && p2 != p1)
+         break;
+   } while (p2 == p1 || y > gauss);
+
+   return {fHitArray->at(p1).GetPosition(), fHitArray->at(p2).GetPosition()};
+}
+/**
+ * @ brief Sample two points based on charge
+ */
+std::vector<XYZPoint> AtRansacMod::sampleWeighted(int numPoints)
+{
+   //-------Weighted sampling
+   auto Proba = getPDF();
+   bool validSecondPoint = false;
+   int counter = 0;
+   int p1 = gRandom->Uniform(0, fHitArray->size());
+   int p2 = p1;
+
+   do {
+      validSecondPoint = false;
+      counter++;
+      if (counter > 30 && p2 != p1)
+         break;
+
+      p2 = gRandom->Uniform(0, fHitArray->size());
+      double TwiceAvCharge = 2 * fAvgCharge;
+
+      if (Proba.size() == fHitArray->size())
+         validSecondPoint = (Proba[p2] >= gRandom->Uniform(0, TwiceAvCharge));
+      else
+         validSecondPoint = true;
+
+   } while (p2 == p1 || validSecondPoint == false);
+
+   return {fHitArray->at(p1).GetPosition(), fHitArray->at(p2).GetPosition()};
+}
+
+/**
+ * @brief Sample two points from indX
+ *
+ * The first point is sampled randomly by charge. The second points is sampled according to
+ * a gaussian distribition around the first point with a sigma of 30. If in 20 samples it
+ * doesn't find a point close enough, it defaults to a charge weighted sample.
+ *
+ * @TODO We should probably set sigma so it scales with the size of the pad plane or make it
+ * a tunable parameter.
+ */
+std::vector<XYZPoint> AtRansacMod::sampleWeightedGaussian(int numPoints)
+{
+   //-------Weighted sampling + Gauss dist.
+   auto Proba = getPDF();
+   bool validSecondPoint = false;
+   double sigma = 30.0;
+   double y = 0;
+   double gauss = 0;
+   int counter = 0;
+
+   int p1 = gRandom->Uniform(0, fHitArray->size());
+   int p2 = p1;
+   auto &P1 = fHitArray->at(p1).GetPosition();
+
+   do {
+      p2 = gRandom->Uniform(0, fHitArray->size());
+      auto &P2 = fHitArray->at(p2).GetPosition();
+      auto dist = std::sqrt((P2 - P1).Mag2());
+
+      gauss = 1.0 * exp(-1.0 * pow(dist / sigma, 2));
+      y = (gRandom->Uniform(0, 1));
+
+      counter++;
+      if (counter > 30 && p2 != p1)
+         break;
+
+      validSecondPoint = false;
+      double TwiceAvCharge = 2 * fAvgCharge;
+
+      if (Proba.size() == fHitArray->size())
+         validSecondPoint = (Proba[p2] >= gRandom->Uniform(0, TwiceAvCharge));
+      else
+         validSecondPoint = true;
+
+   } while (p2 == p1 || validSecondPoint == false || y > gauss);
+
+   return {fHitArray->at(p1).GetPosition(), fHitArray->at(p2).GetPosition()};
+}
+
+std::vector<double> AtRansacMod::getPDF()
+{
+   double Tcharge = 0;
+   for (const auto &hit : *fHitArray)
+      Tcharge += hit.GetCharge();
+
+   fAvgCharge = Tcharge / fHitArray->size();
+   std::vector<double> w;
+   if (Tcharge > 0)
+      for (const auto &hit : *fHitArray)
+         w.push_back(hit.GetCharge() / Tcharge);
+
+   return w;
 }

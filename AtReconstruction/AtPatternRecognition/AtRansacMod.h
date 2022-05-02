@@ -42,13 +42,13 @@ public:
    using AllClusters = std::vector<Cluster>;
    // pair.first is "goodness"
    // pair.second is indices defining the model
-   using PotentialModels = std::vector<std::pair<double, std::vector<int>>>;
+   using PotentialModels = std::vector<std::unique_ptr<AtTrackModel>>;
 
    enum class SampleMethod;
 
 protected:
-   std::unique_ptr<AtTrackModel> fModel{nullptr}; //!
-   AtTrackModel::SampleMethod fRandSamplMode{0};
+   SampleMethod fRandSamplMode{0};                //!
+   const std::vector<AtHit> *fHitArray{nullptr};  //!
 
    // Set in constructor
    float fRANSACMaxIteration{500};
@@ -88,7 +88,7 @@ public:
 
    // Setters
    // void SetAvCharge(double charge) { Avcharge = charge; };
-   void SetRanSamMode(AtTrackModel::SampleMethod mode) { fRandSamplMode = mode; };
+   void SetRanSamMode(SampleMethod mode) { fRandSamplMode = mode; };
    void SetDistanceThreshold(Float_t threshold) { fRANSACThreshold = threshold; };
    void SetMinHitsLine(Int_t nhits) { fRANSACMinPoints = nhits; };
    void SetNumItera(Int_t niterations) { fRANSACMaxIteration = niterations; };
@@ -97,12 +97,12 @@ public:
 
 protected:
    // Virtual behavior functions
-   virtual std::pair<double, int> evaluateModel(const std::vector<int> &pointsToCheck);
+   virtual int evaluateModel(AtTrackModel *model, const std::vector<int> &pointsToCheck);
 
    void Reset();
    void Solve();
    void doIteration(PotentialModels &IdxMod1);
-   std::vector<int> getPointsInModel(const std::vector<int> &indexes);
+   std::vector<int> getPointsInModel(const std::vector<int> &indexes, AtTrackModel *model);
    void removePoints(std::vector<int> &vectorToModify, const std::vector<int> &pointsToRemove);
    void Init(AtEvent *event);
 
@@ -111,6 +111,15 @@ protected:
    void FindVertex(std::vector<AtTrack *> tracks);
    void FindVertexOneTrack(std::vector<AtTrack *> tracks);
    void SetCluster(const std::vector<int> samplesIdx, const double cost, const double Chi2, std::vector<double> fitPar);
+
+   /***** Sampling info - to be moved to own class *****/
+   std::vector<XYZPoint> sampleModelPoints(int numPoints, SampleMethod mode);
+   std::vector<XYZPoint> sampleUniform(int numPoints);
+   std::vector<XYZPoint> sampleGaussian(int numPoints);
+   std::vector<XYZPoint> sampleWeighted(int numPoints);
+   std::vector<XYZPoint> sampleWeightedGaussian(int numPoints);
+   std::vector<double> getPDF(); //< Returns the PDF weighted by charge for fHitArray.
+   Double_t fAvgCharge;
 
    ClassDef(AtRansacMod, 1);
 };

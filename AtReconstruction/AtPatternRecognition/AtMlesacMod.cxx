@@ -20,7 +20,7 @@ constexpr auto cGREEN = "\033[1;32m";
 using namespace std;
 
 ClassImp(AtMlesacMod);
-std::pair<double, int> AtMlesacMod::evaluateModel(const std::vector<int> &pointsToCheck)
+int AtMlesacMod::evaluateModel(AtTrackModel *model, const std::vector<int> &pointsToCheck)
 {
    double sigma = fRANSACThreshold / 1.96;
    double dataSigma2 = sigma * sigma;
@@ -28,7 +28,7 @@ std::pair<double, int> AtMlesacMod::evaluateModel(const std::vector<int> &points
    // Calculate min and max errors
    double minError = 1e5, maxError = -1e5;
    for (int j : pointsToCheck) {
-      double error = fModel->DistanceToModel(j);
+      double error = model->DistanceToModel(fHitArray->at(j).GetPosition());
       if (error < minError)
          minError = error;
       if (error > maxError)
@@ -44,7 +44,7 @@ std::pair<double, int> AtMlesacMod::evaluateModel(const std::vector<int> &points
       const double probInlierCoeff = gamma / sqrt(2 * TMath::Pi() * dataSigma2);
 
       for (int j : pointsToCheck) {
-         double error = fModel->DistanceToModel(j);
+         double error = model->DistanceToModel(fHitArray->at(j).GetPosition());
          double probInlier = probInlierCoeff * exp(-0.5 * error * error / dataSigma2);
          sumPosteriorProb += probInlier / (probInlier + probOutlier);
       }
@@ -58,7 +58,7 @@ std::pair<double, int> AtMlesacMod::evaluateModel(const std::vector<int> &points
    const double probOutlier = (1 - gamma) / nu;
    const double probInlierCoeff = gamma / sqrt(2 * TMath::Pi() * dataSigma2);
    for (int j : pointsToCheck) {
-      double error = fModel->DistanceToModel(j);
+      double error = model->DistanceToModel(fHitArray->at(j).GetPosition());
       double probInlier = probInlierCoeff * exp(-0.5 * error * error / dataSigma2);
       // if((probInlier + probOutlier)>0) sumLogLikelihood = sumLogLikelihood - log(probInlier + probOutlier);
 
@@ -73,5 +73,6 @@ std::pair<double, int> AtMlesacMod::evaluateModel(const std::vector<int> &points
    if (sumLogLikelihood < 0 || std::isinf(sumLogLikelihood))
       scale = 0;
 
-   return {scale, nbInliers};
+   model->SetChi2(scale);
+   return nbInliers;
 }

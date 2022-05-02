@@ -14,9 +14,12 @@ protected:
 public:
    AtModelLine();
 
-   virtual Double_t Fit3D(const std::vector<int> idx, std::vector<double> &fitPar) override;
-   virtual void ConstructModel(const std::vector<int> &idx) override;
-   virtual Double_t DistanceToModel(const AtHit &hit) override;
+   virtual void ConstructModel(const std::vector<XYZPoint> &points) override;
+
+   virtual Double_t DistanceToModel(const XYZPoint &point) override;
+
+protected:
+   virtual void FitModel(const std::vector<XYZPoint> &points, const std::vector<double> &charge) override;
 };
 
 #endif //#ifndef ATMODELLINE_H

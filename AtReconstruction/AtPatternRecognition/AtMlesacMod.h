@@ -30,7 +30,7 @@ class TMemberInspector;
 
 class AtMlesacMod : public AtRansacMod {
 protected:
-   virtual std::pair<double, int> evaluateModel(const std::vector<int> &pointsToCheck) override;
+   virtual int evaluateModel(AtTrackModel *model, const std::vector<int> &pointsToCheck) override;
 
    ClassDefOverride(AtMlesacMod, 2);
 };

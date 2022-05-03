@@ -20,7 +20,8 @@ constexpr auto cGREEN = "\033[1;32m";
 using namespace std;
 
 ClassImp(AtMlesacMod);
-int AtMlesacMod::evaluateModel(AtTrackModel *model, const std::vector<int> &pointsToCheck)
+int AtMlesacMod::evaluateModel(AtTrackModel *model, const std::vector<int> &pointsToCheck,
+                               const std::vector<AtHit> &hitArray)
 {
    double sigma = fRANSACThreshold / 1.96;
    double dataSigma2 = sigma * sigma;
@@ -28,7 +29,7 @@ int AtMlesacMod::evaluateModel(AtTrackModel *model, const std::vector<int> &poin
    // Calculate min and max errors
    double minError = 1e5, maxError = -1e5;
    for (int j : pointsToCheck) {
-      double error = model->DistanceToModel(fHitArray->at(j).GetPosition());
+      double error = model->DistanceToModel(hitArray.at(j).GetPosition());
       if (error < minError)
          minError = error;
       if (error > maxError)
@@ -44,7 +45,7 @@ int AtMlesacMod::evaluateModel(AtTrackModel *model, const std::vector<int> &poin
       const double probInlierCoeff = gamma / sqrt(2 * TMath::Pi() * dataSigma2);
 
       for (int j : pointsToCheck) {
-         double error = model->DistanceToModel(fHitArray->at(j).GetPosition());
+         double error = model->DistanceToModel(hitArray.at(j).GetPosition());
          double probInlier = probInlierCoeff * exp(-0.5 * error * error / dataSigma2);
          sumPosteriorProb += probInlier / (probInlier + probOutlier);
       }
@@ -58,7 +59,7 @@ int AtMlesacMod::evaluateModel(AtTrackModel *model, const std::vector<int> &poin
    const double probOutlier = (1 - gamma) / nu;
    const double probInlierCoeff = gamma / sqrt(2 * TMath::Pi() * dataSigma2);
    for (int j : pointsToCheck) {
-      double error = model->DistanceToModel(fHitArray->at(j).GetPosition());
+      double error = model->DistanceToModel(hitArray.at(j).GetPosition());
       double probInlier = probInlierCoeff * exp(-0.5 * error * error / dataSigma2);
       // if((probInlier + probOutlier)>0) sumLogLikelihood = sumLogLikelihood - log(probInlier + probOutlier);
 

@@ -24,17 +24,6 @@ ClassImp(AtRansacMod);
 AtRansacMod::AtRansacMod() = default;
 AtRansacMod::~AtRansacMod() = default;
 
-void AtRansacMod::Init(AtEvent *event)
-{
-   Reset();
-   fHitArray = &(event->GetHitArray());
-}
-
-void AtRansacMod::Reset()
-{
-   cluster_vector.clear();
-}
-
 /**
  * @brief Check the goodness of the model
  *
@@ -45,14 +34,14 @@ void AtRansacMod::Reset()
  * @return A pair where the the smaller the first number, the better the model
  * and the second element is the number of inliers defined by fRANSACThreshold
  */
-int AtRansacMod::evaluateModel(AtTrackModel *model, const std::vector<int> &pointsToCheck)
+int AtRansacMod::evaluateModel(AtTrackModel *model, const std::vector<int> &pointsToCheck,
+                               const std::vector<AtHit> &hitArray)
 {
    int nbInliers = 0;
    double weight = 0;
 
    for (auto index : pointsToCheck) {
-      // double error = distanceToModel(index);
-      auto &pos = fHitArray->at(index).GetPosition();
+      auto &pos = hitArray.at(index).GetPosition();
       double error = model->DistanceToModel(pos);
       error = error * error;
       if (error < (fRANSACThreshold * fRANSACThreshold)) {
@@ -64,44 +53,62 @@ int AtRansacMod::evaluateModel(AtTrackModel *model, const std::vector<int> &poin
    return nbInliers;
 }
 
-void AtRansacMod::doIteration(PotentialModels &IdxModel)
+std::unique_ptr<AtTrackModel> AtRansacMod::GenerateModel(const std::vector<AtHit> &hitArray)
 {
+
    std::vector<int> remainIndex;
-   for (size_t i = 0; i < fHitArray->size(); i++)
+   for (size_t i = 0; i < hitArray.size(); i++)
       remainIndex.push_back(i);
 
-   if (remainIndex.size() < fRANSACMinPoints)
-      return;
+   if (remainIndex.size() < fRANSACMinPoints) {
+      return nullptr;
+   }
 
-   auto testModel = AtModelFactory::CreateModel(fModelType);
+   auto model = AtModelFactory::CreateModel(fModelType);
 
-   auto points = AtRandomSample::SamplePoints(testModel->GetNumPoints(), *fHitArray, fRandSamplMode);
-   testModel->ConstructModel(points);
+   auto points = AtRandomSample::SamplePoints(model->GetNumPoints(), hitArray, fRandSamplMode);
+   model->ConstructModel(points);
 
-   auto nInliers = evaluateModel(testModel.get(), remainIndex);
+   LOG(debug) << "Testing model" << std::endl;
+   auto nInliers = evaluateModel(model.get(), remainIndex, hitArray);
+   LOG(debug) << "Found " << nInliers << " inliers";
 
    // If the model is consistent with enough points, save it
    if (nInliers > fRANSACMinPoints) {
       LOG(debug) << "Adding model with nInliers: " << nInliers;
-      IdxModel.push_back(std::move(testModel));
+      return model;
    }
+
+   return nullptr;
 }
-void AtRansacMod::Solve()
+
+void AtRansacMod::Solve(AtEvent *event)
 {
-   // Vectors to store the indices used to define the model and their
-   // "scale" of the model
+   if (event->IsGood())
+      Solve(event->GetHitArray());
+}
 
-   PotentialModels models;
+void AtRansacMod::Solve(const std::vector<AtHit> &hitArray)
+{
+   if (hitArray.size() < fRANSACMinPoints) {
+      LOG(error) << "Not enough points to solve. Requires" << fRANSACMinPoints;
+      return;
+   }
 
-   // Populate vectors of randomly sampled potential models
-   for (int i = 0; i < fRANSACMaxIteration; i++)
-      doIteration(models);
+   auto cmp = [](const ModelPtr &a, const ModelPtr &b) { return a->GetChi2() < b->GetChi2(); };
+   auto models = std::set<ModelPtr, decltype(cmp)>(cmp);
+   // SortedModels models(decltype(cmp));
 
-   // sort clusters by "goodness" of the models
-   sort(models.begin(), models.end(), [](const auto &a, const auto &b) { return a->GetChi2() < b->GetChi2(); });
+   LOG(debug2) << "Generating models";
+   for (int i = 0; i < fRANSACMaxIteration; i++) {
+      auto model = GenerateModel(hitArray);
+      if (model != nullptr)
+         models.insert(std::move(model));
+   }
+   LOG(debug2) << "Created " << models.size() << " valid models.";
 
    std::vector<int> remainIndex;
-   for (size_t i = 0; i < fHitArray->size(); i++)
+   for (size_t i = 0; i < hitArray.size(); i++)
       remainIndex.push_back(i);
 
    // Loop through each model, and extract the points that fit each model
@@ -109,109 +116,44 @@ void AtRansacMod::Solve()
       if (remainIndex.size() < fRANSACMinPoints)
          break;
 
-      // fModel->ConstructModel(model.second);
+      LOG(debug2) << "Examining model: " << fTrackCand.size();
+      // Get indices of hits in this model
+      auto inliers = getPointsInModel(remainIndex, model.get(), hitArray);
 
-      // Get a vector of every point that fits this model
-      auto inliers = getPointsInModel(remainIndex, model.get());
-
-      // If there are enough points that fit the model save it
+      // If there are enough points that fit the model save it as a track
       if (inliers.size() > fRANSACMinPoints) {
+         LOG(debug) << "Saving model: " << fTrackCand.size();
+         fTrackCand.emplace_back();
+         AtTrack &track = fTrackCand.back();
+         track.SetTrackID(fTrackCand.size() - 1);
+
+         // Add inliers to our ouput track
          std::vector<XYZPoint> pointsIn;
-         for (auto index : inliers)
-            pointsIn.push_back(fHitArray->at(index).GetPosition());
-         auto cost = model->GetChi2();
-         double chi2 = model->FitModel(pointsIn);
-         SetCluster(inliers, cost, chi2, model->GetModelPar());
+         for (auto index : inliers) {
+            track.AddHit(hitArray.at(index));
+            pointsIn.push_back(hitArray.at(index).GetPosition());
+         }
+
+         model->FitModel(pointsIn);
+         track.SetFitPar(model->GetModelPar());
+         track.SetMinimum(model->GetChi2());
+         track.SetNFree(model->GetNFree());
       }
 
       // Remove all the points that fit this model (even if it wasn't saved?)
       removePoints(remainIndex, inliers);
    }
 }
-void AtRansacMod::removePoints(std::vector<int> &toModify, const std::vector<int> &toRemove)
-{
-   std::vector<int> tempRemain;
-   std::set_difference(toModify.begin(), toModify.end(), toRemove.begin(), toRemove.end(),
-                       std::inserter(tempRemain, tempRemain.begin()));
-   toModify = std::move(tempRemain);
-}
 
-std::vector<int> AtRansacMod::getPointsInModel(const std::vector<int> &indexes, AtTrackModel *model)
+std::vector<int>
+AtRansacMod::getPointsInModel(const std::vector<int> &indexes, AtTrackModel *model, const std::vector<AtHit> &hitArray)
 {
    std::vector<int> retVec;
    for (auto index : indexes) {
-      auto pos = fHitArray->at(index).GetPosition();
+      auto pos = hitArray.at(index).GetPosition();
       double error = model->DistanceToModel(pos);
       if ((error * error) < (fRANSACThreshold * fRANSACThreshold))
          retVec.push_back(index);
    }
    return retVec;
-}
-
-void AtRansacMod::CalcRANSACMod(AtEvent *event)
-{
-
-   // std::cout << "Inicializa" << '\n';
-   Init(event);
-   // std::cout << "Resuelve" << '\n';
-   if (fHitArray->size() > fRANSACMinPoints) {
-      Solve();
-      AllClusters myClusters = GetClusters();
-      // I know this step is stupid, but this part is meant to be in the future a clustering process
-      // std::cout << "Escribe tracks" << '\n';
-      std::vector<AtTrack *> tracks = Clusters2Tracks(myClusters, event);
-
-      Int_t tracksSize = tracks.size();
-      std::cout << "RansacMod tracks size : " << tracksSize << std::endl;
-      for (Int_t ntrack = 0; ntrack < tracks.size(); ntrack++) {
-         tracks.at(ntrack)->SetTrackID(ntrack);
-         fTrackCand.push_back(*tracks.at(ntrack));
-      }
-   }
-}
-
-void AtRansacMod::SetCluster(const std::vector<int> samplesIdx, const double cost, const double Chi2,
-                             std::vector<double> fitPar)
-{
-   Cluster cstr;
-   cstr.ClusterIndex = samplesIdx;
-   cstr.ClusterSize = samplesIdx.size();
-   cstr.ClusterStrength = cost;
-   cstr.ClusterChi2 = Chi2;
-   cstr.fitPar = std::move(fitPar);
-   cluster_vector.push_back(cstr);
-}
-
-std::vector<AtTrack *> AtRansacMod::Clusters2Tracks(AllClusters NClusters, AtEvent *event)
-{
-
-   std::vector<AtTrack *> tracks;
-
-   auto hits = event->GetHitArray();
-
-   int numclus = NClusters.size();
-   // std::cout << "numero de clusters "<<numclus << '\n';
-
-   for (int i = 0; i < numclus; i++) {
-
-      size_t clustersize = NClusters[i].ClusterSize;
-      std::vector<int> indicesCluster = NClusters[i].ClusterIndex;
-
-      LOG(debug) << "Saving track with " << clustersize << " hits";
-
-      auto *track = new AtTrack();
-
-      for (int j = 0; j < clustersize; j++)
-         track->AddHit(hits.at(indicesCluster[j]));
-
-      track->SetFitPar(NClusters[i].fitPar);
-      track->SetMinimum(NClusters[i].ClusterChi2);
-      track->SetNFree(clustersize - 6);
-
-      tracks.push_back(track);
-
-      // delete track;
-   }
-
-   return tracks;
 }

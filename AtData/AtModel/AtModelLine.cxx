@@ -130,4 +130,5 @@ void AtModelLine::FitModel(const std::vector<XYZPoint> &points, const std::vecto
    // fModelPar = {Xm, Ym, Zm, Xh, Yh, Zh};
    ConstructModel({p1, p2});
    fChi2 = (fabs(dm2 / Q));
+   fNFree = points.size() - 6;
 }

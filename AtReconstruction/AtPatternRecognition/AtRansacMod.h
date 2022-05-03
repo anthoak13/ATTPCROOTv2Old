@@ -23,31 +23,20 @@
 #include <stdio.h> // for size_t
 
 #include <algorithm> // for max
-#include <utility>   // for pair
-#include <vector>    // for vector
-
+#include <set>
+#include <utility> // for pair
+#include <vector>  // for vector
 class AtEvent;
 class TBuffer;
 class TClass;
 class TMemberInspector;
+class AtPatternEvent;
 
 class AtRansacMod : public TObject {
 public:
-   struct Cluster {
-      double ClusterStrength;        //< strength
-      size_t ClusterSize;            //< size
-      double ClusterChi2;            //< Chi2
-      std::vector<int> ClusterIndex; //< Indices
-      std::vector<double> fitPar;
-   };
-
-   using AllClusters = std::vector<Cluster>;
-   using PotentialModels = std::vector<std::unique_ptr<AtTrackModel>>;
-
 protected:
    AtModelType fModelType{AtModelType::kLINE};
    AtRandomSample::SampleMethod fRandSamplMode{0}; //!
-   const std::vector<AtHit> *fHitArray{nullptr};   //!
 
    // Set in constructor
    float fRANSACMaxIteration{500};
@@ -58,18 +47,16 @@ protected:
 
    // Data structure
    std::vector<AtTrack> fTrackCand; // Candidate tracks
-   AllClusters cluster_vector;
 
 public:
    AtRansacMod();
    virtual ~AtRansacMod();
 
-   // Behavior
-   void CalcRANSACMod(AtEvent *event);
+   void Solve(AtEvent *event);
+   void Solve(const std::vector<AtHit> &hitArray);
 
    // Getters
    std::vector<AtTrack> GetTrackCand() const { return fTrackCand; };
-   inline AllClusters GetClusters() const { return cluster_vector; }
 
    // Setters
    void SetRanSamMode(AtRandomSample::SampleMethod mode) { fRandSamplMode = mode; };
@@ -80,22 +67,21 @@ public:
    void SetChargeThres(double value) { fChargeThres = value; };
 
 protected:
-   // Virtual behavior functions
-   virtual int evaluateModel(AtTrackModel *model, const std::vector<int> &pointsToCheck);
+   using ModelPtr = std::unique_ptr<AtTrackModel>;
+   virtual int
+   evaluateModel(AtTrackModel *model, const std::vector<int> &pointsToCheck, const std::vector<AtHit> &hitArray);
 
-   void Reset();
-   void Solve();
-   void doIteration(PotentialModels &IdxMod1);
-   std::vector<int> getPointsInModel(const std::vector<int> &indexes, AtTrackModel *model);
-   void removePoints(std::vector<int> &vectorToModify, const std::vector<int> &pointsToRemove);
-   void Init(AtEvent *event);
-
-   std::vector<AtTrack *> Clusters2Tracks(AllClusters NClusters, AtEvent *event);
-   void SetCluster(const std::vector<int> samplesIdx, const double cost, const double Chi2, std::vector<double> fitPar);
-
-   // For some reason these also are what actually set the tracks to be saved...
-   void FindVertex(std::vector<AtTrack *> tracks);
-   void FindVertexOneTrack(std::vector<AtTrack *> tracks);
+   std::unique_ptr<AtTrackModel> GenerateModel(const std::vector<AtHit> &hitArray);
+   std::vector<int>
+   getPointsInModel(const std::vector<int> &indexes, AtTrackModel *model, const std::vector<AtHit> &hitArray);
+   template <typename T>
+   void removePoints(std::vector<T> &toModify, const std::vector<T> &toRemove)
+   {
+      std::vector<T> tempRemain;
+      std::set_difference(toModify.begin(), toModify.end(), toRemove.begin(), toRemove.end(),
+                          std::inserter(tempRemain, tempRemain.begin()));
+      toModify = std::move(tempRemain);
+   }
 
    ClassDef(AtRansacMod, 2);
 };

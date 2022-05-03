@@ -13,7 +13,8 @@ class AtTrackModel : public TObject {
 protected:
    std::vector<Double_t> fModelPar; //< Description of model
    Double_t fChi2{NAN};             //< How good the model is at describing the data
-   const Int_t fNumPoints;          //< Number of 3D points that define the model (i.e. size of fIndices)
+   Int_t fNFree{0};                 //< Degrees of freedom in the fit to the model
+   const Int_t fNumPoints; //< Number of 3D points that define the model (i.e. size of fIndices)
 
 public:
    AtTrackModel(Int_t numPoints = 0);
@@ -51,13 +52,14 @@ public:
     */
    Int_t GetNumPoints() const { return fNumPoints; }
    Double_t GetChi2() const { return fChi2; }
+   Int_t GetNFree() const { return fNFree; }
    std::vector<double> GetModelPar() const { return fModelPar; }
    void SetChi2(double chi2) { fChi2 = chi2; }
 
 protected:
    /**
     * Called by other versions of FitModel. If pointCharge is not empty does charge weighted fit.
-    * Sets fModelPar, and fChi2
+    * Sets fModelPar, fChi2, and fNFree
     */
    virtual void FitModel(const std::vector<XYZPoint> &pointsToFit, const std::vector<double> &pointCharge) = 0;
 

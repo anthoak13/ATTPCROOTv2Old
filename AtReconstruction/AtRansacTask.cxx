@@ -163,7 +163,7 @@ void AtRansacTask::Exec(Option_t *opt)
       Rantest->SetMinHitsLine(fMinHitsLine);
       Rantest->SetNumItera(fNumItera);
       Rantest->SetRanSamMode(static_cast<AtRandomSample::SampleMethod>(fRandSamplMode));
-      Rantest->CalcRANSACMod(fEvent);
+      Rantest->Solve(fEvent);
       Rantest->SetChargeThres(fCharThres);
    }
 
@@ -174,7 +174,7 @@ void AtRansacTask::Exec(Option_t *opt)
       Rantest->SetMinHitsLine(fMinHitsLine);
       Rantest->SetNumItera(fNumItera);
       Rantest->SetRanSamMode(static_cast<AtRandomSample::SampleMethod>(fRandSamplMode));
-      Rantest->CalcRANSACMod(fEvent);
+      Rantest->Solve(fEvent);
       Rantest->SetChargeThres(fCharThres);
    }
 
@@ -185,7 +185,7 @@ void AtRansacTask::Exec(Option_t *opt)
       Rantest->SetMinHitsLine(fMinHitsLine);
       Rantest->SetNumItera(fNumItera);
       Rantest->SetRanSamMode(static_cast<AtRandomSample::SampleMethod>(fRandSamplMode));
-      Rantest->CalcRANSACMod(fEvent);
+      Rantest->Solve(fEvent);
       Rantest->SetChargeThres(fCharThres);
    }
 }

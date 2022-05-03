@@ -9,15 +9,12 @@
 #include "AtEvent.h"            // for AtEvent, hitVector
 #include "AtEventManagerS800.h" // for AtEventManagerS800
 #include "AtHit.h"              // for AtHit
-#include "AtLmedsMod.h"         // for AtLmedsMod
 #include "AtMap.h"              // for AtMap
-#include "AtMlesacMod.h"        // for AtMlesacMod
 #include "AtPad.h"              // for AtPad
 #include "AtPatternEvent.h"     // for AtPatternEvent
 #include "AtProtoEvent.h"       // for AtProtoEvent
 #include "AtProtoQuadrant.h"    // for AtProtoQuadrant
 #include "AtRansac.h"           // for AtRansac, operator<<, AtRansac::Pair...
-#include "AtRansacMod.h"        // for AtRansacMod
 #include "AtRawEvent.h"         // for AtRawEvent
 #include "AtTpcMap.h"           // for AtTpcMap
 #include "AtTpcProtoMap.h"      // for AtTpcProtoMap

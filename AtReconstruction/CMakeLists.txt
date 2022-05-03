@@ -69,10 +69,8 @@ if(PCL_FOUND)
     AtPatternRecognition/hc.cxx
     AtPatternRecognition/fastcluster.cxx
     AtPatternRecognition/AtPRA.cxx
-    AtPatternRecognition/AtRansacMod.cxx
-    AtPatternRecognition/AtMlesacMod.cxx
-    AtPatternRecognition/AtLmedsMod.cxx
     AtPatternRecognition/AtSampleConsensus.cxx
+    AtPatternRecognition/AtSampleEstimator.cxx
     AtRansac/AtRansac.cxx
     AtPRAtask.cxx
     AtRansacTask.cxx

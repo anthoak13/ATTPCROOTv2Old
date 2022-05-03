@@ -12,13 +12,10 @@
 #include "AtGadgetIIMap.h"      // for AtGadgetIIMap
 #include "AtHit.h"              // for AtHit
 #include "AtHitCluster.h"       // for AtHitCluster
-#include "AtLmedsMod.h"         // for AtLmedsMod
 #include "AtMap.h"              // for AtMap
-#include "AtMlesacMod.h"        // for AtMlesacMod
 #include "AtPad.h"              // for AtPad
 #include "AtPatternEvent.h"     // for AtPatternEvent
 #include "AtRansac.h"           // for AtRansac, operator<<, AtRansac::Pair...
-#include "AtRansacMod.h"        // for AtRansacMod
 #include "AtRawEvent.h"         // for AtRawEvent, AuxPadMap
 #include "AtSpecMATMap.h"       // for AtSpecMATMap
 #include "AtTpcMap.h"           // for AtTpcMap

@@ -7,16 +7,11 @@
 #ifndef AtSAMPLECONSENSUS_H
 #define AtSAMPLECONSENSUS_H
 
-#ifdef _OPENMP
-#include <omp.h>
-#endif
-
 #include "AtModelFactory.h"
 #include "AtRandomSample.h"
+#include "AtSampleEstimator.h"
 #include "AtTrack.h" // for AtTrack
 #include "AtTrackModel.h"
-
-#include <Rtypes.h> // for Int_t, Double_t, THashConsistencyHolder, ClassDef
 
 #include <stdio.h> // for size_t
 
@@ -24,14 +19,14 @@
 #include <set>
 #include <utility> // for pair
 #include <vector>  // for vector
-
 class AtEvent;
 class AtPatternEvent;
 
-class AtSampleConsensus {
+class AtSampleConsensus final {
 protected:
    AtModelType fModelType{AtModelType::kLINE};
-   AtRandomSample::SampleMethod fRandSamplMode;
+   AtSampleEstimator::Estimator fSampleEstimator{AtSampleEstimator::Estimator::kRANSAC};
+   AtRandomSample::SampleMethod fRandSamplMode{AtRandomSample::SampleMethod::kUniform};
 
    float fIterations{500};       //< Number of interations of sample consensus
    float fMinModelPoints{30};    //< Required number of points to form a model
@@ -54,16 +49,17 @@ public:
 
    void SetRanSamMode(AtRandomSample::SampleMethod mode) { fRandSamplMode = mode; };
    void SetModelType(AtModelType type) { fModelType = type; }
-   void SetDistanceThreshold(Float_t threshold) { fDistanceThreshold = threshold; };
-   void SetMinHitsLine(Int_t nhits) { fMinModelPoints = nhits; };
-   void SetNumItera(Int_t niterations) { fIterations = niterations; };
-   // void SetChargeThres(double value) { fChargeThres = value; };
+   void SetEstimator(AtSampleEstimator::Estimator estimator) { fSampleEstimator = estimator; }
 
-protected:
+   void SetNumIterations(Int_t niterations) { fIterations = niterations; };
+   void SetMinHitsModel(Int_t nhits) { fMinModelPoints = nhits; };
+   void SetDistanceThreshold(Float_t threshold) { fDistanceThreshold = threshold; };
+   void SetChargeThreshold(double value) { fChargeThres = value; };
+
+private:
    using ModelPtr = std::unique_ptr<AtTrackModel>;
    std::unique_ptr<AtTrackModel> GenerateModel(const std::vector<AtHit> &hitArray);
 
-   virtual int evaluateModel(AtTrackModel *model, const std::vector<AtHit> &hitsToCheck) = 0;
    std::vector<AtHit> movePointsInModel(AtTrackModel *model, std::vector<AtHit> &indexes);
    AtTrack CreateTrack(AtTrackModel *model, std::vector<AtHit> &indexes);
 

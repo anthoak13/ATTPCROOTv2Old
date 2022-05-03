@@ -15,35 +15,8 @@
 #include <iterator> // for insert_iterator, inserter
 #include <memory>   // for allocator_traits<>::value_type
 
-AtSampleConsensus::AtSampleConsensus() : fRandSamplMode(AtRandomSample::SampleMethod::kUniform) {}
+AtSampleConsensus::AtSampleConsensus() = default;
 AtSampleConsensus::~AtSampleConsensus() = default;
-
-/**
- * @brief Check the goodness of the model
- *
- * Evaluates how good the model is in comparison to the points in pointsToCheck.
- *
- * @param[in] hitArray AtHits to compare to the model
- * @param[in/out] model Model to check. Sets Chi2 of the model
- * @return thenumber of inliers defined by fDistanceThreshold
- */
-int AtSampleConsensus::evaluateModel(AtTrackModel *model, const std::vector<AtHit> &hitArray)
-{
-   int nbInliers = 0;
-   double weight = 0;
-
-   for (const auto &hit : hitArray) {
-      auto &pos = hit.GetPosition();
-      double error = model->DistanceToModel(pos);
-      error = error * error;
-      if (error < (fDistanceThreshold * fDistanceThreshold)) {
-         nbInliers++;
-         weight += error;
-      }
-   }
-   model->SetChi2(weight / nbInliers);
-   return nbInliers;
-}
 
 std::unique_ptr<AtTrackModel> AtSampleConsensus::GenerateModel(const std::vector<AtHit> &hitArray)
 {
@@ -58,7 +31,7 @@ std::unique_ptr<AtTrackModel> AtSampleConsensus::GenerateModel(const std::vector
    model->ConstructModel(points);
 
    LOG(debug) << "Testing model" << std::endl;
-   auto nInliers = evaluateModel(model.get(), hitArray);
+   auto nInliers = AtSampleEstimator::EvaluateModel(model.get(), hitArray, fDistanceThreshold, fSampleEstimator);
    LOG(debug) << "Found " << nInliers << " inliers";
 
    // If the model is consistent with enough points, save it

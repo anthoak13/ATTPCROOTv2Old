@@ -19,7 +19,6 @@ constexpr auto cGREEN = "\033[1;32m";
 
 using namespace std;
 
-ClassImp(AtMlesacMod);
 int AtMlesacMod::evaluateModel(AtTrackModel *model, const std::vector<AtHit> &hitArray)
 {
    double sigma = fRANSACThreshold / 1.96;

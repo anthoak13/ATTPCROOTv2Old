@@ -8,7 +8,6 @@
 
 #include <numeric>
 
-enum class AtRandomSample::SampleMethod { kUniform = 0, kGaussian = 1, kWeighted = 2, kWeightedGaussian = 3 };
 std::ostream &operator<<(std::ostream &os, const AtRandomSample::SampleMethod &t)
 {
    using method = AtRandomSample::SampleMethod;

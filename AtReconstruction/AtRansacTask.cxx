@@ -169,6 +169,6 @@ void AtRansacTask::Exec(Option_t *opt)
       ransac.SetNumItera(fNumItera);
       ransac.SetRanSamMode(static_cast<AtRandomSample::SampleMethod>(fRandSamplMode));
       ransac.Solve(fEvent, patternEvent);
-      ransac.SetChargeThres(fCharThres);
+      // ransac.SetChargeThres(fCharThres);
    }
 }

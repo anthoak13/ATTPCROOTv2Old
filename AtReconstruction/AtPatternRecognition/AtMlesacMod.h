@@ -24,15 +24,10 @@
 #include <utility>   // for pair
 #include <vector>    // for vector
 class AtEvent;
-class TBuffer;
-class TClass;
-class TMemberInspector;
 
 class AtMlesacMod : public AtRansacMod {
 protected:
    virtual int evaluateModel(AtTrackModel *model, const std::vector<AtHit> &hitArray) override;
-
-   ClassDefOverride(AtMlesacMod, 2);
 };
 
 #endif

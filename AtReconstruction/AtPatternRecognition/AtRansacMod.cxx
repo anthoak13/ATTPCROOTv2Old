@@ -4,6 +4,7 @@
 #include "AtHit.h"   // for AtHit
 #include "AtModelFactory.h"
 #include "AtPatternEvent.h"
+#include "AtRandomSample.h"
 
 #include <Math/Point3D.h> // for PositionVector3D
 #include <TMath.h>        // for Pi
@@ -13,16 +14,8 @@
 #include <fstream>  // for std
 #include <iterator> // for insert_iterator, inserter
 #include <memory>   // for allocator_traits<>::value_type
-constexpr auto cRED = "\033[1;31m";
-constexpr auto cYELLOW = "\033[1;33m";
-constexpr auto cNORMAL = "\033[0m";
-constexpr auto cGREEN = "\033[1;32m";
 
-using namespace std;
-
-ClassImp(AtRansacMod);
-
-AtRansacMod::AtRansacMod() = default;
+AtRansacMod::AtRansacMod() : fRandSamplMode(AtRandomSample::SampleMethod::kUniform) {}
 AtRansacMod::~AtRansacMod() = default;
 
 /**
@@ -30,10 +23,9 @@ AtRansacMod::~AtRansacMod() = default;
  *
  * Evaluates how good the model is in comparison to the points in pointsToCheck.
  *
- * @param[in] pointsToCheck List of indices of points to compare to the model
- *
- * @return A pair where the the smaller the first number, the better the model
- * and the second element is the number of inliers defined by fRANSACThreshold
+ * @param[in] hitArray AtHits to compare to the model
+ * @param[in/out] model Model to check. Sets Chi2 of the model
+ * @return thenumber of inliers defined by fRANSACThreshold
  */
 int AtRansacMod::evaluateModel(AtTrackModel *model, const std::vector<AtHit> &hitArray)
 {
@@ -56,11 +48,7 @@ int AtRansacMod::evaluateModel(AtTrackModel *model, const std::vector<AtHit> &hi
 std::unique_ptr<AtTrackModel> AtRansacMod::GenerateModel(const std::vector<AtHit> &hitArray)
 {
 
-   std::vector<int> remainIndex;
-   for (size_t i = 0; i < hitArray.size(); i++)
-      remainIndex.push_back(i);
-
-   if (remainIndex.size() < fRANSACMinPoints) {
+   if (hitArray.size() < fRANSACMinPoints) {
       return nullptr;
    }
 
@@ -134,6 +122,14 @@ AtTrack AtRansacMod::CreateTrack(AtTrackModel *model, std::vector<AtHit> &inlier
    track.SetNFree(model->GetNFree());
    return track;
 }
+/**
+ * Moves the entries of hits that are consistent with the model to the returned vector
+ *
+ * @param [in] model
+ * @param[in/out] hits Hits returned are removed from this vector
+ * @return vector containing the AtHits consistent with the model
+ *
+ */
 std::vector<AtHit> AtRansacMod::movePointsInModel(AtTrackModel *model, std::vector<AtHit> &hits)
 {
 

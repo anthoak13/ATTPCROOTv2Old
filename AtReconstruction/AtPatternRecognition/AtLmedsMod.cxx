@@ -19,8 +19,6 @@ constexpr auto cGREEN = "\033[1;32m";
 
 using namespace std;
 
-ClassImp(AtLmedsMod);
-
 int AtLmedsMod::evaluateModel(AtTrackModel *model, const std::vector<AtHit> &hitArray)
 {
    std::vector<double> errorsVec;

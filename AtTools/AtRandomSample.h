@@ -11,7 +11,8 @@ class AtHit;
  */
 class AtRandomSample {
 public:
-   enum class SampleMethod;
+   enum class SampleMethod { kUniform = 0, kGaussian = 1, kWeighted = 2, kWeightedGaussian = 3 };
+
    using XYZPoint = ROOT::Math::XYZPoint;
 
 public:

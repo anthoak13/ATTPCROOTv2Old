@@ -24,17 +24,12 @@
 #include <utility>   // for pair
 #include <vector>    // for vector
 class AtEvent;
-class TBuffer;
-class TClass;
-class TMemberInspector;
 
 class AtLmedsMod : public AtRansacMod {
 protected:
    virtual int evaluateModel(AtTrackModel *model, const std::vector<AtHit> &hitArray) override;
 
    double GetMedian(std::vector<double> &errvec);
-
-   ClassDefOverride(AtLmedsMod, 2);
 };
 
 #endif

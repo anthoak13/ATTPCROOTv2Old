@@ -34,14 +34,13 @@ AtRansacMod::~AtRansacMod() = default;
  * @return A pair where the the smaller the first number, the better the model
  * and the second element is the number of inliers defined by fRANSACThreshold
  */
-int AtRansacMod::evaluateModel(AtTrackModel *model, const std::vector<int> &pointsToCheck,
-                               const std::vector<AtHit> &hitArray)
+int AtRansacMod::evaluateModel(AtTrackModel *model, const std::vector<AtHit> &hitArray)
 {
    int nbInliers = 0;
    double weight = 0;
 
-   for (auto index : pointsToCheck) {
-      auto &pos = hitArray.at(index).GetPosition();
+   for (const auto &hit : hitArray) {
+      auto &pos = hit.GetPosition();
       double error = model->DistanceToModel(pos);
       error = error * error;
       if (error < (fRANSACThreshold * fRANSACThreshold)) {
@@ -70,7 +69,7 @@ std::unique_ptr<AtTrackModel> AtRansacMod::GenerateModel(const std::vector<AtHit
    model->ConstructModel(points);
 
    LOG(debug) << "Testing model" << std::endl;
-   auto nInliers = evaluateModel(model.get(), remainIndex, hitArray);
+   auto nInliers = evaluateModel(model.get(), hitArray);
    LOG(debug) << "Found " << nInliers << " inliers";
 
    // If the model is consistent with enough points, save it
@@ -112,48 +111,68 @@ void AtRansacMod::Solve(const std::vector<AtHit> &hitArray)
       remainIndex.push_back(i);
 
    // Loop through each model, and extract the points that fit each model
+   auto remainHits = hitArray;
    for (const auto &model : models) {
-      if (remainIndex.size() < fRANSACMinPoints)
+      if (remainHits.size() < fRANSACMinPoints)
          break;
 
-      LOG(debug2) << "Examining model: " << fTrackCand.size();
-      // Get indices of hits in this model
-      auto inliers = getPointsInModel(remainIndex, model.get(), hitArray);
-
-      // If there are enough points that fit the model save it as a track
-      if (inliers.size() > fRANSACMinPoints) {
-         LOG(debug) << "Saving model: " << fTrackCand.size();
-         fTrackCand.emplace_back();
-         AtTrack &track = fTrackCand.back();
-         track.SetTrackID(fTrackCand.size() - 1);
-
-         // Add inliers to our ouput track
-         std::vector<XYZPoint> pointsIn;
-         for (auto index : inliers) {
-            track.AddHit(hitArray.at(index));
-            pointsIn.push_back(hitArray.at(index).GetPosition());
-         }
-
-         model->FitModel(pointsIn);
-         track.SetFitPar(model->GetModelPar());
-         track.SetMinimum(model->GetChi2());
-         track.SetNFree(model->GetNFree());
-      }
-
-      // Remove all the points that fit this model (even if it wasn't saved?)
-      removePoints(remainIndex, inliers);
+      auto inlierHits = movePointsInModel(model.get(), remainHits);
+      if (inlierHits.size() > fRANSACMinPoints)
+         SaveTrack(model.get(), inlierHits);
    }
 }
-
-std::vector<int>
-AtRansacMod::getPointsInModel(const std::vector<int> &indexes, AtTrackModel *model, const std::vector<AtHit> &hitArray)
+void AtRansacMod::SaveTrack(AtTrackModel *model, std::vector<AtHit> &inliers)
 {
-   std::vector<int> retVec;
-   for (auto index : indexes) {
-      auto pos = hitArray.at(index).GetPosition();
-      double error = model->DistanceToModel(pos);
-      if ((error * error) < (fRANSACThreshold * fRANSACThreshold))
-         retVec.push_back(index);
+   LOG(debug) << "Saving model: " << fTrackCand.size();
+
+   fTrackCand.emplace_back();
+   AtTrack &track = fTrackCand.back();
+   track.SetTrackID(fTrackCand.size() - 1);
+
+   // Add inliers to our ouput track
+   for (auto &hit : inliers) {
+      std::cout << hit.GetHitID() << std::endl;
+      track.AddHit(std::move(hit));
+   }
+
+   model->FitModel(inliers, false);
+   track.SetFitPar(model->GetModelPar());
+   track.SetMinimum(model->GetChi2());
+   track.SetNFree(model->GetNFree());
+}
+std::vector<AtHit> AtRansacMod::movePointsInModel(AtTrackModel *model, std::vector<AtHit> &hits)
+{
+
+   std::vector<AtHit> retVec;
+   auto itStartEqualRange = hits.end();
+
+   for (auto it = hits.begin(); it != hits.end(); ++it) {
+
+      double error = model->DistanceToModel(it->GetPosition());
+      auto isInModel = (error * error) < (fRANSACThreshold * fRANSACThreshold);
+
+      // Start of sub-vector with hits in model
+      if (isInModel && itStartEqualRange == hits.end()) {
+         itStartEqualRange = it;
+         continue;
+      }
+
+      // End of sub-vector with hits in model.
+      // Move hits in this range to retVec then delete the empty entries
+      if (itStartEqualRange != hits.end() && !isInModel) {
+         retVec.insert(retVec.end(), std::make_move_iterator(itStartEqualRange), std::make_move_iterator(it));
+         hits.erase(itStartEqualRange, it);
+         it = itStartEqualRange;
+         itStartEqualRange = hits.end();
+         continue;
+      }
+   }
+
+   // If the last chunk of the array was in the model, move it and delete empty entries
+   if (itStartEqualRange != hits.end()) {
+      auto it = hits.end();
+      retVec.insert(retVec.end(), std::make_move_iterator(itStartEqualRange), std::make_move_iterator(it));
+      hits.erase(itStartEqualRange, it);
    }
    return retVec;
 }

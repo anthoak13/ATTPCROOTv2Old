@@ -21,14 +21,13 @@ using namespace std;
 
 ClassImp(AtLmedsMod);
 
-int AtLmedsMod::evaluateModel(AtTrackModel *model, const std::vector<int> &pointsToCheck,
-                              const std::vector<AtHit> &hitArray)
+int AtLmedsMod::evaluateModel(AtTrackModel *model, const std::vector<AtHit> &hitArray)
 {
    std::vector<double> errorsVec;
    // Loop through point and if it is an inlier, then add the error**2 to weight
-   for (auto index : pointsToCheck) {
+   for (const auto &hit : hitArray) {
 
-      double error = model->DistanceToModel(hitArray.at(index).GetPosition());
+      double error = model->DistanceToModel(hit.GetPosition());
       error = error * error;
       if (error < (fRANSACThreshold * fRANSACThreshold))
          errorsVec.push_back(error);

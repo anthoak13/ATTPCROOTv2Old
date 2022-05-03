@@ -20,16 +20,15 @@ constexpr auto cGREEN = "\033[1;32m";
 using namespace std;
 
 ClassImp(AtMlesacMod);
-int AtMlesacMod::evaluateModel(AtTrackModel *model, const std::vector<int> &pointsToCheck,
-                               const std::vector<AtHit> &hitArray)
+int AtMlesacMod::evaluateModel(AtTrackModel *model, const std::vector<AtHit> &hitArray)
 {
    double sigma = fRANSACThreshold / 1.96;
    double dataSigma2 = sigma * sigma;
 
    // Calculate min and max errors
    double minError = 1e5, maxError = -1e5;
-   for (int j : pointsToCheck) {
-      double error = model->DistanceToModel(hitArray.at(j).GetPosition());
+   for (const auto &hit : hitArray) {
+      double error = model->DistanceToModel(hit.GetPosition());
       if (error < minError)
          minError = error;
       if (error > maxError)
@@ -44,12 +43,12 @@ int AtMlesacMod::evaluateModel(AtTrackModel *model, const std::vector<int> &poin
       const double probOutlier = (1 - gamma) / nu;
       const double probInlierCoeff = gamma / sqrt(2 * TMath::Pi() * dataSigma2);
 
-      for (int j : pointsToCheck) {
-         double error = model->DistanceToModel(hitArray.at(j).GetPosition());
+      for (const auto &hit : hitArray) {
+         double error = model->DistanceToModel(hit.GetPosition());
          double probInlier = probInlierCoeff * exp(-0.5 * error * error / dataSigma2);
          sumPosteriorProb += probInlier / (probInlier + probOutlier);
       }
-      gamma = sumPosteriorProb / pointsToCheck.size();
+      gamma = sumPosteriorProb / hitArray.size();
    }
 
    double sumLogLikelihood = 0;
@@ -58,8 +57,8 @@ int AtMlesacMod::evaluateModel(AtTrackModel *model, const std::vector<int> &poin
    // Evaluate the model
    const double probOutlier = (1 - gamma) / nu;
    const double probInlierCoeff = gamma / sqrt(2 * TMath::Pi() * dataSigma2);
-   for (int j : pointsToCheck) {
-      double error = model->DistanceToModel(hitArray.at(j).GetPosition());
+   for (const auto &hit : hitArray) {
+      double error = model->DistanceToModel(hit.GetPosition());
       double probInlier = probInlierCoeff * exp(-0.5 * error * error / dataSigma2);
       // if((probInlier + probOutlier)>0) sumLogLikelihood = sumLogLikelihood - log(probInlier + probOutlier);
 

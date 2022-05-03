@@ -18,7 +18,7 @@ AtTrackModel::AtTrackModel(Int_t numPoints) : fNumPoints(numPoints) {}
  * @param[in] points Points in 3D space to fit with charge information
  * @return Chi-squared of the fit
  */
-Double_t AtTrackModel::FitModel(const std::vector<AtHit> &pointsToFit)
+Double_t AtTrackModel::FitModel(const std::vector<AtHit> &pointsToFit, bool withQ)
 {
    std::vector<XYZPoint> points;
    std::vector<double> charge;
@@ -26,7 +26,10 @@ Double_t AtTrackModel::FitModel(const std::vector<AtHit> &pointsToFit)
       points.push_back(hit.GetPosition());
       charge.push_back(hit.GetCharge());
    }
-   FitModel(points, charge);
+   if (withQ)
+      FitModel(points, charge);
+   else
+      FitModel(points);
    return fChi2;
 }
 

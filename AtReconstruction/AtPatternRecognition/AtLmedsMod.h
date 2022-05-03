@@ -30,8 +30,7 @@ class TMemberInspector;
 
 class AtLmedsMod : public AtRansacMod {
 protected:
-   virtual int evaluateModel(AtTrackModel *model, const std::vector<int> &pointsToCheck,
-                             const std::vector<AtHit> &hitArray) override;
+   virtual int evaluateModel(AtTrackModel *model, const std::vector<AtHit> &hitArray) override;
 
    double GetMedian(std::vector<double> &errvec);
 

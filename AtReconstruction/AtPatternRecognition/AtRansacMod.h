@@ -68,20 +68,11 @@ public:
 
 protected:
    using ModelPtr = std::unique_ptr<AtTrackModel>;
-   virtual int
-   evaluateModel(AtTrackModel *model, const std::vector<int> &pointsToCheck, const std::vector<AtHit> &hitArray);
-
    std::unique_ptr<AtTrackModel> GenerateModel(const std::vector<AtHit> &hitArray);
-   std::vector<int>
-   getPointsInModel(const std::vector<int> &indexes, AtTrackModel *model, const std::vector<AtHit> &hitArray);
-   template <typename T>
-   void removePoints(std::vector<T> &toModify, const std::vector<T> &toRemove)
-   {
-      std::vector<T> tempRemain;
-      std::set_difference(toModify.begin(), toModify.end(), toRemove.begin(), toRemove.end(),
-                          std::inserter(tempRemain, tempRemain.begin()));
-      toModify = std::move(tempRemain);
-   }
+
+   virtual int evaluateModel(AtTrackModel *model, const std::vector<AtHit> &hitsToCheck);
+   std::vector<AtHit> movePointsInModel(AtTrackModel *model, std::vector<AtHit> &indexes);
+   void SaveTrack(AtTrackModel *model, std::vector<AtHit> &indexes);
 
    ClassDef(AtRansacMod, 2);
 };

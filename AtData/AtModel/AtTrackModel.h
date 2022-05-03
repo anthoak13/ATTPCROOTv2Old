@@ -18,7 +18,7 @@ protected:
 
 public:
    AtTrackModel(Int_t numPoints = 0);
-   Double_t FitModel(const std::vector<AtHit> &pointsToFit);
+   Double_t FitModel(const std::vector<AtHit> &pointsToFit, bool withQ = true);
    Double_t FitModel(const std::vector<XYZPoint> &pointsToFit);
 
    /**

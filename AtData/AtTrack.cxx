@@ -64,7 +64,7 @@ std::vector<AtHitCluster> *AtTrack::GetHitClusterArray()
 {
    return &fHitClusterArray;
 }
-std::vector<Double_t> AtTrack::GetFitPar()
+std::vector<Double_t> AtTrack::GetFitPar() const
 {
    return fFitPar;
 }
@@ -76,7 +76,7 @@ Int_t AtTrack::GetNFree()
 {
    return fNFree;
 }
-Int_t AtTrack::GetTrackID()
+Int_t AtTrack::GetTrackID() const
 {
    return fTrackID;
 }

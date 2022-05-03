@@ -165,7 +165,6 @@ void AtRansacTask::Exec(Option_t *opt)
       Rantest->SetRanSamMode(static_cast<AtRandomSample::SampleMethod>(fRandSamplMode));
       Rantest->CalcRANSACMod(fEvent);
       Rantest->SetChargeThres(fCharThres);
-      Rantest->SetVertexMod(fVertexMode);
    }
 
    if (fRANSACAlg == 2) {
@@ -177,7 +176,6 @@ void AtRansacTask::Exec(Option_t *opt)
       Rantest->SetRanSamMode(static_cast<AtRandomSample::SampleMethod>(fRandSamplMode));
       Rantest->CalcRANSACMod(fEvent);
       Rantest->SetChargeThres(fCharThres);
-      Rantest->SetVertexMod(fVertexMode);
    }
 
    if (fRANSACAlg == 3) {
@@ -189,6 +187,5 @@ void AtRansacTask::Exec(Option_t *opt)
       Rantest->SetRanSamMode(static_cast<AtRandomSample::SampleMethod>(fRandSamplMode));
       Rantest->CalcRANSACMod(fEvent);
       Rantest->SetChargeThres(fCharThres);
-      Rantest->SetVertexMod(fVertexMode);
    }
 }

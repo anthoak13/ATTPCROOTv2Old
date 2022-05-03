@@ -408,13 +408,14 @@ void AtEventDrawTask::DrawHitPoints()
          } else {
             fRansacMod = dynamic_cast<AtRansacMod *>(fRansacArray->At(0));
             TrackCand = fRansacMod->GetTrackCand();
-            TVector3 Vertex = fRansacMod->GetVertex();
+            /*TVector3 Vertex = fRansacMod->GetVertex();
             auto VertexTime = fRansacMod->GetVertexTime();
 
             std::cout << cGREEN;
             std::cout << " Vertex Time : " << VertexTime << std::endl;
             std::cout << " Vertex Mean - X : " << Vertex.X() << " - Y : " << Vertex.Y() << "  - Z : " << Vertex.Z()
                       << cNORMAL << std::endl;
+       */
          }
 
       } else if (fPatternEventArray) {
@@ -558,9 +559,10 @@ void AtEventDrawTask::DrawHitPoints()
          if (!fRansacUnified)
             fVertex->SetNextPoint(fRansac->GetVertexMean().x() * 0.1, fRansac->GetVertexMean().y() * 0.1,
                                   fRansac->GetVertexMean().z() * 0.1);
-         else
+         /*else
             fVertex->SetNextPoint(fRansacMod->GetVertex().x() * 0.1, fRansacMod->GetVertex().y() * 0.1,
                                   fRansacMod->GetVertex().z() * 0.1);
+    */
       }
    }
 
@@ -1537,9 +1539,9 @@ void AtEventDrawTask::SetLine6(double t, std::vector<Double_t> p, double &x, dou
    // a parameteric line is define from 6 parameters but 4 are independent
    // x0,y0,z0,z1,y1,z1 which are the coordinates of two points on the line
    // can choose z0 = 0 if line not parallel to x-y plane and z1 = 1;
-   x = (p[0] + p[1] * t) / 10.0;
-   y = (p[2] + p[3] * t) / 10.0;
-   z = (p[4] + p[5] * t) / 10.0;
+   x = (p[0] + p[3] * t) / 10.0;
+   y = (p[1] + p[4] * t) / 10.0;
+   z = (p[2] + p[5] * t) / 10.0;
 }
 
 EColor AtEventDrawTask::GetTrackColor(int i)

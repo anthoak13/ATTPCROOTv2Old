@@ -88,11 +88,11 @@ public:
    std::vector<AtHitCluster> *GetHitClusterArray();
    void ResetHitClusterArray() { fHitClusterArray.clear(); }
    // void ResetHitArray();
-   std::vector<Double_t> GetFitPar();
+   std::vector<Double_t> GetFitPar() const;
    const std::vector<AtHit> &GetHitArrayConst() const { return fHitArray; }
    Double_t GetMinimum();
    Int_t GetNFree();
-   Int_t GetTrackID();
+   Int_t GetTrackID() const;
    Double_t GetAngleZAxis();
    Double_t GetAngleZDet();
    Double_t GetAngleYDet();

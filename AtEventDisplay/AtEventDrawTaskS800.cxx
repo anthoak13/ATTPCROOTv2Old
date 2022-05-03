@@ -509,7 +509,7 @@ void AtEventDrawTaskS800::DrawHitPoints()
          if (fRANSACAlg == 1) {
             fRansacMod = dynamic_cast<AtRansacMod *>(fRansacArray->At(0));
             TrackCand = fRansacMod->GetTrackCand();
-            TVector3 Vertex1 = fRansacMod->GetVertex();
+            // TVector3 Vertex1 = fRansacMod->GetVertex();
             /*TVector3 Vertex1    = fRansacMod->GetVertex1();
             TVector3 Vertex2    = fRansacMod->GetVertex2();
             Double_t VertexTime = fRansacMod->GetVertexTime();

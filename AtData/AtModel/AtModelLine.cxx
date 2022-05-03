@@ -3,13 +3,23 @@
 #include <FairLogger.h>
 
 #include <TMath.h>
+
+ClassImp(AtModelLine);
+
 AtModelLine::AtModelLine() : AtTrackModel(2) {}
 
+XYZPoint AtModelLine::ClosestPointOnModel(const XYZPoint &point)
+{
+   auto p = GetPoint();
+   auto d = GetDirection();
+
+   return p;
+}
 Double_t AtModelLine::DistanceToModel(const XYZPoint &point)
 {
-   auto vec = fPoint - point;
-   auto nD = fDirection.Cross(vec);
-   double dist2 = nD.Mag2() / fDirection.Mag2();
+   auto vec = GetPoint() - point;
+   auto nD = GetDirection().Cross(vec);
+   double dist2 = nD.Mag2() / GetDirection().Mag2();
    return std::sqrt(dist2);
 }
 
@@ -18,8 +28,13 @@ void AtModelLine::ConstructModel(const std::vector<XYZPoint> &points)
    if (points.size() != fNumPoints)
       LOG(error) << "Trying to create model with wrong number of points " << points.size();
 
-   fPoint = points[0];
-   fDirection = points[1] - points[0];
+   auto fPoint = points[0];
+   auto fDirection = points[1] - points[0];
+
+   // If not perpendicular to z-axis rescale direction
+   // if (fDirection.Z() != 0)
+   //   fDirection /= fDirection.Z();
+   fModelPar = {fPoint.X(), fPoint.Y(), fPoint.Z(), fDirection.X(), fDirection.Y(), fDirection.Z()};
 }
 
 void AtModelLine::FitModel(const std::vector<XYZPoint> &points, const std::vector<double> &charge)
@@ -109,6 +124,10 @@ void AtModelLine::FitModel(const std::vector<XYZPoint> &points, const std::vecto
    Zh = ((a * a + b * b) * Zm + a * Xm + b * Ym) / (1. + a * a + b * b);
 
    // First 3 are point1. Second 3 are point 2
-   fModelPar = {Xm, Ym, Zm, Xh, Yh, Zh};
+   XYZPoint p1 = {Xm, Ym, Zm};
+   XYZPoint p2 = {Xh, Yh, Zh};
+
+   // fModelPar = {Xm, Ym, Zm, Xh, Yh, Zh};
+   ConstructModel({p1, p2});
    fChi2 = (fabs(dm2 / Q));
 }

@@ -5,6 +5,8 @@
 #include <TMath.h>
 #include <TRandom3.h>
 
+ClassImp(AtTrackModel);
+
 AtTrackModel::AtTrackModel(Int_t numPoints) : fNumPoints(numPoints) {}
 
 /**

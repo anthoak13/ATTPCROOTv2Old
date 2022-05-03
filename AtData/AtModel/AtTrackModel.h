@@ -17,6 +17,8 @@ protected:
 
 public:
    AtTrackModel(Int_t numPoints = 0);
+   Double_t FitModel(const std::vector<AtHit> &pointsToFit);
+   Double_t FitModel(const std::vector<XYZPoint> &pointsToFit);
 
    /**
     * @brief Construct a model.
@@ -31,15 +33,16 @@ public:
    /**
     * @brief Closest distance to model.
     *
-    * Note: An XYZPoint can be constructed from any vector-like object (T) that supports the interface
-    * `T.X(); T.Y(); T.Z()`.
-    *
     * @param[in] point Point to get the distance from.
     */
    virtual Double_t DistanceToModel(const XYZPoint &point) = 0;
-
-   Double_t FitModel(const std::vector<AtHit> &pointsToFit);
-   Double_t FitModel(const std::vector<XYZPoint> &pointsToFit);
+   /**
+    * @brief Closest point on model.
+    *
+    * @param[in] point Point to get the closest point on the model.
+    * @return Closest point on model
+    */
+   virtual XYZPoint ClosestPointOnModel(const XYZPoint &point) = 0;
 
    /**
     * @brief Number of points to define the model.
@@ -57,6 +60,8 @@ protected:
     * Sets fModelPar, and fChi2
     */
    virtual void FitModel(const std::vector<XYZPoint> &pointsToFit, const std::vector<double> &pointCharge) = 0;
+
+   ClassDef(AtTrackModel, 1)
 };
 
 #endif //#ifndef ATTRACKMODEL_H

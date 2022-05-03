@@ -12,13 +12,6 @@
 #include <iterator> // for insert_iterator, inserter
 #include <memory>   // for allocator_traits<>::value_type
 
-constexpr auto cRED = "\033[1;31m";
-constexpr auto cYELLOW = "\033[1;33m";
-constexpr auto cNORMAL = "\033[0m";
-constexpr auto cGREEN = "\033[1;32m";
-
-using namespace std;
-
 int AtLmedsMod::evaluateModel(AtTrackModel *model, const std::vector<AtHit> &hitArray)
 {
    std::vector<double> errorsVec;
@@ -27,7 +20,7 @@ int AtLmedsMod::evaluateModel(AtTrackModel *model, const std::vector<AtHit> &hit
 
       double error = model->DistanceToModel(hit.GetPosition());
       error = error * error;
-      if (error < (fRANSACThreshold * fRANSACThreshold))
+      if (error < (fDistanceThreshold * fDistanceThreshold))
          errorsVec.push_back(error);
    }
    model->SetChi2(GetMedian(errorsVec) / errorsVec.size());

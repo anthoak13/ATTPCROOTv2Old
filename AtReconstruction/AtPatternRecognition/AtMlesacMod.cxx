@@ -21,7 +21,7 @@ using namespace std;
 
 int AtMlesacMod::evaluateModel(AtTrackModel *model, const std::vector<AtHit> &hitArray)
 {
-   double sigma = fRANSACThreshold / 1.96;
+   double sigma = fDistanceThreshold / 1.96;
    double dataSigma2 = sigma * sigma;
 
    // Calculate min and max errors

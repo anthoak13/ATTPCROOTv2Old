@@ -16,6 +16,7 @@ public:
    virtual void ConstructModel(const std::vector<XYZPoint> &points) override;
    virtual Double_t DistanceToModel(const XYZPoint &point) override;
    virtual XYZPoint ClosestPointOnModel(const XYZPoint &point) override;
+   virtual XYZPoint GetPointAt(double z) override;
 
 protected:
    virtual void FitModel(const std::vector<XYZPoint> &points, const std::vector<double> &charge) override;

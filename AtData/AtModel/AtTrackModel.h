@@ -1,5 +1,6 @@
 /**
- * A base class that describes a model of a track. For example a 2D circle or a line
+ * A base class that describes the pattern of a track. For example a 2D circle or a line
+ * These patterns are parameterized by some number (t)
  *
  */
 #ifndef ATTRACKMODEL_H
@@ -14,7 +15,7 @@ protected:
    std::vector<Double_t> fModelPar; //< Description of model
    Double_t fChi2{NAN};             //< How good the model is at describing the data
    Int_t fNFree{0};                 //< Degrees of freedom in the fit to the model
-   const Int_t fNumPoints; //< Number of 3D points that define the model (i.e. size of fIndices)
+   const Int_t fNumPoints;          //< Number of 3D points that define the model (i.e. size of fIndices)
 
 public:
    AtTrackModel(Int_t numPoints = 0);
@@ -44,6 +45,12 @@ public:
     * @return Closest point on model
     */
    virtual XYZPoint ClosestPointOnModel(const XYZPoint &point) = 0;
+   /**
+    * @brief Point on model at t
+    *
+    * Get the point on the model at parameter t. What t physically represents is pattern dependent.
+    */
+   virtual XYZPoint GetPointAt(double t) = 0;
 
    /**
     * @brief Number of points to define the model.

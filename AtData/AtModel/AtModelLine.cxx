@@ -15,6 +15,7 @@ XYZPoint AtModelLine::ClosestPointOnModel(const XYZPoint &point)
 
    return p;
 }
+
 Double_t AtModelLine::DistanceToModel(const XYZPoint &point)
 {
    auto vec = GetPoint() - point;
@@ -32,9 +33,22 @@ void AtModelLine::ConstructModel(const std::vector<XYZPoint> &points)
    auto fDirection = points[1] - points[0];
 
    // If not perpendicular to z-axis rescale direction
-   // if (fDirection.Z() != 0)
-   //   fDirection /= fDirection.Z();
+   if (fDirection.Z() != 0)
+      fDirection /= fDirection.Z();
    fModelPar = {fPoint.X(), fPoint.Y(), fPoint.Z(), fDirection.X(), fDirection.Y(), fDirection.Z()};
+}
+
+/**
+ * @brief Get point on line at z
+ *
+ * Get point on line at z. If the line is parallel to Z, then return then the parameter passed
+ * has not defined physical interpretation
+ *
+ * @param[in] z Location of point at z [mm]
+ */
+XYZPoint AtModelLine::GetPointAt(double z)
+{
+   return GetPoint() + z * GetDirection();
 }
 
 void AtModelLine::FitModel(const std::vector<XYZPoint> &points, const std::vector<double> &charge)

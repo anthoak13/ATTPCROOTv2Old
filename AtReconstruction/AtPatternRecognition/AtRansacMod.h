@@ -33,23 +33,30 @@ protected:
    AtModelType fModelType{AtModelType::kLINE};
    AtRandomSample::SampleMethod fRandSamplMode;
 
-   float fRANSACMaxIteration{500}; //< Number of interations of ransac
-   float fRANSACMinPoints{30};     //< Required number of points to form a track
-   float fRANSACThreshold{15};     //< Distance
-   // double fChargeThres{0};
+   float fIterations{500};        //< Number of interations of sample consensus
+   float fMinModelPoints{30};     //< Required number of points to form a model
+   float fDistanceThreshold{15};  //< Distance a point must be from model to be an inlier
+
+   /**
+    * @brief Min charge for charge weighted fit.
+    *
+    * Minimum charge to include point in charge weighted fit. If set to -1 it
+    * disables charge weighting when fitting the track.
+    */
+   double fChargeThres{-1};
 
 public:
    AtRansacMod();
    virtual ~AtRansacMod();
 
-   void Solve(AtEvent *event, AtPatternEvent *patternEvent);
-   void Solve(const std::vector<AtHit> &hitArray, AtPatternEvent *event);
+   AtPatternEvent Solve(AtEvent *event);
+   AtPatternEvent Solve(const std::vector<AtHit> &hitArray);
 
    void SetRanSamMode(AtRandomSample::SampleMethod mode) { fRandSamplMode = mode; };
    void SetModelType(AtModelType type) { fModelType = type; }
-   void SetDistanceThreshold(Float_t threshold) { fRANSACThreshold = threshold; };
-   void SetMinHitsLine(Int_t nhits) { fRANSACMinPoints = nhits; };
-   void SetNumItera(Int_t niterations) { fRANSACMaxIteration = niterations; };
+   void SetDistanceThreshold(Float_t threshold) { fDistanceThreshold = threshold; };
+   void SetMinHitsLine(Int_t nhits) { fMinModelPoints = nhits; };
+   void SetNumItera(Int_t niterations) { fIterations = niterations; };
    // void SetChargeThres(double value) { fChargeThres = value; };
 
 protected:

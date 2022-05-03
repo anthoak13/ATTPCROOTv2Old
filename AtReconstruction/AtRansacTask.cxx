@@ -144,9 +144,6 @@ void AtRansacTask::Exec(Option_t *opt)
 
    fEvent = dynamic_cast<AtEvent *>(fEventArray->At(0));
 
-   fPatternEventArray.Delete();
-   auto *patternEvent = (AtPatternEvent *)new (fPatternEventArray[0]) AtPatternEvent();
-
    LOG(debug) << "Running RANSAC with " << fEvent->GetNumHits() << " hits.";
 
    if (fRANSACAlg == 0) {
@@ -168,7 +165,9 @@ void AtRansacTask::Exec(Option_t *opt)
       ransac.SetMinHitsLine(fMinHitsLine);
       ransac.SetNumItera(fNumItera);
       ransac.SetRanSamMode(static_cast<AtRandomSample::SampleMethod>(fRandSamplMode));
-      ransac.Solve(fEvent, patternEvent);
       // ransac.SetChargeThres(fCharThres);
+      fPatternEventArray.Delete();
+      auto patternEvent = ransac.Solve(fEvent);
+      new (fPatternEventArray[0]) AtPatternEvent(patternEvent);
    }
 }

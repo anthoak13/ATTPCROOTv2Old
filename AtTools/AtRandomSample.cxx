@@ -8,6 +8,157 @@
 
 #include <numeric>
 
+/**
+ * Implementation class for random sampling
+ */
+class AtRandomSample::AtRandomSample_impl {
+public:
+   static std::vector<XYZPoint> positionFromIndices(const std::vector<int> inds, const std::vector<AtHit> &hits)
+   {
+      std::vector<XYZPoint> ret;
+      for (auto ind : inds)
+         ret.push_back(hits[ind].GetPosition());
+
+      return ret;
+   }
+   static bool isInVector(const std::vector<int> inds, int val)
+   {
+      return std::find(inds.begin(), inds.end(), val) != inds.end();
+   }
+
+   static std::vector<XYZPoint> sampleUniform(int N, const std::vector<AtHit> &hits)
+   {
+      std::vector<int> sampled;
+      sampled.push_back(gRandom->Uniform(0, hits.size()));
+      while (sampled.size() < N) {
+         int candIndex = 0;
+
+         do {
+            candIndex = gRandom->Uniform(0, hits.size());
+         } while (isInVector(sampled, candIndex));
+         sampled.push_back(candIndex);
+      }
+
+      return positionFromIndices(sampled, hits);
+   }
+
+   static bool checkGauss(XYZPoint pos1, XYZPoint pos2, double sigma)
+   {
+      auto dist = std::sqrt((pos1 - pos2).Mag2());
+      auto gauss = 1.0 * exp(-1.0 * pow(dist / sigma, 2.0));
+      auto y = gRandom->Uniform(0, 1);
+      return y <= gauss;
+   }
+   static std::vector<XYZPoint> sampleGaussian(int N, const std::vector<AtHit> &hits)
+   {
+      double sigma = 30.0;
+
+      std::vector<int> sampled;
+      sampled.push_back(gRandom->Uniform(0, hits.size()));
+      auto iniPos = hits.at(sampled.back()).GetPosition();
+
+      for (int i = 1; i < N; ++i) {
+         int candIndex = 0;
+         int count = 0;
+         bool validPoint = false;
+
+         do {
+            count++;
+            candIndex = gRandom->Uniform(0, hits.size());
+            auto candPos = hits.at(candIndex).GetPosition();
+
+            if (count > 20 && !isInVector(sampled, candIndex))
+               break;
+            validPoint = checkGauss(iniPos, candPos, sigma);
+
+         } while (isInVector(sampled, candIndex) || !validPoint);
+
+         sampled.push_back(candIndex);
+      }
+      return positionFromIndices(sampled, hits);
+   }
+
+   static bool checkCharge(int ind, const std::vector<double> &pdf, double avgCharge)
+   {
+      return (pdf[ind] >= gRandom->Uniform(0, 2 * avgCharge));
+   }
+
+   static std::vector<XYZPoint> sampleWeighted(int N, const std::vector<AtHit> &hits)
+   {
+      double avgCharge = 0;
+      auto Proba = getPDF(avgCharge, hits);
+
+      std::vector<int> sampled;
+      sampled.push_back(gRandom->Uniform(0, hits.size()));
+      auto iniPos = hits.at(sampled.back()).GetPosition();
+
+      while (sampled.size() < N) {
+         bool validPoint = false;
+         int counter = 0;
+         int candInd;
+
+         do {
+            counter++;
+            candInd = gRandom->Uniform(0, hits.size());
+
+            if (counter > 30 && !isInVector(sampled, candInd))
+               break;
+
+            validPoint = checkCharge(candInd, Proba, avgCharge);
+
+         } while (isInVector(sampled, candInd) || !validPoint);
+         sampled.push_back(candInd);
+      }
+      return positionFromIndices(sampled, hits);
+   }
+
+   static std::vector<XYZPoint> sampleWeightedGaussian(int N, const std::vector<AtHit> &hits)
+   {
+      //-------Weighted sampling + Gauss dist.
+      double avgCharge = 0;
+      auto Proba = getPDF(avgCharge, hits);
+      double sigma = 30.0;
+
+      std::vector<int> sampled;
+      sampled.push_back(gRandom->Uniform(0, hits.size()));
+      auto iniPos = hits.at(sampled.back()).GetPosition();
+
+      while (sampled.size() < N) {
+         bool validPoint = false;
+         int counter = 0;
+         int candInd;
+
+         do {
+            counter++;
+            candInd = gRandom->Uniform(0, hits.size());
+            auto candPos = hits.at(candInd).GetPosition();
+
+            if (counter > 30 && !isInVector(sampled, candInd))
+               break;
+            validPoint = checkGauss(iniPos, candPos, sigma);
+            validPoint &= checkCharge(candInd, Proba, avgCharge);
+
+         } while (isInVector(sampled, candInd) || !validPoint);
+         sampled.push_back(candInd);
+      }
+      return positionFromIndices(sampled, hits);
+   }
+
+   static std::vector<double> getPDF(double &avgCharge, const std::vector<AtHit> &hits)
+   {
+      double Tcharge =
+         std::accumulate(hits.begin(), hits.end(), 0, [](double sum, auto &a) { return sum + a.GetCharge(); });
+
+      avgCharge = Tcharge / hits.size();
+      std::vector<double> w;
+      if (Tcharge > 0)
+         for (const auto &hit : hits)
+            w.push_back(hit.GetCharge() / Tcharge);
+
+      return w;
+   }
+};
+
 std::ostream &operator<<(std::ostream &os, const AtRandomSample::SampleMethod &t)
 {
    using method = AtRandomSample::SampleMethod;
@@ -36,158 +187,10 @@ std::vector<AtRandomSample::XYZPoint>
 AtRandomSample::SamplePoints(int N, const std::vector<AtHit> &hits, SampleMethod mode = SampleMethod::kUniform)
 {
    switch (mode) {
-   case (SampleMethod::kUniform): return sampleUniform(N, hits);
-   case (SampleMethod::kGaussian): return sampleGaussian(N, hits);
-   case (SampleMethod::kWeighted): return sampleWeighted(N, hits);
-   case (SampleMethod::kWeightedGaussian): return sampleWeightedGaussian(N, hits);
+   case (SampleMethod::kUniform): return AtRandomSample_impl::sampleUniform(N, hits);
+   case (SampleMethod::kGaussian): return AtRandomSample_impl::sampleGaussian(N, hits);
+   case (SampleMethod::kWeighted): return AtRandomSample_impl::sampleWeighted(N, hits);
+   case (SampleMethod::kWeightedGaussian): return AtRandomSample_impl::sampleWeightedGaussian(N, hits);
    default: LOG(error) << "Invalid sample method passed " << mode; return {};
    }
-}
-/**
- * @brief Sample random points
- */
-std::vector<AtRandomSample::XYZPoint> AtRandomSample::sampleUniform(int N, const std::vector<AtHit> &hits)
-{
-   //-------Uniform sampling
-   int ind1 = gRandom->Uniform(0, hits.size());
-   int ind2;
-   do {
-      ind2 = gRandom->Uniform(0, hits.size());
-   } while (ind1 == ind2);
-
-   return {hits.at(ind1).GetPosition(), hits.at(ind2).GetPosition()};
-}
-
-/**
- * @brief Sample points from
- *
- * The first point is sampled randomly. The remaining points are sampled according to
- * a gaussian distribition around the first point with a sigma of 30. If in 20 samples it
- * doesn't find a point close enough, it defaults to a uniform sample.
- *
- * @TODO We should probably set sigma so it scales with the size of the pad plane or make it
- * a tunable parameter.
- */
-std::vector<AtRandomSample::XYZPoint> AtRandomSample::sampleGaussian(int numPoints, const std::vector<AtHit> &hits)
-{
-   //--------Gaussian sampling
-   double sigma = 30.0;
-   double y = 0;
-   double gauss = 0;
-   int counter = 0;
-   int p1 = gRandom->Uniform(0, hits.size());
-   int p2;
-   auto &P1 = hits.at(p1).GetPosition();
-
-   do {
-      p2 = gRandom->Uniform(0, hits.size());
-      auto &P2 = hits.at(p2).GetPosition();
-      auto dist = std::sqrt((P2 - P1).Mag2());
-
-      gauss = 1.0 * exp(-1.0 * pow(dist / sigma, 2.0));
-      y = (gRandom->Uniform(0, 1));
-      counter++;
-      if (counter > 20 && p2 != p1) {
-         LOG(info) << "Gaussian sampling defaulting to uniform";
-         break;
-      }
-   } while (p2 == p1 || y > gauss);
-
-   return {hits.at(p1).GetPosition(), hits.at(p2).GetPosition()};
-}
-
-/**
- * @ brief Sample two points based on charge
- */
-std::vector<AtRandomSample::XYZPoint> AtRandomSample::sampleWeighted(int numPoints, const std::vector<AtHit> &hits)
-{
-   //-------Weighted sampling
-   double avgCharge = 0;
-   auto Proba = getPDF(avgCharge, hits);
-   bool validSecondPoint = false;
-   int counter = 0;
-   int p1 = gRandom->Uniform(0, hits.size());
-   int p2 = p1;
-
-   do {
-      validSecondPoint = false;
-      counter++;
-      if (counter > 30 && p2 != p1)
-         break;
-
-      p2 = gRandom->Uniform(0, hits.size());
-      double TwiceAvCharge = 2 * avgCharge;
-
-      if (Proba.size() == hits.size())
-         validSecondPoint = (Proba[p2] >= gRandom->Uniform(0, TwiceAvCharge));
-      else
-         validSecondPoint = true;
-
-   } while (p2 == p1 || validSecondPoint == false);
-
-   return {hits.at(p1).GetPosition(), hits.at(p2).GetPosition()};
-}
-
-/**
- * @brief Sample two points from indX
- *
- * The first point is sampled randomly by charge. The second points is sampled according to
- * a gaussian distribition around the first point with a sigma of 30. If in 20 samples it
- * doesn't find a point close enough, it defaults to a charge weighted sample.
- *
- * @TODO We should probably set sigma so it scales with the size of the pad plane or make it
- * a tunable parameter.
- */
-std::vector<AtRandomSample::XYZPoint> AtRandomSample::sampleWeightedGaussian(int N, const std::vector<AtHit> &hits)
-{
-   //-------Weighted sampling + Gauss dist.
-   double avgCharge = 0;
-   auto Proba = getPDF(avgCharge, hits);
-   bool validSecondPoint = false;
-   double sigma = 30.0;
-   double y = 0;
-   double gauss = 0;
-   int counter = 0;
-
-   int p1 = gRandom->Uniform(0, hits.size());
-   int p2 = p1;
-   auto &P1 = hits.at(p1).GetPosition();
-
-   do {
-      p2 = gRandom->Uniform(0, hits.size());
-      auto &P2 = hits.at(p2).GetPosition();
-      auto dist = std::sqrt((P2 - P1).Mag2());
-
-      gauss = 1.0 * exp(-1.0 * pow(dist / sigma, 2));
-      y = (gRandom->Uniform(0, 1));
-
-      counter++;
-      if (counter > 30 && p2 != p1)
-         break;
-
-      validSecondPoint = false;
-      double TwiceAvCharge = 2 * avgCharge;
-
-      if (Proba.size() == hits.size())
-         validSecondPoint = (Proba[p2] >= gRandom->Uniform(0, TwiceAvCharge));
-      else
-         validSecondPoint = true;
-
-   } while (p2 == p1 || validSecondPoint == false || y > gauss);
-
-   return {hits.at(p1).GetPosition(), hits.at(p2).GetPosition()};
-}
-
-std::vector<double> AtRandomSample::getPDF(double &avgCharge, const std::vector<AtHit> &hits)
-{
-   double Tcharge =
-      std::accumulate(hits.begin(), hits.end(), 0, [](double sum, auto &a) { return sum + a.GetCharge(); });
-
-   avgCharge = Tcharge / hits.size();
-   std::vector<double> w;
-   if (Tcharge > 0)
-      for (const auto &hit : hits)
-         w.push_back(hit.GetCharge() / Tcharge);
-
-   return w;
 }

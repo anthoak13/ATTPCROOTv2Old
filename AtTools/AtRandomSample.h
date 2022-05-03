@@ -12,18 +12,12 @@ class AtHit;
 class AtRandomSample {
 public:
    enum class SampleMethod { kUniform = 0, kGaussian = 1, kWeighted = 2, kWeightedGaussian = 3 };
-
    using XYZPoint = ROOT::Math::XYZPoint;
 
-public:
    static std::vector<XYZPoint> SamplePoints(int N, const std::vector<AtHit> &hits, SampleMethod mode);
 
-protected:
-   static std::vector<XYZPoint> sampleUniform(int N, const std::vector<AtHit> &hits);
-   static std::vector<XYZPoint> sampleGaussian(int N, const std::vector<AtHit> &hits);
-   static std::vector<XYZPoint> sampleWeighted(int N, const std::vector<AtHit> &hits);
-   static std::vector<XYZPoint> sampleWeightedGaussian(int N, const std::vector<AtHit> &hits);
-   static std::vector<double> getPDF(double &avgCharge, const std::vector<AtHit> &hits);
+private:
+   class AtRandomSample_impl;
 };
 
 std::ostream &operator<<(std::ostream &os, const AtRandomSample::SampleMethod &t);

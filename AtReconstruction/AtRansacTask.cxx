@@ -149,9 +149,14 @@ void AtRansacTask::Exec(Option_t *opt)
       LOG(debug) << "Running Unified RANSAC";
       AtSampleConsensus ransac;
       ransac.SetDistanceThreshold(fRANSACThreshold);
-      ransac.SetMinHitsModel(fMinHitsLine);
+      ransac.SetMinHitsPattern(fMinHitsLine);
       ransac.SetNumIterations(fNumItera);
       ransac.SetRanSamMode(static_cast<AtRandomSample::SampleMethod>(fRandSamplMode));
+      switch (fRANSACAlg) {
+      case 1: ransac.SetEstimator(AtSampleEstimator::Estimator::kRANSAC); break;
+      case 2: ransac.SetEstimator(AtSampleEstimator::Estimator::kMLESAC); break;
+      case 3: ransac.SetEstimator(AtSampleEstimator::Estimator::kLMedS); break;
+      }
       // ransac.SetChargeThres(fCharThres);
       fPatternEventArray.Delete();
       auto patternEvent = ransac.Solve(fEvent);

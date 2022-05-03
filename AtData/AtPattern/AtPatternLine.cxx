@@ -1,14 +1,14 @@
-#include "AtModelLine.h"
+#include "AtPatternLine.h"
 
 #include <FairLogger.h>
 
 #include <TMath.h>
 
-ClassImp(AtModelLine);
+ClassImp(AtPatternLine);
 
-AtModelLine::AtModelLine() : AtTrackModel(2) {}
+AtPatternLine::AtPatternLine() : AtPattern(2) {}
 
-XYZPoint AtModelLine::ClosestPointOnModel(const XYZPoint &point)
+XYZPoint AtPatternLine::ClosestPointOnPattern(const XYZPoint &point)
 {
    auto p = GetPoint();
    auto d = GetDirection();
@@ -16,7 +16,7 @@ XYZPoint AtModelLine::ClosestPointOnModel(const XYZPoint &point)
    return p;
 }
 
-Double_t AtModelLine::DistanceToModel(const XYZPoint &point)
+Double_t AtPatternLine::DistanceToPattern(const XYZPoint &point)
 {
    auto vec = GetPoint() - point;
    auto nD = GetDirection().Cross(vec);
@@ -24,10 +24,10 @@ Double_t AtModelLine::DistanceToModel(const XYZPoint &point)
    return std::sqrt(dist2);
 }
 
-void AtModelLine::ConstructModel(const std::vector<XYZPoint> &points)
+void AtPatternLine::DefinePattern(const std::vector<XYZPoint> &points)
 {
    if (points.size() != fNumPoints)
-      LOG(error) << "Trying to create model with wrong number of points " << points.size();
+      LOG(error) << "Trying to create pattern with wrong number of points " << points.size();
 
    auto fPoint = points[0];
    auto fDirection = points[1] - points[0];
@@ -35,7 +35,7 @@ void AtModelLine::ConstructModel(const std::vector<XYZPoint> &points)
    // If not perpendicular to z-axis rescale direction
    if (fDirection.Z() != 0)
       fDirection /= fDirection.Z();
-   fModelPar = {fPoint.X(), fPoint.Y(), fPoint.Z(), fDirection.X(), fDirection.Y(), fDirection.Z()};
+   fPatternPar = {fPoint.X(), fPoint.Y(), fPoint.Z(), fDirection.X(), fDirection.Y(), fDirection.Z()};
 }
 
 /**
@@ -46,12 +46,12 @@ void AtModelLine::ConstructModel(const std::vector<XYZPoint> &points)
  *
  * @param[in] z Location of point at z [mm]
  */
-XYZPoint AtModelLine::GetPointAt(double z)
+XYZPoint AtPatternLine::GetPointAt(double z)
 {
    return GetPoint() + z * GetDirection();
 }
 
-void AtModelLine::FitModel(const std::vector<XYZPoint> &points, const std::vector<double> &charge)
+void AtPatternLine::FitPattern(const std::vector<XYZPoint> &points, const std::vector<double> &charge)
 {
    //------3D Line Regression
    //----- adapted from: http://fr.scribd.com/doc/31477970/Regressions-et-trajectoires-3D
@@ -141,8 +141,7 @@ void AtModelLine::FitModel(const std::vector<XYZPoint> &points, const std::vecto
    XYZPoint p1 = {Xm, Ym, Zm};
    XYZPoint p2 = {Xh, Yh, Zh};
 
-   // fModelPar = {Xm, Ym, Zm, Xh, Yh, Zh};
-   ConstructModel({p1, p2});
+   DefinePattern({p1, p2});
    fChi2 = (fabs(dm2 / Q));
    fNFree = points.size() - 6;
 }

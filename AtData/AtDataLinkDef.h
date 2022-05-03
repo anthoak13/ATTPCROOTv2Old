@@ -19,7 +19,7 @@
 #pragma link C++ class AtTrackingEventAna + ;
 #pragma link C++ class AtProtoQuadrant + ;
 #pragma link C++ class AtTrack + ;
-#pragma link C++ class AtTrackModel + ;
-#pragma link C++ class AtModelLine + ;
+#pragma link C++ class AtPattern + ;
+#pragma link C++ class AtPatternLine + ;
 
 #endif

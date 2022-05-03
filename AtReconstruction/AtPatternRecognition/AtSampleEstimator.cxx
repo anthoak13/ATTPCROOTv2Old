@@ -1,6 +1,6 @@
 #include "AtSampleEstimator.h"
 
-#include "AtTrackModel.h"
+#include "AtPattern.h"
 
 #include <cmath>
 
@@ -9,14 +9,14 @@
  */
 class AtEstimatorRansac {
 public:
-   static int EvaluateModel(AtTrackModel *model, const std::vector<AtHit> &hitArray, double distanceThreshold)
+   static int EvaluateModel(AtPattern *model, const std::vector<AtHit> &hitArray, double distanceThreshold)
    {
       int nbInliers = 0;
       double weight = 0;
 
       for (const auto &hit : hitArray) {
          auto &pos = hit.GetPosition();
-         double error = model->DistanceToModel(pos);
+         double error = model->DistanceToPattern(pos);
          error = error * error;
          if (error < (distanceThreshold * distanceThreshold)) {
             nbInliers++;
@@ -33,7 +33,7 @@ public:
  */
 class AtEstimatorMlesac {
 public:
-   static int EvaluateModel(AtTrackModel *model, const std::vector<AtHit> &hitArray, double distanceThreshold)
+   static int EvaluateModel(AtPattern *model, const std::vector<AtHit> &hitArray, double distanceThreshold)
    {
       double sigma = distanceThreshold / 1.96;
       double dataSigma2 = sigma * sigma;
@@ -41,7 +41,7 @@ public:
       // Calculate min and max errors
       double minError = 1e5, maxError = -1e5;
       for (const auto &hit : hitArray) {
-         double error = model->DistanceToModel(hit.GetPosition());
+         double error = model->DistanceToPattern(hit.GetPosition());
          if (error < minError)
             minError = error;
          if (error > maxError)
@@ -57,7 +57,7 @@ public:
          const double probInlierCoeff = gamma / sqrt(2 * M_PI * dataSigma2);
 
          for (const auto &hit : hitArray) {
-            double error = model->DistanceToModel(hit.GetPosition());
+            double error = model->DistanceToPattern(hit.GetPosition());
             double probInlier = probInlierCoeff * exp(-0.5 * error * error / dataSigma2);
             sumPosteriorProb += probInlier / (probInlier + probOutlier);
          }
@@ -71,7 +71,7 @@ public:
       const double probOutlier = (1 - gamma) / nu;
       const double probInlierCoeff = gamma / sqrt(2 * M_PI * dataSigma2);
       for (const auto &hit : hitArray) {
-         double error = model->DistanceToModel(hit.GetPosition());
+         double error = model->DistanceToPattern(hit.GetPosition());
          double probInlier = probInlierCoeff * exp(-0.5 * error * error / dataSigma2);
          // if((probInlier + probOutlier)>0) sumLogLikelihood = sumLogLikelihood - log(probInlier + probOutlier);
 
@@ -96,13 +96,13 @@ public:
  */
 class AtEstimatorLmeds {
 public:
-   static int EvaluateModel(AtTrackModel *model, const std::vector<AtHit> &hitArray, double distanceThreshold)
+   static int EvaluateModel(AtPattern *model, const std::vector<AtHit> &hitArray, double distanceThreshold)
    {
       std::vector<double> errorsVec;
       // Loop through point and if it is an inlier, then add the error**2 to weight
       for (const auto &hit : hitArray) {
 
-         double error = model->DistanceToModel(hit.GetPosition());
+         double error = model->DistanceToPattern(hit.GetPosition());
          error = error * error;
          if (error < (distanceThreshold * distanceThreshold))
             errorsVec.push_back(error);
@@ -128,7 +128,7 @@ public:
    }
 };
 
-int AtSampleEstimator::EvaluateModel(AtTrackModel *model, const std::vector<AtHit> &hits, double distThresh,
+int AtSampleEstimator::EvaluateModel(AtPattern *model, const std::vector<AtHit> &hits, double distThresh,
                                      Estimator estimator)
 {
    switch (estimator) {

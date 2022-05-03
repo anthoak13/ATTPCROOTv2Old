@@ -4,7 +4,7 @@
 #pragma link off all classes;
 #pragma link off all functions;
 
-#pragma link C++ class AtilterFFT - !; // Don't generate any IO
+#pragma link C++ class AtFilterFFT - !; // Don't generate any IO
 #pragma link C++ class AtFilterCalibrate - !;
 
 #pragma link C++ class AtPSA + ;
@@ -25,9 +25,7 @@
 #pragma link C++ class AtPATTERN::AtTrackFinderHC + ;
 #pragma link C++ class AtPATTERN::AtPRA + ;
 #pragma link C++ namespace AtPATTERN;
-#pragma link C++ class AtRansacMod - !;
-#pragma link C++ class AtMlesacMod - !;
-#pragma link C++ class AtLmedsMod - !;
+#pragma link C++ class AtSampleConsensus - !;
 
 /* Classes that depend on Genfit2 */
 #pragma link C++ class genfit::AtSpacepointMeasurement + ;

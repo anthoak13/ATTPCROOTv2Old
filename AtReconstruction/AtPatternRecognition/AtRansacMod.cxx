@@ -3,6 +3,7 @@
 #include "AtEvent.h" // for AtEvent
 #include "AtHit.h"   // for AtHit
 #include "AtModelFactory.h"
+#include "AtPatternEvent.h"
 
 #include <Math/Point3D.h> // for PositionVector3D
 #include <TMath.h>        // for Pi
@@ -81,34 +82,28 @@ std::unique_ptr<AtTrackModel> AtRansacMod::GenerateModel(const std::vector<AtHit
    return nullptr;
 }
 
-void AtRansacMod::Solve(AtEvent *event)
+void AtRansacMod::Solve(AtEvent *event, AtPatternEvent *patternEvent)
 {
    if (event->IsGood())
-      Solve(event->GetHitArray());
+      Solve(event->GetHitArray(), patternEvent);
 }
 
-void AtRansacMod::Solve(const std::vector<AtHit> &hitArray)
+void AtRansacMod::Solve(const std::vector<AtHit> &hitArray, AtPatternEvent *event)
 {
-   if (hitArray.size() < fRANSACMinPoints) {
+   if (hitArray.size() < fRANSACMinPoints || event == nullptr) {
       LOG(error) << "Not enough points to solve. Requires" << fRANSACMinPoints;
-      return;
    }
 
    auto cmp = [](const ModelPtr &a, const ModelPtr &b) { return a->GetChi2() < b->GetChi2(); };
    auto models = std::set<ModelPtr, decltype(cmp)>(cmp);
-   // SortedModels models(decltype(cmp));
 
-   LOG(debug2) << "Generating models";
+   LOG(debug2) << "Generating " << fRANSACMaxIteration << " models";
    for (int i = 0; i < fRANSACMaxIteration; i++) {
       auto model = GenerateModel(hitArray);
       if (model != nullptr)
          models.insert(std::move(model));
    }
    LOG(debug2) << "Created " << models.size() << " valid models.";
-
-   std::vector<int> remainIndex;
-   for (size_t i = 0; i < hitArray.size(); i++)
-      remainIndex.push_back(i);
 
    // Loop through each model, and extract the points that fit each model
    auto remainHits = hitArray;
@@ -117,28 +112,27 @@ void AtRansacMod::Solve(const std::vector<AtHit> &hitArray)
          break;
 
       auto inlierHits = movePointsInModel(model.get(), remainHits);
-      if (inlierHits.size() > fRANSACMinPoints)
-         SaveTrack(model.get(), inlierHits);
+      if (inlierHits.size() > fRANSACMinPoints) {
+         auto track = CreateTrack(model.get(), inlierHits);
+         track.SetTrackID(event->GetTrackCand().size());
+         event->AddTrack(track);
+      }
    }
 }
-void AtRansacMod::SaveTrack(AtTrackModel *model, std::vector<AtHit> &inliers)
-{
-   LOG(debug) << "Saving model: " << fTrackCand.size();
 
-   fTrackCand.emplace_back();
-   AtTrack &track = fTrackCand.back();
-   track.SetTrackID(fTrackCand.size() - 1);
+AtTrack AtRansacMod::CreateTrack(AtTrackModel *model, std::vector<AtHit> &inliers)
+{
+   AtTrack track;
 
    // Add inliers to our ouput track
-   for (auto &hit : inliers) {
-      std::cout << hit.GetHitID() << std::endl;
+   for (auto &hit : inliers)
       track.AddHit(std::move(hit));
-   }
 
    model->FitModel(inliers, false);
    track.SetFitPar(model->GetModelPar());
    track.SetMinimum(model->GetChi2());
    track.SetNFree(model->GetNFree());
+   return track;
 }
 std::vector<AtHit> AtRansacMod::movePointsInModel(AtTrackModel *model, std::vector<AtHit> &hits)
 {

@@ -506,51 +506,6 @@ void AtEventDrawTaskS800::DrawHitPoints()
             }
          }
 
-         if (fRANSACAlg == 1) {
-            fRansacMod = dynamic_cast<AtRansacMod *>(fRansacArray->At(0));
-            TrackCand = fRansacMod->GetTrackCand();
-            // TVector3 Vertex1 = fRansacMod->GetVertex();
-            /*TVector3 Vertex1    = fRansacMod->GetVertex1();
-            TVector3 Vertex2    = fRansacMod->GetVertex2();
-            Double_t VertexTime = fRansacMod->GetVertexTime();
-            std::cout<<cGREEN<<" Vertex 1 - X : "<<Vertex1.X()<<" - Y : "<<Vertex1.Y()<<"  - Z :
-            "<<Vertex1.Z()<<std::endl; std::cout<<" Vertex 2 - X : "<<Vertex2.X()<<" - Y : "<<Vertex2.Y()<<"  - Z :
-            "<<Vertex2.Z()<<std::endl; std::cout<<" Vertex Time : "<<VertexTime<<std::endl; std::cout<<" Vertex Mean - X
-            : "<<(Vertex1.X()+Vertex2.X())/2.0<<" - Y : "<<(Vertex1.Y()+Vertex2.Y())/2.0<<"  - Z :
-            "<<(Vertex1.Z()+Vertex2.Z())/2.0<<cNORMAL<<std::endl;
-            */
-         }
-
-         if (fRANSACAlg == 2) {
-            fMlesacMod = dynamic_cast<AtMlesacMod *>(fRansacArray->At(0));
-            TrackCand = fMlesacMod->GetTrackCand();
-            // TVector3 Vertex1    = fRansacMod->GetVertex1();
-            /*TVector3 Vertex1    = fMlesacMod->GetVertex1();
-            TVector3 Vertex2    = fMlesacMod->GetVertex2();
-            Double_t VertexTime = fMlesacMod->GetVertexTime();
-            std::cout<<cGREEN<<" Vertex 1 - X : "<<Vertex1.X()<<" - Y : "<<Vertex1.Y()<<"  - Z :
-            "<<Vertex1.Z()<<std::endl; std::cout<<" Vertex 2 - X : "<<Vertex2.X()<<" - Y : "<<Vertex2.Y()<<"  - Z :
-            "<<Vertex2.Z()<<std::endl; std::cout<<" Vertex Time : "<<VertexTime<<std::endl; std::cout<<" Vertex Mean - X
-            : "<<(Vertex1.X()+Vertex2.X())/2.0<<" - Y : "<<(Vertex1.Y()+Vertex2.Y())/2.0<<"  - Z :
-            "<<(Vertex1.Z()+Vertex2.Z())/2.0<<cNORMAL<<std::endl;
-            */
-         }
-
-         if (fRANSACAlg == 3) {
-            fLmedsMod = dynamic_cast<AtLmedsMod *>(fRansacArray->At(0));
-            TrackCand = fLmedsMod->GetTrackCand();
-            // TVector3 Vertex1    = fRansacMod->GetVertex1();
-            /*TVector3 Vertex1    = fLmedsMod->GetVertex1();
-            TVector3 Vertex2    = fLmedsMod->GetVertex2();
-            Double_t VertexTime = fLmedsMod->GetVertexTime();
-            std::cout<<cGREEN<<" Vertex 1 - X : "<<Vertex1.X()<<" - Y : "<<Vertex1.Y()<<"  - Z :
-            "<<Vertex1.Z()<<std::endl; std::cout<<" Vertex 2 - X : "<<Vertex2.X()<<" - Y : "<<Vertex2.Y()<<"  - Z :
-            "<<Vertex2.Z()<<std::endl; std::cout<<" Vertex Time : "<<VertexTime<<std::endl; std::cout<<" Vertex Mean - X
-            : "<<(Vertex1.X()+Vertex2.X())/2.0<<" - Y : "<<(Vertex1.Y()+Vertex2.Y())/2.0<<"  - Z :
-            "<<(Vertex1.Z()+Vertex2.Z())/2.0<<cNORMAL<<std::endl;
-            */
-         }
-
       } else if (fPatternEventArray) {
          auto *patternEvent = dynamic_cast<AtPatternEvent *>(fPatternEventArray->At(0));
          TrackCand = patternEvent->GetTrackCand();

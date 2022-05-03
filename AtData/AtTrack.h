@@ -59,7 +59,9 @@ public:
 
    // Attributes shared by all track finding algorithms
    void SetTrackID(Int_t val) { fTrackID = val; }
+
    void AddHit(const AtHit &hit) { fHitArray.push_back(hit); }
+   void AddHit(AtHit &&hit) { fHitArray.push_back(hit); }
 
    // Atributes used by all ransac classes
 

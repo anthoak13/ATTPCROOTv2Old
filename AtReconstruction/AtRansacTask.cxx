@@ -3,6 +3,7 @@
 #include "AtEvent.h"     // for AtEvent
 #include "AtLmedsMod.h"  // for AtLmedsMod
 #include "AtMlesacMod.h" // for AtMlesacMod
+#include "AtPatternEvent.h"
 #include "AtRansac.h"    // for AtRansac
 #include "AtRansacMod.h" // for AtRansacMod
 
@@ -18,7 +19,7 @@ ClassImp(AtRansacTask);
 
 AtRansacTask::AtRansacTask()
    : fInputBranchName("AtEventH"), fOutputBranchName("AtRansac"), kIsPersistence(kFALSE), kIsFullMode(kFALSE),
-     kIsReprocess(kFALSE)
+     kIsReprocess(kFALSE), fPatternEventArray("AtPatternEvent", 1)
 {
 }
 
@@ -120,7 +121,10 @@ InitStatus AtRansacTask::Init()
       return kERROR;
    }
 
-   ioMan->Register(fOutputBranchName, "AtTPC", fRansacArray, kIsPersistence);
+   if (fRANSACModel == 0)
+      ioMan->Register(fOutputBranchName, "AtTPC", fRansacArray, kIsPersistence);
+   else
+      ioMan->Register("AtPatternEvent", "AtTPC", &fPatternEventArray, kIsPersistence);
 
    if (kIsReprocess) {
 
@@ -140,6 +144,9 @@ void AtRansacTask::Exec(Option_t *opt)
 
    fEvent = dynamic_cast<AtEvent *>(fEventArray->At(0));
 
+   fPatternEventArray.Delete();
+   auto *patternEvent = (AtPatternEvent *)new (fPatternEventArray[0]) AtPatternEvent();
+
    LOG(debug) << "Running RANSAC with " << fEvent->GetNumHits() << " hits.";
 
    if (fRANSACAlg == 0) {
@@ -154,38 +161,14 @@ void AtRansacTask::Exec(Option_t *opt)
          Ransac->CalcRANSACFull(fEvent);
       else
          Ransac->CalcRANSAC(fEvent);
-   }
-
-   if (fRANSACAlg == 1) {
-      LOG(debug) << "Running RANSAC algorithm AtRansacMod";
-      auto *Rantest = (AtRansacMod *)new ((*fRansacArray)[0]) AtRansacMod();
-      Rantest->SetDistanceThreshold(fRANSACThreshold);
-      Rantest->SetMinHitsLine(fMinHitsLine);
-      Rantest->SetNumItera(fNumItera);
-      Rantest->SetRanSamMode(static_cast<AtRandomSample::SampleMethod>(fRandSamplMode));
-      Rantest->Solve(fEvent);
-      Rantest->SetChargeThres(fCharThres);
-   }
-
-   if (fRANSACAlg == 2) {
-      LOG(debug) << "Running RANSAC algorithm AtMlesacMod";
-      auto *Rantest = (AtMlesacMod *)new ((*fRansacArray)[0]) AtMlesacMod();
-      Rantest->SetDistanceThreshold(fRANSACThreshold);
-      Rantest->SetMinHitsLine(fMinHitsLine);
-      Rantest->SetNumItera(fNumItera);
-      Rantest->SetRanSamMode(static_cast<AtRandomSample::SampleMethod>(fRandSamplMode));
-      Rantest->Solve(fEvent);
-      Rantest->SetChargeThres(fCharThres);
-   }
-
-   if (fRANSACAlg == 3) {
-      LOG(debug) << "Running RANSAC algorithm AtLmedsMod";
-      auto *Rantest = (AtLmedsMod *)new ((*fRansacArray)[0]) AtLmedsMod();
-      Rantest->SetDistanceThreshold(fRANSACThreshold);
-      Rantest->SetMinHitsLine(fMinHitsLine);
-      Rantest->SetNumItera(fNumItera);
-      Rantest->SetRanSamMode(static_cast<AtRandomSample::SampleMethod>(fRandSamplMode));
-      Rantest->Solve(fEvent);
-      Rantest->SetChargeThres(fCharThres);
+   } else {
+      LOG(debug) << "Running Unified RANSAC";
+      AtRansacMod ransac;
+      ransac.SetDistanceThreshold(fRANSACThreshold);
+      ransac.SetMinHitsLine(fMinHitsLine);
+      ransac.SetNumItera(fNumItera);
+      ransac.SetRanSamMode(static_cast<AtRandomSample::SampleMethod>(fRandSamplMode));
+      ransac.Solve(fEvent, patternEvent);
+      ransac.SetChargeThres(fCharThres);
    }
 }

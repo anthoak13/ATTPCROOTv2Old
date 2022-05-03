@@ -45,18 +45,12 @@ protected:
    Int_t fLineDistThreshold{40};
    double fChargeThres{0};
 
-   // Data structure
-   std::vector<AtTrack> fTrackCand; // Candidate tracks
-
 public:
    AtRansacMod();
    virtual ~AtRansacMod();
 
-   void Solve(AtEvent *event);
-   void Solve(const std::vector<AtHit> &hitArray);
-
-   // Getters
-   std::vector<AtTrack> GetTrackCand() const { return fTrackCand; };
+   void Solve(AtEvent *event, AtPatternEvent *patternEvent);
+   void Solve(const std::vector<AtHit> &hitArray, AtPatternEvent *event);
 
    // Setters
    void SetRanSamMode(AtRandomSample::SampleMethod mode) { fRandSamplMode = mode; };
@@ -72,7 +66,9 @@ protected:
 
    virtual int evaluateModel(AtTrackModel *model, const std::vector<AtHit> &hitsToCheck);
    std::vector<AtHit> movePointsInModel(AtTrackModel *model, std::vector<AtHit> &indexes);
-   void SaveTrack(AtTrackModel *model, std::vector<AtHit> &indexes);
+   AtTrack CreateTrack(AtTrackModel *model, std::vector<AtHit> &indexes);
+
+   void SaveTrack(AtTrackModel *model, std::vector<AtHit> &indexes, AtPatternEvent *event);
 
    ClassDef(AtRansacMod, 2);
 };

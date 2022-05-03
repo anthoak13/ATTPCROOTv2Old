@@ -187,7 +187,7 @@ InitStatus AtEventDrawTask::Init()
       fIsRawData = kTRUE;
    }
 
-   fRansacArray = dynamic_cast<TClonesArray *>(ioMan->GetObject("AtRansac"));
+   // fRansacArray = dynamic_cast<TClonesArray *>(ioMan->GetObject("AtRansac"));
    if (fRansacArray)
       LOG(INFO) << cGREEN << "RANSAC Array Found." << cNORMAL << std::endl;
 
@@ -405,19 +405,7 @@ void AtEventDrawTask::DrawHitPoints()
                   std::cout << pl << std::endl;
                }
             }
-         } else {
-            fRansacMod = dynamic_cast<AtRansacMod *>(fRansacArray->At(0));
-            TrackCand = fRansacMod->GetTrackCand();
-            /*TVector3 Vertex = fRansacMod->GetVertex();
-            auto VertexTime = fRansacMod->GetVertexTime();
-
-            std::cout << cGREEN;
-            std::cout << " Vertex Time : " << VertexTime << std::endl;
-            std::cout << " Vertex Mean - X : " << Vertex.X() << " - Y : " << Vertex.Y() << "  - Z : " << Vertex.Z()
-                      << cNORMAL << std::endl;
-       */
          }
-
       } else if (fPatternEventArray) {
          auto *patternEvent = dynamic_cast<AtPatternEvent *>(fPatternEventArray->At(0));
          TrackCand = patternEvent->GetTrackCand();

@@ -72,6 +72,7 @@ if(PCL_FOUND)
     AtPatternRecognition/AtRansacMod.cxx
     AtPatternRecognition/AtMlesacMod.cxx
     AtPatternRecognition/AtLmedsMod.cxx
+    AtPatternRecognition/AtSampleConsensus.cxx
     AtRansac/AtRansac.cxx
     AtPRAtask.cxx
     AtRansacTask.cxx

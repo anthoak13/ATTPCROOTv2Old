@@ -12,24 +12,29 @@ AtTrackModel::AtTrackModel(Int_t numPoints) : fNumPoints(numPoints) {}
 /**
  * @brief Fit the model.
  *
- * Fit the model shape using all hits in pointsToFit. Does a charge weighted fit.
+ * Fit the model shape using all hits in pointsToFit. Does a charge weighted fit if qThreshold is not equal to -1.
  * Sets fModelPar parameters, and fChi2.
  *
  * @param[in] points Points in 3D space to fit with charge information
+ * @param[in] qThreshold Only fit points that are above this charge threshold.
  * @return Chi-squared of the fit
  */
-Double_t AtTrackModel::FitModel(const std::vector<AtHit> &pointsToFit, bool withQ)
+Double_t AtTrackModel::FitModel(const std::vector<AtHit> &pointsToFit, Double_t qThreshold)
 {
    std::vector<XYZPoint> points;
    std::vector<double> charge;
    for (const auto &hit : pointsToFit) {
-      points.push_back(hit.GetPosition());
-      charge.push_back(hit.GetCharge());
+      if (hit.GetCharge() > qThreshold) {
+         points.push_back(hit.GetPosition());
+         charge.push_back(hit.GetCharge());
+      }
    }
-   if (withQ)
-      FitModel(points, charge);
-   else
+
+   if (qThreshold == -1)
       FitModel(points);
+   else
+      FitModel(points, charge);
+
    return fChi2;
 }
 

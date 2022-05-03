@@ -119,7 +119,7 @@ AtTrack AtSampleConsensus::CreateTrack(AtTrackModel *model, std::vector<AtHit> &
    for (auto &hit : inliers)
       track.AddHit(std::move(hit));
 
-   model->FitModel(inliers, false);
+   model->FitModel(inliers, fChargeThres);
 
    track.SetFitPar(model->GetModelPar());
    track.SetMinimum(model->GetChi2());

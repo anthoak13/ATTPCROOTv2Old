@@ -19,6 +19,8 @@ public:
    ~AtPatternEvent();
 
    void SetTrackCand(std::vector<AtTrack> tracks);
+   void AddTrack(const AtTrack &track) { fTrackCand.push_back(track); }
+   void AddTrack(AtTrack &&track) { fTrackCand.push_back(track); }
 
    std::vector<AtTrack> &GetTrackCand();
 

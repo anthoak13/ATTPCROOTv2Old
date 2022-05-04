@@ -13,13 +13,15 @@ set(SRCS
   AtKinematics.cxx
 
   AtFormat.cxx
+  AtRandomSample.cxx
   )
 
 Set(DEPENDENCIES
   ROOT::XMLParser
   ROOT::Core
-
+  
   FairRoot::FairTools
+  ATTPCROOT::AtData
 )
 
 generate_target_and_root_library(${LIBRARY_NAME}

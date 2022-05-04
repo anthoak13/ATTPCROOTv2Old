@@ -12,13 +12,10 @@
 #include "AtGadgetIIMap.h"      // for AtGadgetIIMap
 #include "AtHit.h"              // for AtHit
 #include "AtHitCluster.h"       // for AtHitCluster
-#include "AtLmedsMod.h"         // for AtLmedsMod
 #include "AtMap.h"              // for AtMap
-#include "AtMlesacMod.h"        // for AtMlesacMod
 #include "AtPad.h"              // for AtPad
 #include "AtPatternEvent.h"     // for AtPatternEvent
 #include "AtRansac.h"           // for AtRansac, operator<<, AtRansac::Pair...
-#include "AtRansacMod.h"        // for AtRansacMod
 #include "AtRawEvent.h"         // for AtRawEvent, AuxPadMap
 #include "AtSpecMATMap.h"       // for AtSpecMATMap
 #include "AtTpcMap.h"           // for AtTpcMap
@@ -104,8 +101,8 @@ AtEventDrawTask::AtEventDrawTask()
      fCvsRhoVariance(nullptr), fRhoVariance(nullptr), fCvsPhi(nullptr), fCvsMesh(nullptr), fMesh(nullptr),
      fCvs3DHist(nullptr), f3DHist(nullptr), fCvsRad(nullptr), fRadVSTb(nullptr), fCvsTheta(nullptr), fTheta(nullptr),
      fAtMapPtr(nullptr), fMinZ(0), fMaxZ(1344), fMinX(432), fMaxX(-432), f3DHitStyle(0), fMultiHit(0),
-     fSaveTextData(false), f3DThreshold(0), fRANSACAlg(0), fDetNumPads(10240), fRawEventBranchName("AtRawEvent"),
-     fEventBranchName("AtEventH")
+     fSaveTextData(false), f3DThreshold(0), fRansacUnified(false), fDetNumPads(10240),
+     fRawEventBranchName("AtRawEvent"), fEventBranchName("AtEventH")
 {
 
    Char_t padhistname[256];
@@ -187,7 +184,7 @@ InitStatus AtEventDrawTask::Init()
       fIsRawData = kTRUE;
    }
 
-   fRansacArray = dynamic_cast<TClonesArray *>(ioMan->GetObject("AtRansac"));
+   // fRansacArray = dynamic_cast<TClonesArray *>(ioMan->GetObject("AtRansac"));
    if (fRansacArray)
       LOG(INFO) << cGREEN << "RANSAC Array Found." << cNORMAL << std::endl;
 
@@ -383,7 +380,7 @@ void AtEventDrawTask::DrawHitPoints()
       std::vector<AtTrack> TrackCand;
 
       if (fRansacArray) {
-         if (fRANSACAlg == 0) {
+         if (!fRansacUnified) {
             fRansac = dynamic_cast<AtRANSACN::AtRansac *>(fRansacArray->At(0));
             TrackCand = fRansac->GetTrackCand();
             TVector3 Vertex1 = fRansac->GetVertex1();
@@ -406,55 +403,6 @@ void AtEventDrawTask::DrawHitPoints()
                }
             }
          }
-
-         if (fRANSACAlg == 1) {
-            fRansacMod = dynamic_cast<AtRansacMod *>(fRansacArray->At(0));
-            TrackCand = fRansacMod->GetTrackCand();
-            TVector3 Vertex1 = fRansacMod->GetVertex1();
-            TVector3 Vertex2 = fRansacMod->GetVertex2();
-            Double_t VertexTime = fRansacMod->GetVertexTime();
-            std::cout << cGREEN << " Vertex 1 - X : " << Vertex1.X() << " - Y : " << Vertex1.Y()
-                      << "  - Z : " << Vertex1.Z() << std::endl;
-            std::cout << " Vertex 2 - X : " << Vertex2.X() << " - Y : " << Vertex2.Y() << "  - Z : " << Vertex2.Z()
-                      << std::endl;
-            std::cout << " Vertex Time : " << VertexTime << std::endl;
-            std::cout << " Vertex Mean - X : " << (Vertex1.X() + Vertex2.X()) / 2.0
-                      << " - Y : " << (Vertex1.Y() + Vertex2.Y()) / 2.0
-                      << "  - Z : " << (Vertex1.Z() + Vertex2.Z()) / 2.0 << cNORMAL << std::endl;
-         }
-
-         if (fRANSACAlg == 2) {
-            fMlesacMod = dynamic_cast<AtMlesacMod *>(fRansacArray->At(0));
-            TrackCand = fMlesacMod->GetTrackCand();
-            TVector3 Vertex1 = fMlesacMod->GetVertex1();
-            TVector3 Vertex2 = fMlesacMod->GetVertex2();
-            Double_t VertexTime = fMlesacMod->GetVertexTime();
-            std::cout << cGREEN << " Vertex 1 - X : " << Vertex1.X() << " - Y : " << Vertex1.Y()
-                      << "  - Z : " << Vertex1.Z() << std::endl;
-            std::cout << " Vertex 2 - X : " << Vertex2.X() << " - Y : " << Vertex2.Y() << "  - Z : " << Vertex2.Z()
-                      << std::endl;
-            std::cout << " Vertex Time : " << VertexTime << std::endl;
-            std::cout << " Vertex Mean - X : " << (Vertex1.X() + Vertex2.X()) / 2.0
-                      << " - Y : " << (Vertex1.Y() + Vertex2.Y()) / 2.0
-                      << "  - Z : " << (Vertex1.Z() + Vertex2.Z()) / 2.0 << cNORMAL << std::endl;
-         }
-
-         if (fRANSACAlg == 3) {
-            fLmedsMod = dynamic_cast<AtLmedsMod *>(fRansacArray->At(0));
-            TrackCand = fLmedsMod->GetTrackCand();
-            TVector3 Vertex1 = fLmedsMod->GetVertex1();
-            TVector3 Vertex2 = fLmedsMod->GetVertex2();
-            Double_t VertexTime = fLmedsMod->GetVertexTime();
-            std::cout << cGREEN << " Vertex 1 - X : " << Vertex1.X() << " - Y : " << Vertex1.Y()
-                      << "  - Z : " << Vertex1.Z() << std::endl;
-            std::cout << " Vertex 2 - X : " << Vertex2.X() << " - Y : " << Vertex2.Y() << "  - Z : " << Vertex2.Z()
-                      << std::endl;
-            std::cout << " Vertex Time : " << VertexTime << std::endl;
-            std::cout << " Vertex Mean - X : " << (Vertex1.X() + Vertex2.X()) / 2.0
-                      << " - Y : " << (Vertex1.Y() + Vertex2.Y()) / 2.0
-                      << "  - Z : " << (Vertex1.Z() + Vertex2.Z()) / 2.0 << cNORMAL << std::endl;
-         }
-
       } else if (fPatternEventArray) {
          auto *patternEvent = dynamic_cast<AtPatternEvent *>(fPatternEventArray->At(0));
          TrackCand = patternEvent->GetTrackCand();
@@ -593,18 +541,13 @@ void AtEventDrawTask::DrawHitPoints()
          fVertex->SetMarkerStyle(34);
          fVertex->SetMarkerSize(2.0);
          fVertex->SetMarkerColor(kViolet);
-         if (fRANSACAlg == 0)
+         if (!fRansacUnified)
             fVertex->SetNextPoint(fRansac->GetVertexMean().x() * 0.1, fRansac->GetVertexMean().y() * 0.1,
                                   fRansac->GetVertexMean().z() * 0.1);
-         if (fRANSACAlg == 1)
-            fVertex->SetNextPoint(fRansacMod->GetVertexMean().x() * 0.1, fRansacMod->GetVertexMean().y() * 0.1,
-                                  fRansacMod->GetVertexMean().z() * 0.1);
-         if (fRANSACAlg == 2)
-            fVertex->SetNextPoint(fMlesacMod->GetVertexMean().x() * 0.1, fMlesacMod->GetVertexMean().y() * 0.1,
-                                  fMlesacMod->GetVertexMean().z() * 0.1);
-         if (fRANSACAlg == 3)
-            fVertex->SetNextPoint(fLmedsMod->GetVertexMean().x() * 0.1, fLmedsMod->GetVertexMean().y() * 0.1,
-                                  fLmedsMod->GetVertexMean().z() * 0.1);
+         /*else
+            fVertex->SetNextPoint(fRansacMod->GetVertex().x() * 0.1, fRansacMod->GetVertex().y() * 0.1,
+                                  fRansacMod->GetVertex().z() * 0.1);
+    */
       }
    }
 
@@ -1581,9 +1524,9 @@ void AtEventDrawTask::SetLine6(double t, std::vector<Double_t> p, double &x, dou
    // a parameteric line is define from 6 parameters but 4 are independent
    // x0,y0,z0,z1,y1,z1 which are the coordinates of two points on the line
    // can choose z0 = 0 if line not parallel to x-y plane and z1 = 1;
-   x = (p[0] + p[1] * t) / 10.0;
-   y = (p[2] + p[3] * t) / 10.0;
-   z = (p[4] + p[5] * t) / 10.0;
+   x = (p[0] + p[3] * t) / 10.0;
+   y = (p[1] + p[4] * t) / 10.0;
+   z = (p[2] + p[5] * t) / 10.0;
 }
 
 EColor AtEventDrawTask::GetTrackColor(int i)

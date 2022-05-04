@@ -3,13 +3,16 @@
 
 #include <FairTask.h> // for FairTask, InitStatus
 
-#include <Rtypes.h>  // for Int_t, Bool_t, Double_t, THashConsistencyHolder
+#include <Rtypes.h> // for Int_t, Bool_t, Double_t, THashConsistencyHolder
+#include <TClonesArray.h>
 #include <TString.h> // for TString
+
 class AtEvent;
 class TBuffer;
 class TClass;
 class TClonesArray;
 class TMemberInspector;
+enum class SampleMethod;
 
 class AtRansacTask : public FairTask {
 private:
@@ -18,6 +21,7 @@ private:
 
    TClonesArray *fEventArray{};
    TClonesArray *fRansacArray{};
+   TClonesArray fPatternEventArray;
 
    AtEvent *fEvent{};
 

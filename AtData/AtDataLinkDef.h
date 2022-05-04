@@ -1,3 +1,4 @@
+
 #ifdef __CINT__
 
 #pragma link off all globals;
@@ -18,6 +19,8 @@
 #pragma link C++ class AtTrackingEventAna + ;
 #pragma link C++ class AtProtoQuadrant + ;
 #pragma link C++ class AtTrack + ;
-#pragma link C++ struct AtTrack::FitPar + ;
-
+#pragma link C++ class AtPattern + ;
+#pragma link C++ class AtPatternLine + ;
+#pragma link C++ class AtPatternCircle2D + ;
+#pragma link C++ enum AtPattern::Type;
 #endif

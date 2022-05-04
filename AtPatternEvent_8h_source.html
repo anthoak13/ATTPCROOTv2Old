@@ -92,26 +92,31 @@ $(function() {
 <div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classAtPatternEvent.html#a01fa214b77c325d88109fc5c8e4d8b93">   19</a></span>&#160;   <a class="code" href="classAtPatternEvent.html#a01fa214b77c325d88109fc5c8e4d8b93">~AtPatternEvent</a>();</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;   <span class="keywordtype">void</span> <a class="code" href="classAtPatternEvent.html#adeaf0fadf0a46da7d99268d8410a6ffc">SetTrackCand</a>(std::vector&lt;AtTrack&gt; tracks);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;   std::vector&lt;AtTrack&gt; &amp;<a class="code" href="classAtPatternEvent.html#a5b6dd506d0c1b95b832c0f26ce5e6183">GetTrackCand</a>();</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classAtPatternEvent.html#a2d9c4fe1d08bcda46ab002a5d61d2052">   22</a></span>&#160;   <span class="keywordtype">void</span> <a class="code" href="classAtPatternEvent.html#a2d9c4fe1d08bcda46ab002a5d61d2052">AddTrack</a>(<span class="keyword">const</span> <a class="code" href="classAtTrack.html">AtTrack</a> &amp;track) { fTrackCand.push_back(track); }</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classAtPatternEvent.html#a55515e91b3da076a9511921c614797c8">   23</a></span>&#160;   <span class="keywordtype">void</span> <a class="code" href="classAtPatternEvent.html#a55515e91b3da076a9511921c614797c8">AddTrack</a>(<a class="code" href="classAtTrack.html">AtTrack</a> &amp;&amp;track) { fTrackCand.push_back(track); }</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;   std::vector&lt;AtTrack&gt; fTrackCand; <span class="comment">// Candidate tracks</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;   ClassDef(<a class="code" href="classAtPatternEvent.html">AtPatternEvent</a>, 1);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;};</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;   std::vector&lt;AtTrack&gt; &amp;<a class="code" href="classAtPatternEvent.html#a5b6dd506d0c1b95b832c0f26ce5e6183">GetTrackCand</a>();</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;   std::vector&lt;AtTrack&gt; fTrackCand; <span class="comment">// Candidate tracks</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;   ClassDef(<a class="code" href="classAtPatternEvent.html">AtPatternEvent</a>, 1);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;};</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclassAtPatternEvent_html"><div class="ttname"><a href="classAtPatternEvent.html">AtPatternEvent</a></div><div class="ttdef"><b>Definition:</b> <a href="AtPatternEvent_8h_source.html#l00015">AtPatternEvent.h:15</a></div></div>
+<div class="ttc" id="aclassAtPatternEvent_html_a55515e91b3da076a9511921c614797c8"><div class="ttname"><a href="classAtPatternEvent.html#a55515e91b3da076a9511921c614797c8">AtPatternEvent::AddTrack</a></div><div class="ttdeci">void AddTrack(AtTrack &amp;&amp;track)</div><div class="ttdef"><b>Definition:</b> <a href="AtPatternEvent_8h_source.html#l00023">AtPatternEvent.h:23</a></div></div>
+<div class="ttc" id="aclassAtPatternEvent_html_a2d9c4fe1d08bcda46ab002a5d61d2052"><div class="ttname"><a href="classAtPatternEvent.html#a2d9c4fe1d08bcda46ab002a5d61d2052">AtPatternEvent::AddTrack</a></div><div class="ttdeci">void AddTrack(const AtTrack &amp;track)</div><div class="ttdef"><b>Definition:</b> <a href="AtPatternEvent_8h_source.html#l00022">AtPatternEvent.h:22</a></div></div>
 <div class="ttc" id="aclassAtPatternEvent_html_adeaf0fadf0a46da7d99268d8410a6ffc"><div class="ttname"><a href="classAtPatternEvent.html#adeaf0fadf0a46da7d99268d8410a6ffc">AtPatternEvent::SetTrackCand</a></div><div class="ttdeci">void SetTrackCand(std::vector&lt; AtTrack &gt; tracks)</div><div class="ttdef"><b>Definition:</b> <a href="AtPatternEvent_8cxx_source.html#l00011">AtPatternEvent.cxx:11</a></div></div>
 <div class="ttc" id="aclassAtPatternEvent_html_a01fa214b77c325d88109fc5c8e4d8b93"><div class="ttname"><a href="classAtPatternEvent.html#a01fa214b77c325d88109fc5c8e4d8b93">AtPatternEvent::~AtPatternEvent</a></div><div class="ttdeci">~AtPatternEvent()</div></div>
+<div class="ttc" id="aclassAtTrack_html"><div class="ttname"><a href="classAtTrack.html">AtTrack</a></div><div class="ttdef"><b>Definition:</b> <a href="AtTrack_8h_source.html#l00026">AtTrack.h:26</a></div></div>
 <div class="ttc" id="aAtTrack_8h_html"><div class="ttname"><a href="AtTrack_8h.html">AtTrack.h</a></div></div>
 <div class="ttc" id="aclassAtPatternEvent_html_a180df91a47f37f439c9635c748331387"><div class="ttname"><a href="classAtPatternEvent.html#a180df91a47f37f439c9635c748331387">AtPatternEvent::AtPatternEvent</a></div><div class="ttdeci">AtPatternEvent()</div><div class="ttdef"><b>Definition:</b> <a href="AtPatternEvent_8cxx_source.html#l00007">AtPatternEvent.cxx:7</a></div></div>
 <div class="ttc" id="aclassAtPatternEvent_html_a5b6dd506d0c1b95b832c0f26ce5e6183"><div class="ttname"><a href="classAtPatternEvent.html#a5b6dd506d0c1b95b832c0f26ce5e6183">AtPatternEvent::GetTrackCand</a></div><div class="ttdeci">std::vector&lt; AtTrack &gt; &amp; GetTrackCand()</div><div class="ttdef"><b>Definition:</b> <a href="AtPatternEvent_8cxx_source.html#l00015">AtPatternEvent.cxx:15</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Apr 30 2022 01:35:58 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 4 2022 02:00:03 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

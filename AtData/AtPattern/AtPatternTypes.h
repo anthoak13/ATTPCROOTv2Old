@@ -1,3 +1,3 @@
 #include "AtPattern.h"
 
-enum class AtPattern::Type { kLine }; //< Supported patterns
+enum class AtPattern::Type { kLine, kCircle2D }; //< Supported patterns

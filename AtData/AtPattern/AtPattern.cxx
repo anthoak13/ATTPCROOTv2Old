@@ -1,5 +1,6 @@
 #include "AtPattern.h"
 
+#include "AtPatternCircle2D.h"
 #include "AtPatternLine.h"
 #include "AtPatternTypes.h"
 
@@ -62,6 +63,7 @@ std::unique_ptr<AtPattern> AtPattern::CreatePattern(Type type)
 {
    switch (type) {
    case (Type::kLine): return std::make_unique<AtPatternLine>();
+   case (Type::kCircle2D): return std::make_unique<AtPatternCircle2D>();
    default: return nullptr;
    }
 }

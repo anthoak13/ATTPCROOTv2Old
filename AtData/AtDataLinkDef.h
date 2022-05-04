@@ -21,5 +21,6 @@
 #pragma link C++ class AtTrack + ;
 #pragma link C++ class AtPattern + ;
 #pragma link C++ class AtPatternLine + ;
-
+#pragma link C++ class AtPatternCircle2D + ;
+#pragma link C++ enum AtPattern::Type;
 #endif

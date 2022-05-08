@@ -1,0 +1,28 @@
+#include "AtSampleFromReference.h"
+
+#include "AtHit.h"
+
+#include <TRandom3.h>
+using namespace AtTools;
+std::vector<AtHit> AtSampleFromReference::SampleHits(int N)
+{
+   SampleReferenceHit();
+   FillCDF();
+
+   return AtSample::SampleHits(N);
+}
+
+/**
+ * @brief Get reference hit from fHits.
+ * Uniformly samples from fHits
+ */
+void AtSampleFromReference::SampleReferenceHit()
+{
+   int refIndex = gRandom->Uniform() * fHits->size();
+   SetReferenceHit(fHits->at(refIndex));
+}
+
+void AtSampleFromReference::SetHitsToSample(const std::vector<AtHit> *hits)
+{
+   fHits = hits;
+}

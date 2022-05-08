@@ -69,6 +69,9 @@ $(function() {
 <div class="title">Random Sampling</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Collection for sampling AtHits.  
+<a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
@@ -78,6 +81,8 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtTools_1_1AtIndependentSample.html">AtTools::AtIndependentSample</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtTools_1_1AtSample.html">AtTools::AtSample</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtTools_1_1AtSampleFromReference.html">AtTools::AtSampleFromReference</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtTools_1_1AtUniform.html">AtTools::AtUniform</a></td></tr>
@@ -86,11 +91,13 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<p>Interface for randomly sampling a collection of AtHits according to the cumulitive distribution function fCDF. </p>
+<p>Collection for sampling AtHits. </p>
+<p>Group of classes for randomly sampling AtHits according to some probability density function (PDF).</p>
+<p>Provides subclassed interfaces for the case where the hits sampled are independent (AtIndependentSample) and when the the PDF depends on some reference hit (AtSampleFromReference). To add an additional sampling method, at minimum it must inherit AtSample. It should also be added to the SampleMethod enum, and the static factory method AtSample::CreateSampler. </p>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun May 8 2022 23:28:45 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun May 8 2022 23:41:47 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

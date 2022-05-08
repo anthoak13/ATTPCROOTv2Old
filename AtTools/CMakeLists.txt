@@ -14,6 +14,14 @@ set(SRCS
 
   AtFormat.cxx
   AtRandomSample.cxx
+  AtHitSampling/AtSample.cxx
+  AtHitSampling/AtSampleMethods.cxx
+  AtHitSampling/AtIndependentSample.cxx
+  AtHitSampling/AtChargeWeighted.cxx
+  AtHitSampling/AtUniform.cxx
+  AtHitSampling/AtSampleFromReference.cxx
+  AtHitSampling/AtGaussian.cxx
+  AtHitSampling/AtWeightedGaussian.cxx
   )
 
 Set(DEPENDENCIES
@@ -28,5 +36,6 @@ generate_target_and_root_library(${LIBRARY_NAME}
   LINKDEF ${LINKDEF}
   SRCS ${SRCS}
   DEPS_PUBLIC ${DEPENDENCIES}
+  INCLUDE_DIR ${CMAKE_SOURCE_DIR}/AtTools/AtHitSampling
   )
 

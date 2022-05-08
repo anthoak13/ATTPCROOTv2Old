@@ -18,4 +18,11 @@
 #pragma link C++ class AtTools::AtKinematics + ;
 #pragma link C++ class AtTools::AtVirtualTerminal + ;
 
+#pragma link C++ class AtTools::AtSample - !;
+#pragma link C++ class AtTools::AtIndependentSample - !;
+#pragma link C++ class AtTools::AtUniform - !;
+#pragma link C++ class AtTools::AtChargeWeighted - !;
+#pragma link C++ class AtTools::AtGaussian - !;
+#pragma link C++ class AtTools::AtWeightedGaussian - !;
+
 #endif

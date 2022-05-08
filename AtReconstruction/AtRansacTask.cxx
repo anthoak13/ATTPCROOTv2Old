@@ -3,6 +3,7 @@
 #include "AtEvent.h" // for AtEvent
 #include "AtPatternEvent.h"
 #include "AtRansac.h" // for AtRansac
+#include "AtSample.h"
 #include "AtSampleConsensus.h"
 
 #include <FairLogger.h>      // for LOG, Logger
@@ -151,7 +152,8 @@ void AtRansacTask::Exec(Option_t *opt)
       ransac.SetDistanceThreshold(fRANSACThreshold);
       ransac.SetMinHitsPattern(fMinHitsLine);
       ransac.SetNumIterations(fNumItera);
-      ransac.SetRanSamMode(static_cast<AtRandomSample::SampleMethod>(fRandSamplMode));
+      auto sampleMethod = static_cast<AtTools::AtSample::SampleMethod>(fRandSamplMode);
+      ransac.SetRandomSample(AtTools::AtSample::CreateSampler(sampleMethod));
       switch (fRANSACAlg) {
       case 1: ransac.SetEstimator(AtSampleEstimator::Estimator::kRANSAC); break;
       case 2: ransac.SetEstimator(AtSampleEstimator::Estimator::kMLESAC); break;

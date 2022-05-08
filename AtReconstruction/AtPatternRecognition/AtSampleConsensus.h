@@ -9,6 +9,7 @@
 
 #include "AtPattern.h"
 #include "AtRandomSample.h"
+#include "AtSample.h"
 #include "AtSampleEstimator.h"
 #include "AtTrack.h" // for AtTrack
 
@@ -18,7 +19,6 @@
 #include <set>
 #include <utility> // for pair
 #include <vector>  // for vector
-
 class AtEvent;
 class AtPatternEvent;
 
@@ -28,10 +28,12 @@ private:
    using SampleMethod = AtRandomSample::SampleMethod;
    using PatternType = AtPattern::Type;
    using PatternPtr = std::unique_ptr<AtPattern>;
+   using AtSample = std::unique_ptr<AtTools::AtSample>;
 
-   PatternType fPatternType;                            //< Pattern to find
-   Estimator fEstimator{Estimator::kRANSAC};            //< Estimator to evaluate pattern
-   SampleMethod fRandSamplMode{SampleMethod::kUniform}; //< Sampling method
+   PatternType fPatternType;                 //< Pattern to find
+   Estimator fEstimator{Estimator::kRANSAC}; //< Estimator to evaluate pattern
+   AtSample fRandSampler;                    //< Sampling Method (defaults to uniform)
+   // SampleMethod fRandSamplMode{SampleMethod::kUniform}; //< Sampling method
 
    float fIterations{500};       //< Number of interations of sample consensus
    float fMinPatternPoints{30};  //< Required number of points to form a pattern
@@ -51,7 +53,7 @@ public:
    AtPatternEvent Solve(AtEvent *event);
    AtPatternEvent Solve(const std::vector<AtHit> &hitArray);
 
-   void SetRanSamMode(SampleMethod mode) { fRandSamplMode = mode; };
+   void SetRandomSample(AtSample mode) { fRandSampler = std::move(mode); };
    void SetPatternType(PatternType type) { fPatternType = type; }
    void SetEstimator(Estimator estimator) { fEstimator = estimator; }
 

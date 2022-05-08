@@ -27,7 +27,8 @@ std::unique_ptr<AtPattern> AtSampleConsensus::GeneratePatternFromHits(const std:
 
    auto pattern = AtPattern::CreatePattern(fPatternType);
 
-   auto points = AtRandomSample::SamplePoints(pattern->GetNumPoints(), hitArray, fRandSamplMode);
+   auto points = fRandSampler->SamplePoints(pattern->GetNumPoints());
+
    pattern->DefinePattern(points);
 
    LOG(debug) << "Testing pattern" << std::endl;
@@ -60,6 +61,7 @@ AtPatternEvent AtSampleConsensus::Solve(const std::vector<AtHit> &hitArray)
    auto sortedPatterns = std::set<PatternPtr, decltype(comp)>(comp);
 
    LOG(debug2) << "Generating " << fIterations << " patterns";
+   fRandSampler->SetHitsToSample(&hitArray);
    for (int i = 0; i < fIterations; i++) {
       auto pattern = GeneratePatternFromHits(hitArray);
       if (pattern != nullptr)

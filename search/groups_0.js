@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['estimators_5552',['Estimators',['../group__AtSampleEstimator.html',1,'']]]
+  ['estimators_5556',['Estimators',['../group__AtSampleEstimator.html',1,'']]]
 ];

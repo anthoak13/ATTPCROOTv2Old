@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['visualizeclusterasmst_4660',['visualizeClusterAsMst',['../main_8cpp.html#a46166eb603d98f2e4cbee8f6e787c052',1,'main.cpp']]],
-  ['visualizetriplets_4661',['visualizeTriplets',['../main_8cpp.html#a911b4bdc932d17d1e5948a87f612c909',1,'main.cpp']]]
+  ['visualizeclusterasmst_4665',['visualizeClusterAsMst',['../main_8cpp.html#a46166eb603d98f2e4cbee8f6e787c052',1,'main.cpp']]],
+  ['visualizetriplets_4666',['visualizeTriplets',['../main_8cpp.html#a911b4bdc932d17d1e5948a87f612c909',1,'main.cpp']]]
 ];

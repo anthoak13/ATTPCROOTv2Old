@@ -82,62 +82,51 @@ $(function() {
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;TMath.h&gt;</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;TRandom3.h&gt;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="AtPattern_8cxx.html#afe85b0f531a887473e24a4dc759d4ca6">   12</a></span>&#160;<a class="code" href="AtPattern_8cxx.html#afe85b0f531a887473e24a4dc759d4ca6">ClassImp</a>(<a class="code" href="classAtPattern.html">AtPattern</a>);</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">// Defined here so we don&#39;t force a recompule</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classAtPattern.html#a0dc3de272d47f8cd52ad4262b98c7efc">   15</a></span>&#160;<a class="code" href="classAtPattern.html#a0dc3de272d47f8cd52ad4262b98c7efc">AtPattern::AtPattern</a>(Int_t numPoints) : fNumPoints(numPoints) {}</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classAtPattern.html#a47bc46c5ce6dd13cb037065cef67bc6c">   27</a></span>&#160;Double_t <a class="code" href="classAtPattern.html#a47bc46c5ce6dd13cb037065cef67bc6c">AtPattern::FitPattern</a>(<span class="keyword">const</span> std::vector&lt;AtHit&gt; &amp;pointsToFit, Double_t qThreshold)</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;{</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;   std::vector&lt;XYZPoint&gt; points;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;   std::vector&lt;double&gt; charge;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;   <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;hit : pointsToFit) {</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;      <span class="keywordflow">if</span> (hit.GetCharge() &gt; qThreshold) {</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;         points.push_back(hit.GetPosition());</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;         charge.push_back(hit.GetCharge());</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;      }</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;   }</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;   <span class="keywordflow">if</span> (qThreshold == -1)</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;      <a class="code" href="classAtPattern.html#a47bc46c5ce6dd13cb037065cef67bc6c">FitPattern</a>(points);</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;   <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;      <a class="code" href="classAtPattern.html#a47bc46c5ce6dd13cb037065cef67bc6c">FitPattern</a>(points, charge);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;   <span class="keywordflow">return</span> <a class="code" href="classAtPattern.html#a988e1f45daba69d96bcf5ad7d5a1fcb0">fChi2</a>;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;}</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="classAtPattern.html#aa9ae0f5cea07d6713541aea9249ad958">   55</a></span>&#160;Double_t <a class="code" href="classAtPattern.html#a47bc46c5ce6dd13cb037065cef67bc6c">AtPattern::FitPattern</a>(<span class="keyword">const</span> std::vector&lt;XYZPoint&gt; &amp;pointsToFit)</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;{</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;   std::vector&lt;double&gt; charge;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;   <a class="code" href="classAtPattern.html#a47bc46c5ce6dd13cb037065cef67bc6c">FitPattern</a>(pointsToFit, charge);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;   <span class="keywordflow">return</span> <a class="code" href="classAtPattern.html#a988e1f45daba69d96bcf5ad7d5a1fcb0">fChi2</a>;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;}</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="classAtPattern.html#aa4a261310ee381e608bb525c0a65e643">   62</a></span>&#160;std::unique_ptr&lt;AtPattern&gt; <a class="code" href="classAtPattern.html#aa4a261310ee381e608bb525c0a65e643">AtPattern::CreatePattern</a>(<a class="code" href="classAtPattern.html#acda6bfc7c836a0b6b8ebf58ec86efe05">Type</a> type)</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;{</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;   <span class="keywordflow">switch</span> (type) {</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;   <span class="keywordflow">case</span> (<a class="code" href="classAtPattern.html#acda6bfc7c836a0b6b8ebf58ec86efe05aee669fa7b5a35d96a396d4ed648afb45">Type::kLine</a>): <span class="keywordflow">return</span> std::make_unique&lt;AtPatternLine&gt;();</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;   <span class="keywordflow">case</span> (<a class="code" href="classAtPattern.html#acda6bfc7c836a0b6b8ebf58ec86efe05ac162690276b0c003fe31ea3969a63fae">Type::kCircle2D</a>): <span class="keywordflow">return</span> std::make_unique&lt;AtPatternCircle2D&gt;();</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;   <span class="keywordflow">default</span>: <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;   }</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;}</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespaceAtPatterns.html">AtPatterns</a>;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="AtPattern_8cxx.html#afe85b0f531a887473e24a4dc759d4ca6">   14</a></span>&#160;<a class="code" href="AtPattern_8cxx.html#afe85b0f531a887473e24a4dc759d4ca6">ClassImp</a>(<a class="code" href="classAtPatterns_1_1AtPattern.html">AtPattern</a>);</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classAtPatterns_1_1AtPattern.html#a0dc3de272d47f8cd52ad4262b98c7efc">   16</a></span>&#160;<a class="code" href="classAtPatterns_1_1AtPattern.html#a0dc3de272d47f8cd52ad4262b98c7efc">AtPattern::AtPattern</a>(Int_t numPoints) : fNumPoints(numPoints) {}</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classAtPatterns_1_1AtPattern.html#a47bc46c5ce6dd13cb037065cef67bc6c">   28</a></span>&#160;Double_t <a class="code" href="classAtPatterns_1_1AtPattern.html#a47bc46c5ce6dd13cb037065cef67bc6c">AtPattern::FitPattern</a>(<span class="keyword">const</span> std::vector&lt;AtHit&gt; &amp;pointsToFit, Double_t qThreshold)</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;   std::vector&lt;XYZPoint&gt; points;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;   std::vector&lt;double&gt; charge;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;   <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;hit : pointsToFit) {</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;      <span class="keywordflow">if</span> (hit.GetCharge() &gt; qThreshold) {</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;         points.push_back(hit.GetPosition());</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;         charge.push_back(hit.GetCharge());</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;      }</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;   }</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;   <span class="keywordflow">if</span> (qThreshold == -1)</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;      <a class="code" href="classAtPatterns_1_1AtPattern.html#a47bc46c5ce6dd13cb037065cef67bc6c">FitPattern</a>(points);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;   <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;      <a class="code" href="classAtPatterns_1_1AtPattern.html#a47bc46c5ce6dd13cb037065cef67bc6c">FitPattern</a>(points, charge);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;   <span class="keywordflow">return</span> <a class="code" href="classAtPatterns_1_1AtPattern.html#a14b91f38a2a78530f3418807ce023c24">fChi2</a>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="classAtPatterns_1_1AtPattern.html#aa9ae0f5cea07d6713541aea9249ad958">   56</a></span>&#160;Double_t <a class="code" href="classAtPatterns_1_1AtPattern.html#a47bc46c5ce6dd13cb037065cef67bc6c">AtPattern::FitPattern</a>(<span class="keyword">const</span> std::vector&lt;XYZPoint&gt; &amp;pointsToFit)</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;{</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;   std::vector&lt;double&gt; charge;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;   <a class="code" href="classAtPatterns_1_1AtPattern.html#a47bc46c5ce6dd13cb037065cef67bc6c">FitPattern</a>(pointsToFit, charge);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;   <span class="keywordflow">return</span> <a class="code" href="classAtPatterns_1_1AtPattern.html#a14b91f38a2a78530f3418807ce023c24">fChi2</a>;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclassAtPattern_html_a0dc3de272d47f8cd52ad4262b98c7efc"><div class="ttname"><a href="classAtPattern.html#a0dc3de272d47f8cd52ad4262b98c7efc">AtPattern::AtPattern</a></div><div class="ttdeci">AtPattern(Int_t numPoints=0)</div><div class="ttdef"><b>Definition:</b> <a href="AtPattern_8cxx_source.html#l00015">AtPattern.cxx:15</a></div></div>
-<div class="ttc" id="aclassAtPattern_html_aa4a261310ee381e608bb525c0a65e643"><div class="ttname"><a href="classAtPattern.html#aa4a261310ee381e608bb525c0a65e643">AtPattern::CreatePattern</a></div><div class="ttdeci">static std::unique_ptr&lt; AtPattern &gt; CreatePattern(Type type)</div><div class="ttdef"><b>Definition:</b> <a href="AtPattern_8cxx_source.html#l00062">AtPattern.cxx:62</a></div></div>
 <div class="ttc" id="aAtPattern_8h_html"><div class="ttname"><a href="AtPattern_8h.html">AtPattern.h</a></div></div>
 <div class="ttc" id="aAtPattern_8cxx_html_afe85b0f531a887473e24a4dc759d4ca6"><div class="ttname"><a href="AtPattern_8cxx.html#afe85b0f531a887473e24a4dc759d4ca6">ClassImp</a></div><div class="ttdeci">ClassImp(AtPattern)</div></div>
-<div class="ttc" id="aclassAtPattern_html"><div class="ttname"><a href="classAtPattern.html">AtPattern</a></div><div class="ttdef"><b>Definition:</b> <a href="AtPattern_8h_source.html#l00013">AtPattern.h:13</a></div></div>
+<div class="ttc" id="aclassAtPatterns_1_1AtPattern_html"><div class="ttname"><a href="classAtPatterns_1_1AtPattern.html">AtPatterns::AtPattern</a></div><div class="ttdef"><b>Definition:</b> <a href="AtPattern_8h_source.html#l00026">AtPattern.h:26</a></div></div>
+<div class="ttc" id="aclassAtPatterns_1_1AtPattern_html_a0dc3de272d47f8cd52ad4262b98c7efc"><div class="ttname"><a href="classAtPatterns_1_1AtPattern.html#a0dc3de272d47f8cd52ad4262b98c7efc">AtPatterns::AtPattern::AtPattern</a></div><div class="ttdeci">AtPattern(Int_t numPoints=0)</div><div class="ttdef"><b>Definition:</b> <a href="AtPattern_8cxx_source.html#l00016">AtPattern.cxx:16</a></div></div>
 <div class="ttc" id="aAtPatternLine_8h_html"><div class="ttname"><a href="AtPatternLine_8h.html">AtPatternLine.h</a></div></div>
-<div class="ttc" id="aclassAtPattern_html_a47bc46c5ce6dd13cb037065cef67bc6c"><div class="ttname"><a href="classAtPattern.html#a47bc46c5ce6dd13cb037065cef67bc6c">AtPattern::FitPattern</a></div><div class="ttdeci">Double_t FitPattern(const std::vector&lt; AtHit &gt; &amp;pointsToFit, Double_t qThreshold=-1)</div><div class="ttdoc">Fit the pattern.</div><div class="ttdef"><b>Definition:</b> <a href="AtPattern_8cxx_source.html#l00027">AtPattern.cxx:27</a></div></div>
-<div class="ttc" id="aclassAtPattern_html_a988e1f45daba69d96bcf5ad7d5a1fcb0"><div class="ttname"><a href="classAtPattern.html#a988e1f45daba69d96bcf5ad7d5a1fcb0">AtPattern::fChi2</a></div><div class="ttdeci">Double_t fChi2</div><div class="ttdef"><b>Definition:</b> <a href="AtPattern_8h_source.html#l00016">AtPattern.h:16</a></div></div>
-<div class="ttc" id="aclassAtPattern_html_acda6bfc7c836a0b6b8ebf58ec86efe05"><div class="ttname"><a href="classAtPattern.html#acda6bfc7c836a0b6b8ebf58ec86efe05">AtPattern::Type</a></div><div class="ttdeci">Type</div><div class="ttdef"><b>Definition:</b> <a href="AtPatternTypes_8h_source.html#l00003">AtPatternTypes.h:3</a></div></div>
-<div class="ttc" id="aclassAtPattern_html_acda6bfc7c836a0b6b8ebf58ec86efe05aee669fa7b5a35d96a396d4ed648afb45"><div class="ttname"><a href="classAtPattern.html#acda6bfc7c836a0b6b8ebf58ec86efe05aee669fa7b5a35d96a396d4ed648afb45">AtPattern::Type::kLine</a></div><div class="ttdeci">@ kLine</div></div>
+<div class="ttc" id="aclassAtPatterns_1_1AtPattern_html_a14b91f38a2a78530f3418807ce023c24"><div class="ttname"><a href="classAtPatterns_1_1AtPattern.html#a14b91f38a2a78530f3418807ce023c24">AtPatterns::AtPattern::fChi2</a></div><div class="ttdeci">Double_t fChi2</div><div class="ttdef"><b>Definition:</b> <a href="AtPattern_8h_source.html#l00029">AtPattern.h:29</a></div></div>
+<div class="ttc" id="anamespaceAtPatterns_html"><div class="ttname"><a href="namespaceAtPatterns.html">AtPatterns</a></div><div class="ttdef"><b>Definition:</b> <a href="AtPattern_8h_source.html#l00015">AtPattern.h:15</a></div></div>
 <div class="ttc" id="aAtPatternTypes_8h_html"><div class="ttname"><a href="AtPatternTypes_8h.html">AtPatternTypes.h</a></div></div>
-<div class="ttc" id="aclassAtPattern_html_acda6bfc7c836a0b6b8ebf58ec86efe05ac162690276b0c003fe31ea3969a63fae"><div class="ttname"><a href="classAtPattern.html#acda6bfc7c836a0b6b8ebf58ec86efe05ac162690276b0c003fe31ea3969a63fae">AtPattern::Type::kCircle2D</a></div><div class="ttdeci">@ kCircle2D</div></div>
 <div class="ttc" id="aAtPatternCircle2D_8h_html"><div class="ttname"><a href="AtPatternCircle2D_8h.html">AtPatternCircle2D.h</a></div></div>
+<div class="ttc" id="aclassAtPatterns_1_1AtPattern_html_a47bc46c5ce6dd13cb037065cef67bc6c"><div class="ttname"><a href="classAtPatterns_1_1AtPattern.html#a47bc46c5ce6dd13cb037065cef67bc6c">AtPatterns::AtPattern::FitPattern</a></div><div class="ttdeci">Double_t FitPattern(const std::vector&lt; AtHit &gt; &amp;pointsToFit, Double_t qThreshold=-1)</div><div class="ttdoc">Fit the pattern.</div><div class="ttdef"><b>Definition:</b> <a href="AtPattern_8cxx_source.html#l00028">AtPattern.cxx:28</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon May 9 2022 17:12:50 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon May 9 2022 22:17:31 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

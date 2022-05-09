@@ -9,8 +9,9 @@
 #include <TMath.h>
 #include <TRandom3.h>
 
+using namespace AtPatterns;
+
 ClassImp(AtPattern);
-// Defined here so we don't force a recompule
 
 AtPattern::AtPattern(Int_t numPoints) : fNumPoints(numPoints) {}
 
@@ -57,13 +58,4 @@ Double_t AtPattern::FitPattern(const std::vector<XYZPoint> &pointsToFit)
    std::vector<double> charge;
    FitPattern(pointsToFit, charge);
    return fChi2;
-}
-
-std::unique_ptr<AtPattern> AtPattern::CreatePattern(Type type)
-{
-   switch (type) {
-   case (Type::kLine): return std::make_unique<AtPatternLine>();
-   case (Type::kCircle2D): return std::make_unique<AtPatternCircle2D>();
-   default: return nullptr;
-   }
 }

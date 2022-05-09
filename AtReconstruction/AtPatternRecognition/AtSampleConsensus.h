@@ -24,13 +24,15 @@ class AtPatternEvent;
 class AtSampleConsensus final {
 private:
    using Estimators = AtSampleEstimator::Estimators;
-   using PatternType = AtPattern::Type;
+   using PatternType = AtPatterns::PatternType;
+   using SampleMethod = AtTools::AtSample::SampleMethod;
+   using AtPattern = AtPatterns::AtPattern;
    using PatternPtr = std::unique_ptr<AtPattern>;
-   using AtSample = std::unique_ptr<AtTools::AtSample>;
+   using AtSamplePtr = std::unique_ptr<AtTools::AtSample>;
 
    PatternPtr fPatternProto; //< Prototype of pattern to find
    Estimators fEstimator;    //< Estimator to evaluate pattern
-   AtSample fRandSampler;    //< Sampling Method (defaults to uniform)
+   AtSamplePtr fRandSampler; //< Sampling Method (defaults to uniform)
 
    float fIterations{500};       //< Number of interations of sample consensus
    float fMinPatternPoints{30};  //< Required number of points to form a pattern
@@ -46,11 +48,12 @@ private:
 
 public:
    AtSampleConsensus();
+   AtSampleConsensus(Estimators estimator, PatternType patternType, SampleMethod sampleMethod);
 
    AtPatternEvent Solve(AtEvent *event);
    AtPatternEvent Solve(const std::vector<AtHit> &hitArray);
 
-   void SetRandomSample(AtSample mode) { fRandSampler = std::move(mode); };
+   void SetRandomSample(AtSamplePtr mode) { fRandSampler = std::move(mode); };
    void SetPatternType(PatternPtr type) { fPatternProto = std::move(type); }
    void SetEstimator(Estimators estimator) { fEstimator = estimator; }
 

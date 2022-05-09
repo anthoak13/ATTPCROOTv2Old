@@ -18,22 +18,26 @@
 #include <iterator> // for insert_iterator, inserter
 #include <memory>   // for allocator_traits<>::value_type
 
-using SampleMethod = AtTools::AtSample::SampleMethod;
 AtSampleConsensus::AtSampleConsensus()
-   : fEstimator(Estimators::kRANSAC), fPatternProto(AtPattern::CreatePattern(PatternType::kLine)),
-     fRandSampler(AtTools::AtSample::CreateSampler(SampleMethod::kUniform))
+   : AtSampleConsensus(Estimators::kRANSAC, PatternType::kLine, SampleMethod::kUniform)
+{
+}
+
+AtSampleConsensus::AtSampleConsensus(Estimators estimator, PatternType patternType, SampleMethod sampleMethod)
+   : fEstimator(estimator), fPatternProto(AtPatterns::AtPattern::CreatePattern(patternType)),
+     fRandSampler(AtTools::AtSample::CreateSampler(sampleMethod))
 
 {
 }
 
-std::unique_ptr<AtPattern> AtSampleConsensus::GeneratePatternFromHits(const std::vector<AtHit> &hitArray)
+std::unique_ptr<AtPatterns::AtPattern> AtSampleConsensus::GeneratePatternFromHits(const std::vector<AtHit> &hitArray)
 {
 
    if (hitArray.size() < fMinPatternPoints) {
       return nullptr;
    }
 
-   auto pattern = AtPattern::CreatePattern(PatternType::kLine);
+   auto pattern = fPatternProto->Clone();
 
    auto points = fRandSampler->SamplePoints(pattern->GetNumPoints());
 

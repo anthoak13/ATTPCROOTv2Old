@@ -5,7 +5,7 @@
 
 #include <cmath>
 
-int AtSampleEstimator::EvaluateModel(AtPattern *model, const std::vector<AtHit> &hits, double distThresh,
+int AtSampleEstimator::EvaluateModel(AtPatterns::AtPattern *model, const std::vector<AtHit> &hits, double distThresh,
                                      Estimators estimator = Estimators::kRANSAC)
 {
    switch (estimator) {

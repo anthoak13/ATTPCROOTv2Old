@@ -30,6 +30,7 @@ set(SRCS
   AtPattern/AtPattern.cxx
   AtPattern/AtPatternLine.cxx
   AtPattern/AtPatternCircle2D.cxx
+  AtPattern/AtPatternTypes.cxx
   )
 
 generate_target_and_root_library(${LIBRARY_NAME}

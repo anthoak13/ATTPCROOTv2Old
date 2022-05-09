@@ -14,7 +14,7 @@ enum class AtSampleEstimator::Estimators { kRANSAC, kLMedS, kMLESAC };
  */
 class AtEstimatorRansac {
 public:
-   static int EvaluateModel(AtPattern *model, const std::vector<AtHit> &hitArray, double distanceThreshold);
+   static int EvaluateModel(AtPatterns::AtPattern *model, const std::vector<AtHit> &hitArray, double distanceThreshold);
 };
 
 /**
@@ -24,7 +24,7 @@ public:
 
 class AtEstimatorMlesac {
 public:
-   static int EvaluateModel(AtPattern *model, const std::vector<AtHit> &hitArray, double distanceThreshold);
+   static int EvaluateModel(AtPatterns::AtPattern *model, const std::vector<AtHit> &hitArray, double distanceThreshold);
 };
 
 /**
@@ -33,7 +33,7 @@ public:
  */
 class AtEstimatorLmeds {
 public:
-   static int EvaluateModel(AtPattern *model, const std::vector<AtHit> &hitArray, double distanceThreshold);
+   static int EvaluateModel(AtPatterns::AtPattern *model, const std::vector<AtHit> &hitArray, double distanceThreshold);
    static double GetMedian(std::vector<double> &vec);
 };
 

@@ -24,7 +24,7 @@ protected:
 public:
    enum class SampleMethod;
 
-   virtual std::vector<AtHit> SampleHits(int N) = 0;
+   virtual std::vector<AtHit> SampleHits(int N);
    std::vector<ROOT::Math::XYZPoint> SamplePoints(int N);
 
    virtual void SetHitsToSample(const std::vector<AtHit> *hits) = 0;
@@ -45,10 +45,13 @@ protected:
    virtual std::vector<double> PDF(const AtHit &hit) = 0;
    void FillCDF();
 
-   std::vector<int> sampleIndicesFromCDF(int N, const std::vector<int> &vetoed = {});
+   std::vector<int> sampleIndicesFromCDF(int N, std::vector<int> vetoed = {});
+   int getIndexFromCDF(double r, double rmCFD, std::vector<int> vetoed);
    template <typename T>
    static inline bool isInVector(T val, std::vector<T> vec)
    {
+      if (vec.size() == 0)
+         return false;
       return std::find(vec.begin(), vec.end(), val) != vec.end();
    }
 };

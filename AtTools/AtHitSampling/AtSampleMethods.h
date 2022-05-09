@@ -1,11 +1,7 @@
 #ifndef ATSAMPLEMETHODS_H
 #define ATSAMPLEMETHODS_H
 
-#include "AtChargeWeighted.h"
-#include "AtGaussian.h"
 #include "AtSample.h"
-#include "AtUniform.h"
-#include "AtWeightedGaussian.h"
 
 /**
  * @brief Collection for sampling AtHits
@@ -21,8 +17,8 @@
  */
 
 /**
- *
- *
+ * Defined methods of sampling hits
+ * @ingroup AtHitSampling
  */
 enum class AtTools::AtSample::SampleMethod { kUniform = 0, kChargeWeighted = 1, kGaussian = 2, kWeightedGaussian = 3 };
 

@@ -19,6 +19,7 @@ public:
    virtual std::vector<AtHit> SampleHits(int N) override;
    virtual void SetHitsToSample(const std::vector<AtHit> *hits) override;
    void SetReferenceHit(AtHit hit) { fReferenceHit = std::move(hit); }
+   const AtHit &GetReferenceHit() const { return fReferenceHit; }
 
 protected:
    virtual void SampleReferenceHit();

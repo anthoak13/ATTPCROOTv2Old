@@ -9,13 +9,13 @@ std::vector<AtHit> AtSampleFromReference::SampleHits(int N)
    SampleReferenceHit();
    FillCDF();
 
-   // Using the sampled indices, return a vector of positions
-   std::vector<AtHit> ret;
-   for (auto ind : sampleIndicesFromCDF(N))
-      ret.push_back(fHits->at(ind));
-   return ret;
+   return AtSample::SampleHits(N);
 }
 
+/**
+ * @brief Get reference hit from fHits.
+ * Uniformly samples from fHits
+ */
 void AtSampleFromReference::SampleReferenceHit()
 {
    int refIndex = gRandom->Uniform() * fHits->size();

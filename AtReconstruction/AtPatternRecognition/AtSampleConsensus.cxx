@@ -1,11 +1,13 @@
 #include "AtSampleConsensus.h"
 
+#include "AtEstimatorMethods.h"
 #include "AtEvent.h" // for AtEvent
 #include "AtHit.h"   // for AtHit
 #include "AtPattern.h"
 #include "AtPatternEvent.h"
 #include "AtPatternTypes.h"
-#include "AtRandomSample.h"
+#include "AtSampleEstimator.h"
+#include "AtSampleMethods.h"
 
 #include <Math/Point3D.h> // for PositionVector3D
 #include <TMath.h>        // for Pi
@@ -16,7 +18,13 @@
 #include <iterator> // for insert_iterator, inserter
 #include <memory>   // for allocator_traits<>::value_type
 
-AtSampleConsensus::AtSampleConsensus() : fPatternType(PatternType::kLine) {}
+using SampleMethod = AtTools::AtSample::SampleMethod;
+AtSampleConsensus::AtSampleConsensus()
+   : fEstimator(Estimators::kRANSAC), fPatternProto(AtPattern::CreatePattern(PatternType::kLine)),
+     fRandSampler(AtTools::AtSample::CreateSampler(SampleMethod::kUniform))
+
+{
+}
 
 std::unique_ptr<AtPattern> AtSampleConsensus::GeneratePatternFromHits(const std::vector<AtHit> &hitArray)
 {
@@ -25,7 +33,7 @@ std::unique_ptr<AtPattern> AtSampleConsensus::GeneratePatternFromHits(const std:
       return nullptr;
    }
 
-   auto pattern = AtPattern::CreatePattern(fPatternType);
+   auto pattern = AtPattern::CreatePattern(PatternType::kLine);
 
    auto points = fRandSampler->SamplePoints(pattern->GetNumPoints());
 

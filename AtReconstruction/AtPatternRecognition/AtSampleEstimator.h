@@ -1,14 +1,26 @@
 #ifndef ATSAMPLEESTIMATOR_H
 #define ATSAMPLEESTIMATOR_H
 
-#include "AtHit.h"
+#include <vector>
 
 class AtPattern;
+class AtHit;
 
+/**
+ * @defgroup AtSampleEstimator Estimators
+ *
+ * Group of classes and functions for sample consensus estimators. Should be used by including the file
+ * AtEstimatorMethods.h
+ */
+
+/**
+ * Static class for calling the correct estimator based on the enum
+ * Enum definition and implementation is in AtEstimatorMethods.h
+ */
 class AtSampleEstimator {
 
 public:
-   enum class Estimator { kRANSAC, kLMedS, kMLESAC };
+   enum class Estimators;
    /**
     * @brief Evaluate how well model describes hits
     *
@@ -20,8 +32,7 @@ public:
     * @param[in] distThresh How close a point must be to be consistent with the model
     * @return Number of points consistent with model in hits
     */
-   static int EvaluateModel(AtPattern *model, const std::vector<AtHit> &hits, double distThresh,
-                            Estimator estimator = Estimator::kRANSAC);
+   static int EvaluateModel(AtPattern *model, const std::vector<AtHit> &hits, double distThresh, Estimators estimator);
 };
 
 #endif //#ifndef ATSAMPLEESTIMATOR_H

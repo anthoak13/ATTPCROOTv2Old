@@ -8,7 +8,23 @@
 using namespace AtTools;
 
 /**
- * Sample spacial locations (XYZPoints) from fHits.
+ * @brief Sample hits (AtHit) from fHits.
+ *
+ * Assumes fCDF is already setup and we are just using it.
+ */
+std::vector<AtHit> AtSample::SampleHits(int N)
+{
+   // Using the sampled indices, return a vector of positions
+   std::vector<AtHit> ret;
+   for (auto ind : sampleIndicesFromCDF(N))
+      ret.push_back(fHits->at(ind));
+   return ret;
+}
+
+/**
+ * @brief Sample spacial locations (XYZPoints) from fHits.
+ *
+ * Calls SampleHits(int N).
  */
 std::vector<ROOT::Math::XYZPoint> AtSample::SamplePoints(int N)
 {
@@ -19,23 +35,61 @@ std::vector<ROOT::Math::XYZPoint> AtSample::SamplePoints(int N)
 }
 
 /**
+ * @brief Get the index i where CDF[i] >= r and CDF[i-1] < r.
+ *
+ * Loop through fCDF, skipping any index in vetoed, for the index that corresponds to r
+ * So need to track what indices are not allowed (vetoed) and the amount of the CDF that has been removed (i.e.
+ * sum of PDFs for all removed indices). (rmCDF) The new CDF is then oldCDF/(1-rmCDF) We then need to loop through
+ * CDF and look for index where CDF[i] >= r
+
+ * @param[in] r Random number between [0,1) to compare to fCDF
+ * @param[in] vetoed Indices to ignore while searching fCDF
+ *
+ */
+int AtSample::getIndexFromCDF(double r, double rmCFD, std::vector<int> vetoed)
+{
+   for (int i = 0; i < fCDF.size(); ++i) {
+
+      if (isInVector(i, vetoed)) {
+         continue;
+      }
+
+      if (fCDF[i] / (1.0 - rmCFD) >= r)
+         return i;
+   }
+   return fCDF.size() - 1;
+}
+
+/**
  * Get a list of indices aampled according to the constructed fCDF (assumes FillCDF() has been called already)
  *
- * @param[in] N number of points to sample. If sampling without replacement this should be small compared to the total
- * number of hits in the hit array.
+ * @param[in] N number of pcoints to sample. If sampling without replacement this should be small compared to the
+ * total number of hits in the hit array.
  * @param[in] vetoed Indices to not sample (even if sampling with replacement).
  */
-std::vector<int> AtSample::sampleIndicesFromCDF(int N, const std::vector<int> &vetoed)
+std::vector<int> AtSample::sampleIndicesFromCDF(int N, std::vector<int> vetoed)
 {
+   double rmProb = 0;
    std::vector<int> sampledInd;
    while (sampledInd.size() < N) {
       auto r = gRandom->Uniform();
+
       // Get the index i where CDF[i] >= r and CDF[i-1] < r
-      int hitInd = std::distance(fCDF.begin(), std::lower_bound(fCDF.begin(), fCDF.end(), r));
-      // Save the index if it has not already been sampled
+      int hitInd = getIndexFromCDF(r, rmProb, vetoed);
+
+      if (!fWithReplacement) {
+         if (hitInd == 0)
+            rmProb += fCDF[0];
+         else
+            rmProb += (fCDF[hitInd] - fCDF[hitInd - 1]);
+         vetoed.push_back(hitInd);
+      }
       auto canSample = fWithReplacement || !isInVector(hitInd, sampledInd);
-      if (canSample && !isInVector(hitInd, vetoed))
+
+      // Save the index if it has not already been sampled
+      if (fWithReplacement || !isInVector(hitInd, sampledInd)) {
          sampledInd.push_back(hitInd);
+      }
    }
 
    return sampledInd;

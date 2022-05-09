@@ -10,7 +10,6 @@ namespace AtTools {
 
 class AtIndependentSample : public AtSample {
 public:
-   virtual std::vector<AtHit> SampleHits(int N) override;
    virtual void SetHitsToSample(const std::vector<AtHit> *hits) override;
 
 protected:

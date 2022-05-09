@@ -3,8 +3,13 @@
 #include <Math/Point2D.h>
 #include <Math/Point3D.h>
 using XYPoint = ROOT::Math::XYPoint;
+using namespace AtPatterns;
 
 AtPatternCircle2D::AtPatternCircle2D() : AtPattern(3) {}
+std::unique_ptr<AtPattern> AtPatternCircle2D::Clone()
+{
+   return std::make_unique<AtPatternCircle2D>(*this);
+}
 
 void AtPatternCircle2D::DefinePattern(const std::vector<XYZPoint> &points)
 {

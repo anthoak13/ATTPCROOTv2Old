@@ -3,6 +3,7 @@
 #include "AtEstimatorMethods.h"
 #include "AtEvent.h" // for AtEvent
 #include "AtPatternEvent.h"
+#include "AtPatternTypes.h"
 #include "AtRansac.h" // for AtRansac
 #include "AtSample.h"
 #include "AtSampleConsensus.h"
@@ -149,17 +150,19 @@ void AtRansacTask::Exec(Option_t *opt)
          Ransac->CalcRANSAC(fEvent);
    } else {
       LOG(debug) << "Running Unified RANSAC";
-      AtSampleConsensus ransac;
+
+      auto sampleMethod = static_cast<AtTools::AtSample::SampleMethod>(fRandSamplMode);
+      auto patternType = AtPatterns::PatternType::kLine;
+      auto estimator = AtSampleEstimator::Estimators::kRANSAC;
+      if (fRANSACAlg == 2)
+         estimator = AtSampleEstimator::Estimators::kMLESAC;
+      if (fRANSACAlg == 3)
+         estimator = AtSampleEstimator::Estimators::kLMedS;
+      AtSampleConsensus ransac(estimator, patternType, sampleMethod);
+
       ransac.SetDistanceThreshold(fRANSACThreshold);
       ransac.SetMinHitsPattern(fMinHitsLine);
       ransac.SetNumIterations(fNumItera);
-      auto sampleMethod = static_cast<AtTools::AtSample::SampleMethod>(fRandSamplMode);
-      ransac.SetRandomSample(AtTools::AtSample::CreateSampler(sampleMethod));
-      switch (fRANSACAlg) {
-      case 1: ransac.SetEstimator(AtSampleEstimator::Estimators::kRANSAC); break;
-      case 2: ransac.SetEstimator(AtSampleEstimator::Estimators::kMLESAC); break;
-      case 3: ransac.SetEstimator(AtSampleEstimator::Estimators::kLMedS); break;
-      }
       // ransac.SetChargeThres(fCharThres);
       fPatternEventArray.Delete();
       auto patternEvent = ransac.Solve(fEvent);

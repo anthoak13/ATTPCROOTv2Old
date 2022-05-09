@@ -4,9 +4,15 @@
 
 #include <TMath.h>
 
+using namespace AtPatterns;
+
 ClassImp(AtPatternLine);
 
 AtPatternLine::AtPatternLine() : AtPattern(2) {}
+std::unique_ptr<AtPattern> AtPatternLine::Clone()
+{
+   return std::make_unique<AtPatternLine>(*this);
+}
 
 XYZPoint AtPatternLine::ClosestPointOnPattern(const XYZPoint &point)
 {

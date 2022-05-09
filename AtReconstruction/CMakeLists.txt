@@ -71,6 +71,7 @@ if(PCL_FOUND)
     AtPatternRecognition/AtPRA.cxx
     AtPatternRecognition/AtSampleConsensus.cxx
     AtPatternRecognition/AtSampleEstimator.cxx
+    AtPatternRecognition/AtEstimatorMethods.cxx
     AtRansac/AtRansac.cxx
     AtPRAtask.cxx
     AtRansacTask.cxx

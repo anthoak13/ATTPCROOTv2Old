@@ -1,5 +1,6 @@
 #include "AtRansacTask.h"
 
+#include "AtEstimatorMethods.h"
 #include "AtEvent.h" // for AtEvent
 #include "AtPatternEvent.h"
 #include "AtRansac.h" // for AtRansac
@@ -155,9 +156,9 @@ void AtRansacTask::Exec(Option_t *opt)
       auto sampleMethod = static_cast<AtTools::AtSample::SampleMethod>(fRandSamplMode);
       ransac.SetRandomSample(AtTools::AtSample::CreateSampler(sampleMethod));
       switch (fRANSACAlg) {
-      case 1: ransac.SetEstimator(AtSampleEstimator::Estimator::kRANSAC); break;
-      case 2: ransac.SetEstimator(AtSampleEstimator::Estimator::kMLESAC); break;
-      case 3: ransac.SetEstimator(AtSampleEstimator::Estimator::kLMedS); break;
+      case 1: ransac.SetEstimator(AtSampleEstimator::Estimators::kRANSAC); break;
+      case 2: ransac.SetEstimator(AtSampleEstimator::Estimators::kMLESAC); break;
+      case 3: ransac.SetEstimator(AtSampleEstimator::Estimators::kLMedS); break;
       }
       // ransac.SetChargeThres(fCharThres);
       fPatternEventArray.Delete();

@@ -64,7 +64,9 @@ $(function() {
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Random Sampling</div>  </div>
 </div><!--header-->
@@ -89,15 +91,92 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtTools_1_1AtWeightedGaussian.html">AtTools::AtWeightedGaussian</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:ga5f814e6032faa15b7970aa59c106444d"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__AtHitSampling.html#ga5f814e6032faa15b7970aa59c106444d">AtTools::AtSample::SampleMethod</a> { <a class="el" href="group__AtHitSampling.html#gga5f814e6032faa15b7970aa59c106444da3ea9f7aca87fd7b64469a0d1119f0b50">AtTools::AtSample::SampleMethod::kUniform</a> = 0, 
+<a class="el" href="group__AtHitSampling.html#gga5f814e6032faa15b7970aa59c106444daf305214d62cc60adbf7708e548e0fe45">AtTools::AtSample::SampleMethod::kChargeWeighted</a> = 1, 
+<a class="el" href="group__AtHitSampling.html#gga5f814e6032faa15b7970aa59c106444dab933cd0242085c2dbf804dbf288ce7f0">AtTools::AtSample::SampleMethod::kGaussian</a> = 2, 
+<a class="el" href="group__AtHitSampling.html#gga5f814e6032faa15b7970aa59c106444dadff460d312ef7227d6e8fa577dd4a5c8">AtTools::AtSample::SampleMethod::kWeightedGaussian</a> = 3
+ }</td></tr>
+<tr class="separator:ga5f814e6032faa15b7970aa59c106444d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ga52bbdfaa64f75e322aaeec586ea375fc"><td class="memItemLeft" align="right" valign="top">static std::unique_ptr&lt; <a class="el" href="classAtTools_1_1AtSample.html">AtSample</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__AtHitSampling.html#ga52bbdfaa64f75e322aaeec586ea375fc">AtTools::AtSample::CreateSampler</a> (<a class="el" href="group__AtHitSampling.html#ga5f814e6032faa15b7970aa59c106444d">SampleMethod</a> method)</td></tr>
+<tr class="separator:ga52bbdfaa64f75e322aaeec586ea375fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Collection for sampling AtHits. </p>
 <p>Group of classes for randomly sampling AtHits according to some probability density function (PDF).</p>
 <p>Provides subclassed interfaces for the case where the hits sampled are independent (AtIndependentSample) and when the the PDF depends on some reference hit (AtSampleFromReference). To add an additional sampling method, at minimum it must inherit AtSample. It should also be added to the SampleMethod enum, and the static factory method AtSample::CreateSampler. </p>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="ga5f814e6032faa15b7970aa59c106444d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5f814e6032faa15b7970aa59c106444d">&#9670;&nbsp;</a></span>SampleMethod</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="group__AtHitSampling.html#ga5f814e6032faa15b7970aa59c106444d">AtTools::AtSample::SampleMethod</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Defined methods of sampling hits </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="gga5f814e6032faa15b7970aa59c106444da3ea9f7aca87fd7b64469a0d1119f0b50"></a>kUniform&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="gga5f814e6032faa15b7970aa59c106444daf305214d62cc60adbf7708e548e0fe45"></a>kChargeWeighted&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="gga5f814e6032faa15b7970aa59c106444dab933cd0242085c2dbf804dbf288ce7f0"></a>kGaussian&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="gga5f814e6032faa15b7970aa59c106444dadff460d312ef7227d6e8fa577dd4a5c8"></a>kWeightedGaussian&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="AtSampleMethods_8h_source.html#l00023">23</a> of file <a class="el" href="AtSampleMethods_8h_source.html">AtSampleMethods.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="ga52bbdfaa64f75e322aaeec586ea375fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga52bbdfaa64f75e322aaeec586ea375fc">&#9670;&nbsp;</a></span>CreateSampler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unique_ptr&lt; <a class="el" href="classAtTools_1_1AtSample.html">AtTools::AtSample</a> &gt; AtTools::AtSample::CreateSampler </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__AtHitSampling.html#ga5f814e6032faa15b7970aa59c106444d">SampleMethod</a>&#160;</td>
+          <td class="paramname"><em>method</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Static factory method for creating instances of <a class="el" href="classAtTools_1_1AtSample.html">AtSample</a></p>
+<p>Only returns a nullptr for sub-types of <a class="el" href="classAtTools_1_1AtSample.html">AtSample</a> that do not require additional information. </p>
+
+<p class="definition">Definition at line <a class="el" href="AtSampleMethods_8cxx_source.html#l00015">15</a> of file <a class="el" href="AtSampleMethods_8cxx_source.html">AtSampleMethods.cxx</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun May 8 2022 23:41:47 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon May 9 2022 17:12:52 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

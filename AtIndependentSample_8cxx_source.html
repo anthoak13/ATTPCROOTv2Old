@@ -77,32 +77,22 @@ $(function() {
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;TRandom3.h&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespaceAtTools.html">AtTools</a>;</div>
-<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="classAtTools_1_1AtIndependentSample.html#a830ed236c3404d56c40239e38085afe0">   10</a></span>&#160;std::vector&lt;AtHit&gt; <a class="code" href="classAtTools_1_1AtIndependentSample.html#a830ed236c3404d56c40239e38085afe0">AtIndependentSample::SampleHits</a>(<span class="keywordtype">int</span> N)</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;   <span class="comment">// Using the sampled indices, return a vector of positions</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;   std::vector&lt;AtHit&gt; ret;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;   <span class="keywordflow">for</span> (<span class="keyword">auto</span> ind : <a class="code" href="classAtTools_1_1AtSample.html#a715d0b85af79dc0cdf50224761ed952f">sampleIndicesFromCDF</a>(N))</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;      ret.push_back(<a class="code" href="classAtTools_1_1AtSample.html#a0ca04f396460999bf52e62a53ac81e5d">fHits</a>-&gt;at(ind));</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;   <span class="keywordflow">return</span> ret;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;}</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classAtTools_1_1AtIndependentSample.html#a93c3b41181ebfa4cfe02a4fac6a36fdf">   19</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classAtTools_1_1AtIndependentSample.html#a93c3b41181ebfa4cfe02a4fac6a36fdf">AtIndependentSample::SetHitsToSample</a>(<span class="keyword">const</span> std::vector&lt;AtHit&gt; *hits)</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;   <a class="code" href="classAtTools_1_1AtSample.html#a0ca04f396460999bf52e62a53ac81e5d">fHits</a> = hits;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;   <a class="code" href="classAtTools_1_1AtSample.html#a87603152013f66ed93fab1cdf72126c6">FillCDF</a>();</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;}</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="classAtTools_1_1AtIndependentSample.html#a93c3b41181ebfa4cfe02a4fac6a36fdf">    8</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classAtTools_1_1AtIndependentSample.html#a93c3b41181ebfa4cfe02a4fac6a36fdf">AtIndependentSample::SetHitsToSample</a>(<span class="keyword">const</span> std::vector&lt;AtHit&gt; *hits)</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;   <a class="code" href="classAtTools_1_1AtSample.html#a0ca04f396460999bf52e62a53ac81e5d">fHits</a> = hits;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;   <a class="code" href="classAtTools_1_1AtSample.html#a87603152013f66ed93fab1cdf72126c6">FillCDF</a>();</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclassAtTools_1_1AtSample_html_a87603152013f66ed93fab1cdf72126c6"><div class="ttname"><a href="classAtTools_1_1AtSample.html#a87603152013f66ed93fab1cdf72126c6">AtTools::AtSample::FillCDF</a></div><div class="ttdeci">void FillCDF()</div><div class="ttdef"><b>Definition:</b> <a href="AtSample_8cxx_source.html#l00051">AtSample.cxx:51</a></div></div>
+<div class="ttc" id="aclassAtTools_1_1AtSample_html_a87603152013f66ed93fab1cdf72126c6"><div class="ttname"><a href="classAtTools_1_1AtSample.html#a87603152013f66ed93fab1cdf72126c6">AtTools::AtSample::FillCDF</a></div><div class="ttdeci">void FillCDF()</div><div class="ttdef"><b>Definition:</b> <a href="AtSample_8cxx_source.html#l00105">AtSample.cxx:105</a></div></div>
 <div class="ttc" id="aAtHit_8h_html"><div class="ttname"><a href="AtHit_8h.html">AtHit.h</a></div></div>
-<div class="ttc" id="aclassAtTools_1_1AtSample_html_a715d0b85af79dc0cdf50224761ed952f"><div class="ttname"><a href="classAtTools_1_1AtSample.html#a715d0b85af79dc0cdf50224761ed952f">AtTools::AtSample::sampleIndicesFromCDF</a></div><div class="ttdeci">std::vector&lt; int &gt; sampleIndicesFromCDF(int N, const std::vector&lt; int &gt; &amp;vetoed={})</div><div class="ttdef"><b>Definition:</b> <a href="AtSample_8cxx_source.html#l00028">AtSample.cxx:28</a></div></div>
 <div class="ttc" id="anamespaceAtTools_html"><div class="ttname"><a href="namespaceAtTools.html">AtTools</a></div><div class="ttdef"><b>Definition:</b> <a href="AtELossManager_8h_source.html#l00022">AtELossManager.h:22</a></div></div>
-<div class="ttc" id="aclassAtTools_1_1AtIndependentSample_html_a830ed236c3404d56c40239e38085afe0"><div class="ttname"><a href="classAtTools_1_1AtIndependentSample.html#a830ed236c3404d56c40239e38085afe0">AtTools::AtIndependentSample::SampleHits</a></div><div class="ttdeci">virtual std::vector&lt; AtHit &gt; SampleHits(int N) override</div><div class="ttdef"><b>Definition:</b> <a href="AtIndependentSample_8cxx_source.html#l00010">AtIndependentSample.cxx:10</a></div></div>
 <div class="ttc" id="aAtIndependentSample_8h_html"><div class="ttname"><a href="AtIndependentSample_8h.html">AtIndependentSample.h</a></div></div>
 <div class="ttc" id="aclassAtTools_1_1AtSample_html_a0ca04f396460999bf52e62a53ac81e5d"><div class="ttname"><a href="classAtTools_1_1AtSample.html#a0ca04f396460999bf52e62a53ac81e5d">AtTools::AtSample::fHits</a></div><div class="ttdeci">const std::vector&lt; AtHit &gt; * fHits</div><div class="ttdef"><b>Definition:</b> <a href="AtSample_8h_source.html#l00020">AtSample.h:20</a></div></div>
-<div class="ttc" id="aclassAtTools_1_1AtIndependentSample_html_a93c3b41181ebfa4cfe02a4fac6a36fdf"><div class="ttname"><a href="classAtTools_1_1AtIndependentSample.html#a93c3b41181ebfa4cfe02a4fac6a36fdf">AtTools::AtIndependentSample::SetHitsToSample</a></div><div class="ttdeci">virtual void SetHitsToSample(const std::vector&lt; AtHit &gt; *hits) override</div><div class="ttdef"><b>Definition:</b> <a href="AtIndependentSample_8cxx_source.html#l00019">AtIndependentSample.cxx:19</a></div></div>
+<div class="ttc" id="aclassAtTools_1_1AtIndependentSample_html_a93c3b41181ebfa4cfe02a4fac6a36fdf"><div class="ttname"><a href="classAtTools_1_1AtIndependentSample.html#a93c3b41181ebfa4cfe02a4fac6a36fdf">AtTools::AtIndependentSample::SetHitsToSample</a></div><div class="ttdeci">virtual void SetHitsToSample(const std::vector&lt; AtHit &gt; *hits) override</div><div class="ttdef"><b>Definition:</b> <a href="AtIndependentSample_8cxx_source.html#l00008">AtIndependentSample.cxx:8</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun May 8 2022 23:41:47 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon May 9 2022 17:12:51 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

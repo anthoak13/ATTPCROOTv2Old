@@ -76,24 +76,26 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:adabad5d28da09cc90458c84cac1ab39e"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtSampleEstimator.html#adabad5d28da09cc90458c84cac1ab39e">Estimator</a> { <a class="el" href="classAtSampleEstimator.html#adabad5d28da09cc90458c84cac1ab39eaebb961fd102cb47ca4be06d977086dcd">Estimator::kRANSAC</a>, 
-<a class="el" href="classAtSampleEstimator.html#adabad5d28da09cc90458c84cac1ab39eaa0b526ae4e2054e8fb229a1744c527a9">Estimator::kLMedS</a>, 
-<a class="el" href="classAtSampleEstimator.html#adabad5d28da09cc90458c84cac1ab39ea7624a3dbfe0b98ea33b3a64138bb694b">Estimator::kMLESAC</a>
+<tr class="memitem:a358f197ca03ef21b57ad97c05d5e0fae"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtSampleEstimator.html#a358f197ca03ef21b57ad97c05d5e0fae">Estimators</a> { <a class="el" href="classAtSampleEstimator.html#a358f197ca03ef21b57ad97c05d5e0faeaebb961fd102cb47ca4be06d977086dcd">Estimators::kRANSAC</a>, 
+<a class="el" href="classAtSampleEstimator.html#a358f197ca03ef21b57ad97c05d5e0faeaa0b526ae4e2054e8fb229a1744c527a9">Estimators::kLMedS</a>, 
+<a class="el" href="classAtSampleEstimator.html#a358f197ca03ef21b57ad97c05d5e0faea7624a3dbfe0b98ea33b3a64138bb694b">Estimators::kMLESAC</a>
  }</td></tr>
-<tr class="separator:adabad5d28da09cc90458c84cac1ab39e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:a358f197ca03ef21b57ad97c05d5e0fae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implemented estimators for sample consensus.  <a href="classAtSampleEstimator.html#a358f197ca03ef21b57ad97c05d5e0fae">More...</a><br /></td></tr>
+<tr class="separator:a358f197ca03ef21b57ad97c05d5e0fae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a949aaae129dd302c47710dd1215bb400"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtSampleEstimator.html#a949aaae129dd302c47710dd1215bb400">EvaluateModel</a> (<a class="el" href="classAtPattern.html">AtPattern</a> *model, const std::vector&lt; <a class="el" href="classAtHit.html">AtHit</a> &gt; &amp;hits, double distThresh, <a class="el" href="classAtSampleEstimator.html#adabad5d28da09cc90458c84cac1ab39e">Estimator</a> estimator=<a class="el" href="classAtSampleEstimator.html#adabad5d28da09cc90458c84cac1ab39eaebb961fd102cb47ca4be06d977086dcd">Estimator::kRANSAC</a>)</td></tr>
-<tr class="memdesc:a949aaae129dd302c47710dd1215bb400"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate how well model describes hits.  <a href="classAtSampleEstimator.html#a949aaae129dd302c47710dd1215bb400">More...</a><br /></td></tr>
-<tr class="separator:a949aaae129dd302c47710dd1215bb400"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a486359bd0699a8fa5139095c74599c40"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtSampleEstimator.html#a486359bd0699a8fa5139095c74599c40">EvaluateModel</a> (<a class="el" href="classAtPattern.html">AtPattern</a> *model, const std::vector&lt; <a class="el" href="classAtHit.html">AtHit</a> &gt; &amp;hits, double distThresh, <a class="el" href="classAtSampleEstimator.html#a358f197ca03ef21b57ad97c05d5e0fae">Estimators</a> estimator)</td></tr>
+<tr class="memdesc:a486359bd0699a8fa5139095c74599c40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate how well model describes hits.  <a href="classAtSampleEstimator.html#a486359bd0699a8fa5139095c74599c40">More...</a><br /></td></tr>
+<tr class="separator:a486359bd0699a8fa5139095c74599c40"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="AtSampleEstimator_8h_source.html#l00008">8</a> of file <a class="el" href="AtSampleEstimator_8h_source.html">AtSampleEstimator.h</a>.</p>
+<div class="textblock"><p>Static class for calling the correct estimator based on the enum Enum definition and implementation is in <a class="el" href="AtEstimatorMethods_8h.html">AtEstimatorMethods.h</a> </p>
+
+<p class="definition">Definition at line <a class="el" href="AtSampleEstimator_8h_source.html#l00020">20</a> of file <a class="el" href="AtSampleEstimator_8h_source.html">AtSampleEstimator.h</a>.</p>
 </div><h2 class="groupheader">Member Enumeration Documentation</h2>
-<a id="adabad5d28da09cc90458c84cac1ab39e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adabad5d28da09cc90458c84cac1ab39e">&#9670;&nbsp;</a></span>Estimator</h2>
+<a id="a358f197ca03ef21b57ad97c05d5e0fae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a358f197ca03ef21b57ad97c05d5e0fae">&#9670;&nbsp;</a></span>Estimators</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -102,7 +104,7 @@ Static Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="classAtSampleEstimator.html#adabad5d28da09cc90458c84cac1ab39e">AtSampleEstimator::Estimator</a></td>
+          <td class="memname">enum <a class="el" href="classAtSampleEstimator.html#a358f197ca03ef21b57ad97c05d5e0fae">AtSampleEstimator::Estimators</a></td>
         </tr>
       </table>
   </td>
@@ -111,19 +113,21 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Implemented estimators for sample consensus. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="adabad5d28da09cc90458c84cac1ab39eaebb961fd102cb47ca4be06d977086dcd"></a>kRANSAC&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="adabad5d28da09cc90458c84cac1ab39eaa0b526ae4e2054e8fb229a1744c527a9"></a>kLMedS&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="adabad5d28da09cc90458c84cac1ab39ea7624a3dbfe0b98ea33b3a64138bb694b"></a>kMLESAC&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a358f197ca03ef21b57ad97c05d5e0faeaebb961fd102cb47ca4be06d977086dcd"></a>kRANSAC&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a358f197ca03ef21b57ad97c05d5e0faeaa0b526ae4e2054e8fb229a1744c527a9"></a>kLMedS&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a358f197ca03ef21b57ad97c05d5e0faea7624a3dbfe0b98ea33b3a64138bb694b"></a>kMLESAC&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="AtSampleEstimator_8h_source.html#l00011">11</a> of file <a class="el" href="AtSampleEstimator_8h_source.html">AtSampleEstimator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtEstimatorMethods_8h_source.html#l00009">9</a> of file <a class="el" href="AtEstimatorMethods_8h_source.html">AtEstimatorMethods.h</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a949aaae129dd302c47710dd1215bb400"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a949aaae129dd302c47710dd1215bb400">&#9670;&nbsp;</a></span>EvaluateModel()</h2>
+<a id="a486359bd0699a8fa5139095c74599c40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a486359bd0699a8fa5139095c74599c40">&#9670;&nbsp;</a></span>EvaluateModel()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -152,8 +156,8 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classAtSampleEstimator.html#adabad5d28da09cc90458c84cac1ab39e">Estimator</a>&#160;</td>
-          <td class="paramname"><em>estimator</em> = <code><a class="el" href="classAtSampleEstimator.html#adabad5d28da09cc90458c84cac1ab39eaebb961fd102cb47ca4be06d977086dcd">Estimator::kRANSAC</a></code>&#160;</td>
+          <td class="paramtype"><a class="el" href="classAtSampleEstimator.html#a358f197ca03ef21b57ad97c05d5e0fae">Estimators</a>&#160;</td>
+          <td class="paramname"><em>estimator</em> = <code><a class="el" href="classAtSampleEstimator.html#a358f197ca03ef21b57ad97c05d5e0faeaebb961fd102cb47ca4be06d977086dcd">Estimators::kRANSAC</a></code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -180,7 +184,7 @@ Static Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Number of points consistent with model in hits </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="AtSampleEstimator_8cxx_source.html#l00131">131</a> of file <a class="el" href="AtSampleEstimator_8cxx_source.html">AtSampleEstimator.cxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtSampleEstimator_8cxx_source.html#l00008">8</a> of file <a class="el" href="AtSampleEstimator_8cxx_source.html">AtSampleEstimator.cxx</a>.</p>
 
 </div>
 </div>
@@ -191,7 +195,7 @@ Static Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun May 8 2022 23:41:48 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon May 9 2022 17:12:52 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

@@ -243,7 +243,7 @@ $(function() {
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;}</div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160; </div>
 <div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;std::vector&lt;AtRandomSample::XYZPoint&gt;</div>
-<div class="line"><a name="l00187"></a><span class="lineno"><a class="line" href="classAtRandomSample.html#a88a2ec96b116b6a8aeb444dea580d155">  187</a></span>&#160;<a class="code" href="classAtRandomSample.html#a88a2ec96b116b6a8aeb444dea580d155">AtRandomSample::SamplePoints</a>(<span class="keywordtype">int</span> N, <span class="keyword">const</span> std::vector&lt;AtHit&gt; &amp;hits, <a class="code" href="classAtRandomSample.html#a845362f1f34a534234e4422402450170">SampleMethod</a> mode = SampleMethod::kUniform)</div>
+<div class="line"><a name="l00187"></a><span class="lineno"><a class="line" href="classAtRandomSample.html#a88a2ec96b116b6a8aeb444dea580d155">  187</a></span>&#160;<a class="code" href="classAtRandomSample.html#a88a2ec96b116b6a8aeb444dea580d155">AtRandomSample::SamplePoints</a>(<span class="keywordtype">int</span> N, <span class="keyword">const</span> std::vector&lt;AtHit&gt; &amp;hits, <a class="code" href="classAtRandomSample.html#a845362f1f34a534234e4422402450170">SampleMethod</a> mode = <a class="code" href="group__AtHitSampling.html#gga5f814e6032faa15b7970aa59c106444da3ea9f7aca87fd7b64469a0d1119f0b50">SampleMethod::kUniform</a>)</div>
 <div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;{</div>
 <div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;   <span class="keywordflow">switch</span> (mode) {</div>
 <div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;   <span class="keywordflow">case</span> (<a class="code" href="classAtRandomSample.html#a845362f1f34a534234e4422402450170a3ea9f7aca87fd7b64469a0d1119f0b50">SampleMethod::kUniform</a>): <span class="keywordflow">return</span> <a class="code" href="classAtRandomSample_1_1AtRandomSample__impl.html#a4a1651b7b4c5ec51e7133600225efcfb">AtRandomSample_impl::sampleUniform</a>(N, hits);</div>
@@ -263,6 +263,7 @@ $(function() {
 <div class="ttc" id="aclassAtRandomSample_html_a845362f1f34a534234e4422402450170"><div class="ttname"><a href="classAtRandomSample.html#a845362f1f34a534234e4422402450170">AtRandomSample::SampleMethod</a></div><div class="ttdeci">SampleMethod</div><div class="ttdef"><b>Definition:</b> <a href="AtRandomSample_8h_source.html#l00014">AtRandomSample.h:14</a></div></div>
 <div class="ttc" id="aclassAtRandomSample_html_a845362f1f34a534234e4422402450170ab933cd0242085c2dbf804dbf288ce7f0"><div class="ttname"><a href="classAtRandomSample.html#a845362f1f34a534234e4422402450170ab933cd0242085c2dbf804dbf288ce7f0">AtRandomSample::SampleMethod::kGaussian</a></div><div class="ttdeci">@ kGaussian</div></div>
 <div class="ttc" id="aclassAtRandomSample_html_a845362f1f34a534234e4422402450170a3ea9f7aca87fd7b64469a0d1119f0b50"><div class="ttname"><a href="classAtRandomSample.html#a845362f1f34a534234e4422402450170a3ea9f7aca87fd7b64469a0d1119f0b50">AtRandomSample::SampleMethod::kUniform</a></div><div class="ttdeci">@ kUniform</div></div>
+<div class="ttc" id="agroup__AtHitSampling_html_gga5f814e6032faa15b7970aa59c106444da3ea9f7aca87fd7b64469a0d1119f0b50"><div class="ttname"><a href="group__AtHitSampling.html#gga5f814e6032faa15b7970aa59c106444da3ea9f7aca87fd7b64469a0d1119f0b50">AtTools::AtSample::SampleMethod::kUniform</a></div><div class="ttdeci">@ kUniform</div></div>
 <div class="ttc" id="aclassAtRandomSample_1_1AtRandomSample__impl_html"><div class="ttname"><a href="classAtRandomSample_1_1AtRandomSample__impl.html">AtRandomSample::AtRandomSample_impl</a></div><div class="ttdef"><b>Definition:</b> <a href="AtRandomSample_8cxx_source.html#l00014">AtRandomSample.cxx:14</a></div></div>
 <div class="ttc" id="aAtHit_8h_html"><div class="ttname"><a href="AtHit_8h.html">AtHit.h</a></div></div>
 <div class="ttc" id="almfit_8cxx_html_acccf7a109398c69e4d333b4322df36d9"><div class="ttname"><a href="lmfit_8cxx.html#acccf7a109398c69e4d333b4322df36d9">gauss</a></div><div class="ttdeci">double gauss(double x, const double *p)</div><div class="ttdef"><b>Definition:</b> <a href="lmfit_8cxx_source.html#l00021">lmfit.cxx:21</a></div></div>
@@ -278,7 +279,7 @@ $(function() {
 <div class="ttc" id="aclassAtRandomSample_html_a845362f1f34a534234e4422402450170a2135eaef891c9a81636d3273e059f9cc"><div class="ttname"><a href="classAtRandomSample.html#a845362f1f34a534234e4422402450170a2135eaef891c9a81636d3273e059f9cc">AtRandomSample::SampleMethod::kWeighted</a></div><div class="ttdeci">@ kWeighted</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun May 8 2022 23:41:47 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon May 9 2022 17:12:51 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

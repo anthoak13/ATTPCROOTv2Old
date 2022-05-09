@@ -112,18 +112,20 @@ Collaboration diagram for AtTools::AtSample:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a5f814e6032faa15b7970aa59c106444d"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtTools_1_1AtSample.html#a5f814e6032faa15b7970aa59c106444d">SampleMethod</a> { <a class="el" href="classAtTools_1_1AtSample.html#a5f814e6032faa15b7970aa59c106444da3ea9f7aca87fd7b64469a0d1119f0b50">SampleMethod::kUniform</a> = 0, 
-<a class="el" href="classAtTools_1_1AtSample.html#a5f814e6032faa15b7970aa59c106444daf305214d62cc60adbf7708e548e0fe45">SampleMethod::kChargeWeighted</a> = 1, 
-<a class="el" href="classAtTools_1_1AtSample.html#a5f814e6032faa15b7970aa59c106444dab933cd0242085c2dbf804dbf288ce7f0">SampleMethod::kGaussian</a> = 2, 
-<a class="el" href="classAtTools_1_1AtSample.html#a5f814e6032faa15b7970aa59c106444dadff460d312ef7227d6e8fa577dd4a5c8">SampleMethod::kWeightedGaussian</a> = 3
+<tr class="memitem:ga5f814e6032faa15b7970aa59c106444d"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__AtHitSampling.html#ga5f814e6032faa15b7970aa59c106444d">SampleMethod</a> { <a class="el" href="group__AtHitSampling.html#gga5f814e6032faa15b7970aa59c106444da3ea9f7aca87fd7b64469a0d1119f0b50">SampleMethod::kUniform</a> = 0, 
+<a class="el" href="group__AtHitSampling.html#gga5f814e6032faa15b7970aa59c106444daf305214d62cc60adbf7708e548e0fe45">SampleMethod::kChargeWeighted</a> = 1, 
+<a class="el" href="group__AtHitSampling.html#gga5f814e6032faa15b7970aa59c106444dab933cd0242085c2dbf804dbf288ce7f0">SampleMethod::kGaussian</a> = 2, 
+<a class="el" href="group__AtHitSampling.html#gga5f814e6032faa15b7970aa59c106444dadff460d312ef7227d6e8fa577dd4a5c8">SampleMethod::kWeightedGaussian</a> = 3
  }</td></tr>
-<tr class="separator:a5f814e6032faa15b7970aa59c106444d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:ga5f814e6032faa15b7970aa59c106444d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a1edb786d251e966458e565fcacb6f1a5"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="classAtHit.html">AtHit</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtTools_1_1AtSample.html#a1edb786d251e966458e565fcacb6f1a5">SampleHits</a> (int N)=0</td></tr>
-<tr class="separator:a1edb786d251e966458e565fcacb6f1a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05f973bb9f6201604cc53c4a5a607963"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="classAtHit.html">AtHit</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtTools_1_1AtSample.html#a05f973bb9f6201604cc53c4a5a607963">SampleHits</a> (int N)</td></tr>
+<tr class="memdesc:a05f973bb9f6201604cc53c4a5a607963"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sample hits (<a class="el" href="classAtHit.html">AtHit</a>) from fHits.  <a href="classAtTools_1_1AtSample.html#a05f973bb9f6201604cc53c4a5a607963">More...</a><br /></td></tr>
+<tr class="separator:a05f973bb9f6201604cc53c4a5a607963"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e128b16a1ea75af270cc7ec56ac0184"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="AtSpaceChargeModel_8h.html#acdbe604dea12970b4e97a316f9046ae7">ROOT::Math::XYZPoint</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtTools_1_1AtSample.html#a8e128b16a1ea75af270cc7ec56ac0184">SamplePoints</a> (int N)</td></tr>
+<tr class="memdesc:a8e128b16a1ea75af270cc7ec56ac0184"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sample spacial locations (XYZPoints) from fHits.  <a href="classAtTools_1_1AtSample.html#a8e128b16a1ea75af270cc7ec56ac0184">More...</a><br /></td></tr>
 <tr class="separator:a8e128b16a1ea75af270cc7ec56ac0184"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a495c5f15ddf81726103a2b5665593a81"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtTools_1_1AtSample.html#a495c5f15ddf81726103a2b5665593a81">SetHitsToSample</a> (const std::vector&lt; <a class="el" href="classAtHit.html">AtHit</a> &gt; *hits)=0</td></tr>
 <tr class="separator:a495c5f15ddf81726103a2b5665593a81"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -132,8 +134,8 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a52bbdfaa64f75e322aaeec586ea375fc"><td class="memItemLeft" align="right" valign="top">static std::unique_ptr&lt; <a class="el" href="classAtTools_1_1AtSample.html">AtSample</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtTools_1_1AtSample.html#a52bbdfaa64f75e322aaeec586ea375fc">CreateSampler</a> (<a class="el" href="classAtTools_1_1AtSample.html#a5f814e6032faa15b7970aa59c106444d">SampleMethod</a> method)</td></tr>
-<tr class="separator:a52bbdfaa64f75e322aaeec586ea375fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga52bbdfaa64f75e322aaeec586ea375fc"><td class="memItemLeft" align="right" valign="top">static std::unique_ptr&lt; <a class="el" href="classAtTools_1_1AtSample.html">AtSample</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__AtHitSampling.html#ga52bbdfaa64f75e322aaeec586ea375fc">CreateSampler</a> (<a class="el" href="group__AtHitSampling.html#ga5f814e6032faa15b7970aa59c106444d">SampleMethod</a> method)</td></tr>
+<tr class="separator:ga52bbdfaa64f75e322aaeec586ea375fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -141,8 +143,11 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:a2286b0cbd39652c5c59e696fbd9ff466"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a87603152013f66ed93fab1cdf72126c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtTools_1_1AtSample.html#a87603152013f66ed93fab1cdf72126c6">FillCDF</a> ()</td></tr>
 <tr class="separator:a87603152013f66ed93fab1cdf72126c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a715d0b85af79dc0cdf50224761ed952f"><td class="memItemLeft" align="right" valign="top">std::vector&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtTools_1_1AtSample.html#a715d0b85af79dc0cdf50224761ed952f">sampleIndicesFromCDF</a> (int N, const std::vector&lt; int &gt; &amp;vetoed={})</td></tr>
-<tr class="separator:a715d0b85af79dc0cdf50224761ed952f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7161a2cfa3053d71e96ccc26a71afe9e"><td class="memItemLeft" align="right" valign="top">std::vector&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtTools_1_1AtSample.html#a7161a2cfa3053d71e96ccc26a71afe9e">sampleIndicesFromCDF</a> (int N, std::vector&lt; int &gt; vetoed={})</td></tr>
+<tr class="separator:a7161a2cfa3053d71e96ccc26a71afe9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a967365883bf2c7ccbdf215793a3542b3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtTools_1_1AtSample.html#a967365883bf2c7ccbdf215793a3542b3">getIndexFromCDF</a> (double r, double rmCFD, std::vector&lt; int &gt; vetoed)</td></tr>
+<tr class="memdesc:a967365883bf2c7ccbdf215793a3542b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the index i where CDF[i] &gt;= r and CDF[i-1] &lt; r.  <a href="classAtTools_1_1AtSample.html#a967365883bf2c7ccbdf215793a3542b3">More...</a><br /></td></tr>
+<tr class="separator:a967365883bf2c7ccbdf215793a3542b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
@@ -163,66 +168,7 @@ Protected Attributes</h2></td></tr>
 <div class="textblock"><p>Interface for randomly sampling a collection of AtHits according to the cumulitive distribution function fCDF. </p>
 
 <p class="definition">Definition at line <a class="el" href="AtSample_8h_source.html#l00018">18</a> of file <a class="el" href="AtSample_8h_source.html">AtSample.h</a>.</p>
-</div><h2 class="groupheader">Member Enumeration Documentation</h2>
-<a id="a5f814e6032faa15b7970aa59c106444d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5f814e6032faa15b7970aa59c106444d">&#9670;&nbsp;</a></span>SampleMethod</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="classAtTools_1_1AtSample.html#a5f814e6032faa15b7970aa59c106444d">AtTools::AtSample::SampleMethod</a></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a5f814e6032faa15b7970aa59c106444da3ea9f7aca87fd7b64469a0d1119f0b50"></a>kUniform&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a5f814e6032faa15b7970aa59c106444daf305214d62cc60adbf7708e548e0fe45"></a>kChargeWeighted&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a5f814e6032faa15b7970aa59c106444dab933cd0242085c2dbf804dbf288ce7f0"></a>kGaussian&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a5f814e6032faa15b7970aa59c106444dadff460d312ef7227d6e8fa577dd4a5c8"></a>kWeightedGaussian&#160;</td><td class="fielddoc"></td></tr>
-</table>
-
-<p class="definition">Definition at line <a class="el" href="AtSampleMethods_8h_source.html#l00027">27</a> of file <a class="el" href="AtSampleMethods_8h_source.html">AtSampleMethods.h</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a id="a52bbdfaa64f75e322aaeec586ea375fc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a52bbdfaa64f75e322aaeec586ea375fc">&#9670;&nbsp;</a></span>CreateSampler()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::unique_ptr&lt; <a class="el" href="classAtTools_1_1AtSample.html">AtTools::AtSample</a> &gt; AtTools::AtSample::CreateSampler </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classAtTools_1_1AtSample.html#a5f814e6032faa15b7970aa59c106444d">SampleMethod</a>&#160;</td>
-          <td class="paramname"><em>method</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="AtSampleMethods_8cxx_source.html#l00003">3</a> of file <a class="el" href="AtSampleMethods_8cxx_source.html">AtSampleMethods.cxx</a>.</p>
-
-</div>
-</div>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a87603152013f66ed93fab1cdf72126c6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a87603152013f66ed93fab1cdf72126c6">&#9670;&nbsp;</a></span>FillCDF()</h2>
 
@@ -248,7 +194,61 @@ Protected Attributes</h2></td></tr>
 <p>Fill the cumulitive distribution function to sample using the marginal PDFs returned by the function <a class="el" href="classAtTools_1_1AtSample.html#a2286b0cbd39652c5c59e696fbd9ff466">PDF(const AtHit &amp;hit)</a> from every entry in the vector fHits.</p>
 <p>Each marginal PDF is normalized to construct the final CDF. Assumes the marginal PDFs are independent (i.e. the joint PDF is just the product of all marginal PDFs) </p>
 
-<p class="definition">Definition at line <a class="el" href="AtSample_8cxx_source.html#l00051">51</a> of file <a class="el" href="AtSample_8cxx_source.html">AtSample.cxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtSample_8cxx_source.html#l00105">105</a> of file <a class="el" href="AtSample_8cxx_source.html">AtSample.cxx</a>.</p>
+
+</div>
+</div>
+<a id="a967365883bf2c7ccbdf215793a3542b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a967365883bf2c7ccbdf215793a3542b3">&#9670;&nbsp;</a></span>getIndexFromCDF()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int AtSample::getIndexFromCDF </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>rmCFD</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; int &gt;&#160;</td>
+          <td class="paramname"><em>vetoed</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the index i where CDF[i] &gt;= r and CDF[i-1] &lt; r. </p>
+<p>Loop through fCDF, skipping any index in vetoed, for the index that corresponds to r So need to track what indices are not allowed (vetoed) and the amount of the CDF that has been removed (i.e. sum of PDFs for all removed indices). (rmCDF) The new CDF is then oldCDF/(1-rmCDF) We then need to loop through CDF and look for index where CDF[i] &gt;= r</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">r</td><td>Random number between [0,1) to compare to fCDF </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">vetoed</td><td>Indices to ignore while searching fCDF </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="AtSample_8cxx_source.html#l00049">49</a> of file <a class="el" href="AtSample_8cxx_source.html">AtSample.cxx</a>.</p>
 
 </div>
 </div>
@@ -288,7 +288,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtSample_8h_source.html#l00050">50</a> of file <a class="el" href="AtSample_8h_source.html">AtSample.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtSample_8h_source.html#l00051">51</a> of file <a class="el" href="AtSample_8h_source.html">AtSample.h</a>.</p>
 
 </div>
 </div>
@@ -323,8 +323,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a1edb786d251e966458e565fcacb6f1a5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1edb786d251e966458e565fcacb6f1a5">&#9670;&nbsp;</a></span>SampleHits()</h2>
+<a id="a05f973bb9f6201604cc53c4a5a607963"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05f973bb9f6201604cc53c4a5a607963">&#9670;&nbsp;</a></span>SampleHits()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -333,7 +333,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual std::vector&lt;<a class="el" href="classAtHit.html">AtHit</a>&gt; AtTools::AtSample::SampleHits </td>
+          <td class="memname">std::vector&lt; <a class="el" href="classAtHit.html">AtHit</a> &gt; AtSample::SampleHits </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>N</em></td><td>)</td>
@@ -342,17 +342,22 @@ template&lt;typename T &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classAtTools_1_1AtSampleFromReference.html#afb3c4068a6e802fa7ca08b816e4efff4">AtTools::AtSampleFromReference</a>, and <a class="el" href="classAtTools_1_1AtIndependentSample.html#a830ed236c3404d56c40239e38085afe0">AtTools::AtIndependentSample</a>.</p>
+<p>Sample hits (<a class="el" href="classAtHit.html">AtHit</a>) from fHits. </p>
+<p>Assumes fCDF is already setup and we are just using it. </p>
+
+<p>Reimplemented in <a class="el" href="classAtTools_1_1AtSampleFromReference.html#afb3c4068a6e802fa7ca08b816e4efff4">AtTools::AtSampleFromReference</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="AtSample_8cxx_source.html#l00015">15</a> of file <a class="el" href="AtSample_8cxx_source.html">AtSample.cxx</a>.</p>
 
 </div>
 </div>
-<a id="a715d0b85af79dc0cdf50224761ed952f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a715d0b85af79dc0cdf50224761ed952f">&#9670;&nbsp;</a></span>sampleIndicesFromCDF()</h2>
+<a id="a7161a2cfa3053d71e96ccc26a71afe9e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7161a2cfa3053d71e96ccc26a71afe9e">&#9670;&nbsp;</a></span>sampleIndicesFromCDF()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -369,7 +374,7 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const std::vector&lt; int &gt; &amp;&#160;</td>
+          <td class="paramtype">std::vector&lt; int &gt;&#160;</td>
           <td class="paramname"><em>vetoed</em> = <code>{}</code>&#160;</td>
         </tr>
         <tr>
@@ -387,13 +392,13 @@ template&lt;typename T &gt; </div>
 <p>Get a list of indices aampled according to the constructed fCDF (assumes <a class="el" href="classAtTools_1_1AtSample.html#a87603152013f66ed93fab1cdf72126c6">FillCDF()</a> has been called already)</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">N</td><td>number of points to sample. If sampling without replacement this should be small compared to the total number of hits in the hit array. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">N</td><td>number of pcoints to sample. If sampling without replacement this should be small compared to the total number of hits in the hit array. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">vetoed</td><td>Indices to not sample (even if sampling with replacement). </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="AtSample_8cxx_source.html#l00028">28</a> of file <a class="el" href="AtSample_8cxx_source.html">AtSample.cxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtSample_8cxx_source.html#l00070">70</a> of file <a class="el" href="AtSample_8cxx_source.html">AtSample.cxx</a>.</p>
 
 </div>
 </div>
@@ -412,9 +417,11 @@ template&lt;typename T &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Sample spacial locations (XYZPoints) from fHits. </p>
 
-<p class="definition">Definition at line <a class="el" href="AtSample_8cxx_source.html#l00013">13</a> of file <a class="el" href="AtSample_8cxx_source.html">AtSample.cxx</a>.</p>
+<p>Sample spacial locations (XYZPoints) from fHits. </p>
+<p>Calls <a class="el" href="classAtTools_1_1AtSample.html#a05f973bb9f6201604cc53c4a5a607963" title="Sample hits (AtHit) from fHits.">SampleHits(int N)</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="AtSample_8cxx_source.html#l00029">29</a> of file <a class="el" href="AtSample_8cxx_source.html">AtSample.cxx</a>.</p>
 
 </div>
 </div>
@@ -555,7 +562,7 @@ template&lt;typename T &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun May 8 2022 23:41:48 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon May 9 2022 17:12:52 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

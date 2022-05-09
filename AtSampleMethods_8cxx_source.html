@@ -73,23 +73,34 @@ $(function() {
 <div class="contents">
 <a href="AtSampleMethods_8cxx.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="AtSampleMethods_8h.html">AtSampleMethods.h</a>&quot;</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno"><a class="line" href="classAtTools_1_1AtSample.html#a52bbdfaa64f75e322aaeec586ea375fc">    3</a></span>&#160;std::unique_ptr&lt;AtTools::AtSample&gt; <a class="code" href="classAtTools_1_1AtSample.html#a52bbdfaa64f75e322aaeec586ea375fc">AtTools::AtSample::CreateSampler</a>(<a class="code" href="classAtTools_1_1AtSample.html#a5f814e6032faa15b7970aa59c106444d">SampleMethod</a> method)</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;{</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;   <span class="keywordflow">switch</span> (method) {</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;   <span class="keywordflow">case</span> <a class="code" href="classAtTools_1_1AtSample.html#a5f814e6032faa15b7970aa59c106444da3ea9f7aca87fd7b64469a0d1119f0b50">SampleMethod::kUniform</a>: <span class="keywordflow">return</span> std::make_unique&lt;AtUniform&gt;();</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;   <span class="keywordflow">case</span> <a class="code" href="classAtTools_1_1AtSample.html#a5f814e6032faa15b7970aa59c106444daf305214d62cc60adbf7708e548e0fe45">SampleMethod::kChargeWeighted</a>: <span class="keywordflow">return</span> std::make_unique&lt;AtChargeWeighted&gt;();</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;   <span class="keywordflow">default</span>: <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;   }</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;}</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="AtChargeWeighted_8h.html">AtChargeWeighted.h</a>&quot;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="AtGaussian_8h.html">AtGaussian.h</a>&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="AtSample_8h.html">AtSample.h</a>&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="AtUniform_8h.html">AtUniform.h</a>&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="AtWeightedGaussian_8h.html">AtWeightedGaussian.h</a>&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="group__AtHitSampling.html#ga52bbdfaa64f75e322aaeec586ea375fc">   15</a></span>&#160;std::unique_ptr&lt;AtTools::AtSample&gt; <a class="code" href="group__AtHitSampling.html#ga52bbdfaa64f75e322aaeec586ea375fc">AtTools::AtSample::CreateSampler</a>(<a class="code" href="group__AtHitSampling.html#ga5f814e6032faa15b7970aa59c106444d">SampleMethod</a> method)</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;   <span class="keywordflow">switch</span> (method) {</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;   <span class="keywordflow">case</span> <a class="code" href="group__AtHitSampling.html#gga5f814e6032faa15b7970aa59c106444da3ea9f7aca87fd7b64469a0d1119f0b50">SampleMethod::kUniform</a>: <span class="keywordflow">return</span> std::make_unique&lt;AtUniform&gt;();</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;   <span class="keywordflow">case</span> <a class="code" href="group__AtHitSampling.html#gga5f814e6032faa15b7970aa59c106444daf305214d62cc60adbf7708e548e0fe45">SampleMethod::kChargeWeighted</a>: <span class="keywordflow">return</span> std::make_unique&lt;AtChargeWeighted&gt;();</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;   <span class="keywordflow">default</span>: <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;   }</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclassAtTools_1_1AtSample_html_a5f814e6032faa15b7970aa59c106444d"><div class="ttname"><a href="classAtTools_1_1AtSample.html#a5f814e6032faa15b7970aa59c106444d">AtTools::AtSample::SampleMethod</a></div><div class="ttdeci">SampleMethod</div><div class="ttdef"><b>Definition:</b> <a href="AtSampleMethods_8h_source.html#l00027">AtSampleMethods.h:27</a></div></div>
-<div class="ttc" id="aclassAtTools_1_1AtSample_html_a5f814e6032faa15b7970aa59c106444daf305214d62cc60adbf7708e548e0fe45"><div class="ttname"><a href="classAtTools_1_1AtSample.html#a5f814e6032faa15b7970aa59c106444daf305214d62cc60adbf7708e548e0fe45">AtTools::AtSample::SampleMethod::kChargeWeighted</a></div><div class="ttdeci">@ kChargeWeighted</div></div>
-<div class="ttc" id="aclassAtTools_1_1AtSample_html_a5f814e6032faa15b7970aa59c106444da3ea9f7aca87fd7b64469a0d1119f0b50"><div class="ttname"><a href="classAtTools_1_1AtSample.html#a5f814e6032faa15b7970aa59c106444da3ea9f7aca87fd7b64469a0d1119f0b50">AtTools::AtSample::SampleMethod::kUniform</a></div><div class="ttdeci">@ kUniform</div></div>
-<div class="ttc" id="aclassAtTools_1_1AtSample_html_a52bbdfaa64f75e322aaeec586ea375fc"><div class="ttname"><a href="classAtTools_1_1AtSample.html#a52bbdfaa64f75e322aaeec586ea375fc">AtTools::AtSample::CreateSampler</a></div><div class="ttdeci">static std::unique_ptr&lt; AtSample &gt; CreateSampler(SampleMethod method)</div><div class="ttdef"><b>Definition:</b> <a href="AtSampleMethods_8cxx_source.html#l00003">AtSampleMethods.cxx:3</a></div></div>
+<div class="ttc" id="aAtWeightedGaussian_8h_html"><div class="ttname"><a href="AtWeightedGaussian_8h.html">AtWeightedGaussian.h</a></div></div>
+<div class="ttc" id="agroup__AtHitSampling_html_ga52bbdfaa64f75e322aaeec586ea375fc"><div class="ttname"><a href="group__AtHitSampling.html#ga52bbdfaa64f75e322aaeec586ea375fc">AtTools::AtSample::CreateSampler</a></div><div class="ttdeci">static std::unique_ptr&lt; AtSample &gt; CreateSampler(SampleMethod method)</div><div class="ttdef"><b>Definition:</b> <a href="AtSampleMethods_8cxx_source.html#l00015">AtSampleMethods.cxx:15</a></div></div>
+<div class="ttc" id="aAtChargeWeighted_8h_html"><div class="ttname"><a href="AtChargeWeighted_8h.html">AtChargeWeighted.h</a></div></div>
+<div class="ttc" id="agroup__AtHitSampling_html_gga5f814e6032faa15b7970aa59c106444da3ea9f7aca87fd7b64469a0d1119f0b50"><div class="ttname"><a href="group__AtHitSampling.html#gga5f814e6032faa15b7970aa59c106444da3ea9f7aca87fd7b64469a0d1119f0b50">AtTools::AtSample::SampleMethod::kUniform</a></div><div class="ttdeci">@ kUniform</div></div>
 <div class="ttc" id="aAtSampleMethods_8h_html"><div class="ttname"><a href="AtSampleMethods_8h.html">AtSampleMethods.h</a></div></div>
+<div class="ttc" id="aAtUniform_8h_html"><div class="ttname"><a href="AtUniform_8h.html">AtUniform.h</a></div></div>
+<div class="ttc" id="aAtGaussian_8h_html"><div class="ttname"><a href="AtGaussian_8h.html">AtGaussian.h</a></div></div>
+<div class="ttc" id="agroup__AtHitSampling_html_gga5f814e6032faa15b7970aa59c106444daf305214d62cc60adbf7708e548e0fe45"><div class="ttname"><a href="group__AtHitSampling.html#gga5f814e6032faa15b7970aa59c106444daf305214d62cc60adbf7708e548e0fe45">AtTools::AtSample::SampleMethod::kChargeWeighted</a></div><div class="ttdeci">@ kChargeWeighted</div></div>
+<div class="ttc" id="aAtSample_8h_html"><div class="ttname"><a href="AtSample_8h.html">AtSample.h</a></div></div>
+<div class="ttc" id="agroup__AtHitSampling_html_ga5f814e6032faa15b7970aa59c106444d"><div class="ttname"><a href="group__AtHitSampling.html#ga5f814e6032faa15b7970aa59c106444d">AtTools::AtSample::SampleMethod</a></div><div class="ttdeci">SampleMethod</div><div class="ttdef"><b>Definition:</b> <a href="AtSampleMethods_8h_source.html#l00023">AtSampleMethods.h:23</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun May 8 2022 23:41:47 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon May 9 2022 17:12:51 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

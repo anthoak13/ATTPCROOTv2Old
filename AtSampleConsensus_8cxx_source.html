@@ -73,149 +73,157 @@ $(function() {
 <div class="contents">
 <a href="AtSampleConsensus_8cxx.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="AtSampleConsensus_8h.html">AtSampleConsensus.h</a>&quot;</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="AtEvent_8h.html">AtEvent.h</a>&quot;</span> <span class="comment">// for AtEvent</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="AtHit_8h.html">AtHit.h</a>&quot;</span>   <span class="comment">// for AtHit</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="AtPattern_8h.html">AtPattern.h</a>&quot;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="AtPatternEvent_8h.html">AtPatternEvent.h</a>&quot;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="AtPatternTypes_8h.html">AtPatternTypes.h</a>&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="AtRandomSample_8h.html">AtRandomSample.h</a>&quot;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;Math/Point3D.h&gt;</span> <span class="comment">// for PositionVector3D</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;TMath.h&gt;</span>        <span class="comment">// for Pi</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;TRandom.h&gt;</span>      <span class="comment">// for TRandom, gRandom</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;cmath&gt;</span>    <span class="comment">// for cos, sin, pow, sqrt, fabs, exp, acos, atan</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;fstream&gt;</span>  <span class="comment">// for std</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;iterator&gt;</span> <span class="comment">// for insert_iterator, inserter</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span>   <span class="comment">// for allocator_traits&lt;&gt;::value_type</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classAtSampleConsensus.html#a2ff1654d2dfd021b7b15e11b4d911e4b">   19</a></span>&#160;<a class="code" href="classAtSampleConsensus.html#a2ff1654d2dfd021b7b15e11b4d911e4b">AtSampleConsensus::AtSampleConsensus</a>() : fPatternType(<a class="code" href="classAtPattern.html#acda6bfc7c836a0b6b8ebf58ec86efe05">PatternType</a>::kLine) {}</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="AtEstimatorMethods_8h.html">AtEstimatorMethods.h</a>&quot;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="AtEvent_8h.html">AtEvent.h</a>&quot;</span> <span class="comment">// for AtEvent</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="AtHit_8h.html">AtHit.h</a>&quot;</span>   <span class="comment">// for AtHit</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="AtPattern_8h.html">AtPattern.h</a>&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="AtPatternEvent_8h.html">AtPatternEvent.h</a>&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="AtPatternTypes_8h.html">AtPatternTypes.h</a>&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="AtSampleEstimator_8h.html">AtSampleEstimator.h</a>&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="AtSampleMethods_8h.html">AtSampleMethods.h</a>&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;Math/Point3D.h&gt;</span> <span class="comment">// for PositionVector3D</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;TMath.h&gt;</span>        <span class="comment">// for Pi</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;TRandom.h&gt;</span>      <span class="comment">// for TRandom, gRandom</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;cmath&gt;</span>    <span class="comment">// for cos, sin, pow, sqrt, fabs, exp, acos, atan</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;fstream&gt;</span>  <span class="comment">// for std</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;iterator&gt;</span> <span class="comment">// for insert_iterator, inserter</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span>   <span class="comment">// for allocator_traits&lt;&gt;::value_type</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;std::unique_ptr&lt;AtPattern&gt; AtSampleConsensus::GeneratePatternFromHits(<span class="keyword">const</span> std::vector&lt;AtHit&gt; &amp;hitArray)</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;{</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;   <span class="keywordflow">if</span> (hitArray.size() &lt; fMinPatternPoints) {</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;      <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;   }</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;   <span class="keyword">auto</span> pattern = <a class="code" href="classAtPattern.html#aa4a261310ee381e608bb525c0a65e643">AtPattern::CreatePattern</a>(fPatternType);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;   <span class="keyword">auto</span> points = fRandSampler-&gt;SamplePoints(pattern-&gt;GetNumPoints());</div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="AtSampleConsensus_8cxx.html#a9d9980136a77c68d0a6de3cd1aa1530a">   21</a></span>&#160;<span class="keyword">using</span> <a class="code" href="group__AtHitSampling.html#ga5f814e6032faa15b7970aa59c106444d">SampleMethod</a> = <a class="code" href="group__AtHitSampling.html#ga5f814e6032faa15b7970aa59c106444d">AtTools::AtSample::SampleMethod</a>;</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classAtSampleConsensus.html#a2ff1654d2dfd021b7b15e11b4d911e4b">   22</a></span>&#160;<a class="code" href="classAtSampleConsensus.html#a2ff1654d2dfd021b7b15e11b4d911e4b">AtSampleConsensus::AtSampleConsensus</a>()</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;   : fEstimator(<a class="code" href="classAtSampleEstimator.html#a358f197ca03ef21b57ad97c05d5e0fae">Estimators</a>::kRANSAC), fPatternProto(<a class="code" href="classAtPattern.html">AtPattern</a>::CreatePattern(<a class="code" href="classAtPattern.html#acda6bfc7c836a0b6b8ebf58ec86efe05">PatternType</a>::kLine)),</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;     fRandSampler(<a class="code" href="namespaceAtTools.html">AtTools</a>::AtSample::CreateSampler(<a class="code" href="group__AtHitSampling.html#ga5f814e6032faa15b7970aa59c106444d">SampleMethod</a>::kUniform))</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;{</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;}</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;std::unique_ptr&lt;AtPattern&gt; AtSampleConsensus::GeneratePatternFromHits(<span class="keyword">const</span> std::vector&lt;AtHit&gt; &amp;hitArray)</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;{</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;   pattern-&gt;DefinePattern(points);</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;   LOG(debug) &lt;&lt; <span class="stringliteral">&quot;Testing pattern&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;   <span class="keyword">auto</span> nInliers = <a class="code" href="classAtSampleEstimator.html#a949aaae129dd302c47710dd1215bb400">AtSampleEstimator::EvaluateModel</a>(pattern.get(), hitArray, fDistanceThreshold, fEstimator);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;   LOG(debug) &lt;&lt; <span class="stringliteral">&quot;Found &quot;</span> &lt;&lt; nInliers &lt;&lt; <span class="stringliteral">&quot; inliers&quot;</span>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;   <span class="keywordflow">if</span> (hitArray.size() &lt; fMinPatternPoints) {</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;      <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;   }</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;   <span class="keyword">auto</span> pattern = <a class="code" href="classAtPattern.html#aa4a261310ee381e608bb525c0a65e643">AtPattern::CreatePattern</a>(<a class="code" href="classAtPattern.html#acda6bfc7c836a0b6b8ebf58ec86efe05aee669fa7b5a35d96a396d4ed648afb45">PatternType::kLine</a>);</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;   <span class="comment">// If the pattern is consistent with enough points, save it</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;   <span class="keywordflow">if</span> (nInliers &gt; fMinPatternPoints) {</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;      LOG(debug) &lt;&lt; <span class="stringliteral">&quot;Adding pattern with nInliers: &quot;</span> &lt;&lt; nInliers;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;      <span class="keywordflow">return</span> pattern;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;   }</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;   <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="classAtSampleConsensus.html#ac97c159b0653ad6a7d718436277b274b">   47</a></span>&#160;<a class="code" href="classAtPatternEvent.html">AtPatternEvent</a> <a class="code" href="classAtSampleConsensus.html#ac97c159b0653ad6a7d718436277b274b">AtSampleConsensus::Solve</a>(<a class="code" href="classAtEvent.html">AtEvent</a> *event)</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;{</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;   <span class="keywordflow">if</span> (event-&gt;<a class="code" href="classAtEvent.html#ac56290bf4dde5166ff3f8338280b7f7f">IsGood</a>())</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;      <span class="keywordflow">return</span> <a class="code" href="classAtSampleConsensus.html#ac97c159b0653ad6a7d718436277b274b">Solve</a>(event-&gt;<a class="code" href="classAtEvent.html#a4835a130ed5e4ec7c62cfd520f6c3cd1">GetHitArray</a>());</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;   <span class="keywordflow">return</span> <a class="code" href="classAtPatternEvent.html">AtPatternEvent</a>();</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;}</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="classAtSampleConsensus.html#a6509d5d361dac2013545d6f833839605">   54</a></span>&#160;<a class="code" href="classAtPatternEvent.html">AtPatternEvent</a> <a class="code" href="classAtSampleConsensus.html#ac97c159b0653ad6a7d718436277b274b">AtSampleConsensus::Solve</a>(<span class="keyword">const</span> std::vector&lt;AtHit&gt; &amp;hitArray)</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;{</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;   <span class="keywordflow">if</span> (hitArray.size() &lt; fMinPatternPoints) {</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;      LOG(error) &lt;&lt; <span class="stringliteral">&quot;Not enough points to solve. Requires&quot;</span> &lt;&lt; fMinPatternPoints;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;   }</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;   <span class="keyword">auto</span> comp = [](<span class="keyword">const</span> PatternPtr &amp;a, <span class="keyword">const</span> PatternPtr &amp;b) { <span class="keywordflow">return</span> a-&gt;GetChi2() &lt; b-&gt;GetChi2(); };</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;   <span class="keyword">auto</span> sortedPatterns = std::set&lt;PatternPtr, decltype(comp)&gt;(comp);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;   LOG(debug2) &lt;&lt; <span class="stringliteral">&quot;Generating &quot;</span> &lt;&lt; fIterations &lt;&lt; <span class="stringliteral">&quot; patterns&quot;</span>;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;   fRandSampler-&gt;SetHitsToSample(&amp;hitArray);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;   <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; fIterations; i++) {</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;      <span class="keyword">auto</span> pattern = GeneratePatternFromHits(hitArray);</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;      <span class="keywordflow">if</span> (pattern != <span class="keyword">nullptr</span>)</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;         sortedPatterns.insert(std::move(pattern));</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;   }</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;   LOG(debug2) &lt;&lt; <span class="stringliteral">&quot;Created &quot;</span> &lt;&lt; sortedPatterns.size() &lt;&lt; <span class="stringliteral">&quot; valid patterns.&quot;</span>;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;   <span class="comment">// Loop through each pattern, and extract the points that fit each pattern</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;   <span class="keyword">auto</span> remainHits = hitArray;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;   <a class="code" href="classAtPatternEvent.html">AtPatternEvent</a> retEvent;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;   <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;pattern : sortedPatterns) {</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;      <span class="keywordflow">if</span> (remainHits.size() &lt; fMinPatternPoints)</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;         <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;      <span class="keyword">auto</span> inlierHits = movePointsInPattern(pattern.get(), remainHits);</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;      <span class="keywordflow">if</span> (inlierHits.size() &gt; fMinPatternPoints) {</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;         <span class="keyword">auto</span> track = CreateTrack(pattern.get(), inlierHits);</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;         track.SetTrackID(retEvent.<a class="code" href="classAtPatternEvent.html#a5b6dd506d0c1b95b832c0f26ce5e6183">GetTrackCand</a>().size());</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;         retEvent.<a class="code" href="classAtPatternEvent.html#a2d9c4fe1d08bcda46ab002a5d61d2052">AddTrack</a>(track);</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;      }</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;   }</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;   <span class="keywordflow">return</span> retEvent;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;}</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<a class="code" href="classAtTrack.html">AtTrack</a> AtSampleConsensus::CreateTrack(<a class="code" href="classAtPattern.html">AtPattern</a> *pattern, std::vector&lt;AtHit&gt; &amp;inliers)</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;{</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;   <a class="code" href="classAtTrack.html">AtTrack</a> track;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;   <span class="comment">// Add inliers to our ouput track</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;   <span class="keywordflow">for</span> (<span class="keyword">auto</span> &amp;hit : inliers)</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;      track.<a class="code" href="classAtTrack.html#a1002a94d3f90dbfec4b0cd2bf5d0a0f8">AddHit</a>(std::move(hit));</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;   <span class="keyword">auto</span> points = fRandSampler-&gt;SamplePoints(pattern-&gt;GetNumPoints());</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;   pattern-&gt;DefinePattern(points);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;   LOG(debug) &lt;&lt; <span class="stringliteral">&quot;Testing pattern&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;   <span class="keyword">auto</span> nInliers = <a class="code" href="classAtSampleEstimator.html#a486359bd0699a8fa5139095c74599c40">AtSampleEstimator::EvaluateModel</a>(pattern.get(), hitArray, fDistanceThreshold, fEstimator);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;   LOG(debug) &lt;&lt; <span class="stringliteral">&quot;Found &quot;</span> &lt;&lt; nInliers &lt;&lt; <span class="stringliteral">&quot; inliers&quot;</span>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;   <span class="comment">// If the pattern is consistent with enough points, save it</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;   <span class="keywordflow">if</span> (nInliers &gt; fMinPatternPoints) {</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;      LOG(debug) &lt;&lt; <span class="stringliteral">&quot;Adding pattern with nInliers: &quot;</span> &lt;&lt; nInliers;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;      <span class="keywordflow">return</span> pattern;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;   }</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;   <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;}</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="classAtSampleConsensus.html#ac97c159b0653ad6a7d718436277b274b">   55</a></span>&#160;<a class="code" href="classAtPatternEvent.html">AtPatternEvent</a> <a class="code" href="classAtSampleConsensus.html#ac97c159b0653ad6a7d718436277b274b">AtSampleConsensus::Solve</a>(<a class="code" href="classAtEvent.html">AtEvent</a> *event)</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;{</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;   <span class="keywordflow">if</span> (event-&gt;<a class="code" href="classAtEvent.html#ac56290bf4dde5166ff3f8338280b7f7f">IsGood</a>())</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;      <span class="keywordflow">return</span> <a class="code" href="classAtSampleConsensus.html#ac97c159b0653ad6a7d718436277b274b">Solve</a>(event-&gt;<a class="code" href="classAtEvent.html#a4835a130ed5e4ec7c62cfd520f6c3cd1">GetHitArray</a>());</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;   <span class="keywordflow">return</span> <a class="code" href="classAtPatternEvent.html">AtPatternEvent</a>();</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;}</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="classAtSampleConsensus.html#a6509d5d361dac2013545d6f833839605">   62</a></span>&#160;<a class="code" href="classAtPatternEvent.html">AtPatternEvent</a> <a class="code" href="classAtSampleConsensus.html#ac97c159b0653ad6a7d718436277b274b">AtSampleConsensus::Solve</a>(<span class="keyword">const</span> std::vector&lt;AtHit&gt; &amp;hitArray)</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;{</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;   <span class="keywordflow">if</span> (hitArray.size() &lt; fMinPatternPoints) {</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;      LOG(error) &lt;&lt; <span class="stringliteral">&quot;Not enough points to solve. Requires&quot;</span> &lt;&lt; fMinPatternPoints;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;   }</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;   <span class="keyword">auto</span> comp = [](<span class="keyword">const</span> PatternPtr &amp;a, <span class="keyword">const</span> PatternPtr &amp;b) { <span class="keywordflow">return</span> a-&gt;GetChi2() &lt; b-&gt;GetChi2(); };</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;   <span class="keyword">auto</span> sortedPatterns = std::set&lt;PatternPtr, decltype(comp)&gt;(comp);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;   LOG(debug2) &lt;&lt; <span class="stringliteral">&quot;Generating &quot;</span> &lt;&lt; fIterations &lt;&lt; <span class="stringliteral">&quot; patterns&quot;</span>;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;   fRandSampler-&gt;SetHitsToSample(&amp;hitArray);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;   <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; fIterations; i++) {</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;      <span class="keyword">auto</span> pattern = GeneratePatternFromHits(hitArray);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;      <span class="keywordflow">if</span> (pattern != <span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;         sortedPatterns.insert(std::move(pattern));</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;   }</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;   LOG(debug2) &lt;&lt; <span class="stringliteral">&quot;Created &quot;</span> &lt;&lt; sortedPatterns.size() &lt;&lt; <span class="stringliteral">&quot; valid patterns.&quot;</span>;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;   <span class="comment">// Loop through each pattern, and extract the points that fit each pattern</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;   <span class="keyword">auto</span> remainHits = hitArray;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;   <a class="code" href="classAtPatternEvent.html">AtPatternEvent</a> retEvent;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;   <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;pattern : sortedPatterns) {</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;      <span class="keywordflow">if</span> (remainHits.size() &lt; fMinPatternPoints)</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;         <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;      <span class="keyword">auto</span> inlierHits = movePointsInPattern(pattern.get(), remainHits);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;      <span class="keywordflow">if</span> (inlierHits.size() &gt; fMinPatternPoints) {</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;         <span class="keyword">auto</span> track = CreateTrack(pattern.get(), inlierHits);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;         track.SetTrackID(retEvent.<a class="code" href="classAtPatternEvent.html#a5b6dd506d0c1b95b832c0f26ce5e6183">GetTrackCand</a>().size());</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;         retEvent.<a class="code" href="classAtPatternEvent.html#a2d9c4fe1d08bcda46ab002a5d61d2052">AddTrack</a>(track);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;      }</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;   }</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;   <span class="keywordflow">return</span> retEvent;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;}</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;   pattern-&gt;<a class="code" href="classAtPattern.html#a47bc46c5ce6dd13cb037065cef67bc6c">FitPattern</a>(inliers, fChargeThres);</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;   track.<a class="code" href="classAtTrack.html#a98d6b309b2b8dd978fd59bb43cdff3af">SetFitPar</a>(pattern-&gt;<a class="code" href="classAtPattern.html#abb445934206a9dce7f991a11670858aa">GetPatternPar</a>());</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;   track.<a class="code" href="classAtTrack.html#a93e6b34bb09507cf96a7db1747e5e9dd">SetMinimum</a>(pattern-&gt;<a class="code" href="classAtPattern.html#aeee82ab63bb9e3e97f5db9702468a2aa">GetChi2</a>());</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;   track.<a class="code" href="classAtTrack.html#a408e2bc0d75d265880e0f01523da31f1">SetNFree</a>(pattern-&gt;<a class="code" href="classAtPattern.html#ab9dd971a28ab167fb11735f6eb4d2b0f">GetNFree</a>());</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;   <span class="keywordflow">return</span> track;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;}</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;std::vector&lt;AtHit&gt; AtSampleConsensus::movePointsInPattern(<a class="code" href="classAtPattern.html">AtPattern</a> *pattern, std::vector&lt;AtHit&gt; &amp;hits)</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;{</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;   std::vector&lt;AtHit&gt; retVec;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;   <span class="keyword">auto</span> itStartEqualRange = hits.end();</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;   <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = hits.begin(); it != hits.end(); ++it) {</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;      <span class="keywordtype">double</span> error = pattern-&gt;<a class="code" href="classAtPattern.html#ab212efbdca0043fc575bfb573e5f8be4">DistanceToPattern</a>(it-&gt;GetPosition());</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;      <span class="keyword">auto</span> isInPattern = (error * error) &lt; (fDistanceThreshold * fDistanceThreshold);</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<a class="code" href="classAtTrack.html">AtTrack</a> AtSampleConsensus::CreateTrack(<a class="code" href="classAtPattern.html">AtPattern</a> *pattern, std::vector&lt;AtHit&gt; &amp;inliers)</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;{</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;   <a class="code" href="classAtTrack.html">AtTrack</a> track;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;   <span class="comment">// Add inliers to our ouput track</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;   <span class="keywordflow">for</span> (<span class="keyword">auto</span> &amp;hit : inliers)</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;      track.<a class="code" href="classAtTrack.html#a1002a94d3f90dbfec4b0cd2bf5d0a0f8">AddHit</a>(std::move(hit));</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;   pattern-&gt;<a class="code" href="classAtPattern.html#a47bc46c5ce6dd13cb037065cef67bc6c">FitPattern</a>(inliers, fChargeThres);</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;   track.<a class="code" href="classAtTrack.html#a98d6b309b2b8dd978fd59bb43cdff3af">SetFitPar</a>(pattern-&gt;<a class="code" href="classAtPattern.html#abb445934206a9dce7f991a11670858aa">GetPatternPar</a>());</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;   track.<a class="code" href="classAtTrack.html#a93e6b34bb09507cf96a7db1747e5e9dd">SetMinimum</a>(pattern-&gt;<a class="code" href="classAtPattern.html#aeee82ab63bb9e3e97f5db9702468a2aa">GetChi2</a>());</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;   track.<a class="code" href="classAtTrack.html#a408e2bc0d75d265880e0f01523da31f1">SetNFree</a>(pattern-&gt;<a class="code" href="classAtPattern.html#ab9dd971a28ab167fb11735f6eb4d2b0f">GetNFree</a>());</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;   <span class="keywordflow">return</span> track;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;}</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;std::vector&lt;AtHit&gt; AtSampleConsensus::movePointsInPattern(<a class="code" href="classAtPattern.html">AtPattern</a> *pattern, std::vector&lt;AtHit&gt; &amp;hits)</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;{</div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;      <span class="comment">// Start of sub-vector with hits in pattern</span></div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;      <span class="keywordflow">if</span> (isInPattern &amp;&amp; itStartEqualRange == hits.end()) {</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;         itStartEqualRange = it;</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;         <span class="keywordflow">continue</span>;</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;      }</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;      <span class="comment">// End of sub-vector with hits in pattern.</span></div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;      <span class="comment">// Move hits in this range to retVec then delete the empty entries</span></div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;      <span class="keywordflow">if</span> (itStartEqualRange != hits.end() &amp;&amp; !isInPattern) {</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;         retVec.insert(retVec.end(), std::make_move_iterator(itStartEqualRange), std::make_move_iterator(it));</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;         hits.erase(itStartEqualRange, it);</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;         it = itStartEqualRange;</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;         itStartEqualRange = hits.end();</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;         <span class="keywordflow">continue</span>;</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;      }</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;   }</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160; </div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;   <span class="comment">// If the last chunk of the array was in the pattern, move it and delete empty entries</span></div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;   <span class="keywordflow">if</span> (itStartEqualRange != hits.end()) {</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;      <span class="keyword">auto</span> it = hits.end();</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;      retVec.insert(retVec.end(), std::make_move_iterator(itStartEqualRange), std::make_move_iterator(it));</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;      hits.erase(itStartEqualRange, it);</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;   }</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;   <span class="keywordflow">return</span> retVec;</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;}</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;   std::vector&lt;AtHit&gt; retVec;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;   <span class="keyword">auto</span> itStartEqualRange = hits.end();</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; </div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;   <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = hits.begin(); it != hits.end(); ++it) {</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;      <span class="keywordtype">double</span> error = pattern-&gt;<a class="code" href="classAtPattern.html#ab212efbdca0043fc575bfb573e5f8be4">DistanceToPattern</a>(it-&gt;GetPosition());</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;      <span class="keyword">auto</span> isInPattern = (error * error) &lt; (fDistanceThreshold * fDistanceThreshold);</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;      <span class="comment">// Start of sub-vector with hits in pattern</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;      <span class="keywordflow">if</span> (isInPattern &amp;&amp; itStartEqualRange == hits.end()) {</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;         itStartEqualRange = it;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;         <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;      }</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;      <span class="comment">// End of sub-vector with hits in pattern.</span></div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;      <span class="comment">// Move hits in this range to retVec then delete the empty entries</span></div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;      <span class="keywordflow">if</span> (itStartEqualRange != hits.end() &amp;&amp; !isInPattern) {</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;         retVec.insert(retVec.end(), std::make_move_iterator(itStartEqualRange), std::make_move_iterator(it));</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;         hits.erase(itStartEqualRange, it);</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;         it = itStartEqualRange;</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;         itStartEqualRange = hits.end();</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;         <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;      }</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;   }</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160; </div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;   <span class="comment">// If the last chunk of the array was in the pattern, move it and delete empty entries</span></div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;   <span class="keywordflow">if</span> (itStartEqualRange != hits.end()) {</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;      <span class="keyword">auto</span> it = hits.end();</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;      retVec.insert(retVec.end(), std::make_move_iterator(itStartEqualRange), std::make_move_iterator(it));</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;      hits.erase(itStartEqualRange, it);</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;   }</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;   <span class="keywordflow">return</span> retVec;</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclassAtSampleConsensus_html_a2ff1654d2dfd021b7b15e11b4d911e4b"><div class="ttname"><a href="classAtSampleConsensus.html#a2ff1654d2dfd021b7b15e11b4d911e4b">AtSampleConsensus::AtSampleConsensus</a></div><div class="ttdeci">AtSampleConsensus()</div><div class="ttdef"><b>Definition:</b> <a href="AtSampleConsensus_8cxx_source.html#l00019">AtSampleConsensus.cxx:19</a></div></div>
+<div class="ttc" id="aclassAtSampleConsensus_html_a2ff1654d2dfd021b7b15e11b4d911e4b"><div class="ttname"><a href="classAtSampleConsensus.html#a2ff1654d2dfd021b7b15e11b4d911e4b">AtSampleConsensus::AtSampleConsensus</a></div><div class="ttdeci">AtSampleConsensus()</div><div class="ttdef"><b>Definition:</b> <a href="AtSampleConsensus_8cxx_source.html#l00022">AtSampleConsensus.cxx:22</a></div></div>
 <div class="ttc" id="aclassAtPatternEvent_html"><div class="ttname"><a href="classAtPatternEvent.html">AtPatternEvent</a></div><div class="ttdef"><b>Definition:</b> <a href="AtPatternEvent_8h_source.html#l00015">AtPatternEvent.h:15</a></div></div>
 <div class="ttc" id="aAtEvent_8h_html"><div class="ttname"><a href="AtEvent_8h.html">AtEvent.h</a></div></div>
 <div class="ttc" id="aclassAtTrack_html_a98d6b309b2b8dd978fd59bb43cdff3af"><div class="ttname"><a href="classAtTrack.html#a98d6b309b2b8dd978fd59bb43cdff3af">AtTrack::SetFitPar</a></div><div class="ttdeci">void SetFitPar(const std::vector&lt; Double_t &gt; &amp;par)</div><div class="ttdef"><b>Definition:</b> <a href="AtTrack_8h_source.html#l00068">AtTrack.h:68</a></div></div>
-<div class="ttc" id="aclassAtSampleConsensus_html_ac97c159b0653ad6a7d718436277b274b"><div class="ttname"><a href="classAtSampleConsensus.html#ac97c159b0653ad6a7d718436277b274b">AtSampleConsensus::Solve</a></div><div class="ttdeci">AtPatternEvent Solve(AtEvent *event)</div><div class="ttdef"><b>Definition:</b> <a href="AtSampleConsensus_8cxx_source.html#l00047">AtSampleConsensus.cxx:47</a></div></div>
+<div class="ttc" id="aclassAtSampleConsensus_html_ac97c159b0653ad6a7d718436277b274b"><div class="ttname"><a href="classAtSampleConsensus.html#ac97c159b0653ad6a7d718436277b274b">AtSampleConsensus::Solve</a></div><div class="ttdeci">AtPatternEvent Solve(AtEvent *event)</div><div class="ttdef"><b>Definition:</b> <a href="AtSampleConsensus_8cxx_source.html#l00055">AtSampleConsensus.cxx:55</a></div></div>
 <div class="ttc" id="aclassAtPattern_html_aa4a261310ee381e608bb525c0a65e643"><div class="ttname"><a href="classAtPattern.html#aa4a261310ee381e608bb525c0a65e643">AtPattern::CreatePattern</a></div><div class="ttdeci">static std::unique_ptr&lt; AtPattern &gt; CreatePattern(Type type)</div><div class="ttdef"><b>Definition:</b> <a href="AtPattern_8cxx_source.html#l00062">AtPattern.cxx:62</a></div></div>
 <div class="ttc" id="aclassAtTrack_html_a93e6b34bb09507cf96a7db1747e5e9dd"><div class="ttname"><a href="classAtTrack.html#a93e6b34bb09507cf96a7db1747e5e9dd">AtTrack::SetMinimum</a></div><div class="ttdeci">void SetMinimum(Double_t min)</div><div class="ttdef"><b>Definition:</b> <a href="AtTrack_8h_source.html#l00069">AtTrack.h:69</a></div></div>
 <div class="ttc" id="aclassAtPatternEvent_html_a2d9c4fe1d08bcda46ab002a5d61d2052"><div class="ttname"><a href="classAtPatternEvent.html#a2d9c4fe1d08bcda46ab002a5d61d2052">AtPatternEvent::AddTrack</a></div><div class="ttdeci">void AddTrack(const AtTrack &amp;track)</div><div class="ttdef"><b>Definition:</b> <a href="AtPatternEvent_8h_source.html#l00022">AtPatternEvent.h:22</a></div></div>
@@ -225,24 +233,30 @@ $(function() {
 <div class="ttc" id="aclassAtPattern_html"><div class="ttname"><a href="classAtPattern.html">AtPattern</a></div><div class="ttdef"><b>Definition:</b> <a href="AtPattern_8h_source.html#l00013">AtPattern.h:13</a></div></div>
 <div class="ttc" id="aclassAtPattern_html_aeee82ab63bb9e3e97f5db9702468a2aa"><div class="ttname"><a href="classAtPattern.html#aeee82ab63bb9e3e97f5db9702468a2aa">AtPattern::GetChi2</a></div><div class="ttdeci">Double_t GetChi2() const</div><div class="ttdef"><b>Definition:</b> <a href="AtPattern_8h_source.html#l00063">AtPattern.h:63</a></div></div>
 <div class="ttc" id="aclassAtPattern_html_a47bc46c5ce6dd13cb037065cef67bc6c"><div class="ttname"><a href="classAtPattern.html#a47bc46c5ce6dd13cb037065cef67bc6c">AtPattern::FitPattern</a></div><div class="ttdeci">Double_t FitPattern(const std::vector&lt; AtHit &gt; &amp;pointsToFit, Double_t qThreshold=-1)</div><div class="ttdoc">Fit the pattern.</div><div class="ttdef"><b>Definition:</b> <a href="AtPattern_8cxx_source.html#l00027">AtPattern.cxx:27</a></div></div>
-<div class="ttc" id="aclassAtSampleEstimator_html_a949aaae129dd302c47710dd1215bb400"><div class="ttname"><a href="classAtSampleEstimator.html#a949aaae129dd302c47710dd1215bb400">AtSampleEstimator::EvaluateModel</a></div><div class="ttdeci">static int EvaluateModel(AtPattern *model, const std::vector&lt; AtHit &gt; &amp;hits, double distThresh, Estimator estimator=Estimator::kRANSAC)</div><div class="ttdoc">Evaluate how well model describes hits.</div><div class="ttdef"><b>Definition:</b> <a href="AtSampleEstimator_8cxx_source.html#l00131">AtSampleEstimator.cxx:131</a></div></div>
 <div class="ttc" id="aAtHit_8h_html"><div class="ttname"><a href="AtHit_8h.html">AtHit.h</a></div></div>
+<div class="ttc" id="aAtEstimatorMethods_8h_html"><div class="ttname"><a href="AtEstimatorMethods_8h.html">AtEstimatorMethods.h</a></div></div>
 <div class="ttc" id="aAtSampleConsensus_8h_html"><div class="ttname"><a href="AtSampleConsensus_8h.html">AtSampleConsensus.h</a></div></div>
 <div class="ttc" id="aclassAtTrack_html"><div class="ttname"><a href="classAtTrack.html">AtTrack</a></div><div class="ttdef"><b>Definition:</b> <a href="AtTrack_8h_source.html#l00026">AtTrack.h:26</a></div></div>
+<div class="ttc" id="aAtSampleMethods_8h_html"><div class="ttname"><a href="AtSampleMethods_8h.html">AtSampleMethods.h</a></div></div>
+<div class="ttc" id="anamespaceAtTools_html"><div class="ttname"><a href="namespaceAtTools.html">AtTools</a></div><div class="ttdef"><b>Definition:</b> <a href="AtELossManager_8h_source.html#l00022">AtELossManager.h:22</a></div></div>
 <div class="ttc" id="aAtPatternEvent_8h_html"><div class="ttname"><a href="AtPatternEvent_8h.html">AtPatternEvent.h</a></div></div>
+<div class="ttc" id="aclassAtSampleEstimator_html_a358f197ca03ef21b57ad97c05d5e0fae"><div class="ttname"><a href="classAtSampleEstimator.html#a358f197ca03ef21b57ad97c05d5e0fae">AtSampleEstimator::Estimators</a></div><div class="ttdeci">Estimators</div><div class="ttdoc">Implemented estimators for sample consensus.</div><div class="ttdef"><b>Definition:</b> <a href="AtEstimatorMethods_8h_source.html#l00009">AtEstimatorMethods.h:9</a></div></div>
 <div class="ttc" id="aclassAtEvent_html_a4835a130ed5e4ec7c62cfd520f6c3cd1"><div class="ttname"><a href="classAtEvent.html#a4835a130ed5e4ec7c62cfd520f6c3cd1">AtEvent::GetHitArray</a></div><div class="ttdeci">const hitVector &amp; GetHitArray() const</div><div class="ttdef"><b>Definition:</b> <a href="AtEvent_8h_source.html#l00093">AtEvent.h:93</a></div></div>
 <div class="ttc" id="aclassAtPattern_html_ab9dd971a28ab167fb11735f6eb4d2b0f"><div class="ttname"><a href="classAtPattern.html#ab9dd971a28ab167fb11735f6eb4d2b0f">AtPattern::GetNFree</a></div><div class="ttdeci">Int_t GetNFree() const</div><div class="ttdef"><b>Definition:</b> <a href="AtPattern_8h_source.html#l00064">AtPattern.h:64</a></div></div>
 <div class="ttc" id="aclassAtPattern_html_acda6bfc7c836a0b6b8ebf58ec86efe05"><div class="ttname"><a href="classAtPattern.html#acda6bfc7c836a0b6b8ebf58ec86efe05">AtPattern::Type</a></div><div class="ttdeci">Type</div><div class="ttdef"><b>Definition:</b> <a href="AtPatternTypes_8h_source.html#l00003">AtPatternTypes.h:3</a></div></div>
+<div class="ttc" id="aclassAtPattern_html_acda6bfc7c836a0b6b8ebf58ec86efe05aee669fa7b5a35d96a396d4ed648afb45"><div class="ttname"><a href="classAtPattern.html#acda6bfc7c836a0b6b8ebf58ec86efe05aee669fa7b5a35d96a396d4ed648afb45">AtPattern::Type::kLine</a></div><div class="ttdeci">@ kLine</div></div>
 <div class="ttc" id="aclassAtPattern_html_ab212efbdca0043fc575bfb573e5f8be4"><div class="ttname"><a href="classAtPattern.html#ab212efbdca0043fc575bfb573e5f8be4">AtPattern::DistanceToPattern</a></div><div class="ttdeci">virtual Double_t DistanceToPattern(const XYZPoint &amp;point)=0</div><div class="ttdoc">Closest distance to pattern.</div></div>
 <div class="ttc" id="aAtPatternTypes_8h_html"><div class="ttname"><a href="AtPatternTypes_8h.html">AtPatternTypes.h</a></div></div>
 <div class="ttc" id="aclassAtPatternEvent_html_a5b6dd506d0c1b95b832c0f26ce5e6183"><div class="ttname"><a href="classAtPatternEvent.html#a5b6dd506d0c1b95b832c0f26ce5e6183">AtPatternEvent::GetTrackCand</a></div><div class="ttdeci">std::vector&lt; AtTrack &gt; &amp; GetTrackCand()</div><div class="ttdef"><b>Definition:</b> <a href="AtPatternEvent_8cxx_source.html#l00015">AtPatternEvent.cxx:15</a></div></div>
-<div class="ttc" id="aAtRandomSample_8h_html"><div class="ttname"><a href="AtRandomSample_8h.html">AtRandomSample.h</a></div></div>
+<div class="ttc" id="agroup__AtHitSampling_html_ga5f814e6032faa15b7970aa59c106444d"><div class="ttname"><a href="group__AtHitSampling.html#ga5f814e6032faa15b7970aa59c106444d">AtTools::AtSample::SampleMethod</a></div><div class="ttdeci">SampleMethod</div><div class="ttdef"><b>Definition:</b> <a href="AtSampleMethods_8h_source.html#l00023">AtSampleMethods.h:23</a></div></div>
+<div class="ttc" id="aAtSampleEstimator_8h_html"><div class="ttname"><a href="AtSampleEstimator_8h.html">AtSampleEstimator.h</a></div></div>
+<div class="ttc" id="aclassAtSampleEstimator_html_a486359bd0699a8fa5139095c74599c40"><div class="ttname"><a href="classAtSampleEstimator.html#a486359bd0699a8fa5139095c74599c40">AtSampleEstimator::EvaluateModel</a></div><div class="ttdeci">static int EvaluateModel(AtPattern *model, const std::vector&lt; AtHit &gt; &amp;hits, double distThresh, Estimators estimator)</div><div class="ttdoc">Evaluate how well model describes hits.</div><div class="ttdef"><b>Definition:</b> <a href="AtSampleEstimator_8cxx_source.html#l00008">AtSampleEstimator.cxx:8</a></div></div>
 <div class="ttc" id="aclassAtTrack_html_a408e2bc0d75d265880e0f01523da31f1"><div class="ttname"><a href="classAtTrack.html#a408e2bc0d75d265880e0f01523da31f1">AtTrack::SetNFree</a></div><div class="ttdeci">void SetNFree(Int_t ndf)</div><div class="ttdef"><b>Definition:</b> <a href="AtTrack_8cxx_source.html#l00018">AtTrack.cxx:18</a></div></div>
 <div class="ttc" id="aclassAtEvent_html_ac56290bf4dde5166ff3f8338280b7f7f"><div class="ttname"><a href="classAtEvent.html#ac56290bf4dde5166ff3f8338280b7f7f">AtEvent::IsGood</a></div><div class="ttdeci">Bool_t IsGood() const</div><div class="ttdef"><b>Definition:</b> <a href="AtEvent_8h_source.html#l00104">AtEvent.h:104</a></div></div>
 <div class="ttc" id="aclassAtTrack_html_a1002a94d3f90dbfec4b0cd2bf5d0a0f8"><div class="ttname"><a href="classAtTrack.html#a1002a94d3f90dbfec4b0cd2bf5d0a0f8">AtTrack::AddHit</a></div><div class="ttdeci">void AddHit(const AtHit &amp;hit)</div><div class="ttdef"><b>Definition:</b> <a href="AtTrack_8h_source.html#l00063">AtTrack.h:63</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun May 8 2022 23:41:46 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon May 9 2022 17:12:50 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

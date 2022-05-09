@@ -78,27 +78,25 @@ $(function() {
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
 <div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="classAtTools_1_1AtIndependentSample.html">   11</a></span>&#160;<span class="keyword">class </span><a class="code" href="classAtTools_1_1AtIndependentSample.html">AtIndependentSample</a> : <span class="keyword">public</span> <a class="code" href="classAtTools_1_1AtSample.html">AtSample</a> {</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;   <span class="keyword">virtual</span> std::vector&lt;AtHit&gt; <a class="code" href="classAtTools_1_1AtIndependentSample.html#a830ed236c3404d56c40239e38085afe0">SampleHits</a>(<span class="keywordtype">int</span> N) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classAtTools_1_1AtIndependentSample.html#a93c3b41181ebfa4cfe02a4fac6a36fdf">SetHitsToSample</a>(<span class="keyword">const</span> std::vector&lt;AtHit&gt; *hits) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="classAtTools_1_1AtIndependentSample.html#a31b0e48cb716f63dabe8700016c8de2c">   17</a></span>&#160;   <span class="keyword">virtual</span> std::vector&lt;double&gt; <a class="code" href="classAtTools_1_1AtIndependentSample.html#a31b0e48cb716f63dabe8700016c8de2c">PDF</a>(<span class="keyword">const</span> <a class="code" href="classAtHit.html">AtHit</a> &amp;hit) <span class="keyword">override</span> = 0;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;};</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;} <span class="comment">// namespace AtTools</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#endif //#ifndef ATINDEPENDENTSAMPLE_H</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classAtTools_1_1AtIndependentSample.html#a93c3b41181ebfa4cfe02a4fac6a36fdf">SetHitsToSample</a>(<span class="keyword">const</span> std::vector&lt;AtHit&gt; *hits) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classAtTools_1_1AtIndependentSample.html#a31b0e48cb716f63dabe8700016c8de2c">   16</a></span>&#160;   <span class="keyword">virtual</span> std::vector&lt;double&gt; <a class="code" href="classAtTools_1_1AtIndependentSample.html#a31b0e48cb716f63dabe8700016c8de2c">PDF</a>(<span class="keyword">const</span> <a class="code" href="classAtHit.html">AtHit</a> &amp;hit) <span class="keyword">override</span> = 0;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;};</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;} <span class="comment">// namespace AtTools</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#endif //#ifndef ATINDEPENDENTSAMPLE_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclassAtTools_1_1AtIndependentSample_html_a31b0e48cb716f63dabe8700016c8de2c"><div class="ttname"><a href="classAtTools_1_1AtIndependentSample.html#a31b0e48cb716f63dabe8700016c8de2c">AtTools::AtIndependentSample::PDF</a></div><div class="ttdeci">virtual std::vector&lt; double &gt; PDF(const AtHit &amp;hit) override=0</div></div>
 <div class="ttc" id="aclassAtTools_1_1AtSample_html"><div class="ttname"><a href="classAtTools_1_1AtSample.html">AtTools::AtSample</a></div><div class="ttdef"><b>Definition:</b> <a href="AtSample_8h_source.html#l00018">AtSample.h:18</a></div></div>
 <div class="ttc" id="anamespaceAtTools_html"><div class="ttname"><a href="namespaceAtTools.html">AtTools</a></div><div class="ttdef"><b>Definition:</b> <a href="AtELossManager_8h_source.html#l00022">AtELossManager.h:22</a></div></div>
-<div class="ttc" id="aclassAtTools_1_1AtIndependentSample_html_a830ed236c3404d56c40239e38085afe0"><div class="ttname"><a href="classAtTools_1_1AtIndependentSample.html#a830ed236c3404d56c40239e38085afe0">AtTools::AtIndependentSample::SampleHits</a></div><div class="ttdeci">virtual std::vector&lt; AtHit &gt; SampleHits(int N) override</div><div class="ttdef"><b>Definition:</b> <a href="AtIndependentSample_8cxx_source.html#l00010">AtIndependentSample.cxx:10</a></div></div>
 <div class="ttc" id="aclassAtTools_1_1AtIndependentSample_html"><div class="ttname"><a href="classAtTools_1_1AtIndependentSample.html">AtTools::AtIndependentSample</a></div><div class="ttdef"><b>Definition:</b> <a href="AtIndependentSample_8h_source.html#l00011">AtIndependentSample.h:11</a></div></div>
 <div class="ttc" id="aAtSample_8h_html"><div class="ttname"><a href="AtSample_8h.html">AtSample.h</a></div></div>
 <div class="ttc" id="aclassAtHit_html"><div class="ttname"><a href="classAtHit.html">AtHit</a></div><div class="ttdef"><b>Definition:</b> <a href="AtHit_8h_source.html#l00021">AtHit.h:21</a></div></div>
-<div class="ttc" id="aclassAtTools_1_1AtIndependentSample_html_a93c3b41181ebfa4cfe02a4fac6a36fdf"><div class="ttname"><a href="classAtTools_1_1AtIndependentSample.html#a93c3b41181ebfa4cfe02a4fac6a36fdf">AtTools::AtIndependentSample::SetHitsToSample</a></div><div class="ttdeci">virtual void SetHitsToSample(const std::vector&lt; AtHit &gt; *hits) override</div><div class="ttdef"><b>Definition:</b> <a href="AtIndependentSample_8cxx_source.html#l00019">AtIndependentSample.cxx:19</a></div></div>
+<div class="ttc" id="aclassAtTools_1_1AtIndependentSample_html_a93c3b41181ebfa4cfe02a4fac6a36fdf"><div class="ttname"><a href="classAtTools_1_1AtIndependentSample.html#a93c3b41181ebfa4cfe02a4fac6a36fdf">AtTools::AtIndependentSample::SetHitsToSample</a></div><div class="ttdeci">virtual void SetHitsToSample(const std::vector&lt; AtHit &gt; *hits) override</div><div class="ttdef"><b>Definition:</b> <a href="AtIndependentSample_8cxx_source.html#l00008">AtIndependentSample.cxx:8</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun May 8 2022 23:41:47 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon May 9 2022 17:12:51 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

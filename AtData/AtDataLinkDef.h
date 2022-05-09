@@ -19,8 +19,9 @@
 #pragma link C++ class AtTrackingEventAna + ;
 #pragma link C++ class AtProtoQuadrant + ;
 #pragma link C++ class AtTrack + ;
-#pragma link C++ class AtPattern + ;
-#pragma link C++ class AtPatternLine + ;
-#pragma link C++ class AtPatternCircle2D + ;
-#pragma link C++ enum AtPattern::Type;
+
+#pragma link C++ class AtPatterns::AtPattern + ;
+#pragma link C++ class AtPatterns::AtPatternLine + ;
+#pragma link C++ class AtPatterns::AtPatternCircle2D + ;
+#pragma link C++ enum AtPatterns::PatternType;
 #endif

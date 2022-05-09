@@ -1,8 +1,3 @@
-/**
- * A base class that describes the pattern of a track. For example a 2D circle or a line
- * These patterns are parameterized by some number (t)
- *
- */
 #ifndef ATPATTERN_H
 #define ATPATTERN_H
 
@@ -10,6 +5,24 @@
 
 #include <TObject.h>
 
+/**
+ * Collection of classes for describing and drawing track patterns (essentially the shape of a track).
+ * These objects are stored as the fit for tracks, and are used to run sample consensus models.
+ *
+ * @defgroup AtPattern Track Patterns
+ *
+ */
+namespace AtPatterns {
+
+// Namespace forward declerations
+enum class PatternType;
+
+/**
+ * A base class that describes the pattern of a track. For example a 2D circle or a line
+ * These patterns are parameterized by some number (t)
+ *
+ * @ingroup AtPattern
+ */
 class AtPattern : public TObject {
 protected:
    std::vector<Double_t> fPatternPar; //< Description of pattern
@@ -18,8 +31,6 @@ protected:
    const Int_t fNumPoints;            //< Number of 3D points that define the pattern (i.e. size of fIndices)
 
 public:
-   enum class Type;
-
    AtPattern(Int_t numPoints = 0);
    Double_t FitPattern(const std::vector<AtHit> &pointsToFit, Double_t qThreshold = -1);
    Double_t FitPattern(const std::vector<XYZPoint> &pointsToFit);
@@ -53,6 +64,12 @@ public:
     * Get the point on the pattern at parameter t. What t physically represents is pattern dependent.
     */
    virtual XYZPoint GetPointAt(double t) = 0;
+   /**
+    * @brief Clone the pattern
+    *
+    * Should be reimplemented for each AtPattern to return a pointer to the type implementing the function.
+    */
+   virtual std::unique_ptr<AtPattern> Clone() = 0;
 
    /**
     * @brief Number of points to define the pattern.
@@ -65,7 +82,7 @@ public:
    std::vector<double> GetPatternPar() const { return fPatternPar; }
    void SetChi2(double chi2) { fChi2 = chi2; }
 
-   static std::unique_ptr<AtPattern> CreatePattern(Type type);
+   static std::unique_ptr<AtPattern> CreatePattern(PatternType type);
 
 protected:
    /**
@@ -76,5 +93,5 @@ protected:
 
    ClassDef(AtPattern, 1)
 };
-
+} // namespace AtPatterns
 #endif //#ifndef ATTRACKPATTERN_H

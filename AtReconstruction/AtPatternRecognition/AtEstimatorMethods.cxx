@@ -2,7 +2,8 @@
 
 #include "AtPattern.h"
 
-int AtEstimatorRansac::EvaluateModel(AtPattern *model, const std::vector<AtHit> &hitArray, double distanceThreshold)
+int AtEstimatorRansac::EvaluateModel(AtPatterns::AtPattern *model, const std::vector<AtHit> &hitArray,
+                                     double distanceThreshold)
 {
    int nbInliers = 0;
    double weight = 0;
@@ -20,7 +21,8 @@ int AtEstimatorRansac::EvaluateModel(AtPattern *model, const std::vector<AtHit> 
    return nbInliers;
 }
 
-int AtEstimatorMlesac::EvaluateModel(AtPattern *model, const std::vector<AtHit> &hitArray, double distanceThreshold)
+int AtEstimatorMlesac::EvaluateModel(AtPatterns::AtPattern *model, const std::vector<AtHit> &hitArray,
+                                     double distanceThreshold)
 {
    double sigma = distanceThreshold / 1.96;
    double dataSigma2 = sigma * sigma;
@@ -77,7 +79,8 @@ int AtEstimatorMlesac::EvaluateModel(AtPattern *model, const std::vector<AtHit> 
    return nbInliers;
 }
 
-int AtEstimatorLmeds::EvaluateModel(AtPattern *model, const std::vector<AtHit> &hitArray, double distanceThreshold)
+int AtEstimatorLmeds::EvaluateModel(AtPatterns::AtPattern *model, const std::vector<AtHit> &hitArray,
+                                    double distanceThreshold)
 {
    std::vector<double> errorsVec;
    // Loop through point and if it is an inlier, then add the error**2 to weight

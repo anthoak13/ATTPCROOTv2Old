@@ -2,8 +2,9 @@
 #define ATSAMPLEESTIMATOR_H
 
 #include <vector>
-
+namespace AtPatterns {
 class AtPattern;
+}
 class AtHit;
 
 /**
@@ -32,7 +33,8 @@ public:
     * @param[in] distThresh How close a point must be to be consistent with the model
     * @return Number of points consistent with model in hits
     */
-   static int EvaluateModel(AtPattern *model, const std::vector<AtHit> &hits, double distThresh, Estimators estimator);
+   static int
+   EvaluateModel(AtPatterns::AtPattern *model, const std::vector<AtHit> &hits, double distThresh, Estimators estimator);
 };
 
 #endif //#ifndef ATSAMPLEESTIMATOR_H

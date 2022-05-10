@@ -3,17 +3,17 @@
 #include "AtHit.h"
 
 #include <TRandom3.h>
-using namespace AtTools;
+using namespace RandomSample;
 std::vector<AtHit> AtSampleFromReference::SampleHits(int N)
 {
    SampleReferenceHit();
-   FillCDF();
 
    return AtSample::SampleHits(N);
 }
 
 /**
  * @brief Get reference hit from fHits.
+ *
  * Uniformly samples from fHits
  */
 void AtSampleFromReference::SampleReferenceHit()
@@ -25,4 +25,10 @@ void AtSampleFromReference::SampleReferenceHit()
 void AtSampleFromReference::SetHitsToSample(const std::vector<AtHit> *hits)
 {
    fHits = hits;
+}
+
+void AtSampleFromReference::SetReferenceHit(AtHit hit)
+{
+   fReferenceHit = std::move(hit);
+   FillCDF();
 }

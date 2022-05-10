@@ -1,9 +1,9 @@
 #include "AtEstimatorMethods.h"
 
 #include "AtPattern.h"
+using namespace SampleConsensus;
 
-int AtEstimatorRansac::EvaluateModel(AtPatterns::AtPattern *model, const std::vector<AtHit> &hitArray,
-                                     double distanceThreshold)
+int EvaluateRansac(AtPatterns::AtPattern *model, const std::vector<AtHit> &hitArray, double distanceThreshold)
 {
    int nbInliers = 0;
    double weight = 0;
@@ -21,8 +21,7 @@ int AtEstimatorRansac::EvaluateModel(AtPatterns::AtPattern *model, const std::ve
    return nbInliers;
 }
 
-int AtEstimatorMlesac::EvaluateModel(AtPatterns::AtPattern *model, const std::vector<AtHit> &hitArray,
-                                     double distanceThreshold)
+int EvaluateMlesac(AtPatterns::AtPattern *model, const std::vector<AtHit> &hitArray, double distanceThreshold)
 {
    double sigma = distanceThreshold / 1.96;
    double dataSigma2 = sigma * sigma;
@@ -79,8 +78,22 @@ int AtEstimatorMlesac::EvaluateModel(AtPatterns::AtPattern *model, const std::ve
    return nbInliers;
 }
 
-int AtEstimatorLmeds::EvaluateModel(AtPatterns::AtPattern *model, const std::vector<AtHit> &hitArray,
-                                    double distanceThreshold)
+double GetMedian(std::vector<double> &vec)
+{
+   if (vec.empty())
+      return 0;
+
+   auto n = vec.size() / 2;
+
+   std::nth_element(vec.begin(), vec.begin() + n, vec.end());
+   auto med = vec[n];
+   if (vec.size() % 2 == 0) { // if even, get average of middle two entries
+      med = (*std::max_element(vec.begin(), vec.begin() + n) + med) / 2.0;
+   }
+   return med;
+}
+
+int EvaluateLmeds(AtPatterns::AtPattern *model, const std::vector<AtHit> &hitArray, double distanceThreshold)
 {
    std::vector<double> errorsVec;
    // Loop through point and if it is an inlier, then add the error**2 to weight
@@ -93,20 +106,4 @@ int AtEstimatorLmeds::EvaluateModel(AtPatterns::AtPattern *model, const std::vec
    }
    model->SetChi2(GetMedian(errorsVec) / errorsVec.size());
    return errorsVec.size();
-}
-
-double AtEstimatorLmeds::GetMedian(std::vector<double> &vec)
-{
-   auto vsize = vec.size();
-
-   if (vsize == 0) {
-      return 0;
-   } else {
-      sort(vec.begin(), vec.end());
-      if (vsize % 2 == 0) {
-         return (vec[vsize / 2 - 1] + vec[vsize / 2]) / 2;
-      } else {
-         return vec[vsize / 2];
-      }
-   }
 }

@@ -7,11 +7,26 @@
 #include <vector>
 class AtHit;
 
-namespace AtTools {
+/**
+ * @brief Classes for sampling AtHits.
+ *
+ * Group of classes for randomly sampling AtHits according to some probability density function (PDF).
+ *
+ * Provides subclassed interfaces for the case where the hits sampled are independent (\ref AtIndependentSample) and
+ * when the the PDF depends on some reference hit (\ref AtSampleFromReference).
+ *
+ * To add an additional sampling method, at minimum it must inherit \ref AtSample. It should also be added to the
+ * SampleMethod enum, and the static factory method AtSample::CreateSampler.
+ *
+ * @defgroup AtHitSampling Random Sampling
+ */
+namespace RandomSample {
+enum class SampleMethod;
 
 /**
- * Interface for randomly sampling a collection of AtHits according
- * to the cumulitive distribution function fCDF.
+ * @brief Interface for randomly sampling AtHits.
+ *
+ * Samples according to the cumulitive distribution function fCDF.
  *
  * @ingroup AtHitSampling
  */
@@ -55,6 +70,6 @@ protected:
       return std::find(vec.begin(), vec.end(), val) != vec.end();
    }
 };
-} // namespace AtTools
+} // namespace RandomSample
 
 #endif //#ifndef ATHITSAMPLER_H

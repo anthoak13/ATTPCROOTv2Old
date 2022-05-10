@@ -4,7 +4,7 @@
 
 #include <Math/PdfFuncMathCore.h>
 #include <TRandom3.h>
-using namespace AtTools;
+using namespace RandomSample;
 void AtWeightedGaussian::SetHitsToSample(const std::vector<AtHit> *hits)
 {
    AtSampleFromReference::SetHitsToSample(hits);

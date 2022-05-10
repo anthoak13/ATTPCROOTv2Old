@@ -3,38 +3,28 @@
 
 #include "AtSampleEstimator.h"
 
-/**
- * @brief Implemented estimators for sample consensus
- */
-enum class AtSampleEstimator::Estimators { kRANSAC, kLMedS, kMLESAC };
+namespace SampleConsensus {
 
 /**
- * Implementation of RANSAC estimator
- * @ingroup AtSampleEstimator
+ * @brief Estimators for AtSampleConsensus.
+ *
+ * All implemented estimators for AtSampleConsensus.
+ * @ingroup SampleConsensus
  */
-class AtEstimatorRansac {
-public:
-   static int EvaluateModel(AtPatterns::AtPattern *model, const std::vector<AtHit> &hitArray, double distanceThreshold);
-};
+enum class Estimators { kRANSAC, kLMedS, kMLESAC };
 
 /**
- * Implementation of MLESAC estimator
- * @ingroup AtSampleEstimator
+ * @brief Implementation of RANSAC estimator
  */
-
-class AtEstimatorMlesac {
-public:
-   static int EvaluateModel(AtPatterns::AtPattern *model, const std::vector<AtHit> &hitArray, double distanceThreshold);
-};
-
+int EvaluateRansac(AtPatterns::AtPattern *model, const std::vector<AtHit> &hitArray, double distanceThreshold);
 /**
- * Implementation of LMedS estimator
- * @ingroup AtSampleEstimator
+ * @brief Implementation of MLESAC estimator
  */
-class AtEstimatorLmeds {
-public:
-   static int EvaluateModel(AtPatterns::AtPattern *model, const std::vector<AtHit> &hitArray, double distanceThreshold);
-   static double GetMedian(std::vector<double> &vec);
-};
+int EvaluateMlesac(AtPatterns::AtPattern *model, const std::vector<AtHit> &hitArray, double distanceThreshold);
+/**
+ * @brief Implementation of LMedS estimator
+ */
+int EvaluateLmeds(AtPatterns::AtPattern *model, const std::vector<AtHit> &hitArray, double distanceThreshold);
 
+} // namespace SampleConsensus
 #endif //#ifndef ATESTIMATORMETHODS_H

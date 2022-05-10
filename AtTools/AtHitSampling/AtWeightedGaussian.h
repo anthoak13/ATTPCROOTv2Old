@@ -4,9 +4,11 @@
 #include "AtChargeWeighted.h"
 #include "AtSampleFromReference.h"
 
-namespace AtTools {
+namespace RandomSample {
 
 /**
+ * @brief Sample with a charge-weighted gaussian.
+ *
  * Class for sampling a collection of AtHits in a spacial gaussian distribution around
  * the reference hit where the hits are weighted by charge.
  *
@@ -25,5 +27,5 @@ protected:
    virtual std::vector<double> PDF(const AtHit &hit) override;
    virtual void SampleReferenceHit() override;
 };
-} // namespace AtTools
+} // namespace RandomSample
 #endif // ATSAMPLEGAUSSIAN_H

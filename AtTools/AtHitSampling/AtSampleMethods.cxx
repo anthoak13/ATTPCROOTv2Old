@@ -5,18 +5,23 @@
 #include "AtSample.h"
 #include "AtUniform.h"
 #include "AtWeightedGaussian.h"
+using namespace RandomSample;
 
 /**
- * Static factory method for creating instances of AtSample
+ * @brief Static factory method for creating instances of AtSample.
  *
- * Only returns a nullptr for sub-types of AtSample that do not require additional information.
+ * Factory for creating sampling methods. Will pass parameters to the constructors
+ *Only returns a nullptr for sub-types of AtSample that do not require additional information.
  * @ingroup AtHitSampling
  */
-std::unique_ptr<AtTools::AtSample> AtTools::AtSample::CreateSampler(SampleMethod method)
+template <typename... Ts>
+std::unique_ptr<AtSample> CreateSampler(SampleMethod method, Ts &&...params)
 {
    switch (method) {
    case SampleMethod::kUniform: return std::make_unique<AtUniform>();
    case SampleMethod::kChargeWeighted: return std::make_unique<AtChargeWeighted>();
+   case SampleMethod::kGaussian: return std::make_unique<AtGaussian>(std::forward<Ts>(params)...);
+   case SampleMethod::kWeightedGaussian: return std::make_unique<AtGaussian>(std::forward<Ts>(params)...);
    default: return nullptr;
    }
 }

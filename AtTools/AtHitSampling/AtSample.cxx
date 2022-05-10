@@ -5,7 +5,7 @@
 #include <TRandom3.h>
 
 #include <numeric>
-using namespace AtTools;
+using namespace RandomSample;
 
 /**
  * @brief Sample hits (AtHit) from fHits.

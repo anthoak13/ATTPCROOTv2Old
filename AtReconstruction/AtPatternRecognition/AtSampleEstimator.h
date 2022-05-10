@@ -7,24 +7,19 @@ class AtPattern;
 }
 class AtHit;
 
-/**
- * @defgroup AtSampleEstimator Estimators
- *
- * Group of classes and functions for sample consensus estimators. Should be used by including the file
- * AtEstimatorMethods.h
- */
+namespace SampleConsensus {
+enum class Estimators;
 
 /**
  * Static class for calling the correct estimator based on the enum
  * Enum definition and implementation is in AtEstimatorMethods.h
  * @ingroup AtSampleEstimator
  */
-class AtSampleEstimator {
-
+class AtEstimator {
 public:
-   enum class Estimators;
    static int
    EvaluateModel(AtPatterns::AtPattern *model, const std::vector<AtHit> &hits, double distThresh, Estimators estimator);
 };
+} // namespace SampleConsensus
 
 #endif //#ifndef ATSAMPLEESTIMATOR_H

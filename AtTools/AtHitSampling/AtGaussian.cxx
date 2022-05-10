@@ -4,7 +4,7 @@
 
 #include <Math/PdfFuncMathCore.h>
 #include <TRandom3.h>
-using namespace AtTools;
+using namespace RandomSample;
 std::vector<double> AtGaussian::PDF(const AtHit &hit)
 {
    auto dist = (fReferenceHit.GetPosition() - hit.GetPosition()).Mag2();

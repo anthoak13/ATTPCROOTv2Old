@@ -1,13 +1,25 @@
 #ifndef ATPATTERNTYPES_H
 #define ATPATTERNTYPES_H
+#include <memory>
 
 namespace AtPatterns {
 
 /**
- * All implemented patterns. Can be created with the static factory AtPattern::CreatePattern(Type type)
+ * @brief Supported patterns.
+ *
+ * Can be created with the static factory AtPatterns::CreatePattern(PatternType type)
  * @ingroup AtPattern
  */
-enum class PatternType { kLine, kCircle2D }; //< Supported patterns
+enum class PatternType { kLine, kCircle2D };
+
+class AtPattern;
+/**
+ * @brief Factory for AtPattern.
+ *
+ * Factory method for creating instances of AtPattern based on type
+ * @ingroup AtPattern
+ */
+std::unique_ptr<AtPattern> CreatePattern(PatternType type);
 
 } // namespace AtPatterns
 #endif //#ifndef ATPATTERNTYPES_H

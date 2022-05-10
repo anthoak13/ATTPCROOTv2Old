@@ -1,25 +1,21 @@
 #ifndef ATSAMPLEMETHODS_H
 #define ATSAMPLEMETHODS_H
 
-#include "AtSample.h"
+#include <memory>
 
+namespace RandomSample {
 /**
- * @brief Collection for sampling AtHits
+ * @brief. Methods of random sampling.
  *
- * Group of classes for randomly sampling AtHits according to some probability density function (PDF).
- *
- * Provides subclassed interfaces for the case where the hits sampled are independent (AtIndependentSample) and when the
- * the PDF depends on some reference hit (AtSampleFromReference). To add an additional sampling method, at minimum it
- * must inherit AtSample. It should also be added to the SampleMethod enum, and the static factory method
- * AtSample::CreateSampler.
- *
- * @defgroup AtHitSampling Random Sampling
- */
-
-/**
- * Defined methods of sampling hits
+ * All methods implemented that can be constructed by the factory method CreateSampler(SampleMethod).
  * @ingroup AtHitSampling
  */
-enum class AtTools::AtSample::SampleMethod { kUniform = 0, kChargeWeighted = 1, kGaussian = 2, kWeightedGaussian = 3 };
+enum class SampleMethod { kUniform = 0, kChargeWeighted = 1, kGaussian = 2, kWeightedGaussian = 3 };
+class AtSample;
+
+template <typename... Ts>
+std::unique_ptr<AtSample> CreateSampler(SampleMethod method, Ts &&...params);
+
+} // namespace RandomSample
 
 #endif // #ifndef ATSAMPLEMETHODS_H

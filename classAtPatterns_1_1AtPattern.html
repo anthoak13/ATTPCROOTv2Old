@@ -69,7 +69,6 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classAtPatterns_1_1AtPattern-members.html">List of all members</a>  </div>
@@ -78,13 +77,16 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>Describes a shape in 3D space A base class that describes the pattern of a track. For example a 2D circle or a line These patterns are parameterized by some number (t)  
+ <a href="classAtPatterns_1_1AtPattern.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="AtPattern_8h_source.html">AtPattern.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for AtPatterns::AtPattern:</div>
 <div class="dyncontent">
 <div class="center"><img src="classAtPatterns_1_1AtPattern__inherit__graph.png" border="0" usemap="#AtPatterns_1_1AtPattern_inherit__map" alt="Inheritance graph"/></div>
 <map name="AtPatterns_1_1AtPattern_inherit__map" id="AtPatterns_1_1AtPattern_inherit__map">
-<area shape="rect" title=" " alt="" coords="133,80,278,107"/>
+<area shape="rect" title="Describes a shape in 3D space A base class that describes the pattern of a track. For example a 2D ci..." alt="" coords="133,80,278,107"/>
 <area shape="rect" href="classAtPatterns_1_1AtPatternCircle2D.html" title="Describes a circle track projected to the XY plane." alt="" coords="5,155,200,181"/>
 <area shape="rect" href="classAtPatterns_1_1AtPatternLine.html" title="Describes a linear track." alt="" coords="224,155,395,181"/>
 <area shape="rect" title=" " alt="" coords="171,5,239,32"/>
@@ -95,7 +97,7 @@ Collaboration diagram for AtPatterns::AtPattern:</div>
 <div class="dyncontent">
 <div class="center"><img src="classAtPatterns_1_1AtPattern__coll__graph.png" border="0" usemap="#AtPatterns_1_1AtPattern_coll__map" alt="Collaboration graph"/></div>
 <map name="AtPatterns_1_1AtPattern_coll__map" id="AtPatterns_1_1AtPattern_coll__map">
-<area shape="rect" title=" " alt="" coords="33,95,179,121"/>
+<area shape="rect" title="Describes a shape in 3D space A base class that describes the pattern of a track. For example a 2D ci..." alt="" coords="33,95,179,121"/>
 <area shape="rect" title=" " alt="" coords="5,5,73,32"/>
 <area shape="rect" title=" " alt="" coords="97,5,251,32"/>
 </map>
@@ -123,9 +125,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:afbb9fabb2ef8cc203399f11bae9649bc"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="AtHit_8h.html#acdbe604dea12970b4e97a316f9046ae7">XYZPoint</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtPatterns_1_1AtPattern.html#afbb9fabb2ef8cc203399f11bae9649bc">GetPointAt</a> (double t)=0</td></tr>
 <tr class="memdesc:afbb9fabb2ef8cc203399f11bae9649bc"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structPoint.html">Point</a> on pattern at t.  <a href="classAtPatterns_1_1AtPattern.html#afbb9fabb2ef8cc203399f11bae9649bc">More...</a><br /></td></tr>
 <tr class="separator:afbb9fabb2ef8cc203399f11bae9649bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a72309dba6f5712f33fafe9a08c7c6c6d"><td class="memItemLeft" align="right" valign="top">virtual std::unique_ptr&lt; <a class="el" href="classAtPatterns_1_1AtPattern.html">AtPattern</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtPatterns_1_1AtPattern.html#a72309dba6f5712f33fafe9a08c7c6c6d">Clone</a> ()=0</td></tr>
-<tr class="memdesc:a72309dba6f5712f33fafe9a08c7c6c6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clone the pattern.  <a href="classAtPatterns_1_1AtPattern.html#a72309dba6f5712f33fafe9a08c7c6c6d">More...</a><br /></td></tr>
-<tr class="separator:a72309dba6f5712f33fafe9a08c7c6c6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2fab6a0c676cfeb0bb52d5984e09609d"><td class="memItemLeft" align="right" valign="top">Int_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtPatterns_1_1AtPattern.html#a2fab6a0c676cfeb0bb52d5984e09609d">GetNumPoints</a> () const</td></tr>
 <tr class="memdesc:a2fab6a0c676cfeb0bb52d5984e09609d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of points to define the pattern.  <a href="classAtPatterns_1_1AtPattern.html#a2fab6a0c676cfeb0bb52d5984e09609d">More...</a><br /></td></tr>
 <tr class="separator:a2fab6a0c676cfeb0bb52d5984e09609d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -137,11 +136,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a59c2cd0254546be808b6c839b965e701"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3aa5ff577ace5a1f6a3a88f6413e5779"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtPatterns_1_1AtPattern.html#a3aa5ff577ace5a1f6a3a88f6413e5779">SetChi2</a> (double chi2)</td></tr>
 <tr class="separator:a3aa5ff577ace5a1f6a3a88f6413e5779"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
-Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a087dbc0b9dad7896d1ce934f80d0d66c"><td class="memItemLeft" align="right" valign="top">static std::unique_ptr&lt; <a class="el" href="classAtPatterns_1_1AtPattern.html">AtPattern</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtPatterns_1_1AtPattern.html#a087dbc0b9dad7896d1ce934f80d0d66c">CreatePattern</a> (<a class="el" href="group__AtPattern.html#ga83dfd22f92852e92938315c154952e5c">PatternType</a> type)</td></tr>
-<tr class="separator:a087dbc0b9dad7896d1ce934f80d0d66c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -160,9 +154,9 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a87d803ba69122b048717a08ade23a5db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A base class that describes the pattern of a track. For example a 2D circle or a line These patterns are parameterized by some number (t) </p>
+<div class="textblock"><p>Describes a shape in 3D space A base class that describes the pattern of a track. For example a 2D circle or a line These patterns are parameterized by some number (t) </p>
 
-<p class="definition">Definition at line <a class="el" href="AtPattern_8h_source.html#l00026">26</a> of file <a class="el" href="AtPattern_8h_source.html">AtPattern.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtPattern_8h_source.html#l00029">29</a> of file <a class="el" href="AtPattern_8h_source.html">AtPattern.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a0dc3de272d47f8cd52ad4262b98c7efc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0dc3de272d47f8cd52ad4262b98c7efc">&#9670;&nbsp;</a></span>AtPattern()</h2>
@@ -185,36 +179,6 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a72309dba6f5712f33fafe9a08c7c6c6d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a72309dba6f5712f33fafe9a08c7c6c6d">&#9670;&nbsp;</a></span>Clone()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual std::unique_ptr&lt;<a class="el" href="classAtPatterns_1_1AtPattern.html">AtPattern</a>&gt; AtPatterns::AtPattern::Clone </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Clone the pattern. </p>
-<p>Should be reimplemented for each <a class="el" href="classAtPatterns_1_1AtPattern.html">AtPattern</a> to return a pointer to the type implementing the function. </p>
-
-<p>Implemented in <a class="el" href="classAtPatterns_1_1AtPatternLine.html#aadc850574c8862740a4c4a4aabe7c93d">AtPatterns::AtPatternLine</a>, and <a class="el" href="classAtPatterns_1_1AtPatternCircle2D.html#a1865936d8aeef53ee3a8c203b07a5926">AtPatterns::AtPatternCircle2D</a>.</p>
-
-</div>
-</div>
 <a id="a54035c6004e25c4411e3652a7c989ce0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a54035c6004e25c4411e3652a7c989ce0">&#9670;&nbsp;</a></span>ClosestPointOnPattern()</h2>
 
@@ -249,35 +213,6 @@ Protected Attributes</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>Closest point on pattern </dd></dl>
 
 <p>Implemented in <a class="el" href="classAtPatterns_1_1AtPatternLine.html#affb19647f6f9d553bbbe73dd8046e961">AtPatterns::AtPatternLine</a>, and <a class="el" href="classAtPatterns_1_1AtPatternCircle2D.html#ab12300d9e9c94b5bfc4998a19159e299">AtPatterns::AtPatternCircle2D</a>.</p>
-
-</div>
-</div>
-<a id="a087dbc0b9dad7896d1ce934f80d0d66c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a087dbc0b9dad7896d1ce934f80d0d66c">&#9670;&nbsp;</a></span>CreatePattern()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::unique_ptr&lt; <a class="el" href="classAtPatterns_1_1AtPattern.html">AtPattern</a> &gt; AtPattern::CreatePattern </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group__AtPattern.html#ga83dfd22f92852e92938315c154952e5c">PatternType</a>&#160;</td>
-          <td class="paramname"><em>type</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Implementation of static factory for creating <a class="el" href="namespaceAtPatterns.html">AtPatterns</a> </p>
-
-<p class="definition">Definition at line <a class="el" href="AtPatternTypes_8cxx_source.html#l00012">12</a> of file <a class="el" href="AtPatternTypes_8cxx_source.html">AtPatternTypes.cxx</a>.</p>
 
 </div>
 </div>
@@ -487,7 +422,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtPattern_8h_source.html#l00080">80</a> of file <a class="el" href="AtPattern_8h_source.html">AtPattern.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtPattern_8h_source.html#l00077">77</a> of file <a class="el" href="AtPattern_8h_source.html">AtPattern.h</a>.</p>
 
 </div>
 </div>
@@ -514,7 +449,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtPattern_8h_source.html#l00081">81</a> of file <a class="el" href="AtPattern_8h_source.html">AtPattern.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtPattern_8h_source.html#l00078">78</a> of file <a class="el" href="AtPattern_8h_source.html">AtPattern.h</a>.</p>
 
 </div>
 </div>
@@ -544,7 +479,7 @@ Protected Attributes</h2></td></tr>
 <p>Number of points to define the pattern. </p>
 <p>The minimum number of unique points needed to define the pattern. </p>
 
-<p class="definition">Definition at line <a class="el" href="AtPattern_8h_source.html#l00079">79</a> of file <a class="el" href="AtPattern_8h_source.html">AtPattern.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtPattern_8h_source.html#l00076">76</a> of file <a class="el" href="AtPattern_8h_source.html">AtPattern.h</a>.</p>
 
 </div>
 </div>
@@ -571,7 +506,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtPattern_8h_source.html#l00082">82</a> of file <a class="el" href="AtPattern_8h_source.html">AtPattern.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtPattern_8h_source.html#l00079">79</a> of file <a class="el" href="AtPattern_8h_source.html">AtPattern.h</a>.</p>
 
 </div>
 </div>
@@ -630,7 +565,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtPattern_8h_source.html#l00083">83</a> of file <a class="el" href="AtPattern_8h_source.html">AtPattern.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtPattern_8h_source.html#l00080">80</a> of file <a class="el" href="AtPattern_8h_source.html">AtPattern.h</a>.</p>
 
 </div>
 </div>
@@ -655,7 +590,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtPattern_8h_source.html#l00029">29</a> of file <a class="el" href="AtPattern_8h_source.html">AtPattern.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtPattern_8h_source.html#l00032">32</a> of file <a class="el" href="AtPattern_8h_source.html">AtPattern.h</a>.</p>
 
 </div>
 </div>
@@ -679,7 +614,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtPattern_8h_source.html#l00030">30</a> of file <a class="el" href="AtPattern_8h_source.html">AtPattern.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtPattern_8h_source.html#l00033">33</a> of file <a class="el" href="AtPattern_8h_source.html">AtPattern.h</a>.</p>
 
 </div>
 </div>
@@ -703,7 +638,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtPattern_8h_source.html#l00031">31</a> of file <a class="el" href="AtPattern_8h_source.html">AtPattern.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtPattern_8h_source.html#l00034">34</a> of file <a class="el" href="AtPattern_8h_source.html">AtPattern.h</a>.</p>
 
 </div>
 </div>
@@ -727,19 +662,18 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtPattern_8h_source.html#l00028">28</a> of file <a class="el" href="AtPattern_8h_source.html">AtPattern.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtPattern_8h_source.html#l00031">31</a> of file <a class="el" href="AtPattern_8h_source.html">AtPattern.h</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>/github/workspace/AtData/AtPattern/<a class="el" href="AtPattern_8h_source.html">AtPattern.h</a></li>
 <li>/github/workspace/AtData/AtPattern/<a class="el" href="AtPattern_8cxx_source.html">AtPattern.cxx</a></li>
-<li>/github/workspace/AtData/AtPattern/<a class="el" href="AtPatternTypes_8cxx_source.html">AtPatternTypes.cxx</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue May 10 2022 03:58:37 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue May 10 2022 04:40:51 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

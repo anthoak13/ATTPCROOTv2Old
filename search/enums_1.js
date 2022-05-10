@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['eframetype_5404',['EFrameType',['../classGETDecoder2.html#a3ed1ba9c23cd87f946ecd982d819bcdd',1,'GETDecoder2']]],
-  ['estimators_5405',['Estimators',['../classAtSampleEstimator.html#a358f197ca03ef21b57ad97c05d5e0fae',1,'AtSampleEstimator']]]
+  ['eframetype_5405',['EFrameType',['../classGETDecoder2.html#a3ed1ba9c23cd87f946ecd982d819bcdd',1,'GETDecoder2']]],
+  ['estimators_5406',['Estimators',['../group__SampleConsensus.html#ga3f41f25b8c1dd17e4e1785fba2380d5d',1,'SampleConsensus']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['random_20sampling_5557',['Random Sampling',['../group__AtHitSampling.html',1,'']]]
+  ['sample_20consensus_5558',['Sample Consensus',['../group__SampleConsensus.html',1,'']]]
 ];

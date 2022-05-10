@@ -68,7 +68,9 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">AtEstimatorMethods.h File Reference</div>  </div>
 </div><!--header-->
@@ -99,19 +101,35 @@ This graph shows which files directly or indirectly include this file:</div>
 </div>
 <p><a href="AtEstimatorMethods_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtEstimatorRansac.html">AtEstimatorRansac</a></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespaceSampleConsensus"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSampleConsensus.html">SampleConsensus</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtEstimatorMlesac.html">AtEstimatorMlesac</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtEstimatorLmeds.html">AtEstimatorLmeds</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:ga3f41f25b8c1dd17e4e1785fba2380d5d"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__SampleConsensus.html#ga3f41f25b8c1dd17e4e1785fba2380d5d">SampleConsensus::Estimators</a> { <a class="el" href="group__SampleConsensus.html#gga3f41f25b8c1dd17e4e1785fba2380d5daebb961fd102cb47ca4be06d977086dcd">SampleConsensus::Estimators::kRANSAC</a>, 
+<a class="el" href="group__SampleConsensus.html#gga3f41f25b8c1dd17e4e1785fba2380d5daa0b526ae4e2054e8fb229a1744c527a9">SampleConsensus::Estimators::kLMedS</a>, 
+<a class="el" href="group__SampleConsensus.html#gga3f41f25b8c1dd17e4e1785fba2380d5da7624a3dbfe0b98ea33b3a64138bb694b">SampleConsensus::Estimators::kMLESAC</a>
+ }</td></tr>
+<tr class="separator:ga3f41f25b8c1dd17e4e1785fba2380d5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:aa7274d065e8130596e23e82f30e8d60d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSampleConsensus.html#aa7274d065e8130596e23e82f30e8d60d">SampleConsensus::EvaluateRansac</a> (<a class="el" href="classAtPatterns_1_1AtPattern.html">AtPatterns::AtPattern</a> *model, const std::vector&lt; <a class="el" href="classAtHit.html">AtHit</a> &gt; &amp;hitArray, double distanceThreshold)</td></tr>
+<tr class="memdesc:aa7274d065e8130596e23e82f30e8d60d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implementation of RANSAC estimator.  <a href="namespaceSampleConsensus.html#aa7274d065e8130596e23e82f30e8d60d">More...</a><br /></td></tr>
+<tr class="separator:aa7274d065e8130596e23e82f30e8d60d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace0a45e9405af541decf6bb20d108201"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSampleConsensus.html#ace0a45e9405af541decf6bb20d108201">SampleConsensus::EvaluateMlesac</a> (<a class="el" href="classAtPatterns_1_1AtPattern.html">AtPatterns::AtPattern</a> *model, const std::vector&lt; <a class="el" href="classAtHit.html">AtHit</a> &gt; &amp;hitArray, double distanceThreshold)</td></tr>
+<tr class="memdesc:ace0a45e9405af541decf6bb20d108201"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implementation of MLESAC estimator.  <a href="namespaceSampleConsensus.html#ace0a45e9405af541decf6bb20d108201">More...</a><br /></td></tr>
+<tr class="separator:ace0a45e9405af541decf6bb20d108201"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f654dcd41fda9eaf717d0e2b7d4ce39"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSampleConsensus.html#a8f654dcd41fda9eaf717d0e2b7d4ce39">SampleConsensus::EvaluateLmeds</a> (<a class="el" href="classAtPatterns_1_1AtPattern.html">AtPatterns::AtPattern</a> *model, const std::vector&lt; <a class="el" href="classAtHit.html">AtHit</a> &gt; &amp;hitArray, double distanceThreshold)</td></tr>
+<tr class="memdesc:a8f654dcd41fda9eaf717d0e2b7d4ce39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implementation of LMedS estimator.  <a href="namespaceSampleConsensus.html#a8f654dcd41fda9eaf717d0e2b7d4ce39">More...</a><br /></td></tr>
+<tr class="separator:a8f654dcd41fda9eaf717d0e2b7d4ce39"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue May 10 2022 03:58:36 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue May 10 2022 04:40:50 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

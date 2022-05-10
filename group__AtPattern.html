@@ -65,7 +65,8 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#enum-members">Enumerations</a>  </div>
+<a href="#enum-members">Enumerations</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Track Patterns</div>  </div>
 </div><!--header-->
@@ -74,6 +75,7 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtPatterns_1_1AtPattern.html">AtPatterns::AtPattern</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Describes a shape in 3D space A base class that describes the pattern of a track. For example a 2D circle or a line These patterns are parameterized by some number (t)  <a href="classAtPatterns_1_1AtPattern.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtPatterns_1_1AtPatternCircle2D.html">AtPatterns::AtPatternCircle2D</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Describes a circle track projected to the XY plane.  <a href="classAtPatterns_1_1AtPatternCircle2D.html#details">More...</a><br /></td></tr>
@@ -88,6 +90,13 @@ Enumerations</h2></td></tr>
 <a class="el" href="group__AtPattern.html#gga83dfd22f92852e92938315c154952e5cac162690276b0c003fe31ea3969a63fae">AtPatterns::PatternType::kCircle2D</a>
  }</td></tr>
 <tr class="separator:ga83dfd22f92852e92938315c154952e5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:gaa6d8e49bb5966811e1c6947de4c025ef"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classAtPatterns_1_1AtPattern.html">AtPattern</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__AtPattern.html#gaa6d8e49bb5966811e1c6947de4c025ef">AtPatterns::CreatePattern</a> (<a class="el" href="group__AtPattern.html#ga83dfd22f92852e92938315c154952e5c">PatternType</a> type)</td></tr>
+<tr class="separator:gaa6d8e49bb5966811e1c6947de4c025ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1bc8846761624cd5d1b951156708fa0b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__AtPattern.html#ga1bc8846761624cd5d1b951156708fa0b">EvaluateLmeds</a> (<a class="el" href="classAtPatterns_1_1AtPattern.html">AtPatterns::AtPattern</a> *model, const std::vector&lt; <a class="el" href="classAtHit.html">AtHit</a> &gt; &amp;hitArray, double distanceThreshold)</td></tr>
+<tr class="separator:ga1bc8846761624cd5d1b951156708fa0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Collection of classes for describing and drawing track patterns (essentially the shape of a track). These objects are stored as the fit for tracks, and are used to run sample consensus models. </p>
@@ -111,20 +120,77 @@ Enumerations</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>All implemented patterns. Can be created with the static factory AtPattern::CreatePattern(Type type) </p>
+<p>All implemented patterns. Can be created with the static factory <a class="el" href="group__AtPattern.html#gaa6d8e49bb5966811e1c6947de4c025ef">AtPatterns::CreatePattern(PatternType type)</a> </p>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="gga83dfd22f92852e92938315c154952e5caee669fa7b5a35d96a396d4ed648afb45"></a>kLine&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="gga83dfd22f92852e92938315c154952e5cac162690276b0c003fe31ea3969a63fae"></a>kCircle2D&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="AtPatternTypes_8h_source.html#l00010">10</a> of file <a class="el" href="AtPatternTypes_8h_source.html">AtPatternTypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtPatternTypes_8h_source.html#l00011">11</a> of file <a class="el" href="AtPatternTypes_8h_source.html">AtPatternTypes.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="gaa6d8e49bb5966811e1c6947de4c025ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa6d8e49bb5966811e1c6947de4c025ef">&#9670;&nbsp;</a></span>CreatePattern()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unique_ptr&lt; <a class="el" href="classAtPatterns_1_1AtPattern.html">AtPattern</a> &gt; AtPatterns::CreatePattern </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__AtPattern.html#ga83dfd22f92852e92938315c154952e5c">PatternType</a>&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Factory method for creating instances of <a class="el" href="classAtPatterns_1_1AtPattern.html" title="Describes a shape in 3D space A base class that describes the pattern of a track. For example a 2D ci...">AtPattern</a> </p>
+
+</div>
+</div>
+<a id="ga1bc8846761624cd5d1b951156708fa0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1bc8846761624cd5d1b951156708fa0b">&#9670;&nbsp;</a></span>EvaluateLmeds()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int EvaluateLmeds </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classAtPatterns_1_1AtPattern.html">AtPatterns::AtPattern</a> *&#160;</td>
+          <td class="paramname"><em>model</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="classAtHit.html">AtHit</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>hitArray</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>distanceThreshold</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>All implemented patterns. Can be created with the static factory AtPattern::CreatePattern(Type type) </p>
+
+<p class="definition">Definition at line <a class="el" href="AtEstimatorMethods_8cxx_source.html#l00098">98</a> of file <a class="el" href="AtEstimatorMethods_8cxx_source.html">AtEstimatorMethods.cxx</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue May 10 2022 03:58:36 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue May 10 2022 04:40:50 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

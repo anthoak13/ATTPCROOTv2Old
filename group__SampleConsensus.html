@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ATTPCROOT: Estimators</title>
+<title>ATTPCROOT: Sample Consensus</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -65,9 +65,10 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">Estimators</div>  </div>
+<div class="title">Sample Consensus</div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -76,26 +77,29 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtEstimatorRansac.html">AtEstimatorRansac</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSampleConsensus_1_1AtSampleConsensus.html">SampleConsensus::AtSampleConsensus</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform a sample consensus on a cloud of AtHits.  <a href="classSampleConsensus_1_1AtSampleConsensus.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtEstimatorMlesac.html">AtEstimatorMlesac</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtEstimatorLmeds.html">AtEstimatorLmeds</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtSampleEstimator.html">AtSampleEstimator</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:ga3f41f25b8c1dd17e4e1785fba2380d5d"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__SampleConsensus.html#ga3f41f25b8c1dd17e4e1785fba2380d5d">SampleConsensus::Estimators</a> { <a class="el" href="group__SampleConsensus.html#gga3f41f25b8c1dd17e4e1785fba2380d5daebb961fd102cb47ca4be06d977086dcd">SampleConsensus::Estimators::kRANSAC</a>, 
+<a class="el" href="group__SampleConsensus.html#gga3f41f25b8c1dd17e4e1785fba2380d5daa0b526ae4e2054e8fb229a1744c527a9">SampleConsensus::Estimators::kLMedS</a>, 
+<a class="el" href="group__SampleConsensus.html#gga3f41f25b8c1dd17e4e1785fba2380d5da7624a3dbfe0b98ea33b3a64138bb694b">SampleConsensus::Estimators::kMLESAC</a>
+ }</td></tr>
+<tr class="separator:ga3f41f25b8c1dd17e4e1785fba2380d5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga0dd6375a084188d7de3b8f52dededb68"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__AtSampleEstimator.html#ga0dd6375a084188d7de3b8f52dededb68">AtSampleEstimator::EvaluateModel</a> (<a class="el" href="classAtPatterns_1_1AtPattern.html">AtPatterns::AtPattern</a> *model, const std::vector&lt; <a class="el" href="classAtHit.html">AtHit</a> &gt; &amp;hits, double distThresh, <a class="el" href="classAtSampleEstimator.html#a358f197ca03ef21b57ad97c05d5e0fae">Estimators</a> estimator)</td></tr>
-<tr class="memdesc:ga0dd6375a084188d7de3b8f52dededb68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate how well model describes hits.  <a href="group__AtSampleEstimator.html#ga0dd6375a084188d7de3b8f52dededb68">More...</a><br /></td></tr>
-<tr class="separator:ga0dd6375a084188d7de3b8f52dededb68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga36773778b9464b7613bda87198be0c1f"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__SampleConsensus.html#ga36773778b9464b7613bda87198be0c1f">SampleConsensus::AtEstimator::EvaluateModel</a> (<a class="el" href="classAtPatterns_1_1AtPattern.html">AtPatterns::AtPattern</a> *model, const std::vector&lt; <a class="el" href="classAtHit.html">AtHit</a> &gt; &amp;hits, double distThresh, <a class="el" href="group__SampleConsensus.html#ga3f41f25b8c1dd17e4e1785fba2380d5d">Estimators</a> estimator)</td></tr>
+<tr class="memdesc:ga36773778b9464b7613bda87198be0c1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate how well model describes hits.  <a href="group__SampleConsensus.html#ga36773778b9464b7613bda87198be0c1f">More...</a><br /></td></tr>
+<tr class="separator:ga36773778b9464b7613bda87198be0c1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Group of classes and functions for sample consensus estimators. Should be used by including the file <a class="el" href="AtEstimatorMethods_8h.html">AtEstimatorMethods.h</a>. </p>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="ga0dd6375a084188d7de3b8f52dededb68"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga0dd6375a084188d7de3b8f52dededb68">&#9670;&nbsp;</a></span>EvaluateModel()</h2>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="ga3f41f25b8c1dd17e4e1785fba2380d5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3f41f25b8c1dd17e4e1785fba2380d5d">&#9670;&nbsp;</a></span>Estimators</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -104,7 +108,38 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int AtSampleEstimator::EvaluateModel </td>
+          <td class="memname">enum <a class="el" href="group__SampleConsensus.html#ga3f41f25b8c1dd17e4e1785fba2380d5d">SampleConsensus::Estimators</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>All implemented estimators for <a class="el" href="classSampleConsensus_1_1AtSampleConsensus.html" title="Perform a sample consensus on a cloud of AtHits.">AtSampleConsensus</a> </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="gga3f41f25b8c1dd17e4e1785fba2380d5daebb961fd102cb47ca4be06d977086dcd"></a>kRANSAC&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="gga3f41f25b8c1dd17e4e1785fba2380d5daa0b526ae4e2054e8fb229a1744c527a9"></a>kLMedS&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="gga3f41f25b8c1dd17e4e1785fba2380d5da7624a3dbfe0b98ea33b3a64138bb694b"></a>kMLESAC&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="AtEstimatorMethods_8h_source.html#l00012">12</a> of file <a class="el" href="AtEstimatorMethods_8h_source.html">AtEstimatorMethods.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="ga36773778b9464b7613bda87198be0c1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga36773778b9464b7613bda87198be0c1f">&#9670;&nbsp;</a></span>EvaluateModel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int AtEstimator::EvaluateModel </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classAtPatterns_1_1AtPattern.html">AtPatterns::AtPattern</a> *&#160;</td>
           <td class="paramname"><em>model</em>, </td>
@@ -124,8 +159,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classAtSampleEstimator.html#a358f197ca03ef21b57ad97c05d5e0fae">Estimators</a>&#160;</td>
-          <td class="paramname"><em>estimator</em> = <code><a class="el" href="classAtSampleEstimator.html#a358f197ca03ef21b57ad97c05d5e0faeaebb961fd102cb47ca4be06d977086dcd">Estimators::kRANSAC</a></code>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__SampleConsensus.html#ga3f41f25b8c1dd17e4e1785fba2380d5d">Estimators</a>&#160;</td>
+          <td class="paramname"><em>estimator</em> = <code><a class="el" href="group__SampleConsensus.html#gga3f41f25b8c1dd17e4e1785fba2380d5daebb961fd102cb47ca4be06d977086dcd">Estimators::kRANSAC</a></code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -159,7 +194,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue May 10 2022 03:58:36 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue May 10 2022 04:40:50 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

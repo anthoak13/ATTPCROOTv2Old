@@ -76,25 +76,28 @@ $(function() {
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="AtIndependentSample_8h.html">AtIndependentSample.h</a>&quot;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceRandomSample.html">RandomSample</a> {</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="classRandomSample_1_1AtUniform.html">   13</a></span>&#160;<span class="keyword">class </span><a class="code" href="classRandomSample_1_1AtUniform.html">AtUniform</a> : <span class="keyword">public</span> <a class="code" href="classRandomSample_1_1AtIndependentSample.html">AtIndependentSample</a> {</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;   <span class="keyword">virtual</span> std::vector&lt;double&gt; <a class="code" href="classRandomSample_1_1AtUniform.html#a3eb7449161bf3765aa65edf582c41072">PDF</a>(<span class="keyword">const</span> <a class="code" href="classAtHit.html">AtHit</a> &amp;hit) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;};</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;} <span class="comment">// namespace RandomSample</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#endif //#ifndef ATSAMPLEUNIFORM_H</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span> <span class="comment">// for vector</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">class </span><a class="code" href="classAtHit.html">AtHit</a>;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceRandomSample.html">RandomSample</a> {</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classRandomSample_1_1AtUniform.html">   16</a></span>&#160;<span class="keyword">class </span><a class="code" href="classRandomSample_1_1AtUniform.html">AtUniform</a> : <span class="keyword">public</span> <a class="code" href="classRandomSample_1_1AtIndependentSample.html">AtIndependentSample</a> {</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;   <span class="keyword">virtual</span> std::vector&lt;double&gt; <a class="code" href="classRandomSample_1_1AtUniform.html#a3eb7449161bf3765aa65edf582c41072">PDF</a>(<span class="keyword">const</span> <a class="code" href="classAtHit.html">AtHit</a> &amp;hit) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;};</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;} <span class="comment">// namespace RandomSample</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#endif //#ifndef ATSAMPLEUNIFORM_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclassRandomSample_1_1AtUniform_html_a3eb7449161bf3765aa65edf582c41072"><div class="ttname"><a href="classRandomSample_1_1AtUniform.html#a3eb7449161bf3765aa65edf582c41072">RandomSample::AtUniform::PDF</a></div><div class="ttdeci">virtual std::vector&lt; double &gt; PDF(const AtHit &amp;hit) override</div><div class="ttdef"><b>Definition:</b> <a href="AtUniform_8cxx_source.html#l00004">AtUniform.cxx:4</a></div></div>
-<div class="ttc" id="anamespaceRandomSample_html"><div class="ttname"><a href="namespaceRandomSample.html">RandomSample</a></div><div class="ttdef"><b>Definition:</b> <a href="AtChargeWeighted_8h_source.html#l00005">AtChargeWeighted.h:5</a></div></div>
-<div class="ttc" id="aclassRandomSample_1_1AtUniform_html"><div class="ttname"><a href="classRandomSample_1_1AtUniform.html">RandomSample::AtUniform</a></div><div class="ttdoc">Uniformly sample a collection of AtHits.</div><div class="ttdef"><b>Definition:</b> <a href="AtUniform_8h_source.html#l00013">AtUniform.h:13</a></div></div>
-<div class="ttc" id="aclassRandomSample_1_1AtIndependentSample_html"><div class="ttname"><a href="classRandomSample_1_1AtIndependentSample.html">RandomSample::AtIndependentSample</a></div><div class="ttdoc">Interface for independent samples.</div><div class="ttdef"><b>Definition:</b> <a href="AtIndependentSample_8h_source.html#l00013">AtIndependentSample.h:13</a></div></div>
+<div class="ttc" id="aclassRandomSample_1_1AtUniform_html_a3eb7449161bf3765aa65edf582c41072"><div class="ttname"><a href="classRandomSample_1_1AtUniform.html#a3eb7449161bf3765aa65edf582c41072">RandomSample::AtUniform::PDF</a></div><div class="ttdeci">virtual std::vector&lt; double &gt; PDF(const AtHit &amp;hit) override</div><div class="ttdef"><b>Definition:</b> <a href="AtUniform_8cxx_source.html#l00009">AtUniform.cxx:9</a></div></div>
+<div class="ttc" id="anamespaceRandomSample_html"><div class="ttname"><a href="namespaceRandomSample.html">RandomSample</a></div><div class="ttdef"><b>Definition:</b> <a href="AtSampleConsensus_8h_source.html#l00025">AtSampleConsensus.h:25</a></div></div>
+<div class="ttc" id="aclassRandomSample_1_1AtUniform_html"><div class="ttname"><a href="classRandomSample_1_1AtUniform.html">RandomSample::AtUniform</a></div><div class="ttdoc">Uniformly sample a collection of AtHits.</div><div class="ttdef"><b>Definition:</b> <a href="AtUniform_8h_source.html#l00016">AtUniform.h:16</a></div></div>
+<div class="ttc" id="aclassRandomSample_1_1AtIndependentSample_html"><div class="ttname"><a href="classRandomSample_1_1AtIndependentSample.html">RandomSample::AtIndependentSample</a></div><div class="ttdoc">Interface for independent samples.</div><div class="ttdef"><b>Definition:</b> <a href="AtIndependentSample_8h_source.html#l00017">AtIndependentSample.h:17</a></div></div>
 <div class="ttc" id="aAtIndependentSample_8h_html"><div class="ttname"><a href="AtIndependentSample_8h.html">AtIndependentSample.h</a></div></div>
 <div class="ttc" id="aclassAtHit_html"><div class="ttname"><a href="classAtHit.html">AtHit</a></div><div class="ttdef"><b>Definition:</b> <a href="AtHit_8h_source.html#l00021">AtHit.h:21</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue May 10 2022 05:44:26 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue May 10 2022 07:15:18 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

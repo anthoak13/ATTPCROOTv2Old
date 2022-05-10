@@ -74,21 +74,24 @@ $(function() {
 <a href="AtChargeWeighted_8cxx.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="AtChargeWeighted_8h.html">AtChargeWeighted.h</a>&quot;</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="AtHit_8h.html">AtHit.h</a>&quot;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespaceRandomSample.html">RandomSample</a>;</div>
-<div class="line"><a name="l00005"></a><span class="lineno"><a class="line" href="classRandomSample_1_1AtChargeWeighted.html#afd0b8df3d324fb6e33e1861afe555de4">    5</a></span>&#160;std::vector&lt;double&gt; <a class="code" href="classRandomSample_1_1AtChargeWeighted.html#afd0b8df3d324fb6e33e1861afe555de4">AtChargeWeighted::PDF</a>(<span class="keyword">const</span> <a class="code" href="classAtHit.html">AtHit</a> &amp;hit)</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;{</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;   <span class="keywordflow">return</span> {hit.<a class="code" href="classAtHit.html#a8a8e071c728ffbb2cce875cc1a3171df">GetCharge</a>()};</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;}</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="AtSample_8h.html">AtSample.h</a>&quot;</span> <span class="comment">// for RandomSample</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespaceRandomSample.html">RandomSample</a>;</div>
+<div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="classRandomSample_1_1AtChargeWeighted.html#afd0b8df3d324fb6e33e1861afe555de4">    7</a></span>&#160;std::vector&lt;double&gt; <a class="code" href="classRandomSample_1_1AtChargeWeighted.html#afd0b8df3d324fb6e33e1861afe555de4">AtChargeWeighted::PDF</a>(<span class="keyword">const</span> <a class="code" href="classAtHit.html">AtHit</a> &amp;hit)</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;   <span class="keywordflow">return</span> {hit.<a class="code" href="classAtHit.html#a8a8e071c728ffbb2cce875cc1a3171df">GetCharge</a>()};</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="anamespaceRandomSample_html"><div class="ttname"><a href="namespaceRandomSample.html">RandomSample</a></div><div class="ttdef"><b>Definition:</b> <a href="AtChargeWeighted_8h_source.html#l00005">AtChargeWeighted.h:5</a></div></div>
+<div class="ttc" id="anamespaceRandomSample_html"><div class="ttname"><a href="namespaceRandomSample.html">RandomSample</a></div><div class="ttdef"><b>Definition:</b> <a href="AtSampleConsensus_8h_source.html#l00025">AtSampleConsensus.h:25</a></div></div>
 <div class="ttc" id="aAtChargeWeighted_8h_html"><div class="ttname"><a href="AtChargeWeighted_8h.html">AtChargeWeighted.h</a></div></div>
 <div class="ttc" id="aAtHit_8h_html"><div class="ttname"><a href="AtHit_8h.html">AtHit.h</a></div></div>
-<div class="ttc" id="aclassRandomSample_1_1AtChargeWeighted_html_afd0b8df3d324fb6e33e1861afe555de4"><div class="ttname"><a href="classRandomSample_1_1AtChargeWeighted.html#afd0b8df3d324fb6e33e1861afe555de4">RandomSample::AtChargeWeighted::PDF</a></div><div class="ttdeci">virtual std::vector&lt; double &gt; PDF(const AtHit &amp;hit) override</div><div class="ttdef"><b>Definition:</b> <a href="AtChargeWeighted_8cxx_source.html#l00005">AtChargeWeighted.cxx:5</a></div></div>
+<div class="ttc" id="aclassRandomSample_1_1AtChargeWeighted_html_afd0b8df3d324fb6e33e1861afe555de4"><div class="ttname"><a href="classRandomSample_1_1AtChargeWeighted.html#afd0b8df3d324fb6e33e1861afe555de4">RandomSample::AtChargeWeighted::PDF</a></div><div class="ttdeci">virtual std::vector&lt; double &gt; PDF(const AtHit &amp;hit) override</div><div class="ttdef"><b>Definition:</b> <a href="AtChargeWeighted_8cxx_source.html#l00007">AtChargeWeighted.cxx:7</a></div></div>
+<div class="ttc" id="aAtSample_8h_html"><div class="ttname"><a href="AtSample_8h.html">AtSample.h</a></div></div>
 <div class="ttc" id="aclassAtHit_html_a8a8e071c728ffbb2cce875cc1a3171df"><div class="ttname"><a href="classAtHit.html#a8a8e071c728ffbb2cce875cc1a3171df">AtHit::GetCharge</a></div><div class="ttdeci">Double_t GetCharge() const</div><div class="ttdef"><b>Definition:</b> <a href="AtHit_8h_source.html#l00093">AtHit.h:93</a></div></div>
 <div class="ttc" id="aclassAtHit_html"><div class="ttname"><a href="classAtHit.html">AtHit</a></div><div class="ttdef"><b>Definition:</b> <a href="AtHit_8h_source.html#l00021">AtHit.h:21</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue May 10 2022 05:44:26 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue May 10 2022 07:15:18 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

@@ -114,6 +114,8 @@ Collaboration diagram for RandomSample::AtSample:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a60333077797b6f2b243862fbb3ac1791"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRandomSample_1_1AtSample.html#a60333077797b6f2b243862fbb3ac1791">~AtSample</a> ()=default</td></tr>
+<tr class="separator:a60333077797b6f2b243862fbb3ac1791"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05f973bb9f6201604cc53c4a5a607963"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="classAtHit.html">AtHit</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRandomSample_1_1AtSample.html#a05f973bb9f6201604cc53c4a5a607963">SampleHits</a> (int N)</td></tr>
 <tr class="memdesc:a05f973bb9f6201604cc53c4a5a607963"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sample hits (<a class="el" href="classAtHit.html">AtHit</a>) from fHits.  <a href="classRandomSample_1_1AtSample.html#a05f973bb9f6201604cc53c4a5a607963">More...</a><br /></td></tr>
 <tr class="separator:a05f973bb9f6201604cc53c4a5a607963"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -161,8 +163,34 @@ Protected Attributes</h2></td></tr>
 <div class="textblock"><p>Interface for randomly sampling AtHits. </p>
 <p>Samples according to the cumulitive distribution function fCDF. </p>
 
-<p class="definition">Definition at line <a class="el" href="AtSample_8h_source.html#l00033">33</a> of file <a class="el" href="AtSample_8h_source.html">AtSample.h</a>.</p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+<p class="definition">Definition at line <a class="el" href="AtSample_8h_source.html#l00035">35</a> of file <a class="el" href="AtSample_8h_source.html">AtSample.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a60333077797b6f2b243862fbb3ac1791"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60333077797b6f2b243862fbb3ac1791">&#9670;&nbsp;</a></span>~AtSample()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual RandomSample::AtSample::~AtSample </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="a29f732e86a5fcecbcf01724033e920fc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a29f732e86a5fcecbcf01724033e920fc">&#9670;&nbsp;</a></span>CreateSampler()</h2>
 
@@ -214,7 +242,7 @@ Protected Attributes</h2></td></tr>
 <p>Fill the cumulitive distribution function to sample using the marginal PDFs returned by the function <a class="el" href="classRandomSample_1_1AtSample.html#a8d766fab6d39d6656179d70da0f191a3">PDF(const AtHit &amp;hit)</a> from every entry in the vector fHits.</p>
 <p>Each marginal PDF is normalized to construct the final CDF. Assumes the marginal PDFs are independent (i.e. the joint PDF is just the product of all marginal PDFs) </p>
 
-<p class="definition">Definition at line <a class="el" href="AtSample_8cxx_source.html#l00105">105</a> of file <a class="el" href="AtSample_8cxx_source.html">AtSample.cxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtSample_8cxx_source.html#l00108">108</a> of file <a class="el" href="AtSample_8cxx_source.html">AtSample.cxx</a>.</p>
 
 </div>
 </div>
@@ -268,7 +296,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="AtSample_8cxx_source.html#l00049">49</a> of file <a class="el" href="AtSample_8cxx_source.html">AtSample.cxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtSample_8cxx_source.html#l00053">53</a> of file <a class="el" href="AtSample_8cxx_source.html">AtSample.cxx</a>.</p>
 
 </div>
 </div>
@@ -308,7 +336,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtSample_8h_source.html#l00066">66</a> of file <a class="el" href="AtSample_8h_source.html">AtSample.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtSample_8h_source.html#l00068">68</a> of file <a class="el" href="AtSample_8h_source.html">AtSample.h</a>.</p>
 
 </div>
 </div>
@@ -372,7 +400,7 @@ template&lt;typename T &gt; </div>
 
 <p>Reimplemented in <a class="el" href="classRandomSample_1_1AtSampleFromReference.html#afb3c4068a6e802fa7ca08b816e4efff4">RandomSample::AtSampleFromReference</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="AtSample_8cxx_source.html#l00015">15</a> of file <a class="el" href="AtSample_8cxx_source.html">AtSample.cxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtSample_8cxx_source.html#l00019">19</a> of file <a class="el" href="AtSample_8cxx_source.html">AtSample.cxx</a>.</p>
 
 </div>
 </div>
@@ -418,7 +446,7 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="AtSample_8cxx_source.html#l00070">70</a> of file <a class="el" href="AtSample_8cxx_source.html">AtSample.cxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtSample_8cxx_source.html#l00074">74</a> of file <a class="el" href="AtSample_8cxx_source.html">AtSample.cxx</a>.</p>
 
 </div>
 </div>
@@ -441,7 +469,7 @@ template&lt;typename T &gt; </div>
 <p>Sample spacial locations (XYZPoints) from fHits. </p>
 <p>Calls <a class="el" href="classRandomSample_1_1AtSample.html#a05f973bb9f6201604cc53c4a5a607963" title="Sample hits (AtHit) from fHits.">SampleHits(int N)</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="AtSample_8cxx_source.html#l00029">29</a> of file <a class="el" href="AtSample_8cxx_source.html">AtSample.cxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtSample_8cxx_source.html#l00033">33</a> of file <a class="el" href="AtSample_8cxx_source.html">AtSample.cxx</a>.</p>
 
 </div>
 </div>
@@ -497,7 +525,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtSample_8h_source.html#l00047">47</a> of file <a class="el" href="AtSample_8h_source.html">AtSample.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtSample_8h_source.html#l00049">49</a> of file <a class="el" href="AtSample_8h_source.html">AtSample.h</a>.</p>
 
 </div>
 </div>
@@ -522,7 +550,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtSample_8h_source.html#l00036">36</a> of file <a class="el" href="AtSample_8h_source.html">AtSample.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtSample_8h_source.html#l00038">38</a> of file <a class="el" href="AtSample_8h_source.html">AtSample.h</a>.</p>
 
 </div>
 </div>
@@ -546,7 +574,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtSample_8h_source.html#l00035">35</a> of file <a class="el" href="AtSample_8h_source.html">AtSample.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtSample_8h_source.html#l00037">37</a> of file <a class="el" href="AtSample_8h_source.html">AtSample.h</a>.</p>
 
 </div>
 </div>
@@ -570,7 +598,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtSample_8h_source.html#l00037">37</a> of file <a class="el" href="AtSample_8h_source.html">AtSample.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtSample_8h_source.html#l00039">39</a> of file <a class="el" href="AtSample_8h_source.html">AtSample.h</a>.</p>
 
 </div>
 </div>
@@ -581,7 +609,7 @@ template&lt;typename T &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue May 10 2022 05:44:27 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue May 10 2022 07:15:20 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

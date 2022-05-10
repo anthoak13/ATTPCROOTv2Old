@@ -1,5 +1,9 @@
 <map id="/github/workspace/AtTools/AtHitSampling/AtUniform.h" name="/github/workspace/AtTools/AtHitSampling/AtUniform.h">
-<area shape="rect" id="node1" title=" " alt="" coords="157,5,339,47"/>
-<area shape="rect" id="node2" href="$AtSampleMethods_8cxx.html" title=" " alt="" coords="5,95,248,136"/>
-<area shape="rect" id="node3" href="$AtUniform_8cxx.html" title=" " alt="" coords="272,95,467,136"/>
+<area shape="rect" id="node1" title=" " alt="" coords="416,5,599,47"/>
+<area shape="rect" id="node2" href="$AtSampleMethods_8h.html" title=" " alt="" coords="273,95,504,136"/>
+<area shape="rect" id="node7" href="$AtUniform_8cxx.html" title=" " alt="" coords="529,95,723,136"/>
+<area shape="rect" id="node3" href="$AtSampleConsensus_8h.html" title=" " alt="" coords="157,184,442,225"/>
+<area shape="rect" id="node4" href="$AtSampleConsensus_8cxx.html" title=" " alt="" coords="5,273,303,315"/>
+<area shape="rect" id="node5" href="$AtRansacTask_8cxx.html" title=" " alt="" coords="345,273,577,315"/>
+<area shape="rect" id="node6" href="$AtSampleMethods_8cxx.html" title=" " alt="" coords="517,184,759,225"/>
 </map>

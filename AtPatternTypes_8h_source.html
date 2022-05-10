@@ -73,26 +73,36 @@ $(function() {
 <div class="contents">
 <a href="AtPatternTypes_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef ATPATTERNTYPES_H</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define ATPATTERNTYPES_H</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceAtPatterns.html">AtPatterns</a> {</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="group__AtPattern.html#ga83dfd22f92852e92938315c154952e5c">   13</a></span>&#160;<span class="keyword">enum class</span> <a class="code" href="group__AtPattern.html#ga83dfd22f92852e92938315c154952e5c">PatternType</a> { <a class="code" href="group__AtPattern.html#gga83dfd22f92852e92938315c154952e5caee669fa7b5a35d96a396d4ed648afb45">kLine</a>, <a class="code" href="group__AtPattern.html#gga83dfd22f92852e92938315c154952e5cac162690276b0c003fe31ea3969a63fae">kCircle2D</a> };</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">class </span>AtPattern;</div>
-<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="group__AtPattern.html#ga1758fd60711a04932e54096fa91a2c9d">   22</a></span>&#160;std::unique_ptr&lt;AtPattern&gt; <a class="code" href="group__AtPattern.html#ga1758fd60711a04932e54096fa91a2c9d">CreatePattern</a>(<a class="code" href="group__AtPattern.html#ga83dfd22f92852e92938315c154952e5c">PatternType</a> type);</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;} <span class="comment">// namespace AtPatterns</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#endif //#ifndef ATPATTERNTYPES_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceAtPatterns.html">AtPatterns</a> {</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="group__AtPattern.html#ga83dfd22f92852e92938315c154952e5c">   14</a></span>&#160;<span class="keyword">enum class</span> <a class="code" href="group__AtPattern.html#ga83dfd22f92852e92938315c154952e5c">PatternType</a> { <a class="code" href="group__AtPattern.html#gga83dfd22f92852e92938315c154952e5caee669fa7b5a35d96a396d4ed648afb45">kLine</a>, <a class="code" href="group__AtPattern.html#gga83dfd22f92852e92938315c154952e5cac162690276b0c003fe31ea3969a63fae">kCircle2D</a> };</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">class </span>AtPattern;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;std::unique_ptr&lt;AtPattern&gt; <a class="code" href="group__AtPattern.html#gaa6d8e49bb5966811e1c6947de4c025ef">CreatePattern</a>(<a class="code" href="group__AtPattern.html#ga83dfd22f92852e92938315c154952e5c">PatternType</a> type);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">/*{</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">   switch (type) {</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">   case (PatternType::kLine): return std::make_unique&lt;AtPatternLine&gt;();</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">   case (PatternType::kCircle2D): return std::make_unique&lt;AtPatternCircle2D&gt;();</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">   default: return nullptr;</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">   }</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">}</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">*/</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;} <span class="comment">// namespace AtPatterns</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#endif //#ifndef ATPATTERNTYPES_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="agroup__AtPattern_html_gaa6d8e49bb5966811e1c6947de4c025ef"><div class="ttname"><a href="group__AtPattern.html#gaa6d8e49bb5966811e1c6947de4c025ef">AtPatterns::CreatePattern</a></div><div class="ttdeci">std::unique_ptr&lt; AtPattern &gt; CreatePattern(PatternType type)</div><div class="ttdoc">Factory for AtPattern.</div><div class="ttdef"><b>Definition:</b> <a href="AtPatternTypes_8cxx_source.html#l00008">AtPatternTypes.cxx:8</a></div></div>
 <div class="ttc" id="agroup__AtPattern_html_gga83dfd22f92852e92938315c154952e5cac162690276b0c003fe31ea3969a63fae"><div class="ttname"><a href="group__AtPattern.html#gga83dfd22f92852e92938315c154952e5cac162690276b0c003fe31ea3969a63fae">AtPatterns::PatternType::kCircle2D</a></div><div class="ttdeci">@ kCircle2D</div></div>
-<div class="ttc" id="anamespaceAtPatterns_html"><div class="ttname"><a href="namespaceAtPatterns.html">AtPatterns</a></div><div class="ttdef"><b>Definition:</b> <a href="AtPattern_8h_source.html#l00016">AtPattern.h:16</a></div></div>
-<div class="ttc" id="agroup__AtPattern_html_ga83dfd22f92852e92938315c154952e5c"><div class="ttname"><a href="group__AtPattern.html#ga83dfd22f92852e92938315c154952e5c">AtPatterns::PatternType</a></div><div class="ttdeci">PatternType</div><div class="ttdoc">Supported patterns.</div><div class="ttdef"><b>Definition:</b> <a href="AtPatternTypes_8h_source.html#l00013">AtPatternTypes.h:13</a></div></div>
+<div class="ttc" id="anamespaceAtPatterns_html"><div class="ttname"><a href="namespaceAtPatterns.html">AtPatterns</a></div><div class="ttdef"><b>Definition:</b> <a href="AtPattern_8h_source.html#l00026">AtPattern.h:26</a></div></div>
+<div class="ttc" id="agroup__AtPattern_html_ga83dfd22f92852e92938315c154952e5c"><div class="ttname"><a href="group__AtPattern.html#ga83dfd22f92852e92938315c154952e5c">AtPatterns::PatternType</a></div><div class="ttdeci">PatternType</div><div class="ttdoc">Supported patterns.</div><div class="ttdef"><b>Definition:</b> <a href="AtPatternTypes_8h_source.html#l00014">AtPatternTypes.h:14</a></div></div>
 <div class="ttc" id="agroup__AtPattern_html_gga83dfd22f92852e92938315c154952e5caee669fa7b5a35d96a396d4ed648afb45"><div class="ttname"><a href="group__AtPattern.html#gga83dfd22f92852e92938315c154952e5caee669fa7b5a35d96a396d4ed648afb45">AtPatterns::PatternType::kLine</a></div><div class="ttdeci">@ kLine</div></div>
-<div class="ttc" id="agroup__AtPattern_html_ga1758fd60711a04932e54096fa91a2c9d"><div class="ttname"><a href="group__AtPattern.html#ga1758fd60711a04932e54096fa91a2c9d">AtPatterns::CreatePattern</a></div><div class="ttdeci">std::unique_ptr&lt; AtPattern &gt; CreatePattern(PatternType type)</div><div class="ttdoc">Factory for AtPattern.</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue May 10 2022 05:44:25 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue May 10 2022 07:15:16 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

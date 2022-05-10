@@ -1,8 +1,7 @@
 <map id="/github/workspace/AtData/AtPattern/AtPatternTypes.h" name="/github/workspace/AtData/AtPattern/AtPatternTypes.h">
-<area shape="rect" id="node1" title=" " alt="" coords="344,5,529,47"/>
-<area shape="rect" id="node2" href="$AtPattern_8cxx.html" title=" " alt="" coords="5,95,177,136"/>
-<area shape="rect" id="node3" href="$AtPatternTypes_8cxx.html" title=" " alt="" coords="202,95,399,136"/>
-<area shape="rect" id="node4" href="$AtSampleConsensus_8h.html" title=" " alt="" coords="474,95,759,136"/>
-<area shape="rect" id="node5" href="$AtSampleConsensus_8cxx.html" title=" " alt="" coords="323,184,620,225"/>
-<area shape="rect" id="node6" href="$AtRansacTask_8cxx.html" title=" " alt="" coords="662,184,894,225"/>
+<area shape="rect" id="node1" title=" " alt="" coords="237,5,422,47"/>
+<area shape="rect" id="node2" href="$AtPatternTypes_8cxx.html" title=" " alt="" coords="5,95,203,136"/>
+<area shape="rect" id="node3" href="$AtSampleConsensus_8h.html" title=" " alt="" coords="277,95,563,136"/>
+<area shape="rect" id="node4" href="$AtSampleConsensus_8cxx.html" title=" " alt="" coords="126,184,423,225"/>
+<area shape="rect" id="node5" href="$AtRansacTask_8cxx.html" title=" " alt="" coords="465,184,697,225"/>
 </map>

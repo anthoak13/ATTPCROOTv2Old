@@ -1,5 +1,9 @@
 <map id="/github/workspace/AtTools/AtHitSampling/AtWeightedGaussian.h" name="/github/workspace/AtTools/AtHitSampling/AtWeightedGaussian.h">
-<area shape="rect" id="node1" title=" " alt="" coords="141,5,387,47"/>
-<area shape="rect" id="node2" href="$AtSampleMethods_8cxx.html" title=" " alt="" coords="5,95,248,136"/>
-<area shape="rect" id="node3" href="$AtWeightedGaussian_8cxx.html" title=" " alt="" coords="272,95,531,136"/>
+<area shape="rect" id="node1" title=" " alt="" coords="400,5,647,47"/>
+<area shape="rect" id="node2" href="$AtSampleMethods_8h.html" title=" " alt="" coords="273,95,504,136"/>
+<area shape="rect" id="node7" href="$AtWeightedGaussian_8cxx.html" title=" " alt="" coords="529,95,787,136"/>
+<area shape="rect" id="node3" href="$AtSampleConsensus_8h.html" title=" " alt="" coords="157,184,442,225"/>
+<area shape="rect" id="node4" href="$AtSampleConsensus_8cxx.html" title=" " alt="" coords="5,273,303,315"/>
+<area shape="rect" id="node5" href="$AtRansacTask_8cxx.html" title=" " alt="" coords="345,273,577,315"/>
+<area shape="rect" id="node6" href="$AtSampleMethods_8cxx.html" title=" " alt="" coords="517,184,759,225"/>
 </map>

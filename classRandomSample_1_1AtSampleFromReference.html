@@ -110,6 +110,8 @@ Collaboration diagram for RandomSample::AtSampleFromReference:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a02571288138f47a1cfde6993d17fb977"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRandomSample_1_1AtSampleFromReference.html#a02571288138f47a1cfde6993d17fb977">~AtSampleFromReference</a> ()=default</td></tr>
+<tr class="separator:a02571288138f47a1cfde6993d17fb977"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb3c4068a6e802fa7ca08b816e4efff4"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="classAtHit.html">AtHit</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRandomSample_1_1AtSampleFromReference.html#afb3c4068a6e802fa7ca08b816e4efff4">SampleHits</a> (int N) override</td></tr>
 <tr class="memdesc:afb3c4068a6e802fa7ca08b816e4efff4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sample hits (<a class="el" href="classAtHit.html">AtHit</a>) from fHits.  <a href="classRandomSample_1_1AtSampleFromReference.html#afb3c4068a6e802fa7ca08b816e4efff4">More...</a><br /></td></tr>
 <tr class="separator:afb3c4068a6e802fa7ca08b816e4efff4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -120,6 +122,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a36f50ec8e043c5f61bfa31e21ba145c6"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classAtHit.html">AtHit</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRandomSample_1_1AtSampleFromReference.html#a36f50ec8e043c5f61bfa31e21ba145c6">GetReferenceHit</a> () const</td></tr>
 <tr class="separator:a36f50ec8e043c5f61bfa31e21ba145c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classRandomSample_1_1AtSample"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classRandomSample_1_1AtSample')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classRandomSample_1_1AtSample.html">RandomSample::AtSample</a></td></tr>
+<tr class="memitem:a60333077797b6f2b243862fbb3ac1791 inherit pub_methods_classRandomSample_1_1AtSample"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRandomSample_1_1AtSample.html#a60333077797b6f2b243862fbb3ac1791">~AtSample</a> ()=default</td></tr>
+<tr class="separator:a60333077797b6f2b243862fbb3ac1791 inherit pub_methods_classRandomSample_1_1AtSample"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e128b16a1ea75af270cc7ec56ac0184 inherit pub_methods_classRandomSample_1_1AtSample"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="AtSpaceChargeModel_8h.html#acdbe604dea12970b4e97a316f9046ae7">ROOT::Math::XYZPoint</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRandomSample_1_1AtSample.html#a8e128b16a1ea75af270cc7ec56ac0184">SamplePoints</a> (int N)</td></tr>
 <tr class="memdesc:a8e128b16a1ea75af270cc7ec56ac0184 inherit pub_methods_classRandomSample_1_1AtSample"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sample spacial locations (XYZPoints) from fHits.  <a href="classRandomSample_1_1AtSample.html#a8e128b16a1ea75af270cc7ec56ac0184">More...</a><br /></td></tr>
 <tr class="separator:a8e128b16a1ea75af270cc7ec56ac0184 inherit pub_methods_classRandomSample_1_1AtSample"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -168,8 +172,34 @@ Additional Inherited Members</h2></td></tr>
 <div class="textblock"><p>Sample when PDF depends on reference. </p>
 <p>Interface for sampling a collection of AtHits where the PDF depends on a reference hit. </p>
 
-<p class="definition">Definition at line <a class="el" href="AtSampleFromReference_8h_source.html#l00017">17</a> of file <a class="el" href="AtSampleFromReference_8h_source.html">AtSampleFromReference.h</a>.</p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+<p class="definition">Definition at line <a class="el" href="AtSampleFromReference_8h_source.html#l00018">18</a> of file <a class="el" href="AtSampleFromReference_8h_source.html">AtSampleFromReference.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a02571288138f47a1cfde6993d17fb977"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02571288138f47a1cfde6993d17fb977">&#9670;&nbsp;</a></span>~AtSampleFromReference()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual RandomSample::AtSampleFromReference::~AtSampleFromReference </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="a36f50ec8e043c5f61bfa31e21ba145c6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a36f50ec8e043c5f61bfa31e21ba145c6">&#9670;&nbsp;</a></span>GetReferenceHit()</h2>
 
@@ -193,7 +223,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtSampleFromReference_8h_source.html#l00025">25</a> of file <a class="el" href="AtSampleFromReference_8h_source.html">AtSampleFromReference.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtSampleFromReference_8h_source.html#l00027">27</a> of file <a class="el" href="AtSampleFromReference_8h_source.html">AtSampleFromReference.h</a>.</p>
 
 </div>
 </div>
@@ -226,7 +256,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classRandomSample_1_1AtSample.html#a05f973bb9f6201604cc53c4a5a607963">RandomSample::AtSample</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="AtSampleFromReference_8cxx_source.html#l00007">7</a> of file <a class="el" href="AtSampleFromReference_8cxx_source.html">AtSampleFromReference.cxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtSampleFromReference_8cxx_source.html#l00011">11</a> of file <a class="el" href="AtSampleFromReference_8cxx_source.html">AtSampleFromReference.cxx</a>.</p>
 
 </div>
 </div>
@@ -258,7 +288,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classRandomSample_1_1AtWeightedGaussian.html#a5742820d94acd4e3b68f4656f1b5e3db">RandomSample::AtWeightedGaussian</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="AtSampleFromReference_8cxx_source.html#l00019">19</a> of file <a class="el" href="AtSampleFromReference_8cxx_source.html">AtSampleFromReference.cxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtSampleFromReference_8cxx_source.html#l00023">23</a> of file <a class="el" href="AtSampleFromReference_8cxx_source.html">AtSampleFromReference.cxx</a>.</p>
 
 </div>
 </div>
@@ -290,7 +320,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classRandomSample_1_1AtWeightedGaussian.html#a4c5f6a2fc2e67008911dfe4903995042">RandomSample::AtWeightedGaussian</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="AtSampleFromReference_8cxx_source.html#l00025">25</a> of file <a class="el" href="AtSampleFromReference_8cxx_source.html">AtSampleFromReference.cxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtSampleFromReference_8cxx_source.html#l00029">29</a> of file <a class="el" href="AtSampleFromReference_8cxx_source.html">AtSampleFromReference.cxx</a>.</p>
 
 </div>
 </div>
@@ -310,7 +340,7 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtSampleFromReference_8cxx_source.html#l00030">30</a> of file <a class="el" href="AtSampleFromReference_8cxx_source.html">AtSampleFromReference.cxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtSampleFromReference_8cxx_source.html#l00034">34</a> of file <a class="el" href="AtSampleFromReference_8cxx_source.html">AtSampleFromReference.cxx</a>.</p>
 
 </div>
 </div>
@@ -335,7 +365,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtSampleFromReference_8h_source.html#l00019">19</a> of file <a class="el" href="AtSampleFromReference_8h_source.html">AtSampleFromReference.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtSampleFromReference_8h_source.html#l00020">20</a> of file <a class="el" href="AtSampleFromReference_8h_source.html">AtSampleFromReference.h</a>.</p>
 
 </div>
 </div>
@@ -346,7 +376,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue May 10 2022 05:44:27 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue May 10 2022 07:15:20 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

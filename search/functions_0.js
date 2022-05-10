@@ -66,7 +66,7 @@ var searchData=
   ['atfittertask_3352',['AtFitterTask',['../classAtFitterTask.html#af8b89f1b014b1b69ff7a980deabd688a',1,'AtFitterTask']]],
   ['atgadgetiimap_3353',['AtGadgetIIMap',['../classAtGadgetIIMap.html#a1681fa540bca3c7c01b78badee6a14f7',1,'AtGadgetIIMap']]],
   ['atgas_3354',['AtGas',['../classAtGas.html#abd5b0fb05a64f54a5ce07bb29d6befed',1,'AtGas']]],
-  ['atgaussian_3355',['AtGaussian',['../classRandomSample_1_1AtGaussian.html#a34ffc7b2ff89840bb43488ea753c3aef',1,'RandomSample::AtGaussian']]],
+  ['atgaussian_3355',['AtGaussian',['../classRandomSample_1_1AtGaussian.html#a3c956a5b8910dd540f3269200610bd8c',1,'RandomSample::AtGaussian']]],
   ['atgenfit_3356',['AtGenfit',['../classAtFITTER_1_1AtGenfit.html#a864b7a9facdb877147236190c2169fe2',1,'AtFITTER::AtGenfit']]],
   ['atgeocave_3357',['AtGeoCave',['../classAtGeoCave.html#a74f0052dabaeb99f6da57726dfcf5af8',1,'AtGeoCave']]],
   ['atgrawunpacker_3358',['AtGRAWUnpacker',['../classAtGRAWUnpacker.html#abef1c053b1f6a3e9a3b04060275866a4',1,'AtGRAWUnpacker']]],
@@ -156,6 +156,6 @@ var searchData=
   ['atunpacktask_3442',['AtUnpackTask',['../classAtUnpackTask.html#af8879c1a48cc5646a9b8e6bbe82417a8',1,'AtUnpackTask']]],
   ['atvertexpropagator_3443',['AtVertexPropagator',['../classAtVertexPropagator.html#a036c5db744fe6402876b2467e78fcb7a',1,'AtVertexPropagator']]],
   ['atvirtualterminal_3444',['AtVirtualTerminal',['../classAtTools_1_1AtVirtualTerminal.html#ae89c8a1caa82c4590f9840f2ce26b556',1,'AtTools::AtVirtualTerminal']]],
-  ['atweightedgaussian_3445',['AtWeightedGaussian',['../classRandomSample_1_1AtWeightedGaussian.html#af58215326f82e49bef3293e8fe7a7c19',1,'RandomSample::AtWeightedGaussian']]],
+  ['atweightedgaussian_3445',['AtWeightedGaussian',['../classRandomSample_1_1AtWeightedGaussian.html#a1f239a9a2dd24d8bcebaa106bb39b0c4',1,'RandomSample::AtWeightedGaussian']]],
   ['auto_5farray_5fptr_3446',['auto_array_ptr',['../classauto__array__ptr.html#a2f46f7b0de232f54b9cae74001dce2a1',1,'auto_array_ptr::auto_array_ptr()'],['../classauto__array__ptr.html#a4ec248da10975cadfd7a7edf1337a707',1,'auto_array_ptr::auto_array_ptr(index const size)'],['../classauto__array__ptr.html#ad69a7fab8466877f84486d33b2ab29b1',1,'auto_array_ptr::auto_array_ptr(index const size, value const val)']]]
 ];

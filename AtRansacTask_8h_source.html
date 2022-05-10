@@ -83,67 +83,66 @@ $(function() {
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">class </span><a class="code" href="classAtEvent.html">AtEvent</a>;</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">class </span>TBuffer;</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">class </span>TClass;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">class </span>TClonesArray;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">class </span>TMemberInspector;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">enum class</span> <a class="code" href="group__AtHitSampling.html#ga2483e8129e93c221dd4d4961cef2411a">SampleMethod</a>;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="classAtRansacTask.html">   17</a></span>&#160;<span class="keyword">class </span><a class="code" href="classAtRansacTask.html">AtRansacTask</a> : <span class="keyword">public</span> FairTask {</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;   TString fInputBranchName;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;   TString fOutputBranchName;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;   TClonesArray *fEventArray{};</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;   TClonesArray *fRansacArray{};</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;   TClonesArray fPatternEventArray;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;   <a class="code" href="classAtEvent.html">AtEvent</a> *fEvent{};</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;   Bool_t kIsReprocess;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;   Bool_t kIsPersistence;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;   Bool_t kIsFullMode;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;   <span class="keywordtype">int</span> fRANSACModel{-1};</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;   Float_t fRANSACThreshold{5.0};</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;   Int_t fMinHitsLine{5}; <span class="comment">// Minimum number of hits</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;   Double_t fTiltAngle{};</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;   Int_t fNumItera{500};</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;   Int_t fRANSACAlg{0};</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;   Int_t fRandSamplMode{0};</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;   Bool_t fCharThres{<span class="keyword">false</span>};</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;   Int_t fVertexMode{0};</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;   <a class="code" href="classAtRansacTask.html#adefe294737f0e8d37b211af1a172bcb2">AtRansacTask</a>();</div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="classAtRansacTask.html#ae0d8e5b7b91e6edd8e03cf47d2607f8b">   43</a></span>&#160;   <a class="code" href="classAtRansacTask.html#ae0d8e5b7b91e6edd8e03cf47d2607f8b">~AtRansacTask</a>();</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;   <span class="keywordtype">void</span> <a class="code" href="classAtRansacTask.html#a1ae3d974d5f9269555cdbb3ea02f2e2d">SetIsReprocess</a>(Bool_t value = kFALSE);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;   <span class="keywordtype">void</span> <a class="code" href="classAtRansacTask.html#a842bf9668a2f5c9ca7584cbe8ff1a0c6">SetInputBranch</a>(TString branchName);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;   <span class="keywordtype">void</span> <a class="code" href="classAtRansacTask.html#a14dd246cad12cf51957a90714bf5f3a2">SetOutputBranch</a>(TString branchName);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;   <span class="keywordtype">void</span> <a class="code" href="classAtRansacTask.html#a8c469022491779d303d257115e995978">SetPersistence</a>(Bool_t value = kTRUE);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;   <span class="keywordtype">void</span> <a class="code" href="classAtRansacTask.html#a338ebc4a524f2b122a0ef73920964f3e">SetModelType</a>(<span class="keywordtype">int</span> model);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;   <span class="keywordtype">void</span> <a class="code" href="classAtRansacTask.html#aaa3eab1c3fcff33af5e5cab3bba32060">SetDistanceThreshold</a>(Float_t threshold);</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;   <span class="keywordtype">void</span> <a class="code" href="classAtRansacTask.html#a2210d8a1eaf3db1f8383276d858780eb">SetNumItera</a>(Int_t niterations);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;   <span class="keywordtype">void</span> <a class="code" href="classAtRansacTask.html#a3f3711b38dbce864c15c614127b09f56">SetFullMode</a>();               <span class="comment">// Mode that calculates the RANSAC method for every potential line</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;   <span class="keywordtype">void</span> <a class="code" href="classAtRansacTask.html#a5621e59dca484304585837f7d34e79a0">SetMinHitsLine</a>(Int_t nhits); <span class="comment">// Set Mininum number of hits per line</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;   <span class="keywordtype">void</span> <a class="code" href="classAtRansacTask.html#a8aacd763d154e9f35cbfb60af89136f6">SetTiltAngle</a>(Double_t val);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;   <span class="keywordtype">void</span> <a class="code" href="classAtRansacTask.html#ad753b818a8d3fc54032401bd94ed71ab">SetAlgorithm</a>(Int_t val);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;   <span class="keywordtype">void</span> <a class="code" href="classAtRansacTask.html#aacf8e7e5c7c37076436427da9adf57a2">SetRanSamMode</a>(Int_t mode);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;   <span class="keywordtype">void</span> <a class="code" href="classAtRansacTask.html#affa9b989afb8b97f7eb0619103906140">SetChargeThreshold</a>(Double_t value);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;   <span class="keywordtype">void</span> <a class="code" href="classAtRansacTask.html#a67eda7f28b9b4f8aa8261de5b59bb042">SetVertexMode</a>(Int_t value);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;   <span class="keywordtype">void</span> <a class="code" href="classAtRansacTask.html#a10156b490393869c417dbf2c7cddd1cb">SetInputBranchName</a>(TString inputName);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;   <span class="keywordtype">void</span> <a class="code" href="classAtRansacTask.html#a5e2f50c395134c3c67d53bc87bac4aa8">SetOutputBranchName</a>(TString outputName);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;   <span class="keyword">virtual</span> InitStatus <a class="code" href="classAtRansacTask.html#a2760140fa6a7f1597fc916c59261c0d9">Init</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classAtRansacTask.html#af322b1382b58a9f1178fd2335a2048ad">Exec</a>(Option_t *opt) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="classAtRansacTask.html#aee130b6fd19ac9196fd8a01b7e7e3ca8">   66</a></span>&#160;   <a class="code" href="classAtRansacTask.html#aee130b6fd19ac9196fd8a01b7e7e3ca8">ClassDefOverride</a>(<a class="code" href="classAtRansacTask.html">AtRansacTask</a>, 2);</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;};</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">class </span>TMemberInspector;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">enum class</span> <a class="code" href="group__AtHitSampling.html#ga2483e8129e93c221dd4d4961cef2411a">SampleMethod</a>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classAtRansacTask.html">   16</a></span>&#160;<span class="keyword">class </span><a class="code" href="classAtRansacTask.html">AtRansacTask</a> : <span class="keyword">public</span> FairTask {</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;   TString fInputBranchName;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;   TString fOutputBranchName;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;   TClonesArray *fEventArray{};</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;   TClonesArray *fRansacArray{};</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;   TClonesArray fPatternEventArray;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;   <a class="code" href="classAtEvent.html">AtEvent</a> *fEvent{};</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;   Bool_t kIsReprocess;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;   Bool_t kIsPersistence;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;   Bool_t kIsFullMode;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;   <span class="keywordtype">int</span> fRANSACModel{-1};</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;   Float_t fRANSACThreshold{5.0};</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;   Int_t fMinHitsLine{5}; <span class="comment">// Minimum number of hits</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;   Double_t fTiltAngle{};</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;   Int_t fNumItera{500};</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;   Int_t fRANSACAlg{0};</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;   Int_t fRandSamplMode{0};</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;   Bool_t fCharThres{<span class="keyword">false</span>};</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;   Int_t fVertexMode{0};</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;   <a class="code" href="classAtRansacTask.html#adefe294737f0e8d37b211af1a172bcb2">AtRansacTask</a>();</div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="classAtRansacTask.html#ae0d8e5b7b91e6edd8e03cf47d2607f8b">   42</a></span>&#160;   <a class="code" href="classAtRansacTask.html#ae0d8e5b7b91e6edd8e03cf47d2607f8b">~AtRansacTask</a>();</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;   <span class="keywordtype">void</span> <a class="code" href="classAtRansacTask.html#a1ae3d974d5f9269555cdbb3ea02f2e2d">SetIsReprocess</a>(Bool_t value = kFALSE);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;   <span class="keywordtype">void</span> <a class="code" href="classAtRansacTask.html#a842bf9668a2f5c9ca7584cbe8ff1a0c6">SetInputBranch</a>(TString branchName);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;   <span class="keywordtype">void</span> <a class="code" href="classAtRansacTask.html#a14dd246cad12cf51957a90714bf5f3a2">SetOutputBranch</a>(TString branchName);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;   <span class="keywordtype">void</span> <a class="code" href="classAtRansacTask.html#a8c469022491779d303d257115e995978">SetPersistence</a>(Bool_t value = kTRUE);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;   <span class="keywordtype">void</span> <a class="code" href="classAtRansacTask.html#a338ebc4a524f2b122a0ef73920964f3e">SetModelType</a>(<span class="keywordtype">int</span> model);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;   <span class="keywordtype">void</span> <a class="code" href="classAtRansacTask.html#aaa3eab1c3fcff33af5e5cab3bba32060">SetDistanceThreshold</a>(Float_t threshold);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;   <span class="keywordtype">void</span> <a class="code" href="classAtRansacTask.html#a2210d8a1eaf3db1f8383276d858780eb">SetNumItera</a>(Int_t niterations);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;   <span class="keywordtype">void</span> <a class="code" href="classAtRansacTask.html#a3f3711b38dbce864c15c614127b09f56">SetFullMode</a>();               <span class="comment">// Mode that calculates the RANSAC method for every potential line</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;   <span class="keywordtype">void</span> <a class="code" href="classAtRansacTask.html#a5621e59dca484304585837f7d34e79a0">SetMinHitsLine</a>(Int_t nhits); <span class="comment">// Set Mininum number of hits per line</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;   <span class="keywordtype">void</span> <a class="code" href="classAtRansacTask.html#a8aacd763d154e9f35cbfb60af89136f6">SetTiltAngle</a>(Double_t val);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;   <span class="keywordtype">void</span> <a class="code" href="classAtRansacTask.html#ad753b818a8d3fc54032401bd94ed71ab">SetAlgorithm</a>(Int_t val);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;   <span class="keywordtype">void</span> <a class="code" href="classAtRansacTask.html#aacf8e7e5c7c37076436427da9adf57a2">SetRanSamMode</a>(Int_t mode);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;   <span class="keywordtype">void</span> <a class="code" href="classAtRansacTask.html#affa9b989afb8b97f7eb0619103906140">SetChargeThreshold</a>(Double_t value);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;   <span class="keywordtype">void</span> <a class="code" href="classAtRansacTask.html#a67eda7f28b9b4f8aa8261de5b59bb042">SetVertexMode</a>(Int_t value);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;   <span class="keywordtype">void</span> <a class="code" href="classAtRansacTask.html#a10156b490393869c417dbf2c7cddd1cb">SetInputBranchName</a>(TString inputName);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;   <span class="keywordtype">void</span> <a class="code" href="classAtRansacTask.html#a5e2f50c395134c3c67d53bc87bac4aa8">SetOutputBranchName</a>(TString outputName);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;   <span class="keyword">virtual</span> InitStatus <a class="code" href="classAtRansacTask.html#a2760140fa6a7f1597fc916c59261c0d9">Init</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classAtRansacTask.html#af322b1382b58a9f1178fd2335a2048ad">Exec</a>(Option_t *opt) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="classAtRansacTask.html#aee130b6fd19ac9196fd8a01b7e7e3ca8">   65</a></span>&#160;   <a class="code" href="classAtRansacTask.html#aee130b6fd19ac9196fd8a01b7e7e3ca8">ClassDefOverride</a>(<a class="code" href="classAtRansacTask.html">AtRansacTask</a>, 2);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;};</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclassAtRansacTask_html_a8aacd763d154e9f35cbfb60af89136f6"><div class="ttname"><a href="classAtRansacTask.html#a8aacd763d154e9f35cbfb60af89136f6">AtRansacTask::SetTiltAngle</a></div><div class="ttdeci">void SetTiltAngle(Double_t val)</div><div class="ttdef"><b>Definition:</b> <a href="AtRansacTask_8cxx_source.html#l00059">AtRansacTask.cxx:59</a></div></div>
 <div class="ttc" id="aclassAtRansacTask_html_a3f3711b38dbce864c15c614127b09f56"><div class="ttname"><a href="classAtRansacTask.html#a3f3711b38dbce864c15c614127b09f56">AtRansacTask::SetFullMode</a></div><div class="ttdeci">void SetFullMode()</div><div class="ttdef"><b>Definition:</b> <a href="AtRansacTask_8cxx_source.html#l00051">AtRansacTask.cxx:51</a></div></div>
-<div class="ttc" id="agroup__AtHitSampling_html_ga2483e8129e93c221dd4d4961cef2411a"><div class="ttname"><a href="group__AtHitSampling.html#ga2483e8129e93c221dd4d4961cef2411a">RandomSample::SampleMethod</a></div><div class="ttdeci">SampleMethod</div><div class="ttdoc">. Methods of random sampling.</div><div class="ttdef"><b>Definition:</b> <a href="AtSampleMethods_8h_source.html#l00013">AtSampleMethods.h:13</a></div></div>
+<div class="ttc" id="agroup__AtHitSampling_html_ga2483e8129e93c221dd4d4961cef2411a"><div class="ttname"><a href="group__AtHitSampling.html#ga2483e8129e93c221dd4d4961cef2411a">RandomSample::SampleMethod</a></div><div class="ttdeci">SampleMethod</div><div class="ttdoc">. Methods of random sampling.</div><div class="ttdef"><b>Definition:</b> <a href="AtSampleMethods_8h_source.html#l00019">AtSampleMethods.h:19</a></div></div>
 <div class="ttc" id="aclassAtRansacTask_html_aaa3eab1c3fcff33af5e5cab3bba32060"><div class="ttname"><a href="classAtRansacTask.html#aaa3eab1c3fcff33af5e5cab3bba32060">AtRansacTask::SetDistanceThreshold</a></div><div class="ttdeci">void SetDistanceThreshold(Float_t threshold)</div><div class="ttdef"><b>Definition:</b> <a href="AtRansacTask_8cxx_source.html#l00047">AtRansacTask.cxx:47</a></div></div>
 <div class="ttc" id="aclassAtRansacTask_html_a842bf9668a2f5c9ca7584cbe8ff1a0c6"><div class="ttname"><a href="classAtRansacTask.html#a842bf9668a2f5c9ca7584cbe8ff1a0c6">AtRansacTask::SetInputBranch</a></div><div class="ttdeci">void SetInputBranch(TString branchName)</div><div class="ttdef"><b>Definition:</b> <a href="AtRansacTask_8cxx_source.html#l00033">AtRansacTask.cxx:33</a></div></div>
 <div class="ttc" id="aclassAtRansacTask_html_af322b1382b58a9f1178fd2335a2048ad"><div class="ttname"><a href="classAtRansacTask.html#af322b1382b58a9f1178fd2335a2048ad">AtRansacTask::Exec</a></div><div class="ttdeci">virtual void Exec(Option_t *opt) override</div><div class="ttdef"><b>Definition:</b> <a href="AtRansacTask_8cxx_source.html#l00128">AtRansacTask.cxx:128</a></div></div>
@@ -163,11 +162,11 @@ $(function() {
 <div class="ttc" id="aclassAtRansacTask_html_a5e2f50c395134c3c67d53bc87bac4aa8"><div class="ttname"><a href="classAtRansacTask.html#a5e2f50c395134c3c67d53bc87bac4aa8">AtRansacTask::SetOutputBranchName</a></div><div class="ttdeci">void SetOutputBranchName(TString outputName)</div><div class="ttdef"><b>Definition:</b> <a href="AtRansacTask_8cxx_source.html#l00091">AtRansacTask.cxx:91</a></div></div>
 <div class="ttc" id="aclassAtRansacTask_html_affa9b989afb8b97f7eb0619103906140"><div class="ttname"><a href="classAtRansacTask.html#affa9b989afb8b97f7eb0619103906140">AtRansacTask::SetChargeThreshold</a></div><div class="ttdeci">void SetChargeThreshold(Double_t value)</div><div class="ttdef"><b>Definition:</b> <a href="AtRansacTask_8cxx_source.html#l00079">AtRansacTask.cxx:79</a></div></div>
 <div class="ttc" id="aclassAtRansacTask_html_ad753b818a8d3fc54032401bd94ed71ab"><div class="ttname"><a href="classAtRansacTask.html#ad753b818a8d3fc54032401bd94ed71ab">AtRansacTask::SetAlgorithm</a></div><div class="ttdeci">void SetAlgorithm(Int_t val)</div><div class="ttdef"><b>Definition:</b> <a href="AtRansacTask_8cxx_source.html#l00067">AtRansacTask.cxx:67</a></div></div>
-<div class="ttc" id="aclassAtRansacTask_html"><div class="ttname"><a href="classAtRansacTask.html">AtRansacTask</a></div><div class="ttdef"><b>Definition:</b> <a href="AtRansacTask_8h_source.html#l00017">AtRansacTask.h:17</a></div></div>
+<div class="ttc" id="aclassAtRansacTask_html"><div class="ttname"><a href="classAtRansacTask.html">AtRansacTask</a></div><div class="ttdef"><b>Definition:</b> <a href="AtRansacTask_8h_source.html#l00016">AtRansacTask.h:16</a></div></div>
 <div class="ttc" id="aclassAtRansacTask_html_aacf8e7e5c7c37076436427da9adf57a2"><div class="ttname"><a href="classAtRansacTask.html#aacf8e7e5c7c37076436427da9adf57a2">AtRansacTask::SetRanSamMode</a></div><div class="ttdeci">void SetRanSamMode(Int_t mode)</div><div class="ttdef"><b>Definition:</b> <a href="AtRansacTask_8cxx_source.html#l00071">AtRansacTask.cxx:71</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue May 10 2022 05:44:25 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue May 10 2022 07:15:17 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

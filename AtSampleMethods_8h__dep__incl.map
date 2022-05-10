@@ -1,5 +1,7 @@
 <map id="/github/workspace/AtTools/AtHitSampling/AtSampleMethods.h" name="/github/workspace/AtTools/AtHitSampling/AtSampleMethods.h">
-<area shape="rect" id="node1" title=" " alt="" coords="185,5,416,47"/>
-<area shape="rect" id="node2" href="$AtSampleConsensus_8cxx.html" title=" " alt="" coords="5,95,303,136"/>
-<area shape="rect" id="node3" href="$AtSampleMethods_8cxx.html" title=" " alt="" coords="327,95,570,136"/>
+<area shape="rect" id="node1" title=" " alt="" coords="273,5,504,47"/>
+<area shape="rect" id="node2" href="$AtSampleConsensus_8h.html" title=" " alt="" coords="157,95,442,136"/>
+<area shape="rect" id="node3" href="$AtSampleConsensus_8cxx.html" title=" " alt="" coords="5,184,303,225"/>
+<area shape="rect" id="node4" href="$AtRansacTask_8cxx.html" title=" " alt="" coords="345,184,577,225"/>
+<area shape="rect" id="node5" href="$AtSampleMethods_8cxx.html" title=" " alt="" coords="517,95,759,136"/>
 </map>

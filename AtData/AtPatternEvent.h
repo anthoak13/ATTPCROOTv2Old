@@ -1,13 +1,13 @@
-#ifndef AtPAtTERNEVENT_H
-#define AtPAtTERNEVENT_H
+#ifndef ATPATTERNEVENT_H
+#define ATPATTERNEVENT_H
 
 #include "AtTrack.h"
 
 #include <Rtypes.h>
 #include <TNamed.h>
 
+#include <algorithm>
 #include <vector>
-
 class TBuffer;
 class TClass;
 class TMemberInspector;

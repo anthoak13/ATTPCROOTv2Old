@@ -8,8 +8,6 @@ class AtPattern;
 }
 namespace SampleConsensus {
 
-namespace SampleConsensus {
-
 /**
  * @brief Estimators for AtSampleConsensus.
  *

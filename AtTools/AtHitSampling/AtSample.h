@@ -48,8 +48,6 @@ public:
 
    void SetSampleWithReplacement(bool val) { fWithReplacement = val; }
 
-   static std::unique_ptr<AtSample> CreateSampler(SampleMethod method);
-
 protected:
    /**
     * Computes the unnormalized marginal PDFs at the hit.

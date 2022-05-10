@@ -1,9 +1,9 @@
 #ifndef ATCONTAINERMANIP_H
 #define ATCONTAINERMANIP_H
 
-#include "AtTrack.h"
-
+#include <algorithm> // IWYU pragma: keep
 #include <vector>
+
 namespace AtTools {
 
 template <typename T>

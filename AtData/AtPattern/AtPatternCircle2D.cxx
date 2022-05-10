@@ -1,7 +1,16 @@
 #include "AtPatternCircle2D.h"
 
 #include <Math/Point2D.h>
+#include <Math/Point2Dfwd.h> // for XYPoint
 #include <Math/Point3D.h>
+#include <Math/Vector2D.h>    // for DisplacementVector2D
+#include <Math/Vector3D.h>    // for DisplacementVector3D
+#include <Math/Vector3Dfwd.h> // for RhoZPhiVector
+
+#include <algorithm> // for max
+#include <cmath>     // for fabs, isfinite, sqrt
+#include <memory>    // for allocator_traits<>::value_type
+
 using XYPoint = ROOT::Math::XYPoint;
 using namespace AtPatterns;
 
@@ -58,12 +67,12 @@ void AtPatternCircle2D::FitPattern(const std::vector<XYZPoint> &points, const st
    int iter, IterMAX = 99;
    int Niliers = 0;
    double Xi, Yi, Zi;
-   double Xm, Ym, Zm;
+   double Xm = 0, Ym = 0, Zm = 0;
    double Mz, Mxy, Mxx, Myy, Mxz, Myz, Mzz, Cov_xy, Var_z;
    double A0, A1, A2, A22, A3, A33;
    double Dy, xnew, x, ynew, y;
    double DET, Xcenter, Ycenter;
-   double Q;
+   double Q = 0;
    double a, b, r;
 
    bool doChargeWeight = points.size() == charge.size();
@@ -74,12 +83,12 @@ void AtPatternCircle2D::FitPattern(const std::vector<XYZPoint> &points, const st
       Q += hitQ / 10.;
       Xm += pos.X() * hitQ / 10.;
       Ym += pos.Y() * hitQ / 10.;
-      Zm += pos.Z() * hitQ / 10.;
+      // Zm += pos.Z() * hitQ / 10.;
    }
 
    Xm /= Q;
    Ym /= Q;
-   Zm /= Q;
+   // Zm /= Q;
 
    Mxx = Myy = Mxy = Mxz = Myz = Mzz = 0.;
 

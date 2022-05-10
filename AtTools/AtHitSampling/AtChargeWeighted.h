@@ -1,7 +1,11 @@
 #ifndef ATCHARGEWEIGHTED_H
 #define ATCHARGEWEIGHTED_H
 
+#include "AtHit.h" // for AtHit
 #include "AtIndependentSample.h"
+
+#include <vector> // for vector
+
 namespace RandomSample {
 
 /**

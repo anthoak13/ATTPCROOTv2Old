@@ -6,19 +6,17 @@
 
 #include "AtEventDrawTask.h"
 
-#include "AtAuxPad.h"           // for AtAuxPad
-#include "AtEvent.h"            // for AtEvent, hitVector
-#include "AtEventManager.h"     // for AtEventManager
-#include "AtGadgetIIMap.h"      // for AtGadgetIIMap
-#include "AtHit.h"              // for AtHit
-#include "AtHitCluster.h"       // for AtHitCluster
-#include "AtMap.h"              // for AtMap
-#include "AtPad.h"              // for AtPad
+#include "AtAuxPad.h"       // for AtAuxPad
+#include "AtEvent.h"        // for AtEvent, hitVector
+#include "AtEventManager.h" // for AtEventManager
+#include "AtHit.h"          // for AtHit
+#include "AtHitCluster.h"   // for AtHitCluster
+#include "AtMap.h"          // for AtMap
+#include "AtPad.h"          // for AtPad
+#include "AtPadReference.h"
 #include "AtPatternEvent.h"     // for AtPatternEvent
 #include "AtRansac.h"           // for AtRansac, operator<<, AtRansac::Pair...
 #include "AtRawEvent.h"         // for AtRawEvent, AuxPadMap
-#include "AtSpecMATMap.h"       // for AtSpecMATMap
-#include "AtTpcMap.h"           // for AtTpcMap
 #include "AtTrack.h"            // for AtTrack, operator<<
 #include "AtTrackingEventAna.h" // for AtTrackingEventAna
 
@@ -60,7 +58,6 @@
 #include <algorithm> // for max
 #include <array>     // for array
 #include <cstdio>    // for sprintf
-#include <cstdlib>   // for exit
 #include <exception> // for exception
 #include <iostream>  // for cout
 #include <map>       // for operator!=, _Rb_tree_const_iterator

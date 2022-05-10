@@ -7,21 +7,24 @@
 #ifndef ATSAMPLECONSENSUS_H
 #define ATSAMPLECONSENSUS_H
 
+#include "AtEstimatorMethods.h" // for Estimators
 #include "AtPattern.h"
 #include "AtPatternTypes.h"
-#include "AtSample.h"
-#include "AtSampleEstimator.h"
-#include "AtTrack.h" // for AtTrack
+#include "AtSampleMethods.h" // for SampleMethod
+#include "AtTrack.h"         // for AtTrack
 
-#include <stdio.h> // for size_t
+#include <Rtypes.h> // for Int_t, Float_t
 
-#include <algorithm> // for max
-#include <set>
+#include <memory>  // for unique_ptr
 #include <utility> // for pair
 #include <vector>  // for vector
+
+class AtHit;
 class AtEvent;
 class AtPatternEvent;
-
+namespace RandomSample {
+class AtSample;
+}
 /**
  * @defgroup SampleConsensus Sample Consensus
  *

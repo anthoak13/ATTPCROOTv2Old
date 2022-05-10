@@ -2,7 +2,11 @@
 
 #include <FairLogger.h>
 
+#include <Math/Vector3D.h> // for DisplacementVector3D, operator*
 #include <TMath.h>
+
+#include <algorithm> // for min
+#include <cmath>     // for cos, sin, pow, sqrt, acos, atan, fabs
 
 using namespace AtPatterns;
 
@@ -10,19 +14,30 @@ ClassImp(AtPatternLine);
 
 AtPatternLine::AtPatternLine() : AtPattern(2) {}
 
+/**
+ * @brief Get the parameter closes to compPoint.
+ *
+ * The clossest point on the line to compPoint is then GetPointAt(return value)
+ * @param[in] The point to compare the line to
+ * @return The parameter of the point along the line closest to compPoint
+ */
+double AtPatternLine::parameterAtPoint(const XYZPoint &compPoint) const
+{
+   return (compPoint - GetPoint()).Dot(GetDirection()) / GetDirection().Mag2();
+}
 XYZPoint AtPatternLine::ClosestPointOnPattern(const XYZPoint &point)
 {
-   auto p = GetPoint();
-   auto d = GetDirection();
-
-   return p;
+   auto t = parameterAtPoint(point);
+   return GetPoint() + t * GetDirection();
 }
 
 Double_t AtPatternLine::DistanceToPattern(const XYZPoint &point)
 {
+   // Use this rather than parameterAtPoint because it is faster
    auto vec = GetPoint() - point;
    auto nD = GetDirection().Cross(vec);
    double dist2 = nD.Mag2() / GetDirection().Mag2();
+
    return std::sqrt(dist2);
 }
 

@@ -4,9 +4,15 @@
 
 #include <FairLogger.h>
 
+#include <Math/Vector3D.h> // for DisplacementVector3D
+#include <TRandom.h>       // for TRandom
 #include <TRandom3.h>
 
+#include <algorithm> // for max, find
+#include <cmath>     // for exp, pow, sqrt
+#include <memory>    // for allocator_traits<>::value_type
 #include <numeric>
+#include <ostream> // for operator<<
 
 /**
  * Implementation class for random sampling

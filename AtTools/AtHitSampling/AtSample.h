@@ -1,10 +1,12 @@
 #ifndef ATHITSAMPLER_H
 #define ATHITSAMPLER_H
 
-#include <Math/Point3D.h>
+#include <Math/Point3Dfwd.h> // for XYZPoint
 
 #include <algorithm>
+#include <memory> // for unique_ptr
 #include <vector>
+
 class AtHit;
 
 /**
@@ -37,7 +39,7 @@ protected:
    bool fWithReplacement{false};    //< If we should sample with replacement
 
 public:
-   enum class SampleMethod;
+   virtual ~AtSample() = default;
 
    virtual std::vector<AtHit> SampleHits(int N);
    std::vector<ROOT::Math::XYZPoint> SamplePoints(int N);

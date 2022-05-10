@@ -1,8 +1,11 @@
 #ifndef ATESTIMATORMETHODS_H
 #define ATESTIMATORMETHODS_H
 
-#include "AtSampleEstimator.h"
-
+#include <vector>
+class AtHit;
+namespace AtPatterns {
+class AtPattern;
+}
 namespace SampleConsensus {
 
 /**

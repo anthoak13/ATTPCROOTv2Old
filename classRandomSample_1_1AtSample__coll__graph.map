@@ -1,5 +1,5 @@
 <map id="RandomSample::AtSample" name="RandomSample::AtSample">
-<area shape="rect" id="node1" title=" " alt="" coords="65,377,243,404"/>
+<area shape="rect" id="node1" title="Interface for randomly sampling AtHits." alt="" coords="65,377,243,404"/>
 <area shape="rect" id="node2" title=" " alt="" coords="5,288,140,315"/>
 <area shape="rect" id="node3" href="$classAtHit.html" title=" " alt="" coords="47,199,99,225"/>
 <area shape="rect" id="node4" title=" " alt="" coords="17,102,85,129"/>

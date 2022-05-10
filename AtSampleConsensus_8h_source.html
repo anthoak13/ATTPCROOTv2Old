@@ -101,10 +101,10 @@ $(function() {
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;   <span class="keyword">using</span> <a class="code" href="group__SampleConsensus.html#ga3f41f25b8c1dd17e4e1785fba2380d5d">Estimators</a> = <a class="code" href="group__SampleConsensus.html#ga3f41f25b8c1dd17e4e1785fba2380d5d">SampleConsensus::Estimators</a>;</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;   <span class="keyword">using</span> <a class="code" href="group__AtPattern.html#ga83dfd22f92852e92938315c154952e5c">PatternType</a> = <a class="code" href="group__AtPattern.html#ga83dfd22f92852e92938315c154952e5c">AtPatterns::PatternType</a>;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;   <span class="keyword">using</span> SampleMethod = <a class="code" href="group__AtHitSampling.html#ga2483e8129e93c221dd4d4961cef2411a">AtTools::AtSample::SampleMethod</a>;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;   <span class="keyword">using</span> <a class="code" href="group__AtHitSampling.html#ga2483e8129e93c221dd4d4961cef2411a">SampleMethod</a> = <a class="code" href="group__AtHitSampling.html#ga2483e8129e93c221dd4d4961cef2411a">RandomSample::SampleMethod</a>;</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;   <span class="keyword">using</span> <a class="code" href="classAtPatterns_1_1AtPattern.html">AtPattern</a> = <a class="code" href="classAtPatterns_1_1AtPattern.html">AtPatterns::AtPattern</a>;</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;   <span class="keyword">using</span> PatternPtr = std::unique_ptr&lt;AtPattern&gt;;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;   <span class="keyword">using</span> AtSamplePtr = std::unique_ptr&lt;AtTools::AtSample&gt;;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;   <span class="keyword">using</span> AtSamplePtr = std::unique_ptr&lt;RandomSample::AtSample&gt;;</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;   <a class="code" href="group__AtPattern.html#ga83dfd22f92852e92938315c154952e5c">PatternType</a> fPatternType; <span class="comment">//&lt; Type of pattern to find</span></div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;   <a class="code" href="group__SampleConsensus.html#ga3f41f25b8c1dd17e4e1785fba2380d5d">Estimators</a> fEstimator;    <span class="comment">//&lt; Estimator to evaluate pattern</span></div>
@@ -118,7 +118,7 @@ $(function() {
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;   <a class="code" href="classSampleConsensus_1_1AtSampleConsensus.html#a2ff1654d2dfd021b7b15e11b4d911e4b">AtSampleConsensus</a>();</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;   <a class="code" href="classSampleConsensus_1_1AtSampleConsensus.html#a2ff1654d2dfd021b7b15e11b4d911e4b">AtSampleConsensus</a>(<a class="code" href="group__SampleConsensus.html#ga3f41f25b8c1dd17e4e1785fba2380d5d">Estimators</a> estimator, <a class="code" href="group__AtPattern.html#ga83dfd22f92852e92938315c154952e5c">PatternType</a> patternType, SampleMethod sampleMethod);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;   <a class="code" href="classSampleConsensus_1_1AtSampleConsensus.html#a2ff1654d2dfd021b7b15e11b4d911e4b">AtSampleConsensus</a>(<a class="code" href="group__SampleConsensus.html#ga3f41f25b8c1dd17e4e1785fba2380d5d">Estimators</a> estimator, <a class="code" href="group__AtPattern.html#ga83dfd22f92852e92938315c154952e5c">PatternType</a> patternType, <a class="code" href="group__AtHitSampling.html#ga2483e8129e93c221dd4d4961cef2411a">SampleMethod</a> sampleMethod);</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;   <a class="code" href="classAtPatternEvent.html">AtPatternEvent</a> <a class="code" href="classSampleConsensus_1_1AtSampleConsensus.html#ac97c159b0653ad6a7d718436277b274b">Solve</a>(<a class="code" href="classAtEvent.html">AtEvent</a> *event);</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;   <a class="code" href="classAtPatternEvent.html">AtPatternEvent</a> <a class="code" href="classSampleConsensus_1_1AtSampleConsensus.html#ac97c159b0653ad6a7d718436277b274b">Solve</a>(<span class="keyword">const</span> std::vector&lt;AtHit&gt; &amp;hitArray);</div>
@@ -166,7 +166,7 @@ $(function() {
 <div class="ttc" id="anamespaceSampleConsensus_html"><div class="ttname"><a href="namespaceSampleConsensus.html">SampleConsensus</a></div><div class="ttdef"><b>Definition:</b> <a href="AtEstimatorMethods_8h_source.html#l00006">AtEstimatorMethods.h:6</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue May 10 2022 05:25:53 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue May 10 2022 05:44:25 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

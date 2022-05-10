@@ -78,14 +78,19 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRandomSample_1_1AtChargeWeighted.html">RandomSample::AtChargeWeighted</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sample AtHits according to charge.  <a href="classRandomSample_1_1AtChargeWeighted.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRandomSample_1_1AtGaussian.html">RandomSample::AtGaussian</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sample AtHits in gaussian from reference.  <a href="classRandomSample_1_1AtGaussian.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRandomSample_1_1AtIndependentSample.html">RandomSample::AtIndependentSample</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interface for independent samples.  <a href="classRandomSample_1_1AtIndependentSample.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRandomSample_1_1AtSample.html">RandomSample::AtSample</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interface for randomly sampling AtHits.  <a href="classRandomSample_1_1AtSample.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRandomSample_1_1AtSampleFromReference.html">RandomSample::AtSampleFromReference</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sample when PDF depends on reference.  <a href="classRandomSample_1_1AtSampleFromReference.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRandomSample_1_1AtUniform.html">RandomSample::AtUniform</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uniformly sample a collection of AtHits.  <a href="classRandomSample_1_1AtUniform.html#details">More...</a><br /></td></tr>
@@ -106,9 +111,10 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga75480c28013eebe0c49ee5c13c90c80a"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classRandomSample_1_1AtSample.html">AtSample</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__AtHitSampling.html#ga75480c28013eebe0c49ee5c13c90c80a">CreateSampler</a> (<a class="el" href="group__AtHitSampling.html#ga2483e8129e93c221dd4d4961cef2411a">SampleMethod</a> method)</td></tr>
-<tr class="memdesc:ga75480c28013eebe0c49ee5c13c90c80a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static factory method for creating instances of AtSample.  <a href="group__AtHitSampling.html#ga75480c28013eebe0c49ee5c13c90c80a">More...</a><br /></td></tr>
-<tr class="separator:ga75480c28013eebe0c49ee5c13c90c80a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga843dea3bc1af8856740f13a63f5502c4"><td class="memTemplParams" colspan="2">template&lt;typename... Ts&gt; </td></tr>
+<tr class="memitem:ga843dea3bc1af8856740f13a63f5502c4"><td class="memTemplItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classRandomSample_1_1AtSample.html">AtSample</a> &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__AtHitSampling.html#ga843dea3bc1af8856740f13a63f5502c4">CreateSampler</a> (<a class="el" href="group__AtHitSampling.html#ga2483e8129e93c221dd4d4961cef2411a">SampleMethod</a> method, Ts &amp;&amp;...params)</td></tr>
+<tr class="memdesc:ga843dea3bc1af8856740f13a63f5502c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static factory method for creating instances of AtSample.  <a href="group__AtHitSampling.html#ga843dea3bc1af8856740f13a63f5502c4">More...</a><br /></td></tr>
+<tr class="separator:ga843dea3bc1af8856740f13a63f5502c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Classes for sampling AtHits. </p>
@@ -137,7 +143,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>. Methods of random sampling. </p>
-<p>All methods implemented that can be constructed by the factory method <a class="el" href="namespaceRandomSample.html#a0fc07f29297da5db05b8231f5ee5f2b7">CreateSampler(SampleMethod)</a>. </p>
+<p>All methods implemented that can be constructed by the factory method CreateSampler(SampleMethod). </p>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="gga2483e8129e93c221dd4d4961cef2411aa3ea9f7aca87fd7b64469a0d1119f0b50"></a>kUniform&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="gga2483e8129e93c221dd4d4961cef2411aaf305214d62cc60adbf7708e548e0fe45"></a>kChargeWeighted&#160;</td><td class="fielddoc"></td></tr>
@@ -150,33 +156,45 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ga75480c28013eebe0c49ee5c13c90c80a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga75480c28013eebe0c49ee5c13c90c80a">&#9670;&nbsp;</a></span>CreateSampler()</h2>
+<a id="ga843dea3bc1af8856740f13a63f5502c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga843dea3bc1af8856740f13a63f5502c4">&#9670;&nbsp;</a></span>CreateSampler()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Ts&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">std::unique_ptr&lt;<a class="el" href="classRandomSample_1_1AtSample.html">AtSample</a>&gt; CreateSampler </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__AtHitSampling.html#ga2483e8129e93c221dd4d4961cef2411a">SampleMethod</a>&#160;</td>
-          <td class="paramname"><em>method</em></td><td>)</td>
+          <td class="paramname"><em>method</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">Ts &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>params</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Static factory method for creating instances of AtSample. </p>
-<p>Only returns a nullptr for sub-types of AtSample that do not require additional information. </p>
+<p>Factory for creating sampling methods. Will pass parameters to the constructors Only returns a nullptr for sub-types of AtSample that do not require additional information. </p>
 
-<p class="definition">Definition at line <a class="el" href="AtSampleMethods_8cxx_source.html#l00016">16</a> of file <a class="el" href="AtSampleMethods_8cxx_source.html">AtSampleMethods.cxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtSampleMethods_8cxx_source.html#l00018">18</a> of file <a class="el" href="AtSampleMethods_8cxx_source.html">AtSampleMethods.cxx</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue May 10 2022 05:25:54 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue May 10 2022 05:44:26 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

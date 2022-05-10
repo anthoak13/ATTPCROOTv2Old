@@ -350,7 +350,7 @@ var searchData=
   ['setraweventbranch_2329',['SetRawEventBranch',['../classAtEventDrawTask.html#a0344a65e26cef795d22966ddb000f546',1,'AtEventDrawTask']]],
   ['setrealconfig_2330',['SetRealConfig',['../classAtApolloDigitizer.html#a674312cfa5692aa4a97faf5eb0611fd0',1,'AtApolloDigitizer']]],
   ['setreductionfunction_2331',['SetReductionFunction',['../classAtDataReductionTask.html#a68ce9619c5c73d597b327f6183a28387',1,'AtDataReductionTask']]],
-  ['setreferencehit_2332',['SetReferenceHit',['../classRandomSample_1_1AtSampleFromReference.html#a68b98b02290c63ef9c1cc5be00c2eaa0',1,'RandomSample::AtSampleFromReference']]],
+  ['setreferencehit_2332',['SetReferenceHit',['../classRandomSample_1_1AtSampleFromReference.html#afca4412b905b1bc90a511422f9770a97',1,'RandomSample::AtSampleFromReference']]],
   ['setrhovariance_2333',['SetRhoVariance',['../classAtEvent.html#ae1fea1db3f74086dffc30e48be94d7ce',1,'AtEvent']]],
   ['setrisetime_2334',['SetRiseTime',['../classAtTrapezoidFilter.html#a6173eb3fe4e7c1197ecd15fca5efb92a',1,'AtTrapezoidFilter']]],
   ['setrndeloss_2335',['SetRndELoss',['../classAtVertexPropagator.html#a99b4570426ebc338370c5fd603eb366d',1,'AtVertexPropagator']]],

@@ -79,18 +79,21 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>Interface for randomly sampling AtHits.  
+ <a href="classRandomSample_1_1AtSample.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="AtSample_8h_source.html">AtSample.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for RandomSample::AtSample:</div>
 <div class="dyncontent">
 <div class="center"><img src="classRandomSample_1_1AtSample__inherit__graph.png" border="0" usemap="#RandomSample_1_1AtSample_inherit__map" alt="Inheritance graph"/></div>
 <map name="RandomSample_1_1AtSample_inherit__map" id="RandomSample_1_1AtSample_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,85,183,112"/>
-<area shape="rect" href="classRandomSample_1_1AtIndependentSample.html" title=" " alt="" coords="232,45,436,86"/>
-<area shape="rect" href="classRandomSample_1_1AtSampleFromReference.html" title=" " alt="" coords="231,110,437,151"/>
-<area shape="rect" href="classRandomSample_1_1AtChargeWeighted.html" title=" " alt="" coords="485,5,713,32"/>
+<area shape="rect" title="Interface for randomly sampling AtHits." alt="" coords="5,85,183,112"/>
+<area shape="rect" href="classRandomSample_1_1AtIndependentSample.html" title="Interface for independent samples." alt="" coords="232,45,436,86"/>
+<area shape="rect" href="classRandomSample_1_1AtSampleFromReference.html" title="Sample when PDF depends on reference." alt="" coords="231,110,437,151"/>
+<area shape="rect" href="classRandomSample_1_1AtChargeWeighted.html" title="Sample AtHits according to charge." alt="" coords="485,5,713,32"/>
 <area shape="rect" href="classRandomSample_1_1AtUniform.html" title="Uniformly sample a collection of AtHits." alt="" coords="510,56,689,83"/>
-<area shape="rect" href="classRandomSample_1_1AtGaussian.html" title=" " alt="" coords="505,113,693,140"/>
+<area shape="rect" href="classRandomSample_1_1AtGaussian.html" title="Sample AtHits in gaussian from reference." alt="" coords="505,113,693,140"/>
 <area shape="rect" href="classRandomSample_1_1AtWeightedGaussian.html" title="Sample with a charge&#45;weighted gaussian." alt="" coords="506,165,693,206"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
@@ -99,7 +102,7 @@ Collaboration diagram for RandomSample::AtSample:</div>
 <div class="dyncontent">
 <div class="center"><img src="classRandomSample_1_1AtSample__coll__graph.png" border="0" usemap="#RandomSample_1_1AtSample_coll__map" alt="Collaboration graph"/></div>
 <map name="RandomSample_1_1AtSample_coll__map" id="RandomSample_1_1AtSample_coll__map">
-<area shape="rect" title=" " alt="" coords="65,377,243,404"/>
+<area shape="rect" title="Interface for randomly sampling AtHits." alt="" coords="65,377,243,404"/>
 <area shape="rect" title=" " alt="" coords="5,288,140,315"/>
 <area shape="rect" href="classAtHit.html" title=" " alt="" coords="47,199,99,225"/>
 <area shape="rect" title=" " alt="" coords="17,102,85,129"/>
@@ -155,9 +158,10 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a300b4f41e28271c74cf3c267a48e3d9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Interface for randomly sampling a collection of AtHits according to the cumulitive distribution function fCDF. </p>
+<div class="textblock"><p>Interface for randomly sampling AtHits. </p>
+<p>Samples according to the cumulitive distribution function fCDF. </p>
 
-<p class="definition">Definition at line <a class="el" href="AtSample_8h_source.html#l00031">31</a> of file <a class="el" href="AtSample_8h_source.html">AtSample.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtSample_8h_source.html#l00033">33</a> of file <a class="el" href="AtSample_8h_source.html">AtSample.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a29f732e86a5fcecbcf01724033e920fc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a29f732e86a5fcecbcf01724033e920fc">&#9670;&nbsp;</a></span>CreateSampler()</h2>
@@ -304,7 +308,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtSample_8h_source.html#l00064">64</a> of file <a class="el" href="AtSample_8h_source.html">AtSample.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtSample_8h_source.html#l00066">66</a> of file <a class="el" href="AtSample_8h_source.html">AtSample.h</a>.</p>
 
 </div>
 </div>
@@ -493,7 +497,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtSample_8h_source.html#l00045">45</a> of file <a class="el" href="AtSample_8h_source.html">AtSample.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtSample_8h_source.html#l00047">47</a> of file <a class="el" href="AtSample_8h_source.html">AtSample.h</a>.</p>
 
 </div>
 </div>
@@ -518,7 +522,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtSample_8h_source.html#l00034">34</a> of file <a class="el" href="AtSample_8h_source.html">AtSample.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtSample_8h_source.html#l00036">36</a> of file <a class="el" href="AtSample_8h_source.html">AtSample.h</a>.</p>
 
 </div>
 </div>
@@ -542,7 +546,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtSample_8h_source.html#l00033">33</a> of file <a class="el" href="AtSample_8h_source.html">AtSample.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtSample_8h_source.html#l00035">35</a> of file <a class="el" href="AtSample_8h_source.html">AtSample.h</a>.</p>
 
 </div>
 </div>
@@ -566,7 +570,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtSample_8h_source.html#l00035">35</a> of file <a class="el" href="AtSample_8h_source.html">AtSample.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtSample_8h_source.html#l00037">37</a> of file <a class="el" href="AtSample_8h_source.html">AtSample.h</a>.</p>
 
 </div>
 </div>
@@ -577,7 +581,7 @@ template&lt;typename T &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue May 10 2022 05:25:55 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue May 10 2022 05:44:27 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

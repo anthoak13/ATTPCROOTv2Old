@@ -1,6 +1,6 @@
 <map id="RandomSample::AtIndependentSample" name="RandomSample::AtIndependentSample">
-<area shape="rect" id="node1" title=" " alt="" coords="52,453,256,495"/>
-<area shape="rect" id="node2" href="$classRandomSample_1_1AtSample.html" title=" " alt="" coords="65,377,243,404"/>
+<area shape="rect" id="node1" title="Interface for independent samples." alt="" coords="52,453,256,495"/>
+<area shape="rect" id="node2" href="$classRandomSample_1_1AtSample.html" title="Interface for randomly sampling AtHits." alt="" coords="65,377,243,404"/>
 <area shape="rect" id="node3" title=" " alt="" coords="5,288,140,315"/>
 <area shape="rect" id="node4" href="$classAtHit.html" title=" " alt="" coords="47,199,99,225"/>
 <area shape="rect" id="node5" title=" " alt="" coords="17,102,85,129"/>

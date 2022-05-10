@@ -105,16 +105,17 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a53f26e531d92fe51fb02045e398b56f6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtRawEvent.html#a53f26e531d92fe51fb02045e398b56f6">~AtRawEvent</a> ()=default</td></tr>
 <tr class="separator:a53f26e531d92fe51fb02045e398b56f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa96f374f65bdcfa4a645a34b1de62ca7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtRawEvent.html#aa96f374f65bdcfa4a645a34b1de62ca7">CopyAllButData</a> (const <a class="el" href="classAtRawEvent.html">AtRawEvent</a> *event)</td></tr>
+<tr class="memdesc:aa96f374f65bdcfa4a645a34b1de62ca7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy everything but the data (pads, aux pads, and MCPointMap) to this event.  <a href="classAtRawEvent.html#aa96f374f65bdcfa4a645a34b1de62ca7">More...</a><br /></td></tr>
 <tr class="separator:aa96f374f65bdcfa4a645a34b1de62ca7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac5a7c3fe0493548a8e53f0ae3400462f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtRawEvent.html#ac5a7c3fe0493548a8e53f0ae3400462f">Clear</a> (Option_t *opt=nullptr) override</td></tr>
 <tr class="separator:ac5a7c3fe0493548a8e53f0ae3400462f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae7bd0551a1f6898dd05d7db9544dbaeb"><td class="memTemplParams" colspan="2">template&lt;typename... Ts&gt; </td></tr>
 <tr class="memitem:ae7bd0551a1f6898dd05d7db9544dbaeb"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classAtPad.html">AtPad</a> *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classAtRawEvent.html#ae7bd0551a1f6898dd05d7db9544dbaeb">AddPad</a> (Ts &amp;&amp;...params)</td></tr>
-<tr class="memdesc:ae7bd0551a1f6898dd05d7db9544dbaeb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new pad in this event. Adds a new pad, calling a constructor of <a class="el" href="classAtPad.html">AtPad</a> using the passed parameters.  <a href="classAtRawEvent.html#ae7bd0551a1f6898dd05d7db9544dbaeb">More...</a><br /></td></tr>
+<tr class="memdesc:ae7bd0551a1f6898dd05d7db9544dbaeb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new pad in this event.  <a href="classAtRawEvent.html#ae7bd0551a1f6898dd05d7db9544dbaeb">More...</a><br /></td></tr>
 <tr class="separator:ae7bd0551a1f6898dd05d7db9544dbaeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21e68286c144a5e73782dd8df1f03a39"><td class="memTemplParams" colspan="2">template&lt;typename T , typename  = std::enable_if_t&lt;std::is_base_of&lt;AtPad, std::decay_t&lt;T&gt;&gt;::value&gt;&gt; </td></tr>
 <tr class="memitem:a21e68286c144a5e73782dd8df1f03a39"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classAtPad.html">AtPad</a> *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classAtRawEvent.html#a21e68286c144a5e73782dd8df1f03a39">AddPad</a> (std::unique_ptr&lt; T &gt; ptr)</td></tr>
-<tr class="memdesc:a21e68286c144a5e73782dd8df1f03a39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move a pad into the event Moves a std::unique_ptr of <a class="el" href="classAtPad.html">AtPad</a>, or any type derived from <a class="el" href="classAtPad.html">AtPad</a>, into the event.  <a href="classAtRawEvent.html#a21e68286c144a5e73782dd8df1f03a39">More...</a><br /></td></tr>
+<tr class="memdesc:a21e68286c144a5e73782dd8df1f03a39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move a pad into the event.  <a href="classAtRawEvent.html#a21e68286c144a5e73782dd8df1f03a39">More...</a><br /></td></tr>
 <tr class="separator:a21e68286c144a5e73782dd8df1f03a39"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9dc7fa1e265190ea140575a6626d6b4a"><td class="memItemLeft" align="right" valign="top">std::pair&lt; <a class="el" href="classAtAuxPad.html">AtAuxPad</a> *, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtRawEvent.html#a9dc7fa1e265190ea140575a6626d6b4a">AddAuxPad</a> (std::string auxName)</td></tr>
 <tr class="memdesc:a9dc7fa1e265190ea140575a6626d6b4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add new auxilary pad (<a class="el" href="classAtAuxPad.html">AtAuxPad</a>) to event.  <a href="classAtRawEvent.html#a9dc7fa1e265190ea140575a6626d6b4a">More...</a><br /></td></tr>
@@ -169,7 +170,7 @@ Friends</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="AtRawEvent_8h_source.html#l00035">35</a> of file <a class="el" href="AtRawEvent_8h_source.html">AtRawEvent.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtRawEvent_8h_source.html#l00036">36</a> of file <a class="el" href="AtRawEvent_8h_source.html">AtRawEvent.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a4a0dcfa5305790573e76d1d15471a90f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4a0dcfa5305790573e76d1d15471a90f">&#9670;&nbsp;</a></span>AtRawEvent() <span class="overload">[1/3]</span></h2>
@@ -317,7 +318,8 @@ template&lt;typename T , typename  = std::enable_if_t&lt;std::is_base_of&lt;AtPa
 </table>
 </div><div class="memdoc">
 
-<p>Move a pad into the event Moves a std::unique_ptr of <a class="el" href="classAtPad.html">AtPad</a>, or any type derived from <a class="el" href="classAtPad.html">AtPad</a>, into the event. </p>
+<p>Move a pad into the event. </p>
+<p>Moves a std::unique_ptr of <a class="el" href="classAtPad.html">AtPad</a>, or any type derived from <a class="el" href="classAtPad.html">AtPad</a>, into the event.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">params</td><td>std::unique_ptr of pad to move into the event </td></tr>
@@ -326,7 +328,7 @@ template&lt;typename T , typename  = std::enable_if_t&lt;std::is_base_of&lt;AtPa
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to moved pad </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="AtRawEvent_8h_source.html#l00084">84</a> of file <a class="el" href="AtRawEvent_8h_source.html">AtRawEvent.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtRawEvent_8h_source.html#l00087">87</a> of file <a class="el" href="AtRawEvent_8h_source.html">AtRawEvent.h</a>.</p>
 
 </div>
 </div>
@@ -356,7 +358,8 @@ template&lt;typename... Ts&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Create a new pad in this event. Adds a new pad, calling a constructor of <a class="el" href="classAtPad.html">AtPad</a> using the passed parameters. </p>
+<p>Create a new pad in this event. </p>
+<p>Adds a new pad, calling a constructor of <a class="el" href="classAtPad.html">AtPad</a> using the passed parameters.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">params</td><td>Parameters to perfect-forward to the constructor of <a class="el" href="classAtPad.html">AtPad</a> </td></tr>
@@ -365,7 +368,7 @@ template&lt;typename... Ts&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to newly created pad </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="AtRawEvent_8h_source.html#l00070">70</a> of file <a class="el" href="AtRawEvent_8h_source.html">AtRawEvent.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtRawEvent_8h_source.html#l00072">72</a> of file <a class="el" href="AtRawEvent_8h_source.html">AtRawEvent.h</a>.</p>
 
 </div>
 </div>
@@ -441,6 +444,8 @@ template&lt;typename... Ts&gt; </div>
       </table>
 </div><div class="memdoc">
 
+<p>Copy everything but the data (pads, aux pads, and MCPointMap) to this event. </p>
+
 <p class="definition">Definition at line <a class="el" href="AtRawEvent_8cxx_source.html#l00030">30</a> of file <a class="el" href="AtRawEvent_8cxx_source.html">AtRawEvent.cxx</a>.</p>
 
 </div>
@@ -488,7 +493,7 @@ template&lt;typename... Ts&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtRawEvent_8h_source.html#l00119">119</a> of file <a class="el" href="AtRawEvent_8h_source.html">AtRawEvent.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtRawEvent_8h_source.html#l00122">122</a> of file <a class="el" href="AtRawEvent_8h_source.html">AtRawEvent.h</a>.</p>
 
 </div>
 </div>
@@ -515,7 +520,7 @@ template&lt;typename... Ts&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtRawEvent_8h_source.html#l00110">110</a> of file <a class="el" href="AtRawEvent_8h_source.html">AtRawEvent.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtRawEvent_8h_source.html#l00113">113</a> of file <a class="el" href="AtRawEvent_8h_source.html">AtRawEvent.h</a>.</p>
 
 </div>
 </div>
@@ -542,7 +547,7 @@ template&lt;typename... Ts&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtRawEvent_8h_source.html#l00116">116</a> of file <a class="el" href="AtRawEvent_8h_source.html">AtRawEvent.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtRawEvent_8h_source.html#l00119">119</a> of file <a class="el" href="AtRawEvent_8h_source.html">AtRawEvent.h</a>.</p>
 
 </div>
 </div>
@@ -569,7 +574,7 @@ template&lt;typename... Ts&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtRawEvent_8h_source.html#l00112">112</a> of file <a class="el" href="AtRawEvent_8h_source.html">AtRawEvent.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtRawEvent_8h_source.html#l00115">115</a> of file <a class="el" href="AtRawEvent_8h_source.html">AtRawEvent.h</a>.</p>
 
 </div>
 </div>
@@ -596,7 +601,7 @@ template&lt;typename... Ts&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtRawEvent_8h_source.html#l00111">111</a> of file <a class="el" href="AtRawEvent_8h_source.html">AtRawEvent.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtRawEvent_8h_source.html#l00114">114</a> of file <a class="el" href="AtRawEvent_8h_source.html">AtRawEvent.h</a>.</p>
 
 </div>
 </div>
@@ -643,7 +648,7 @@ template&lt;typename... Ts&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtRawEvent_8h_source.html#l00118">118</a> of file <a class="el" href="AtRawEvent_8h_source.html">AtRawEvent.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtRawEvent_8h_source.html#l00121">121</a> of file <a class="el" href="AtRawEvent_8h_source.html">AtRawEvent.h</a>.</p>
 
 </div>
 </div>
@@ -670,7 +675,7 @@ template&lt;typename... Ts&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtRawEvent_8h_source.html#l00120">120</a> of file <a class="el" href="AtRawEvent_8h_source.html">AtRawEvent.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtRawEvent_8h_source.html#l00123">123</a> of file <a class="el" href="AtRawEvent_8h_source.html">AtRawEvent.h</a>.</p>
 
 </div>
 </div>
@@ -698,7 +703,7 @@ template&lt;typename... Ts&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtRawEvent_8h_source.html#l00113">113</a> of file <a class="el" href="AtRawEvent_8h_source.html">AtRawEvent.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtRawEvent_8h_source.html#l00116">116</a> of file <a class="el" href="AtRawEvent_8h_source.html">AtRawEvent.h</a>.</p>
 
 </div>
 </div>
@@ -725,7 +730,7 @@ template&lt;typename... Ts&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtRawEvent_8h_source.html#l00114">114</a> of file <a class="el" href="AtRawEvent_8h_source.html">AtRawEvent.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtRawEvent_8h_source.html#l00117">117</a> of file <a class="el" href="AtRawEvent_8h_source.html">AtRawEvent.h</a>.</p>
 
 </div>
 </div>
@@ -752,7 +757,7 @@ template&lt;typename... Ts&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtRawEvent_8h_source.html#l00115">115</a> of file <a class="el" href="AtRawEvent_8h_source.html">AtRawEvent.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtRawEvent_8h_source.html#l00118">118</a> of file <a class="el" href="AtRawEvent_8h_source.html">AtRawEvent.h</a>.</p>
 
 </div>
 </div>
@@ -826,7 +831,7 @@ template&lt;typename... Ts&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtRawEvent_8h_source.html#l00103">103</a> of file <a class="el" href="AtRawEvent_8h_source.html">AtRawEvent.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtRawEvent_8h_source.html#l00106">106</a> of file <a class="el" href="AtRawEvent_8h_source.html">AtRawEvent.h</a>.</p>
 
 </div>
 </div>
@@ -854,7 +859,7 @@ template&lt;typename... Ts&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtRawEvent_8h_source.html#l00107">107</a> of file <a class="el" href="AtRawEvent_8h_source.html">AtRawEvent.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtRawEvent_8h_source.html#l00110">110</a> of file <a class="el" href="AtRawEvent_8h_source.html">AtRawEvent.h</a>.</p>
 
 </div>
 </div>
@@ -882,7 +887,7 @@ template&lt;typename... Ts&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtRawEvent_8h_source.html#l00104">104</a> of file <a class="el" href="AtRawEvent_8h_source.html">AtRawEvent.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtRawEvent_8h_source.html#l00107">107</a> of file <a class="el" href="AtRawEvent_8h_source.html">AtRawEvent.h</a>.</p>
 
 </div>
 </div>
@@ -910,7 +915,7 @@ template&lt;typename... Ts&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtRawEvent_8h_source.html#l00106">106</a> of file <a class="el" href="AtRawEvent_8h_source.html">AtRawEvent.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtRawEvent_8h_source.html#l00109">109</a> of file <a class="el" href="AtRawEvent_8h_source.html">AtRawEvent.h</a>.</p>
 
 </div>
 </div>
@@ -938,7 +943,7 @@ template&lt;typename... Ts&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtRawEvent_8h_source.html#l00100">100</a> of file <a class="el" href="AtRawEvent_8h_source.html">AtRawEvent.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtRawEvent_8h_source.html#l00103">103</a> of file <a class="el" href="AtRawEvent_8h_source.html">AtRawEvent.h</a>.</p>
 
 </div>
 </div>
@@ -993,7 +998,7 @@ template&lt;typename... Ts&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtRawEvent_8h_source.html#l00048">48</a> of file <a class="el" href="AtRawEvent_8h_source.html">AtRawEvent.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtRawEvent_8h_source.html#l00049">49</a> of file <a class="el" href="AtRawEvent_8h_source.html">AtRawEvent.h</a>.</p>
 
 </div>
 </div>
@@ -1017,7 +1022,7 @@ template&lt;typename... Ts&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtRawEvent_8h_source.html#l00047">47</a> of file <a class="el" href="AtRawEvent_8h_source.html">AtRawEvent.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtRawEvent_8h_source.html#l00048">48</a> of file <a class="el" href="AtRawEvent_8h_source.html">AtRawEvent.h</a>.</p>
 
 </div>
 </div>
@@ -1028,7 +1033,7 @@ template&lt;typename... Ts&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue May 10 2022 07:15:19 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue May 10 2022 16:38:12 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

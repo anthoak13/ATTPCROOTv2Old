@@ -17,22 +17,12 @@ class AtHit;
 /**
  * Static class for calling the correct estimator based on the enum
  * Enum definition and implementation is in AtEstimatorMethods.h
+ * @ingroup AtSampleEstimator
  */
 class AtSampleEstimator {
 
 public:
    enum class Estimators;
-   /**
-    * @brief Evaluate how well model describes hits
-    *
-    * Checks all hits for consistancy with modeled pattern, and sets the model Chi2 based on
-    * the estimator.
-    *
-    * @param[in] model Model to evaluate
-    * @param[in] hits Hits to compare to model
-    * @param[in] distThresh How close a point must be to be consistent with the model
-    * @return Number of points consistent with model in hits
-    */
    static int
    EvaluateModel(AtPatterns::AtPattern *model, const std::vector<AtHit> &hits, double distThresh, Estimators estimator);
 };

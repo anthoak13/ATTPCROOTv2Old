@@ -4,7 +4,6 @@
 #include <Math/Point3Dfwd.h> // for XYZPoint
 
 #include <algorithm>
-#include <memory> // for unique_ptr
 #include <vector>
 
 class AtHit;
@@ -47,8 +46,6 @@ public:
    virtual void SetHitsToSample(const std::vector<AtHit> *hits) = 0;
 
    void SetSampleWithReplacement(bool val) { fWithReplacement = val; }
-
-   static std::unique_ptr<AtSample> CreateSampler(SampleMethod method);
 
 protected:
    /**

@@ -79,7 +79,7 @@ $(function() {
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespaceAtPatterns.html">AtPatterns</a>;</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="AtPatternTypes_8cxx.html#a0e69d867fa1b590cbbd52634d01cafd6">    9</a></span>&#160;std::unique_ptr&lt;AtPattern&gt; <a class="code" href="group__AtPattern.html#gaa6d8e49bb5966811e1c6947de4c025ef">CreatePattern</a>(<a class="code" href="group__AtPattern.html#ga83dfd22f92852e92938315c154952e5c">PatternType</a> type)</div>
+<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="AtPatternTypes_8cxx.html#a0e69d867fa1b590cbbd52634d01cafd6">    9</a></span>&#160;std::unique_ptr&lt;AtPattern&gt; <a class="code" href="group__AtPattern.html#ga1758fd60711a04932e54096fa91a2c9d">CreatePattern</a>(<a class="code" href="group__AtPattern.html#ga83dfd22f92852e92938315c154952e5c">PatternType</a> type)</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;   <span class="keywordflow">switch</span> (type) {</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;   <span class="keywordflow">case</span> (<a class="code" href="group__AtPattern.html#gga83dfd22f92852e92938315c154952e5caee669fa7b5a35d96a396d4ed648afb45">PatternType::kLine</a>): <span class="keywordflow">return</span> std::make_unique&lt;AtPatternLine&gt;();</div>
@@ -89,17 +89,17 @@ $(function() {
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aAtPattern_8h_html"><div class="ttname"><a href="AtPattern_8h.html">AtPattern.h</a></div></div>
-<div class="ttc" id="agroup__AtPattern_html_gaa6d8e49bb5966811e1c6947de4c025ef"><div class="ttname"><a href="group__AtPattern.html#gaa6d8e49bb5966811e1c6947de4c025ef">AtPatterns::CreatePattern</a></div><div class="ttdeci">std::unique_ptr&lt; AtPattern &gt; CreatePattern(PatternType type)</div></div>
 <div class="ttc" id="agroup__AtPattern_html_gga83dfd22f92852e92938315c154952e5cac162690276b0c003fe31ea3969a63fae"><div class="ttname"><a href="group__AtPattern.html#gga83dfd22f92852e92938315c154952e5cac162690276b0c003fe31ea3969a63fae">AtPatterns::PatternType::kCircle2D</a></div><div class="ttdeci">@ kCircle2D</div></div>
 <div class="ttc" id="aAtPatternLine_8h_html"><div class="ttname"><a href="AtPatternLine_8h.html">AtPatternLine.h</a></div></div>
-<div class="ttc" id="anamespaceAtPatterns_html"><div class="ttname"><a href="namespaceAtPatterns.html">AtPatterns</a></div><div class="ttdef"><b>Definition:</b> <a href="AtPattern_8h_source.html#l00015">AtPattern.h:15</a></div></div>
-<div class="ttc" id="agroup__AtPattern_html_ga83dfd22f92852e92938315c154952e5c"><div class="ttname"><a href="group__AtPattern.html#ga83dfd22f92852e92938315c154952e5c">AtPatterns::PatternType</a></div><div class="ttdeci">PatternType</div><div class="ttdef"><b>Definition:</b> <a href="AtPatternTypes_8h_source.html#l00011">AtPatternTypes.h:11</a></div></div>
+<div class="ttc" id="anamespaceAtPatterns_html"><div class="ttname"><a href="namespaceAtPatterns.html">AtPatterns</a></div><div class="ttdef"><b>Definition:</b> <a href="AtPattern_8h_source.html#l00016">AtPattern.h:16</a></div></div>
+<div class="ttc" id="agroup__AtPattern_html_ga83dfd22f92852e92938315c154952e5c"><div class="ttname"><a href="group__AtPattern.html#ga83dfd22f92852e92938315c154952e5c">AtPatterns::PatternType</a></div><div class="ttdeci">PatternType</div><div class="ttdoc">Supported patterns All implemented patterns. Can be created with the static factory AtPatterns::Creat...</div><div class="ttdef"><b>Definition:</b> <a href="AtPatternTypes_8h_source.html#l00012">AtPatternTypes.h:12</a></div></div>
 <div class="ttc" id="aAtPatternTypes_8h_html"><div class="ttname"><a href="AtPatternTypes_8h.html">AtPatternTypes.h</a></div></div>
 <div class="ttc" id="agroup__AtPattern_html_gga83dfd22f92852e92938315c154952e5caee669fa7b5a35d96a396d4ed648afb45"><div class="ttname"><a href="group__AtPattern.html#gga83dfd22f92852e92938315c154952e5caee669fa7b5a35d96a396d4ed648afb45">AtPatterns::PatternType::kLine</a></div><div class="ttdeci">@ kLine</div></div>
 <div class="ttc" id="aAtPatternCircle2D_8h_html"><div class="ttname"><a href="AtPatternCircle2D_8h.html">AtPatternCircle2D.h</a></div></div>
+<div class="ttc" id="agroup__AtPattern_html_ga1758fd60711a04932e54096fa91a2c9d"><div class="ttname"><a href="group__AtPattern.html#ga1758fd60711a04932e54096fa91a2c9d">AtPatterns::CreatePattern</a></div><div class="ttdeci">std::unique_ptr&lt; AtPattern &gt; CreatePattern(PatternType type)</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue May 10 2022 04:54:56 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue May 10 2022 04:55:30 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

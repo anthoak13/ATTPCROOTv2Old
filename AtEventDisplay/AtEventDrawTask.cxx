@@ -14,7 +14,9 @@
 #include "AtMap.h"          // for AtMap
 #include "AtPad.h"          // for AtPad
 #include "AtPadReference.h"
-#include "AtPatternEvent.h"     // for AtPatternEvent
+#include "AtPattern.h"
+#include "AtPatternEvent.h" // for AtPatternEvent
+#include "AtPatternLine.h"
 #include "AtRansac.h"           // for AtRansac, operator<<, AtRansac::Pair...
 #include "AtRawEvent.h"         // for AtRawEvent, AuxPadMap
 #include "AtTrack.h"            // for AtTrack, operator<<
@@ -75,36 +77,22 @@ using namespace std;
 ClassImp(AtEventDrawTask);
 
 AtEventDrawTask::AtEventDrawTask()
-   : fIs2DPlotRange(kFALSE), fUnpackHough(kFALSE), fEventArray(nullptr),
-     // fHitClusterArray(0),
-     // fRiemannTrackArray(0),
-     // fKalmanArray(0),
-     fEventManager(nullptr), fRawevent(nullptr), fDetmap(nullptr), fThreshold(0), fHitSet(nullptr),
-     fCorrectedHitSet(nullptr),
-     // x(0),
-     // hitSphereArray(0),
-     fhitBoxSet(nullptr), fPadPlanePal(nullptr), fHitColor(kPink), fHitSize(1), fHitStyle(kFullDotMedium),
-     // fHitClusterSet(0),
-     // fHitClusterColor(kAzure-5),
-     // fHitClusterColor(kYellow-5),
-     // fHitClusterSize(1),
-     // fHitClusterStyle(kOpenCircle),
-     // fRiemannSetArray(0),
-     // fRiemannColor(kBlue),
-     // fRiemannSize(1.5),
-     // fRiemannStyle(kOpenCircle),
-     fCvsPadPlane(nullptr), fPadPlane(nullptr), fCvsPadWave(nullptr), fPadWave(nullptr), fCvsPadAll(nullptr),
-     fCvsQEvent(nullptr), fQEventHist(nullptr), fQEventHist_H(nullptr), fCvsHoughSpace(nullptr), fHoughSpace(nullptr),
+   : fIs2DPlotRange(kFALSE), fUnpackHough(kFALSE), fEventArray(nullptr), fEventManager(nullptr), fRawevent(nullptr),
+     fDetmap(nullptr), fThreshold(0), fHitSet(nullptr), fCorrectedHitSet(nullptr), fhitBoxSet(nullptr),
+     fPadPlanePal(nullptr), fHitColor(kPink), fHitSize(1), fHitStyle(kFullDotMedium), fCvsPadPlane(nullptr),
+     fPadPlane(nullptr), fCvsPadWave(nullptr), fPadWave(nullptr), fCvsPadAll(nullptr), fCvsQEvent(nullptr),
+     fQEventHist(nullptr), fQEventHist_H(nullptr), fCvsHoughSpace(nullptr), fHoughSpace(nullptr),
      fCvsRhoVariance(nullptr), fRhoVariance(nullptr), fCvsPhi(nullptr), fCvsMesh(nullptr), fMesh(nullptr),
      fCvs3DHist(nullptr), f3DHist(nullptr), fCvsRad(nullptr), fRadVSTb(nullptr), fCvsTheta(nullptr), fTheta(nullptr),
      fAtMapPtr(nullptr), fMinZ(0), fMaxZ(1344), fMinX(432), fMaxX(-432), f3DHitStyle(0), fMultiHit(0),
-     fSaveTextData(false), f3DThreshold(0), fRansacUnified(false), fDetNumPads(10240),
-     fRawEventBranchName("AtRawEvent"), fEventBranchName("AtEventH")
+     fSaveTextData(false), f3DThreshold(0), fRansacUnified(false), fRawEventBranchName("AtRawEvent"),
+     fEventBranchName("AtEventH")
 {
 
+   fHitSetTFHC.resize(20);
    Char_t padhistname[256];
 
-   for (Int_t i = 0; i < fNumPads; i++) { // TODO: Full-scale must be accomodated
+   for (Int_t i = 0; i < fNumPads; i++) {
       sprintf(padhistname, "pad_%d", i);
       fPadAll[i] = new TH1I(padhistname, padhistname, 512, 0, 511);
    }
@@ -132,9 +120,6 @@ AtEventDrawTask::AtEventDrawTask()
    fIsLinearHough = kFALSE;
    fIsRawData = kFALSE;
 
-   fHoughLinearFit =
-      new TF1("HoughLinearFit", " (  (-TMath::Cos([0])/TMath::Sin([0]))*x ) + [1]/TMath::Sin([0])", 0, 500);
-   fRansacLinearFit = new TF1("RansacLinearFit", "x", 0, 500);
    fIniHit = new AtHit();
    fIniHitRansac = new AtHit();
    fLineNum = 0;
@@ -143,16 +128,7 @@ AtEventDrawTask::AtEventDrawTask()
    fRGBAPalette = new TEveRGBAPalette(0, 4096);
 }
 
-AtEventDrawTask::~AtEventDrawTask()
-{
-
-   // TODO Destroy pointers
-   // for(Int_t i=0;i<hitSphereArray.size();i++) delete hitSphereArray[i];
-   // delete x;
-   // hitSphereArray.clear();
-   delete fHoughLinearFit;
-   delete fRansacLinearFit;
-}
+AtEventDrawTask::~AtEventDrawTask() = default;
 
 InitStatus AtEventDrawTask::Init()
 {
@@ -377,48 +353,48 @@ void AtEventDrawTask::DrawHitPoints()
       std::vector<AtTrack> TrackCand;
 
       if (fRansacArray) {
-         if (!fRansacUnified) {
-            fRansac = dynamic_cast<AtRANSACN::AtRansac *>(fRansacArray->At(0));
-            TrackCand = fRansac->GetTrackCand();
-            TVector3 Vertex1 = fRansac->GetVertex1();
-            TVector3 Vertex2 = fRansac->GetVertex2();
-            Double_t VertexTime = fRansac->GetVertexTime();
-            std::cout << cGREEN << " Vertex 1 - X : " << Vertex1.X() << " - Y : " << Vertex1.Y()
-                      << "  - Z : " << Vertex1.Z() << std::endl;
-            std::cout << " Vertex 2 - X : " << Vertex2.X() << " - Y : " << Vertex2.Y() << "  - Z : " << Vertex2.Z()
-                      << std::endl;
-            std::cout << " Vertex Time : " << VertexTime << std::endl;
-            std::cout << " Vertex Mean - X : " << (Vertex1.X() + Vertex2.X()) / 2.0
-                      << " - Y : " << (Vertex1.Y() + Vertex2.Y()) / 2.0
-                      << "  - Z : " << (Vertex1.Z() + Vertex2.Z()) / 2.0 << cNORMAL << std::endl;
+         fRansac = dynamic_cast<AtRANSACN::AtRansac *>(fRansacArray->At(0));
+         TrackCand = fRansac->GetTrackCand();
+         TVector3 Vertex1 = fRansac->GetVertex1();
+         TVector3 Vertex2 = fRansac->GetVertex2();
+         Double_t VertexTime = fRansac->GetVertexTime();
+         std::cout << cGREEN << " Vertex 1 - X : " << Vertex1.X() << " - Y : " << Vertex1.Y()
+                   << "  - Z : " << Vertex1.Z() << std::endl;
+         std::cout << " Vertex 2 - X : " << Vertex2.X() << " - Y : " << Vertex2.Y() << "  - Z : " << Vertex2.Z()
+                   << std::endl;
+         std::cout << " Vertex Time : " << VertexTime << std::endl;
+         std::cout << " Vertex Mean - X : " << (Vertex1.X() + Vertex2.X()) / 2.0
+                   << " - Y : " << (Vertex1.Y() + Vertex2.Y()) / 2.0 << "  - Z : " << (Vertex1.Z() + Vertex2.Z()) / 2.0
+                   << cNORMAL << std::endl;
 
-            std::vector<AtRANSACN::AtRansac::PairedLines> trackCorr = fRansac->GetPairedLinesArray();
-            // std::ostream_iterator<AtRANSACN::AtRansac::PairedLines> pairLine_it (std::cout,"  ");
-            if (trackCorr.size() > 0) {
-               for (auto pl : trackCorr) {
-                  std::cout << pl << std::endl;
-               }
+         std::vector<AtRANSACN::AtRansac::PairedLines> trackCorr = fRansac->GetPairedLinesArray();
+         // std::ostream_iterator<AtRANSACN::AtRansac::PairedLines> pairLine_it (std::cout,"  ");
+         if (trackCorr.size() > 0) {
+            for (auto pl : trackCorr) {
+               std::cout << pl << std::endl;
             }
          }
+
       } else if (fPatternEventArray) {
          auto *patternEvent = dynamic_cast<AtPatternEvent *>(fPatternEventArray->At(0));
          TrackCand = patternEvent->GetTrackCand();
-
-         for (Int_t i = 0; i < 20; i++) {
-            fHitSetTFHC[i] = nullptr;
-            fHitClusterSet[i] = nullptr;
-         }
-
+         fHitLine.clear();
          if (TrackCand.size() < 20) {
             for (Int_t i = 0; i < TrackCand.size(); i++) {
-
-               AtTrack track = TrackCand.at(i);
-               std::vector<AtHit> trackHits = track.GetHitArray();
-               std::vector<AtHitCluster> *hitClusters = track.GetHitClusterArray();
-
                Color_t trackColor = GetTrackColor(i) + 1;
 
-               fHitSetTFHC[i] = new TEvePointSet(Form("HitMC_%d", i), nHitsMin, TEvePointSelectorConsumer::kTVT_XYZ);
+               // Get the line to draw
+               AtTrack track = TrackCand.at(i);
+
+               if (!track.GetIsNoise()) {
+                  fHitLine.push_back(track.GetPattern()->GetEveLine());
+                  fHitLine.back()->SetMainColor(trackColor);
+                  fHitLine.back()->SetName(Form("line_%i", (int)fHitLine.size() - 1));
+               }
+               std::vector<AtHit> trackHits = track.GetHitArray();
+
+               fHitSetTFHC.push_back(
+                  std::make_unique<TEvePointSet>(Form("HitMC_%d", i), nHitsMin, TEvePointSelectorConsumer::kTVT_XYZ));
                if (track.GetIsNoise())
                   fHitSetTFHC[i]->SetMarkerColor(kRed);
                else
@@ -431,7 +407,8 @@ void AtEventDrawTask::DrawHitPoints()
                   fHitSetTFHC[i]->SetNextPoint(position.X() / 10., position.Y() / 10., position.Z() / 10.);
                }
 
-               fHitClusterSet[i] = new TEveBoxSet(Form("HitCluster_%d", i));
+               std::vector<AtHitCluster> *hitClusters = track.GetHitClusterArray();
+               fHitClusterSet.push_back(std::make_unique<TEveBoxSet>(Form("HitCluster_%d", i)));
                fHitClusterSet[i]->Reset(TEveBoxSet::kBT_AABox, kFALSE, 64);
                // fHitClusterSet[i]->SetPalette(fRGBAPalette);
                // fHitClusterSet[i]->DigitValue(2000);
@@ -768,13 +745,14 @@ void AtEventDrawTask::DrawHitPoints()
             gEve->AddElement(fVertex);
       }
 
-      if (fPatternEventArray)
-         if (fLineNum > 0)
-            for (Int_t i = 0; i < fLineNum; i++) {
-               gEve->AddElement(fHitSetTFHC[i]);
-               gEve->AddElement(fHitClusterSet[i]);
-            }
-
+      if (fPatternEventArray) {
+         for (auto &elem : fHitSetTFHC)
+            gEve->AddElement(elem.get());
+         for (auto &elem : fHitClusterSet)
+            gEve->AddElement(elem.get());
+         for (auto &elem : fHitLine)
+            gEve->AddElement(elem.get());
+      }
       if (fTrackingEventAnaArray)
          if (fTrackNum > 0 && fTrackNum < 5)
             for (Int_t i = 0; i < fTrackNum; i++)
@@ -839,19 +817,9 @@ void AtEventDrawTask::Reset()
       }
 
       if (fPatternEventArray) {
-
-         if (fLineNum > 0) {
-            for (Int_t i = 0; i < fLineNum; i++) {
-               if (fHitSetTFHC[i]) {
-                  fHitSetTFHC[i]->Reset();
-                  gEve->RemoveElement(fHitSetTFHC[i], fEventManager);
-               }
-               if (fHitClusterSet[i]) {
-                  fHitClusterSet[i]->Reset();
-                  gEve->RemoveElement(fHitClusterSet[i], fEventManager);
-               }
-            }
-         }
+         fHitClusterSet.clear();
+         fHitSetTFHC.clear();
+         fHitLine.clear();
       }
 
       if (fTrackingEventAnaArray) {
@@ -865,30 +833,6 @@ void AtEventDrawTask::Reset()
       }
 
    } // Draw Minimization
-
-   /* TEveGeoShape* hitShape;
-    if(hitSphereArray.size()>0)
-    for(Int_t i=0;i<hitSphereArray.size();i++){
-    hitShape = hitSphereArray[i];
-    gEve->RemoveElement(hitShape,fEventManager);
-    }*/
-
-   // hitSphereArray.clear();
-
-   /*if(fHitClusterSet) {
-    fHitClusterSet->Reset();
-    gEve->RemoveElement(fHitClusterSet, fEventManager);
-    }*/
-
-   /* Int_t nRiemannTracks = fRiemannSetArray.size();
-    TEvePointSet* pointSet;
-    if(nRiemannTracks!=0) {
-    for(Int_t i=0; i<nRiemannTracks; i++){
-    pointSet = fRiemannSetArray[i];
-    gEve->RemoveElement(pointSet, fEventManager);
-    }
-    fRiemannSetArray.clear();
-    }*/
 
    if (fPadPlane != nullptr)
       fPadPlane->Reset(nullptr);
@@ -1078,8 +1022,6 @@ void AtEventDrawTask::DrawThetaxPhi()
    fThetaxPhi->Draw("");
    fThetaxPhi_Ini->Draw("SAMES");
    fThetaxPhi_Ini_RANSAC->Draw("SAMES");
-
-   fHoughLinearFit->Draw("SAMES");
 }
 
 void AtEventDrawTask::DrawMC()

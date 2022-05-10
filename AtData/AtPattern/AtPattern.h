@@ -6,14 +6,15 @@
 #include <Rtypes.h> // for Double_t, Int_t, THashConsistencyHolder, ClassDef
 #include <TObject.h>
 
-#include <math.h> // for NAN
-
 #include <algorithm> // for max
-#include <vector>    // for vector
+#include <cmath>     // for NAN
+#include <memory>
+#include <vector> // for vector
 
 class TBuffer;
 class TClass;
 class TMemberInspector;
+class TEveLine;
 
 /**
  * @defgroup AtPattern Track Patterns
@@ -40,6 +41,8 @@ protected:
    Int_t fNFree{0};                   //< Degrees of freedom in the fit to the pattern
    const Int_t fNumPoints;            //< Number of 3D points that define the pattern (i.e. size of fIndices)
 
+   using TEveLineVec = std::vector<std::unique_ptr<TEveLine>>;
+
 public:
    AtPattern(Int_t numPoints = 0);
    Double_t FitPattern(const std::vector<AtHit> &pointsToFit, Double_t qThreshold = -1);
@@ -60,21 +63,43 @@ public:
     *
     * @param[in] point Point to get the distance from.
     */
-   virtual Double_t DistanceToPattern(const XYZPoint &point) = 0;
+   virtual Double_t DistanceToPattern(const XYZPoint &point) const = 0;
    /**
     * @brief Closest point on pattern.
     *
     * @param[in] point Point to get the closest point on the pattern.
     * @return Closest point on pattern
     */
-   virtual XYZPoint ClosestPointOnPattern(const XYZPoint &point) = 0;
+   virtual XYZPoint ClosestPointOnPattern(const XYZPoint &point) const = 0;
    /**
     * @brief Point on pattern at t
     *
     * Get the point on the pattern at parameter t. What t physically represents is pattern dependent.
+    * @todo Generalize for multi-valued patterns
     */
-   virtual XYZPoint GetPointAt(double t) = 0;
+   virtual XYZPoint GetPointAt(double t) const = 0;
 
+   /**
+    * @brief Get visual representation of pattern
+    *
+    * Implemented for single-valued patterns (one point in space per value of parameter t)
+    * @todo Generalize for multi-valued patterns
+    *
+    * @param[in] tMin Parameter to start drawing line at
+    * @param[in] tMax Parameter to stop drawing line at
+    * @param[in] dt Step size between points on polyline
+    * @return Representation of line
+    */
+   std::unique_ptr<TEveLine> GetEveLine(double tMin, double tMax, int n) const;
+
+   /**
+    *  @brief Get visual representation of pattern
+    *
+    * Calls GetEveLine(double tMin, double tMax, int n) with reasonable defaults for the shape
+    */
+   virtual std::unique_ptr<TEveLine> GetEveLine() const = 0;
+
+   virtual std::unique_ptr<AtPattern> Clone() const = 0;
    /**
     * @brief Number of points to define the pattern.
     *
@@ -84,6 +109,7 @@ public:
    Double_t GetChi2() const { return fChi2; }
    Int_t GetNFree() const { return fNFree; }
    std::vector<double> GetPatternPar() const { return fPatternPar; }
+   void SetPatternPar(std::vector<double> par) { fPatternPar = std::move(par); }
    void SetChi2(double chi2) { fChi2 = chi2; }
 
 protected:

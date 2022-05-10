@@ -16,10 +16,7 @@
 #include <vector>         // for vector
 class AtEventManager;     // lines 17-17
 class AtHit;              // lines 18-18
-class AtLmedsMod;         // lines 19-19
 class AtMap;              // lines 24-24
-class AtMlesacMod;        // lines 20-20
-class AtRansacMod;        // lines 21-21
 class AtRawEvent;         // lines 22-22
 class AtTrackingEventAna; // lines 23-23
 class TBuffer;
@@ -140,9 +137,6 @@ private:
    TClonesArray *fPatternEventArray{};
 
    AtRANSACN::AtRansac *fRansac{};
-   AtRansacMod *fRansacMod{};
-   AtMlesacMod *fMlesacMod{};
-   AtLmedsMod *fLmedsMod{};
    AtTrackingEventAna *fTrackingEventAna{};
    AtPATTERN::AtTrackFinderHC *fTrackFinderHC{};
 
@@ -157,10 +151,6 @@ private:
    TEvePointSet *fHitSet;
    TEvePointSet *fCorrectedHitSet;
    TEvePointSet *fHitSetMin{};
-
-   TEvePointSet *fHitSetMC[5]{};     // For MC results
-   TEvePointSet *fHitSetTFHC[20]{};  // for TrackFinderHC
-   TEveBoxSet *fHitClusterSet[20]{}; // Track clusterization
 
    // TEveGeoShape* x;
    // std::vector<TEveGeoShape*> hitSphereArray;
@@ -225,8 +215,6 @@ private:
    TGraph *fMC_ZY_int{};
    TGraph *fMC_ZY_back{};
 
-   Int_t fNQuads{};
-
    Int_t fMinZ;
    Int_t fMaxZ;
    Int_t fMinX;
@@ -236,24 +224,27 @@ private:
    Int_t fMultiHit{10};
    Bool_t fSaveTextData;
    Float_t f3DThreshold;
+
    Bool_t fIsRawData;
    Bool_t fRansacUnified;
-   Int_t fDetNumPads;
-   TF1 *fHoughLinearFit;
-   TF1 *fRansacLinearFit;
    AtHit const *fIniHit;
    AtHit const *fIniHitRansac;
 
    // std::vector<TEveLine*> fLineArray;
+   std::vector<std::unique_ptr<TEveLine>> fPatternLines;
+
    TEveLine *fLineArray[5]{};
    TEvePointSet *fVertex = nullptr;
    Int_t fLineNum;
    Int_t fTrackNum;
-   // TEveLine* fLine;
+   TEvePointSet *fHitSetMC[5]{};     // For MC results
+   std::vector<std::unique_ptr<TEvePointSet>> fHitSetTFHC; // for TrackFinderHC
+   std::vector<std::unique_ptr<TEveBoxSet>> fHitClusterSet; // Track clusterization
+   std::vector<std::unique_ptr<TEveLine>> fHitLine;         // Track line
 
    TEveRGBAPalette *fRGBAPalette;
 
-   ClassDef(AtEventDrawTask, 1);
+   ClassDef(AtEventDrawTask, 2);
 };
 
 #endif

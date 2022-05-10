@@ -16,11 +16,11 @@
 // AtTPCROOT
 #include "AtHit.h"
 #include "AtHitCluster.h"
+#include "AtPattern.h"
 
 class TBuffer;
 class TClass;
 class TMemberInspector;
-
 using XYZPoint = ROOT::Math::XYZPoint;
 
 class AtTrack : public TObject {
@@ -29,6 +29,8 @@ protected:
    // Attributes shared by all track finding algorithms
    Int_t fTrackID{-1};
    std::vector<AtHit> fHitArray; // TrackHC, AtGenfit, all ransacs
+
+   std::unique_ptr<AtPatterns::AtPattern> fPattern{nullptr};
 
    // Used by all ransac classes
    XYZPoint fTrackVertex;         // Mean Vertex of the track
@@ -54,9 +56,14 @@ protected:
 
 public:
    AtTrack() = default;
-   AtTrack(const AtTrack &obj) = default;
+   AtTrack(const AtTrack &obj);
+   AtTrack &operator=(const AtTrack &obj) { return *this; };
+   AtTrack(AtTrack &&) = default;
+   AtTrack &operator=(AtTrack &&) = default;
    ~AtTrack() = default;
 
+   const AtPatterns::AtPattern *GetPattern() { return fPattern.get(); }
+   void SetPattern(std::unique_ptr<AtPatterns::AtPattern> pat) { fPattern = std::move(pat); }
    // Attributes shared by all track finding algorithms
    void SetTrackID(Int_t val) { fTrackID = val; }
 
@@ -99,6 +106,7 @@ public:
    Double_t GetAngleZDet();
    Double_t GetAngleYDet();
    Double_t GetMeanTime();
+
    Double_t GetLinearRange();
    Double_t GetLinearRange(XYZPoint vertex);
    Double_t GetLinearRange(const XYZPoint &vertex, const XYZPoint &maxPos);

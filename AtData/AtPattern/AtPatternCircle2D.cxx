@@ -6,6 +6,7 @@
 #include <Math/Vector2D.h>    // for DisplacementVector2D
 #include <Math/Vector3D.h>    // for DisplacementVector3D
 #include <Math/Vector3Dfwd.h> // for RhoZPhiVector
+#include <TEveLine.h>
 
 #include <algorithm> // for max
 #include <cmath>     // for fabs, isfinite, sqrt
@@ -15,6 +16,10 @@ using XYPoint = ROOT::Math::XYPoint;
 using namespace AtPatterns;
 
 AtPatternCircle2D::AtPatternCircle2D() : AtPattern(3) {}
+std::unique_ptr<TEveLine> AtPatternCircle2D::GetEveLine() const
+{
+   return AtPattern::GetEveLine(0, M_2_PI, 100);
+}
 
 void AtPatternCircle2D::DefinePattern(const std::vector<XYZPoint> &points)
 {
@@ -38,19 +43,19 @@ void AtPatternCircle2D::DefinePattern(const std::vector<XYZPoint> &points)
    fPatternPar.push_back((center - p1).R());
 }
 
-Double_t AtPatternCircle2D::DistanceToPattern(const XYZPoint &point)
+Double_t AtPatternCircle2D::DistanceToPattern(const XYZPoint &point) const
 {
    auto pointToCenter = point - GetCenter();
    return std::abs(pointToCenter.R() - GetRadius());
 }
 
-XYZPoint AtPatternCircle2D::ClosestPointOnPattern(const XYZPoint &point)
+XYZPoint AtPatternCircle2D::ClosestPointOnPattern(const XYZPoint &point) const
 {
    auto pointToCenter = point - GetCenter();
    return GetPointAt(pointToCenter.Phi());
 }
 
-XYZPoint AtPatternCircle2D::GetPointAt(double theta)
+XYZPoint AtPatternCircle2D::GetPointAt(double theta) const
 {
    return XYZPoint(GetCenter() + ROOT::Math::RhoZPhiVector(GetRadius(), 0, theta));
 }

@@ -1,5 +1,7 @@
 #include "AtTrack.h"
 
+#include "AtPattern.h"
+
 #include <Rtypes.h>
 #include <TMath.h>
 #include <TMathBase.h>
@@ -14,6 +16,25 @@ constexpr auto cNORMAL = "\033[0m";
 constexpr auto cGREEN = "\033[1;32m";
 
 ClassImp(AtTrack);
+
+AtTrack::AtTrack(const AtTrack &obj)
+{
+   fTrackID = obj.fTrackID;
+   fHitArray = obj.fHitArray;
+
+   fPattern = (obj.fPattern != nullptr) ? obj.fPattern->Clone() : nullptr;
+
+   fTrackVertex = obj.fTrackVertex;
+   fNFree = obj.fNFree;
+   fFitPar = obj.fFitPar;
+
+   fGeoThetaAngle = obj.fGeoThetaAngle;
+   fGeoPhiAngle = obj.fGeoPhiAngle;
+   fGeoRadius = obj.fGeoRadius;
+   fGeoCenter = obj.fGeoCenter;
+   fHitClusterArray = obj.fHitClusterArray;
+   kIsNoise = obj.kIsNoise;
+}
 
 void AtTrack::SetNFree(Int_t ndf)
 {

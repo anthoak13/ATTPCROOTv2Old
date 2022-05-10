@@ -23,7 +23,6 @@ public:
    virtual Double_t DistanceToPattern(const XYZPoint &point) override;
    virtual XYZPoint ClosestPointOnPattern(const XYZPoint &point) override;
    virtual XYZPoint GetPointAt(double theta) override;
-   virtual std::unique_ptr<AtPattern> Clone() override;
 
 protected:
    virtual void FitPattern(const std::vector<XYZPoint> &points, const std::vector<double> &charge) override;

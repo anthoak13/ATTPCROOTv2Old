@@ -8,6 +8,7 @@
 #define ATSAMPLECONSENSUS_H
 
 #include "AtPattern.h"
+#include "AtPatternTypes.h"
 #include "AtSample.h"
 #include "AtSampleEstimator.h"
 #include "AtTrack.h" // for AtTrack
@@ -21,16 +22,33 @@
 class AtEvent;
 class AtPatternEvent;
 
+/**
+ * @defgroup SampleConsensus Sample Consensus
+ *
+ * @brief Group of classes and functions for sample consensus estimators.
+
+ * AtSampleConsensus will perform a sample consensus calculation using an estimator (implemented estimaros are listed in
+ *  Estimators) and an AtPattern.
+ *
+ */
+namespace SampleConsensus {
+
+/**
+ * @brief Perform a sample consensus on a cloud of AtHits
+ * @ingroup SampleConsensus
+ *
+ * Construct a sample consensus using an estimator, pattern type, and method for randomly sampling AtHit cloud.
+ */
 class AtSampleConsensus final {
 private:
-   using Estimators = AtSampleEstimator::Estimators;
+   using Estimators = SampleConsensus::Estimators;
    using PatternType = AtPatterns::PatternType;
-   using SampleMethod = AtTools::AtSample::SampleMethod;
+   using SampleMethod = RandomSample::SampleMethod;
    using AtPattern = AtPatterns::AtPattern;
    using PatternPtr = std::unique_ptr<AtPattern>;
-   using AtSamplePtr = std::unique_ptr<AtTools::AtSample>;
+   using AtSamplePtr = std::unique_ptr<RandomSample::AtSample>;
 
-   PatternPtr fPatternProto; //< Prototype of pattern to find
+   PatternType fPatternType; //< Type of pattern to find
    Estimators fEstimator;    //< Estimator to evaluate pattern
    AtSamplePtr fRandSampler; //< Sampling Method (defaults to uniform)
 
@@ -54,7 +72,7 @@ public:
    AtPatternEvent Solve(const std::vector<AtHit> &hitArray);
 
    void SetRandomSample(AtSamplePtr mode) { fRandSampler = std::move(mode); };
-   void SetPatternType(PatternPtr type) { fPatternProto = std::move(type); }
+   void SetPatternType(PatternType type) { fPatternType = type; }
    void SetEstimator(Estimators estimator) { fEstimator = estimator; }
 
    void SetNumIterations(Int_t niterations) { fIterations = niterations; };
@@ -65,8 +83,8 @@ public:
 private:
    PatternPtr GeneratePatternFromHits(const std::vector<AtHit> &hitArray);
    std::vector<AtHit> movePointsInPattern(AtPattern *pattern, std::vector<AtHit> &indexes);
-   void SaveTrack(AtPattern *pattern, std::vector<AtHit> &indexes, AtPatternEvent *event);
+   // void SaveTrack(AtPattern *pattern, std::vector<AtHit> &indexes, AtPatternEvent *event);
    AtTrack CreateTrack(AtPattern *pattern, std::vector<AtHit> &indexes);
 };
-
+} // namespace SampleConsensus
 #endif

@@ -3,9 +3,12 @@
 
 #include "AtHit.h"
 #include "AtSample.h"
-namespace AtTools {
+
+namespace RandomSample {
 
 /**
+ * @brief Sample when PDF depends on reference
+ *
  * Interface for sampling a collection of AtHits where the PDF depends on
  * a reference hit.
  *
@@ -18,11 +21,11 @@ protected:
 public:
    virtual std::vector<AtHit> SampleHits(int N) override;
    virtual void SetHitsToSample(const std::vector<AtHit> *hits) override;
-   void SetReferenceHit(AtHit hit) { fReferenceHit = std::move(hit); }
+   void SetReferenceHit(AtHit hit);
    const AtHit &GetReferenceHit() const { return fReferenceHit; }
 
 protected:
    virtual void SampleReferenceHit();
 };
-} // namespace AtTools
+} // namespace RandomSample
 #endif //#ifndef ATSAMPLEFROMREFERENCE_H

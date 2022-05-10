@@ -1,5 +1,5 @@
 #include "AtUniform.h"
-using namespace AtTools;
+using namespace RandomSample;
 
 std::vector<double> AtUniform::PDF(const AtHit &hit)
 {

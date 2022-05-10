@@ -151,14 +151,14 @@ void AtRansacTask::Exec(Option_t *opt)
    } else {
       LOG(debug) << "Running Unified RANSAC";
 
-      auto sampleMethod = static_cast<AtTools::AtSample::SampleMethod>(fRandSamplMode);
+      auto sampleMethod = static_cast<RandomSample::SampleMethod>(fRandSamplMode);
       auto patternType = AtPatterns::PatternType::kLine;
-      auto estimator = AtSampleEstimator::Estimators::kRANSAC;
+      auto estimator = SampleConsensus::Estimators::kRANSAC;
       if (fRANSACAlg == 2)
-         estimator = AtSampleEstimator::Estimators::kMLESAC;
+         estimator = SampleConsensus::Estimators::kMLESAC;
       if (fRANSACAlg == 3)
-         estimator = AtSampleEstimator::Estimators::kLMedS;
-      AtSampleConsensus ransac(estimator, patternType, sampleMethod);
+         estimator = SampleConsensus::Estimators::kLMedS;
+      SampleConsensus::AtSampleConsensus ransac(estimator, patternType, sampleMethod);
 
       ransac.SetDistanceThreshold(fRANSACThreshold);
       ransac.SetMinHitsPattern(fMinHitsLine);

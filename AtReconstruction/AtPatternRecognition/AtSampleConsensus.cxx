@@ -17,6 +17,7 @@
 #include <fstream>  // for std
 #include <iterator> // for insert_iterator, inserter
 #include <memory>   // for allocator_traits<>::value_type
+using namespace SampleConsensus;
 
 AtSampleConsensus::AtSampleConsensus()
    : AtSampleConsensus(Estimators::kRANSAC, PatternType::kLine, SampleMethod::kUniform)
@@ -24,8 +25,7 @@ AtSampleConsensus::AtSampleConsensus()
 }
 
 AtSampleConsensus::AtSampleConsensus(Estimators estimator, PatternType patternType, SampleMethod sampleMethod)
-   : fEstimator(estimator), fPatternProto(AtPatterns::AtPattern::CreatePattern(patternType)),
-     fRandSampler(AtTools::AtSample::CreateSampler(sampleMethod))
+   : fPatternType(patternType), fEstimator(estimator), fRandSampler(RandomSample::CreateSampler(sampleMethod))
 
 {
 }
@@ -37,14 +37,14 @@ std::unique_ptr<AtPatterns::AtPattern> AtSampleConsensus::GeneratePatternFromHit
       return nullptr;
    }
 
-   auto pattern = fPatternProto->Clone();
+   auto pattern = AtPatterns::CreatePattern(fPatternType);
 
    auto points = fRandSampler->SamplePoints(pattern->GetNumPoints());
 
    pattern->DefinePattern(points);
 
    LOG(debug) << "Testing pattern" << std::endl;
-   auto nInliers = AtSampleEstimator::EvaluateModel(pattern.get(), hitArray, fDistanceThreshold, fEstimator);
+   auto nInliers = SampleConsensus::AtEstimator::EvaluateModel(pattern.get(), hitArray, fDistanceThreshold, fEstimator);
    LOG(debug) << "Found " << nInliers << " inliers";
 
    // If the pattern is consistent with enough points, save it

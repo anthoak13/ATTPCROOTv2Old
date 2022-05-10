@@ -3,10 +3,10 @@
 
 #include "AtIndependentSample.h"
 
-namespace AtTools {
+namespace RandomSample {
 
 /**
- * Class for uniformly sampling a collection of AtHits
+ * @brief Uniformly sample a collection of AtHits
  *
  * @ingroup AtHitSampling
  */
@@ -15,5 +15,5 @@ class AtUniform : public AtIndependentSample {
 protected:
    virtual std::vector<double> PDF(const AtHit &hit) override;
 };
-} // namespace AtTools
+} // namespace RandomSample
 #endif //#ifndef ATSAMPLEUNIFORM_H

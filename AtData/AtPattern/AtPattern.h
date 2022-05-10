@@ -6,18 +6,18 @@
 #include <TObject.h>
 
 /**
- * Collection of classes for describing and drawing track patterns (essentially the shape of a track).
- * These objects are stored as the fit for tracks, and are used to run sample consensus models.
- *
  * @defgroup AtPattern Track Patterns
+ * @brief Track shapes in 3D space.
+ *
+ * Collection of classes for describing and drawing track patterns (essentially the shape of a track).
+ * These objects are stored as the fit for AtTrack and are used to run sample consensus models (\ref SampleConsensus).
  *
  */
 namespace AtPatterns {
 
-// Namespace forward declerations
-enum class PatternType;
-
 /**
+ * @brief Describes a shape in 3D space.
+ *
  * A base class that describes the pattern of a track. For example a 2D circle or a line
  * These patterns are parameterized by some number (t)
  *
@@ -64,12 +64,6 @@ public:
     * Get the point on the pattern at parameter t. What t physically represents is pattern dependent.
     */
    virtual XYZPoint GetPointAt(double t) = 0;
-   /**
-    * @brief Clone the pattern
-    *
-    * Should be reimplemented for each AtPattern to return a pointer to the type implementing the function.
-    */
-   virtual std::unique_ptr<AtPattern> Clone() = 0;
 
    /**
     * @brief Number of points to define the pattern.
@@ -81,8 +75,6 @@ public:
    Int_t GetNFree() const { return fNFree; }
    std::vector<double> GetPatternPar() const { return fPatternPar; }
    void SetChi2(double chi2) { fChi2 = chi2; }
-
-   static std::unique_ptr<AtPattern> CreatePattern(PatternType type);
 
 protected:
    /**

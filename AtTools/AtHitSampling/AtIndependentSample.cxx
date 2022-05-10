@@ -3,7 +3,7 @@
 #include "AtHit.h"
 
 #include <TRandom3.h>
-using namespace AtTools;
+using namespace RandomSample;
 
 void AtIndependentSample::SetHitsToSample(const std::vector<AtHit> *hits)
 {

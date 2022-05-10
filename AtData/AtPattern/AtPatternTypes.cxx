@@ -6,10 +6,7 @@
 
 using namespace AtPatterns;
 
-/**
- * Implementation of static factory for creating AtPatterns
- */
-std::unique_ptr<AtPattern> AtPattern::CreatePattern(PatternType type)
+std::unique_ptr<AtPattern> CreatePattern(PatternType type)
 {
    switch (type) {
    case (PatternType::kLine): return std::make_unique<AtPatternLine>();

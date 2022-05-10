@@ -4,6 +4,7 @@
 #include "AtHit.h"
 #include "AtSample.h"
 
+#include <vector>
 namespace RandomSample {
 
 /**
@@ -19,6 +20,7 @@ protected:
    AtHit fReferenceHit; //< Hit to use to construct the CDF/PDF
 
 public:
+   virtual ~AtSampleFromReference() = default;
    virtual std::vector<AtHit> SampleHits(int N) override;
    virtual void SetHitsToSample(const std::vector<AtHit> *hits) override;
    void SetReferenceHit(AtHit hit);

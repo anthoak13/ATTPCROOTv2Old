@@ -26,7 +26,9 @@
 #pragma link C++ class AtPATTERN::AtTrackFinderHC + ;
 #pragma link C++ class AtPATTERN::AtPRA + ;
 #pragma link C++ namespace AtPATTERN;
-#pragma link C++ class AtSampleConsensus - !;
+
+#pragma link C++ namespace SampleConsensus;
+#pragma link C++ class SampleConsensus::AtSampleConsensus - !;
 
 /* Classes that depend on Genfit2 */
 #pragma link C++ class genfit::AtSpacepointMeasurement + ;

@@ -2,7 +2,11 @@
 
 #include "AtHit.h"
 
+#include <TRandom.h> // for TRandom
 #include <TRandom3.h>
+
+#include <utility> // for move
+
 using namespace RandomSample;
 std::vector<AtHit> AtSampleFromReference::SampleHits(int N)
 {

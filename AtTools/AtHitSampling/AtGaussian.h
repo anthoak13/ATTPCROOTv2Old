@@ -1,6 +1,10 @@
 #ifndef ATGAUSSIAN_H
 #define ATGAUSSIAN_H
+#include "AtHit.h" // for AtHit
 #include "AtSampleFromReference.h"
+
+#include <vector> // for vector
+
 namespace RandomSample {
 
 /**
@@ -16,7 +20,7 @@ protected:
    double fSigma; //< Sigma of gaussian around fReferencehit to sample [mm]
 
 public:
-   AtGaussian(double sigma) : fSigma(sigma) {}
+   AtGaussian(double sigma = 30) : fSigma(sigma) {}
 
 protected:
    virtual std::vector<double> PDF(const AtHit &hit) override;

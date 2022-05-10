@@ -1,6 +1,10 @@
 #ifndef ATINDEPENDENTSAMPLE_H
 #define ATINDEPENDENTSAMPLE_H
+
+#include "AtHit.h"
 #include "AtSample.h"
+
+#include <vector>
 namespace RandomSample {
 
 /**
@@ -12,6 +16,7 @@ namespace RandomSample {
 
 class AtIndependentSample : public AtSample {
 public:
+   virtual ~AtIndependentSample() = default;
    virtual void SetHitsToSample(const std::vector<AtHit> *hits) override;
 
 protected:

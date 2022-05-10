@@ -10,7 +10,6 @@
 class AtEvent;
 class TBuffer;
 class TClass;
-class TClonesArray;
 class TMemberInspector;
 enum class SampleMethod;
 

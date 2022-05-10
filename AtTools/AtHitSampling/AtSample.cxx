@@ -2,9 +2,13 @@
 
 #include "AtHit.h"
 
+#include <Math/Point3D.h> // for PositionVector3D
+#include <TRandom.h>      // for TRandom
 #include <TRandom3.h>
 
+#include <functional> // for multiplies
 #include <numeric>
+
 using namespace RandomSample;
 
 /**
@@ -84,7 +88,6 @@ std::vector<int> AtSample::sampleIndicesFromCDF(int N, std::vector<int> vetoed)
             rmProb += (fCDF[hitInd] - fCDF[hitInd - 1]);
          vetoed.push_back(hitInd);
       }
-      auto canSample = fWithReplacement || !isInVector(hitInd, sampledInd);
 
       // Save the index if it has not already been sampled
       if (fWithReplacement || !isInVector(hitInd, sampledInd)) {

@@ -1,9 +1,15 @@
 #include "AtEstimatorMethods.h"
 
+#include "AtContainerManip.h"
+#include "AtHit.h" // for AtHit
 #include "AtPattern.h"
+
+#include <algorithm> // for max_element, nth_element, max
+#include <cmath>     // for exp, sqrt, isinf, log, M_PI
 using namespace SampleConsensus;
 
-int EvaluateRansac(AtPatterns::AtPattern *model, const std::vector<AtHit> &hitArray, double distanceThreshold)
+int SampleConsensus::EvaluateRansac(AtPatterns::AtPattern *model, const std::vector<AtHit> &hitArray,
+                                    double distanceThreshold)
 {
    int nbInliers = 0;
    double weight = 0;
@@ -21,7 +27,8 @@ int EvaluateRansac(AtPatterns::AtPattern *model, const std::vector<AtHit> &hitAr
    return nbInliers;
 }
 
-int EvaluateMlesac(AtPatterns::AtPattern *model, const std::vector<AtHit> &hitArray, double distanceThreshold)
+int SampleConsensus::EvaluateMlesac(AtPatterns::AtPattern *model, const std::vector<AtHit> &hitArray,
+                                    double distanceThreshold)
 {
    double sigma = distanceThreshold / 1.96;
    double dataSigma2 = sigma * sigma;
@@ -78,22 +85,8 @@ int EvaluateMlesac(AtPatterns::AtPattern *model, const std::vector<AtHit> &hitAr
    return nbInliers;
 }
 
-double GetMedian(std::vector<double> &vec)
-{
-   if (vec.empty())
-      return 0;
-
-   auto n = vec.size() / 2;
-
-   std::nth_element(vec.begin(), vec.begin() + n, vec.end());
-   auto med = vec[n];
-   if (vec.size() % 2 == 0) { // if even, get average of middle two entries
-      med = (*std::max_element(vec.begin(), vec.begin() + n) + med) / 2.0;
-   }
-   return med;
-}
-
-int EvaluateLmeds(AtPatterns::AtPattern *model, const std::vector<AtHit> &hitArray, double distanceThreshold)
+int SampleConsensus::EvaluateLmeds(AtPatterns::AtPattern *model, const std::vector<AtHit> &hitArray,
+                                   double distanceThreshold)
 {
    std::vector<double> errorsVec;
    // Loop through point and if it is an inlier, then add the error**2 to weight
@@ -104,6 +97,6 @@ int EvaluateLmeds(AtPatterns::AtPattern *model, const std::vector<AtHit> &hitArr
       if (error < (distanceThreshold * distanceThreshold))
          errorsVec.push_back(error);
    }
-   model->SetChi2(GetMedian(errorsVec) / errorsVec.size());
+   model->SetChi2(AtTools::GetMedian(errorsVec) / errorsVec.size());
    return errorsVec.size();
 }

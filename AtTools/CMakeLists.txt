@@ -14,6 +14,7 @@ set(SRCS
 
   AtFormat.cxx
   AtRandomSample.cxx
+  AtContainerManip.cxx
   AtHitSampling/AtSample.cxx
   AtHitSampling/AtSampleMethods.cxx
   AtHitSampling/AtIndependentSample.cxx

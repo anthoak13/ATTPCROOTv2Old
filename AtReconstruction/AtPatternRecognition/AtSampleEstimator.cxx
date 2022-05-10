@@ -1,9 +1,6 @@
 #include "AtSampleEstimator.h"
 
 #include "AtEstimatorMethods.h"
-#include "AtPattern.h"
-
-#include <cmath>
 
 using namespace SampleConsensus;
 /**

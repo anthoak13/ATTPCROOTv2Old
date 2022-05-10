@@ -12,6 +12,7 @@
 #include <Rtypes.h>  // for Int_t, Bool_t, THashConsistencyHolder, Color_t
 #include <TString.h> // for TString
 
+#include <memory>
 #include <vector>         // for vector
 class AtEventManager;     // lines 17-17
 class AtHit;              // lines 18-18

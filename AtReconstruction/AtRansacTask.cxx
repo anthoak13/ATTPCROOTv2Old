@@ -5,8 +5,8 @@
 #include "AtPatternEvent.h"
 #include "AtPatternTypes.h"
 #include "AtRansac.h" // for AtRansac
-#include "AtSample.h"
 #include "AtSampleConsensus.h"
+#include "AtSampleMethods.h"
 
 #include <FairLogger.h>      // for LOG, Logger
 #include <FairRootManager.h> // for FairRootManager

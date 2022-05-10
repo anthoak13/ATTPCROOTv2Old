@@ -3,7 +3,17 @@
 
 #include "AtHit.h"
 
+#include <Rtypes.h> // for Double_t, Int_t, THashConsistencyHolder, ClassDef
 #include <TObject.h>
+
+#include <math.h> // for NAN
+
+#include <algorithm> // for max
+#include <vector>    // for vector
+
+class TBuffer;
+class TClass;
+class TMemberInspector;
 
 /**
  * @defgroup AtPattern Track Patterns

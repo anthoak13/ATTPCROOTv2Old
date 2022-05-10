@@ -2,7 +2,10 @@
 #define ATWEIGHTEDGAUSSIAN_H
 
 #include "AtChargeWeighted.h"
+#include "AtHit.h" // for AtHit
 #include "AtSampleFromReference.h"
+
+#include <vector> // for vector
 
 namespace RandomSample {
 
@@ -20,7 +23,7 @@ protected:
    AtChargeWeighted fChargeSample;
 
 public:
-   AtWeightedGaussian(double sigma) : fSigma(sigma) {}
+   AtWeightedGaussian(double sigma = 30) : fSigma(sigma) {}
    virtual void SetHitsToSample(const std::vector<AtHit> *hits) override;
 
 protected:

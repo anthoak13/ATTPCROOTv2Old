@@ -4,6 +4,14 @@
 #include "AtPattern.h"
 
 #include <Math/Point3D.h>
+#include <Math/Point3Dfwd.h> // for XYZPoint
+#include <Rtypes.h>          // for THashConsistencyHolder, ClassDefOverride
+
+#include <vector> // for vector
+class TBuffer;
+class TClass;
+class TMemberInspector;
+
 using XYZPoint = ROOT::Math::XYZPoint;
 
 namespace AtPatterns {

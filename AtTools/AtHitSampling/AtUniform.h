@@ -3,6 +3,9 @@
 
 #include "AtIndependentSample.h"
 
+#include <vector> // for vector
+class AtHit;
+
 namespace RandomSample {
 
 /**

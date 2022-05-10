@@ -19,8 +19,8 @@
 //
 // Adam Anthony 5/24/21
 
+#include <cstddef>
 #include <iostream>
-#include <iterator>
 #include <sstream>
 #include <string>
 #include <vector>

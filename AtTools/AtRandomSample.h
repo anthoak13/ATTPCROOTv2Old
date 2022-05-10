@@ -1,8 +1,9 @@
 #ifndef ATRANDOMSAMPLE_H
 #define ATRANDOMSAMPLE_H
-
 #include <Math/Point3D.h>
+#include <Math/Point3Dfwd.h> // for XYZPoint
 
+#include <iosfwd> // for ostream
 #include <vector>
 class AtHit;
 

@@ -1,14 +1,5 @@
 #include "AtPattern.h"
 
-#include "AtPatternCircle2D.h"
-#include "AtPatternLine.h"
-#include "AtPatternTypes.h"
-
-#include <FairLogger.h>
-
-#include <TMath.h>
-#include <TRandom3.h>
-
 using namespace AtPatterns;
 
 ClassImp(AtPattern);
@@ -43,7 +34,6 @@ Double_t AtPattern::FitPattern(const std::vector<AtHit> &pointsToFit, Double_t q
 
    return fChi2;
 }
-
 /**
  * @brief Fit the pattern shape.
  *

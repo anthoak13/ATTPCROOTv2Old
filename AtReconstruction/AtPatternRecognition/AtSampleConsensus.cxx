@@ -1,22 +1,22 @@
 #include "AtSampleConsensus.h"
 
-#include "AtEstimatorMethods.h"
 #include "AtEvent.h" // for AtEvent
 #include "AtHit.h"   // for AtHit
 #include "AtPattern.h"
 #include "AtPatternEvent.h"
 #include "AtPatternTypes.h"
+#include "AtSample.h" // for AtSample
 #include "AtSampleEstimator.h"
 #include "AtSampleMethods.h"
 
-#include <Math/Point3D.h> // for PositionVector3D
-#include <TMath.h>        // for Pi
-#include <TRandom.h>      // for TRandom, gRandom
+#include <FairLogger.h> // for Logger, LOG
 
-#include <cmath>    // for cos, sin, pow, sqrt, fabs, exp, acos, atan
-#include <fstream>  // for std
-#include <iterator> // for insert_iterator, inserter
-#include <memory>   // for allocator_traits<>::value_type
+#include <algorithm> // for max
+#include <fstream>   // for std
+#include <iterator>  // for insert_iterator, inserter
+#include <memory>    // for allocator_traits<>::value_type
+#include <set>       // for set, operator!=, _Rb_tree_const_iterator
+
 using namespace SampleConsensus;
 
 AtSampleConsensus::AtSampleConsensus()
@@ -60,7 +60,7 @@ AtPatternEvent AtSampleConsensus::Solve(AtEvent *event)
 {
    if (event->IsGood())
       return Solve(event->GetHitArray());
-   return AtPatternEvent();
+   return {};
 }
 
 AtPatternEvent AtSampleConsensus::Solve(const std::vector<AtHit> &hitArray)

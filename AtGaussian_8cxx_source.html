@@ -78,24 +78,21 @@ $(function() {
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;Math/PdfFuncMathCore.h&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;TRandom3.h&gt;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespaceAtTools.html">AtTools</a>;</div>
-<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="classAtTools_1_1AtGaussian.html#a3f6b31df09d195706f1e0857b84ef6e2">    8</a></span>&#160;std::vector&lt;double&gt; <a class="code" href="classAtTools_1_1AtGaussian.html#a3f6b31df09d195706f1e0857b84ef6e2">AtGaussian::PDF</a>(<span class="keyword">const</span> <a class="code" href="classAtHit.html">AtHit</a> &amp;hit)</div>
+<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="classRandomSample_1_1AtGaussian.html#a3f6b31df09d195706f1e0857b84ef6e2">    8</a></span>&#160;std::vector&lt;double&gt; AtGaussian::PDF(<span class="keyword">const</span> <a class="code" href="classAtHit.html">AtHit</a> &amp;hit)</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;   <span class="keyword">auto</span> dist = (<a class="code" href="classAtTools_1_1AtSampleFromReference.html#a3184527265d6e9e344c60a5d89260d5b">fReferenceHit</a>.<a class="code" href="classAtHit.html#adf5331eb3155ec1fcbc209bd43cb5b68">GetPosition</a>() - hit.<a class="code" href="classAtHit.html#adf5331eb3155ec1fcbc209bd43cb5b68">GetPosition</a>()).Mag2();</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;   <span class="keyword">auto</span> dist = (fReferenceHit.GetPosition() - hit.<a class="code" href="classAtHit.html#adf5331eb3155ec1fcbc209bd43cb5b68">GetPosition</a>()).Mag2();</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;   dist = std::sqrt(dist);</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;   <span class="keywordflow">return</span> {ROOT::Math::gaussian_pdf(dist, <a class="code" href="classAtTools_1_1AtGaussian.html#a6b0224061daaa2a605a28162d3bd4a87">fSigma</a>)};</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;   <span class="keywordflow">return</span> {ROOT::Math::gaussian_pdf(dist, fSigma)};</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclassAtTools_1_1AtSampleFromReference_html_a3184527265d6e9e344c60a5d89260d5b"><div class="ttname"><a href="classAtTools_1_1AtSampleFromReference.html#a3184527265d6e9e344c60a5d89260d5b">AtTools::AtSampleFromReference::fReferenceHit</a></div><div class="ttdeci">AtHit fReferenceHit</div><div class="ttdef"><b>Definition:</b> <a href="AtSampleFromReference_8h_source.html#l00016">AtSampleFromReference.h:16</a></div></div>
-<div class="ttc" id="aclassAtTools_1_1AtGaussian_html_a6b0224061daaa2a605a28162d3bd4a87"><div class="ttname"><a href="classAtTools_1_1AtGaussian.html#a6b0224061daaa2a605a28162d3bd4a87">AtTools::AtGaussian::fSigma</a></div><div class="ttdeci">double fSigma</div><div class="ttdef"><b>Definition:</b> <a href="AtGaussian_8h_source.html#l00014">AtGaussian.h:14</a></div></div>
 <div class="ttc" id="aclassAtHit_html_adf5331eb3155ec1fcbc209bd43cb5b68"><div class="ttname"><a href="classAtHit.html#adf5331eb3155ec1fcbc209bd43cb5b68">AtHit::GetPosition</a></div><div class="ttdeci">const XYZPoint &amp; GetPosition() const</div><div class="ttdef"><b>Definition:</b> <a href="AtHit_8h_source.html#l00090">AtHit.h:90</a></div></div>
 <div class="ttc" id="aAtHit_8h_html"><div class="ttname"><a href="AtHit_8h.html">AtHit.h</a></div></div>
 <div class="ttc" id="anamespaceAtTools_html"><div class="ttname"><a href="namespaceAtTools.html">AtTools</a></div><div class="ttdef"><b>Definition:</b> <a href="AtELossManager_8h_source.html#l00022">AtELossManager.h:22</a></div></div>
-<div class="ttc" id="aclassAtTools_1_1AtGaussian_html_a3f6b31df09d195706f1e0857b84ef6e2"><div class="ttname"><a href="classAtTools_1_1AtGaussian.html#a3f6b31df09d195706f1e0857b84ef6e2">AtTools::AtGaussian::PDF</a></div><div class="ttdeci">virtual std::vector&lt; double &gt; PDF(const AtHit &amp;hit) override</div><div class="ttdef"><b>Definition:</b> <a href="AtGaussian_8cxx_source.html#l00008">AtGaussian.cxx:8</a></div></div>
 <div class="ttc" id="aAtGaussian_8h_html"><div class="ttname"><a href="AtGaussian_8h.html">AtGaussian.h</a></div></div>
 <div class="ttc" id="aclassAtHit_html"><div class="ttname"><a href="classAtHit.html">AtHit</a></div><div class="ttdef"><b>Definition:</b> <a href="AtHit_8h_source.html#l00021">AtHit.h:21</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue May 10 2022 05:06:33 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue May 10 2022 05:25:53 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

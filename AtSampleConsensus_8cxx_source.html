@@ -98,7 +98,7 @@ $(function() {
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;}</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
 <div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classSampleConsensus_1_1AtSampleConsensus.html#a4d3d8370dda8fa316aa533b8f6ed3e60">   27</a></span>&#160;<a class="code" href="classSampleConsensus_1_1AtSampleConsensus.html#a2ff1654d2dfd021b7b15e11b4d911e4b">AtSampleConsensus::AtSampleConsensus</a>(<a class="code" href="group__SampleConsensus.html#ga3f41f25b8c1dd17e4e1785fba2380d5d">Estimators</a> estimator, <a class="code" href="group__AtPattern.html#ga83dfd22f92852e92938315c154952e5c">PatternType</a> patternType, <a class="code" href="group__AtHitSampling.html#ga2483e8129e93c221dd4d4961cef2411a">SampleMethod</a> sampleMethod)</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;   : fPatternType(patternType), fEstimator(estimator), fRandSampler(<a class="code" href="namespaceRandomSample.html">RandomSample</a>::<a class="code" href="namespaceRandomSample.html#a0599d690c6a30d8b11300adbd18d878e">CreateSampler</a>(sampleMethod))</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;   : fPatternType(patternType), fEstimator(estimator), fRandSampler(<a class="code" href="namespaceRandomSample.html">RandomSample</a>::<a class="code" href="group__AtHitSampling.html#ga0599d690c6a30d8b11300adbd18d878e">CreateSampler</a>(sampleMethod))</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;{</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;}</div>
@@ -237,10 +237,10 @@ $(function() {
 <div class="ttc" id="agroup__SampleConsensus_html_ga3f41f25b8c1dd17e4e1785fba2380d5d"><div class="ttname"><a href="group__SampleConsensus.html#ga3f41f25b8c1dd17e4e1785fba2380d5d">SampleConsensus::Estimators</a></div><div class="ttdeci">Estimators</div><div class="ttdoc">Estimators for AtSampleConsensus.</div><div class="ttdef"><b>Definition:</b> <a href="AtEstimatorMethods_8h_source.html#l00017">AtEstimatorMethods.h:17</a></div></div>
 <div class="ttc" id="aclassAtPatternEvent_html_a2d9c4fe1d08bcda46ab002a5d61d2052"><div class="ttname"><a href="classAtPatternEvent.html#a2d9c4fe1d08bcda46ab002a5d61d2052">AtPatternEvent::AddTrack</a></div><div class="ttdeci">void AddTrack(const AtTrack &amp;track)</div><div class="ttdef"><b>Definition:</b> <a href="AtPatternEvent_8h_source.html#l00025">AtPatternEvent.h:25</a></div></div>
 <div class="ttc" id="anamespaceRandomSample_html"><div class="ttname"><a href="namespaceRandomSample.html">RandomSample</a></div><div class="ttdef"><b>Definition:</b> <a href="AtSampleConsensus_8h_source.html#l00025">AtSampleConsensus.h:25</a></div></div>
+<div class="ttc" id="agroup__AtHitSampling_html_ga0599d690c6a30d8b11300adbd18d878e"><div class="ttname"><a href="group__AtHitSampling.html#ga0599d690c6a30d8b11300adbd18d878e">RandomSample::CreateSampler</a></div><div class="ttdeci">std::unique_ptr&lt; AtSample &gt; CreateSampler(SampleMethod method, Ts &amp;&amp;...params)</div><div class="ttdoc">. Create a hit sampler</div><div class="ttdef"><b>Definition:</b> <a href="AtSampleMethods_8h_source.html#l00030">AtSampleMethods.h:30</a></div></div>
 <div class="ttc" id="aAtPattern_8h_html"><div class="ttname"><a href="AtPattern_8h.html">AtPattern.h</a></div></div>
 <div class="ttc" id="agroup__AtPattern_html_gaa6d8e49bb5966811e1c6947de4c025ef"><div class="ttname"><a href="group__AtPattern.html#gaa6d8e49bb5966811e1c6947de4c025ef">AtPatterns::CreatePattern</a></div><div class="ttdeci">std::unique_ptr&lt; AtPattern &gt; CreatePattern(PatternType type)</div><div class="ttdoc">Factory for AtPattern.</div><div class="ttdef"><b>Definition:</b> <a href="AtPatternTypes_8cxx_source.html#l00008">AtPatternTypes.cxx:8</a></div></div>
 <div class="ttc" id="aclassAtEvent_html"><div class="ttname"><a href="classAtEvent.html">AtEvent</a></div><div class="ttdef"><b>Definition:</b> <a href="AtEvent_8h_source.html#l00030">AtEvent.h:30</a></div></div>
-<div class="ttc" id="anamespaceRandomSample_html_a0599d690c6a30d8b11300adbd18d878e"><div class="ttname"><a href="namespaceRandomSample.html#a0599d690c6a30d8b11300adbd18d878e">RandomSample::CreateSampler</a></div><div class="ttdeci">std::unique_ptr&lt; AtSample &gt; CreateSampler(SampleMethod method, Ts &amp;&amp;...params)</div><div class="ttdef"><b>Definition:</b> <a href="AtSampleMethods_8h_source.html#l00022">AtSampleMethods.h:22</a></div></div>
 <div class="ttc" id="aAtHit_8h_html"><div class="ttname"><a href="AtHit_8h.html">AtHit.h</a></div></div>
 <div class="ttc" id="aAtSampleConsensus_8h_html"><div class="ttname"><a href="AtSampleConsensus_8h.html">AtSampleConsensus.h</a></div></div>
 <div class="ttc" id="aclassAtTrack_html"><div class="ttname"><a href="classAtTrack.html">AtTrack</a></div><div class="ttdef"><b>Definition:</b> <a href="AtTrack_8h_source.html#l00026">AtTrack.h:26</a></div></div>
@@ -259,7 +259,7 @@ $(function() {
 <div class="ttc" id="aclassAtTrack_html_a1002a94d3f90dbfec4b0cd2bf5d0a0f8"><div class="ttname"><a href="classAtTrack.html#a1002a94d3f90dbfec4b0cd2bf5d0a0f8">AtTrack::AddHit</a></div><div class="ttdeci">void AddHit(const AtHit &amp;hit)</div><div class="ttdef"><b>Definition:</b> <a href="AtTrack_8h_source.html#l00063">AtTrack.h:63</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 11 2022 17:23:22 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 11 2022 17:34:22 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

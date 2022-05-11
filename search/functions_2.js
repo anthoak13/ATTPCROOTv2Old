@@ -59,7 +59,7 @@ var searchData=
   ['createcontainer_3452',['createContainer',['../classAtApolloContFact.html#a974496eb40f3aef561813ab582729963',1,'AtApolloContFact::createContainer()'],['../classAtContFact.html#a681ead31c0eb9022972f4e7bb73d4bb2',1,'AtContFact::createContainer()'],['../classAtPassiveContFact.html#a8fb6e2e7b1665c7674f60d803527c328',1,'AtPassiveContFact::createContainer()'],['../classAtSiArrayContFact.html#a63c54ff65a8fc71151c6c7a1cf6392bd',1,'AtSiArrayContFact::createContainer()'],['../classAtTpcContFact.html#a8512a6de2feb3db47f1d9998360bd313',1,'AtTpcContFact::createContainer()']]],
   ['createfairfield_3453',['createFairField',['../classAtFieldCreator.html#a93d4d254b628739a5d320bce6ad55fad',1,'AtFieldCreator']]],
   ['createpattern_3454',['CreatePattern',['../group__AtPattern.html#gaa6d8e49bb5966811e1c6947de4c025ef',1,'AtPatterns']]],
-  ['createsampler_3455',['CreateSampler',['../namespaceRandomSample.html#a0599d690c6a30d8b11300adbd18d878e',1,'RandomSample']]],
+  ['createsampler_3455',['CreateSampler',['../group__AtHitSampling.html#ga0599d690c6a30d8b11300adbd18d878e',1,'RandomSample']]],
   ['createxterm_3456',['CreateXterm',['../classAtTools_1_1AtVirtualTerminal.html#a99d4c64c375cdfb91fc320b5a095eba8',1,'AtTools::AtVirtualTerminal']]],
   ['csviterator_3457',['CSVIterator',['../classCSVIterator.html#a65901c5dbac8958863a400d15fba5f41',1,'CSVIterator::CSVIterator(std::istream &amp;stream)'],['../classCSVIterator.html#a1ae56d48c521df47b45cf0c03797dc52',1,'CSVIterator::CSVIterator()']]],
   ['csvrange_3458',['CSVRange',['../classCSVRange.html#acf3868fa9e55bab9acd13207646f4ff5',1,'CSVRange']]],

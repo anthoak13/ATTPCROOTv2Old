@@ -90,14 +90,14 @@ public:
     * @param[in] dt Step size between points on polyline
     * @return Representation of line
     */
-   std::unique_ptr<TEveLine> GetEveLine(double tMin, double tMax, int n) const;
+   TEveLine *GetEveLine(double tMin, double tMax, int n) const;
 
    /**
     *  @brief Get visual representation of pattern
     *
     * Calls GetEveLine(double tMin, double tMax, int n) with reasonable defaults for the shape
     */
-   virtual std::unique_ptr<TEveLine> GetEveLine() const = 0;
+   virtual TEveLine *GetEveLine() const = 0;
 
    virtual std::unique_ptr<AtPattern> Clone() const = 0;
    /**

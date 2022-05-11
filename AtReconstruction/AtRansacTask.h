@@ -19,23 +19,19 @@ private:
    TString fOutputBranchName;
 
    TClonesArray *fEventArray{};
-   TClonesArray *fRansacArray{};
    TClonesArray fPatternEventArray;
 
    AtEvent *fEvent{};
 
    Bool_t kIsReprocess;
    Bool_t kIsPersistence;
-   Bool_t kIsFullMode;
    int fRANSACModel{-1};
    Float_t fRANSACThreshold{5.0};
    Int_t fMinHitsLine{5}; // Minimum number of hits
-   Double_t fTiltAngle{};
    Int_t fNumItera{500};
    Int_t fRANSACAlg{0};
    Int_t fRandSamplMode{0};
-   Bool_t fCharThres{false};
-   Int_t fVertexMode{0};
+   Double_t fChargeThres{-1};
 
 public:
    AtRansacTask();
@@ -49,13 +45,10 @@ public:
    void SetModelType(int model);
    void SetDistanceThreshold(Float_t threshold);
    void SetNumItera(Int_t niterations);
-   void SetFullMode();               // Mode that calculates the RANSAC method for every potential line
    void SetMinHitsLine(Int_t nhits); // Set Mininum number of hits per line
-   void SetTiltAngle(Double_t val);
    void SetAlgorithm(Int_t val);
    void SetRanSamMode(Int_t mode);
-   void SetChargeThreshold(Double_t value);
-   void SetVertexMode(Int_t value);
+   void SetChargeThreshold(Double_t value) { fChargeThres = value; }
    void SetInputBranchName(TString inputName);
    void SetOutputBranchName(TString outputName);
 

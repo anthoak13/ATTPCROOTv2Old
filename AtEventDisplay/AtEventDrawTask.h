@@ -13,12 +13,11 @@
 #include <TString.h> // for TString
 
 #include <memory>
-#include <vector>         // for vector
-class AtEventManager;     // lines 17-17
-class AtHit;              // lines 18-18
-class AtMap;              // lines 24-24
-class AtRawEvent;         // lines 22-22
-class AtTrackingEventAna; // lines 23-23
+#include <vector>     // for vector
+class AtEventManager; // lines 17-17
+class AtHit;          // lines 18-18
+class AtMap;          // lines 24-24
+class AtRawEvent;     // lines 22-22
 class TBuffer;
 class TCanvas; // lines 30-30
 class TClass;
@@ -37,91 +36,11 @@ class TH2Poly;         // lines 41-41
 class TH3F;            // lines 42-42
 class TMemberInspector;
 class TPaletteAxis; // lines 43-43
-namespace AtPATTERN {
-class AtTrackFinderHC;
-} // namespace AtPATTERN
-namespace AtRANSACN {
-class AtRansac;
-} // namespace AtRANSACN
 
 class AtEventDrawTask : public FairTask {
-public:
-   AtEventDrawTask();
-   AtEventDrawTask(TString modes);
-
-   ~AtEventDrawTask();
-
-   InitStatus Init();
-   void Exec(Option_t *option);
-   void Reset();
-
-   // void Set2DPlotRange(Int_t uaIdx);
-   void SetMap(std::shared_ptr<AtMap> map) { fDetmap = map; }
-   void SetThreshold(Int_t val) { fThreshold = val; }
-   void UnpackHoughSpace() { fUnpackHough = kTRUE; }
-   void SetHitAttributes(Color_t, Size_t, Style_t);
-   void Set3DHitStyleBar();
-   void Set3DHitStyleBox();
-   void SetSaveTextData();
-   void SetLine(double t, std::vector<Double_t> p, double &x, double &y, double &z);
-   void SetLine6(double t, std::vector<Double_t> p, double &x, double &y, double &z);
-   void SetRawEventBranch(TString branchName);
-   void SetEventBranch(TString branchName);
-   void SetCorrectedEventBranch(TString branchName) { fCorrectedEventBranchName = branchName; }
-
-   static void SelectPad(const char *rawevt);
-   void DrawWave(Int_t PadNum);
-   void SetMultiHit(Int_t hitMax);
-   void SetUnifiedRansac(Bool_t val) { fRansacUnified = val; };
-
-private:
-   void DrawPadPlane();
-   void DrawPadWave();
-   void DrawPadAll();
-   void DrawQEvent();
-   void DrawRhoVariance();
-   void DrawHoughSpace();
-   void DrawPhiReco();
-   void DrawMesh();
-   void Draw3DHist();
-   void DrawRad();
-   void DrawTheta();
-   void DrawThetaxPhi();
-   void DrawMC();
-   void DrawAux();
-
-   AtMap *fAtMapPtr;
-   void UpdateCvsPadPlane();
-   void UpdateCvsPadWave();
-   void UpdateCvsPadAll();
-   void UpdateCvsQEvent();
-   void UpdateCvsRhoVariance();
-   void UpdateCvsHoughSpace();
-   void UpdateCvsPhi();
-   void UpdateCvsMesh();
-   void UpdateCvs3DHist();
-   void UpdateCvsRad();
-   void UpdateCvsTheta();
-   void UpdateCvsThetaxPhi();
-   void UpdateCvsQuadrants();
-   void UpdateCvsMC();
-   void UpdateCvsAux();
-
-   void ResetPadAll();
-   void ResetPhiDistr();
-
-   void DrawHitPoints();
-   void DrawHSpace();
-   void DrawMeshSpace();
-   // void DrawHitClusterPoints();
-   // void DrawRiemannHits();
-
-   EColor GetTrackColor(int i);
-
+protected:
    Bool_t fIs2DPlotRange;
    Bool_t fUnpackHough;
-   Bool_t fIsCircularHough;
-   Bool_t fIsLinearHough;
    static const Int_t fNumPads = 1000; // Maximum number of pads to draw for DrawAllPads option
 
    TString fRawEventBranchName;
@@ -131,14 +50,7 @@ private:
    TClonesArray *fEventArray;
    TClonesArray *fCorrectedEventArray{};
    TClonesArray *fRawEventArray{};
-   TClonesArray *fRansacArray{};
-   TClonesArray *fTrackFinderHCArray{};
-   TClonesArray *fTrackingEventAnaArray{};
    TClonesArray *fPatternEventArray{};
-
-   AtRANSACN::AtRansac *fRansac{};
-   AtTrackingEventAna *fTrackingEventAna{};
-   AtPATTERN::AtTrackFinderHC *fTrackFinderHC{};
 
    AtEventManager *fEventManager;
    AtRawEvent *fRawevent;
@@ -150,10 +62,6 @@ private:
 
    TEvePointSet *fHitSet;
    TEvePointSet *fCorrectedHitSet;
-   TEvePointSet *fHitSetMin{};
-
-   // TEveGeoShape* x;
-   // std::vector<TEveGeoShape*> hitSphereArray;
 
    TEveBoxSet *fhitBoxSet;
 
@@ -233,16 +141,90 @@ private:
    // std::vector<TEveLine*> fLineArray;
    std::vector<std::unique_ptr<TEveLine>> fPatternLines;
 
-   TEveLine *fLineArray[5]{};
-   TEvePointSet *fVertex = nullptr;
-   Int_t fLineNum;
    Int_t fTrackNum;
-   TEvePointSet *fHitSetMC[5]{};     // For MC results
-   std::vector<std::unique_ptr<TEvePointSet>> fHitSetTFHC; // for TrackFinderHC
-   std::vector<std::unique_ptr<TEveBoxSet>> fHitClusterSet; // Track clusterization
-   std::vector<std::unique_ptr<TEveLine>> fHitLine;         // Track line
+   /*
+      std::vector<std::unique_ptr<TEvePointSet>> fHitSetTFHC;  // for TrackFinderHC
+      std::vector<std::unique_ptr<TEveBoxSet>> fHitClusterSet; // Track clusterization
+      std::vector<std::unique_ptr<TEveLine>> fHitLine;         // Track line
+   */
+   std::vector<TEvePointSet *> fHitSetTFHC;  // for TrackFinderHC
+   std::vector<TEveBoxSet *> fHitClusterSet; // Track clusterization
+   std::vector<TEveLine *> fHitLine;         // Track line
 
    TEveRGBAPalette *fRGBAPalette;
+
+public:
+   AtEventDrawTask();
+   AtEventDrawTask(TString modes);
+
+   ~AtEventDrawTask();
+
+   InitStatus Init();
+   void Exec(Option_t *option);
+   void Reset();
+
+   // void Set2DPlotRange(Int_t uaIdx);
+   void SetMap(std::shared_ptr<AtMap> map) { fDetmap = map; }
+   void SetThreshold(Int_t val) { fThreshold = val; }
+   void UnpackHoughSpace() { fUnpackHough = kTRUE; }
+   void SetHitAttributes(Color_t, Size_t, Style_t);
+   void Set3DHitStyleBar();
+   void Set3DHitStyleBox();
+   void SetSaveTextData();
+   void SetLine(double t, std::vector<Double_t> p, double &x, double &y, double &z);
+   void SetLine6(double t, std::vector<Double_t> p, double &x, double &y, double &z);
+   void SetRawEventBranch(TString branchName);
+   void SetEventBranch(TString branchName);
+   void SetCorrectedEventBranch(TString branchName) { fCorrectedEventBranchName = branchName; }
+
+   static void SelectPad(const char *rawevt);
+   void DrawWave(Int_t PadNum);
+   void SetMultiHit(Int_t hitMax);
+   void SetUnifiedRansac(Bool_t val) { fRansacUnified = val; };
+
+private:
+   void DrawPadPlane();
+   void DrawPadWave();
+   void DrawPadAll();
+   void DrawQEvent();
+   void DrawRhoVariance();
+   void DrawHoughSpace();
+   void DrawPhiReco();
+   void DrawMesh();
+   void Draw3DHist();
+   void DrawRad();
+   void DrawTheta();
+   void DrawThetaxPhi();
+   void DrawMC();
+   void DrawAux();
+
+   AtMap *fAtMapPtr;
+   void UpdateCvsPadPlane();
+   void UpdateCvsPadWave();
+   void UpdateCvsPadAll();
+   void UpdateCvsQEvent();
+   void UpdateCvsRhoVariance();
+   void UpdateCvsHoughSpace();
+   void UpdateCvsPhi();
+   void UpdateCvsMesh();
+   void UpdateCvs3DHist();
+   void UpdateCvsRad();
+   void UpdateCvsTheta();
+   void UpdateCvsThetaxPhi();
+   void UpdateCvsQuadrants();
+   void UpdateCvsMC();
+   void UpdateCvsAux();
+
+   void ResetPadAll();
+   void ResetPhiDistr();
+
+   // Functions for drawing hits
+   void DrawHitPoints();
+   void DrawRawHits();
+   void DrawRecoHits();
+   void DrawAuxChannels();
+
+   EColor GetTrackColor(int i);
 
    ClassDef(AtEventDrawTask, 2);
 };

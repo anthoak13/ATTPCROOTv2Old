@@ -15,7 +15,7 @@ ClassImp(AtPatternLine);
 
 AtPatternLine::AtPatternLine() : AtPattern(2) {}
 
-std::unique_ptr<TEveLine> AtPatternLine::GetEveLine() const
+TEveLine *AtPatternLine::GetEveLine() const
 {
    return AtPattern::GetEveLine(0, 1000, 100);
 }

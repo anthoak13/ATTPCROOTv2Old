@@ -97,12 +97,9 @@ AtPatternEvent AtSampleConsensus::Solve(const std::vector<AtHit> &hitArray)
    }
 
    // Add the remaining hits as noise
-   AtTrack noiseTrack;
-   noiseTrack.SetTrackID(retEvent.GetTrackCand().size());
-   noiseTrack.SetIsNoise(true);
    for (auto &hit : remainHits)
-      noiseTrack.AddHit(std::move(hit));
-   retEvent.AddTrack(noiseTrack);
+      retEvent.AddNoise(std::move(hit));
+
    return retEvent;
 }
 
@@ -117,9 +114,6 @@ AtTrack AtSampleConsensus::CreateTrack(AtPattern *pattern, std::vector<AtHit> &i
    pattern->FitPattern(inliers, fChargeThres);
 
    track.SetPattern(pattern->Clone());
-   track.SetFitPar(pattern->GetPatternPar());
-   track.SetMinimum(pattern->GetChi2());
-   track.SetNFree(pattern->GetNFree());
    return track;
 }
 /**

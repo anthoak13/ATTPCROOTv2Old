@@ -6,9 +6,6 @@
 #include <vector> // for vector
 class AtHit;
 
-#include <vector> // for vector
-class AtHit;
-
 namespace RandomSample {
 
 /**

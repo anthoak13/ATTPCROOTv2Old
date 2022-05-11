@@ -16,7 +16,7 @@ using XYPoint = ROOT::Math::XYPoint;
 using namespace AtPatterns;
 
 AtPatternCircle2D::AtPatternCircle2D() : AtPattern(3) {}
-std::unique_ptr<TEveLine> AtPatternCircle2D::GetEveLine() const
+TEveLine *AtPatternCircle2D::GetEveLine() const
 {
    return AtPattern::GetEveLine(0, M_2_PI, 100);
 }
@@ -46,7 +46,7 @@ void AtPatternCircle2D::DefinePattern(const std::vector<XYZPoint> &points)
 Double_t AtPatternCircle2D::DistanceToPattern(const XYZPoint &point) const
 {
    auto pointToCenter = point - GetCenter();
-   return std::abs(pointToCenter.R() - GetRadius());
+   return std::abs(pointToCenter.Rho() - GetRadius());
 }
 
 XYZPoint AtPatternCircle2D::ClosestPointOnPattern(const XYZPoint &point) const
@@ -62,6 +62,7 @@ XYZPoint AtPatternCircle2D::GetPointAt(double theta) const
 
 void AtPatternCircle2D::FitPattern(const std::vector<XYZPoint> &points, const std::vector<double> &charge)
 {
+
    //  2D circle fit, due to Taubin, based on the journal article
    // G. Taubin, "Estimation Of Planar Curves, Surfaces And Nonplanar
    //             Space Curves Defined By Implicit Equations, With

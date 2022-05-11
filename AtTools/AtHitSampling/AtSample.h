@@ -4,7 +4,6 @@
 #include <Math/Point3Dfwd.h> // for XYZPoint
 
 #include <algorithm>
-#include <memory> // for unique_ptr
 #include <vector>
 
 class AtHit;

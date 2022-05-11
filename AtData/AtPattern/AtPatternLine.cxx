@@ -3,6 +3,7 @@
 #include <FairLogger.h>
 
 #include <Math/Vector3D.h> // for DisplacementVector3D, operator*
+#include <TEveLine.h>
 #include <TMath.h>
 
 #include <algorithm> // for min
@@ -14,6 +15,10 @@ ClassImp(AtPatternLine);
 
 AtPatternLine::AtPatternLine() : AtPattern(2) {}
 
+std::unique_ptr<TEveLine> AtPatternLine::GetEveLine() const
+{
+   return AtPattern::GetEveLine(0, 1000, 100);
+}
 /**
  * @brief Get the parameter closes to compPoint.
  *
@@ -25,13 +30,14 @@ double AtPatternLine::parameterAtPoint(const XYZPoint &compPoint) const
 {
    return (compPoint - GetPoint()).Dot(GetDirection()) / GetDirection().Mag2();
 }
-XYZPoint AtPatternLine::ClosestPointOnPattern(const XYZPoint &point)
+
+XYZPoint AtPatternLine::ClosestPointOnPattern(const XYZPoint &point) const
 {
    auto t = parameterAtPoint(point);
    return GetPoint() + t * GetDirection();
 }
 
-Double_t AtPatternLine::DistanceToPattern(const XYZPoint &point)
+Double_t AtPatternLine::DistanceToPattern(const XYZPoint &point) const
 {
    // Use this rather than parameterAtPoint because it is faster
    auto vec = GetPoint() - point;
@@ -48,6 +54,8 @@ void AtPatternLine::DefinePattern(const std::vector<XYZPoint> &points)
 
    auto fPoint = points[0];
    auto fDirection = points[1] - points[0];
+   auto tZ = -fPoint.Z() / fDirection.Z();
+   fPoint += fDirection * tZ;
 
    // If not perpendicular to z-axis rescale direction
    if (fDirection.Z() != 0)
@@ -63,7 +71,7 @@ void AtPatternLine::DefinePattern(const std::vector<XYZPoint> &points)
  *
  * @param[in] z Location of point at z [mm]
  */
-XYZPoint AtPatternLine::GetPointAt(double z)
+XYZPoint AtPatternLine::GetPointAt(double z) const
 {
    return GetPoint() + z * GetDirection();
 }

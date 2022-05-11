@@ -31,9 +31,11 @@ public:
    XYZVector GetDirection() const { return {fPatternPar[3], fPatternPar[4], fPatternPar[5]}; }
 
    virtual void DefinePattern(const std::vector<XYZPoint> &points) override;
-   virtual Double_t DistanceToPattern(const XYZPoint &point) override;
-   virtual XYZPoint ClosestPointOnPattern(const XYZPoint &point) override;
-   virtual XYZPoint GetPointAt(double z) override;
+   virtual Double_t DistanceToPattern(const XYZPoint &point) const override;
+   virtual XYZPoint ClosestPointOnPattern(const XYZPoint &point) const override;
+   virtual XYZPoint GetPointAt(double z) const override;
+   virtual std::unique_ptr<TEveLine> GetEveLine() const override;
+   virtual std::unique_ptr<AtPattern> Clone() const override { return std::make_unique<AtPatternLine>(*this); }
 
 protected:
    virtual void FitPattern(const std::vector<XYZPoint> &points, const std::vector<double> &charge) override;

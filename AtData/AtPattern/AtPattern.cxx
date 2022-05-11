@@ -1,5 +1,7 @@
 #include "AtPattern.h"
 
+#include <Math/Point3D.h> // for PositionVector3D
+#include <TEveLine.h>
 using namespace AtPatterns;
 
 ClassImp(AtPattern);
@@ -48,4 +50,16 @@ Double_t AtPattern::FitPattern(const std::vector<XYZPoint> &pointsToFit)
    std::vector<double> charge;
    FitPattern(pointsToFit, charge);
    return fChi2;
+}
+
+std::unique_ptr<TEveLine> AtPattern::GetEveLine(double tMin, double tMax, int n) const
+{
+   // Setup return vector with the correct number of
+   auto retLine = std::make_unique<TEveLine>();
+   for (int i = 0; i < n; ++i) {
+      auto t = tMin + i * (tMax - tMin) / n;
+      auto pos = GetPointAt(t) / 10.; // TEve is all in units cm
+      retLine->SetNextPoint(pos.X(), pos.Y(), pos.Z());
+   }
+   return retLine;
 }

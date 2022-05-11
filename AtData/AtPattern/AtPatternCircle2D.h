@@ -24,13 +24,15 @@ class AtPatternCircle2D : public AtPattern {
 public:
    AtPatternCircle2D();
 
-   XYZPoint GetCenter() { return {fPatternPar[0], fPatternPar[1], 0}; }
-   double GetRadius() { return fPatternPar[2]; }
+   XYZPoint GetCenter() const { return {fPatternPar[0], fPatternPar[1], 0}; }
+   double GetRadius() const { return fPatternPar[2]; }
 
    virtual void DefinePattern(const std::vector<XYZPoint> &points) override;
-   virtual Double_t DistanceToPattern(const XYZPoint &point) override;
-   virtual XYZPoint ClosestPointOnPattern(const XYZPoint &point) override;
-   virtual XYZPoint GetPointAt(double theta) override;
+   virtual Double_t DistanceToPattern(const XYZPoint &point) const override;
+   virtual XYZPoint ClosestPointOnPattern(const XYZPoint &point) const override;
+   virtual XYZPoint GetPointAt(double theta) const override;
+   virtual std::unique_ptr<TEveLine> GetEveLine() const override;
+   virtual std::unique_ptr<AtPattern> Clone() const override { return std::make_unique<AtPatternCircle2D>(*this); }
 
 protected:
    virtual void FitPattern(const std::vector<XYZPoint> &points, const std::vector<double> &charge) override;

@@ -18,6 +18,14 @@ namespace RandomSample {
  */
 enum class SampleMethod { kUniform = 0, kChargeWeighted = 1, kGaussian = 2, kWeightedGaussian = 3 };
 
+/**
+ * @brief. Create a hit sampler
+ *
+ * Create a sampler using the method, and any parameters required by the type's constructor.
+ * @param[in] method SampleMethod to create
+ * @param[in] params Arguments to forward to the constructor of method
+ * @ingroup AtHitSampling
+ */
 template <typename... Ts>
 std::unique_ptr<AtSample> CreateSampler(SampleMethod method, Ts &&...params)
 {

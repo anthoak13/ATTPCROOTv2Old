@@ -76,7 +76,10 @@ $(function() {
 <div class="textblock"><code>#include &quot;<a class="el" href="AtPRA_8h_source.html">AtPRA.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="AtHit_8h_source.html">AtHit.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="AtHitCluster_8h_source.html">AtHitCluster.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="AtRansac_8h_source.html">AtRansac.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="AtPatternCircle2D_8h_source.html">AtPatternCircle2D.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="AtPatternEvent_8h_source.html">AtPatternEvent.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="AtPatternLine_8h_source.html">AtPatternLine.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="AtSampleConsensus_8h_source.html">AtSampleConsensus.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="AtTrack_8h_source.html">AtTrack.h</a>&quot;</code><br />
 <code>#include &lt;Math/Point3D.h&gt;</code><br />
 <code>#include &lt;Math/Vector3D.h&gt;</code><br />
@@ -85,12 +88,10 @@ $(function() {
 <code>#include &lt;TMatrixDSymfwd.h&gt;</code><br />
 <code>#include &lt;TMatrixTSym.h&gt;</code><br />
 <code>#include &lt;TVector3.h&gt;</code><br />
-<code>#include &lt;pcl/sample_consensus/model_types.h&gt;</code><br />
 <code>#include &lt;algorithm&gt;</code><br />
 <code>#include &lt;cmath&gt;</code><br />
 <code>#include &lt;cstddef&gt;</code><br />
 <code>#include &lt;exception&gt;</code><br />
-<code>#include &lt;ext/alloc_traits.h&gt;</code><br />
 <code>#include &lt;iostream&gt;</code><br />
 <code>#include &lt;iterator&gt;</code><br />
 <code>#include &lt;memory&gt;</code><br />
@@ -100,40 +101,49 @@ Include dependency graph for AtPRA.cxx:</div>
 <div class="dyncontent">
 <div class="center"><img src="AtPRA_8cxx__incl.png" border="0" usemap="#_2github_2workspace_2AtReconstruction_2AtPatternRecognition_2AtPRA_8cxx" alt=""/></div>
 <map name="_2github_2workspace_2AtReconstruction_2AtPatternRecognition_2AtPRA_8cxx" id="_2github_2workspace_2AtReconstruction_2AtPatternRecognition_2AtPRA_8cxx">
-<area shape="rect" title=" " alt="" coords="1019,5,1251,47"/>
-<area shape="rect" href="AtPRA_8h.html" title=" " alt="" coords="1131,333,1203,360"/>
-<area shape="rect" href="AtHit_8h.html" title=" " alt="" coords="697,333,759,360"/>
-<area shape="rect" title=" " alt="" coords="369,408,479,435"/>
-<area shape="rect" title=" " alt="" coords="1523,408,1642,435"/>
-<area shape="rect" title=" " alt="" coords="507,408,581,435"/>
-<area shape="rect" href="AtHitCluster_8h.html" title=" " alt="" coords="94,259,197,285"/>
-<area shape="rect" href="AtRansac_8h.html" title=" " alt="" coords="1141,102,1230,129"/>
-<area shape="rect" href="AtTrack_8h.html" title=" " alt="" coords="770,184,849,211"/>
-<area shape="rect" title=" " alt="" coords="373,259,443,285"/>
-<area shape="rect" title=" " alt="" coords="467,259,539,285"/>
-<area shape="rect" title=" " alt="" coords="835,333,903,360"/>
-<area shape="rect" title=" " alt="" coords="1131,259,1183,285"/>
-<area shape="rect" title=" " alt="" coords="512,333,571,360"/>
-<area shape="rect" title=" " alt="" coords="1680,184,1765,211"/>
-<area shape="rect" title=" " alt="" coords="1356,102,1431,129"/>
-<area shape="rect" title=" " alt="" coords="1455,102,1585,129"/>
-<area shape="rect" title=" " alt="" coords="1609,102,1719,129"/>
-<area shape="rect" title=" " alt="" coords="1743,95,1897,136"/>
-<area shape="rect" title=" " alt="" coords="1921,102,1986,129"/>
-<area shape="rect" title=" " alt="" coords="2011,102,2088,129"/>
-<area shape="rect" title=" " alt="" coords="2113,102,2229,129"/>
-<area shape="rect" title=" " alt="" coords="2253,102,2315,129"/>
-<area shape="rect" title=" " alt="" coords="795,408,867,435"/>
-<area shape="rect" title=" " alt="" coords="1201,408,1279,435"/>
-<area shape="rect" title=" " alt="" coords="1064,408,1123,435"/>
-<area shape="rect" title=" " alt="" coords="627,408,759,435"/>
-<area shape="rect" title=" " alt="" coords="897,408,1037,435"/>
-<area shape="rect" title=" " alt="" coords="205,333,310,360"/>
-<area shape="rect" title=" " alt="" coords="99,333,181,360"/>
-<area shape="rect" title=" " alt="" coords="1283,184,1373,211"/>
-<area shape="rect" title=" " alt="" coords="1398,184,1463,211"/>
-<area shape="rect" title=" " alt="" coords="1488,184,1555,211"/>
-<area shape="rect" href="AtPattern_8h.html" title=" " alt="" coords="766,259,853,285"/>
+<area shape="rect" title=" " alt="" coords="1584,5,1816,47"/>
+<area shape="rect" href="AtPRA_8h.html" title=" " alt="" coords="2276,393,2348,420"/>
+<area shape="rect" title=" " alt="" coords="2669,468,2737,495"/>
+<area shape="rect" href="AtHit_8h.html" title=" " alt="" coords="1194,468,1257,495"/>
+<area shape="rect" title=" " alt="" coords="62,543,173,569"/>
+<area shape="rect" title=" " alt="" coords="255,543,374,569"/>
+<area shape="rect" title=" " alt="" coords="1409,543,1484,569"/>
+<area shape="rect" href="AtHitCluster_8h.html" title=" " alt="" coords="702,393,805,420"/>
+<area shape="rect" href="AtPatternCircle2D_8h.html" title=" " alt="" coords="519,319,655,345"/>
+<area shape="rect" title=" " alt="" coords="959,468,1017,495"/>
+<area shape="rect" href="AtPatternEvent_8h.html" title=" " alt="" coords="1321,244,1441,271"/>
+<area shape="rect" href="AtTrack_8h.html" title=" " alt="" coords="1183,319,1262,345"/>
+<area shape="rect" title=" " alt="" coords="1244,393,1313,420"/>
+<area shape="rect" title=" " alt="" coords="1337,393,1409,420"/>
+<area shape="rect" title=" " alt="" coords="2741,393,2793,420"/>
+<area shape="rect" href="AtPatternLine_8h.html" title=" " alt="" coords="804,319,916,345"/>
+<area shape="rect" href="AtSampleConsensus_8h.html" title=" " alt="" coords="2436,95,2591,121"/>
+<area shape="rect" title=" " alt="" coords="2716,95,2791,121"/>
+<area shape="rect" title=" " alt="" coords="2815,95,2945,121"/>
+<area shape="rect" title=" " alt="" coords="2969,95,3079,121"/>
+<area shape="rect" title=" " alt="" coords="3103,95,3188,121"/>
+<area shape="rect" title=" " alt="" coords="3213,95,3278,121"/>
+<area shape="rect" title=" " alt="" coords="3303,95,3380,121"/>
+<area shape="rect" title=" " alt="" coords="3405,95,3467,121"/>
+<area shape="rect" title=" " alt="" coords="448,543,520,569"/>
+<area shape="rect" title=" " alt="" coords="1306,543,1385,569"/>
+<area shape="rect" title=" " alt="" coords="2152,543,2211,569"/>
+<area shape="rect" title=" " alt="" coords="570,543,702,569"/>
+<area shape="rect" title=" " alt="" coords="1142,543,1282,569"/>
+<area shape="rect" title=" " alt="" coords="830,468,935,495"/>
+<area shape="rect" title=" " alt="" coords="724,468,807,495"/>
+<area shape="rect" href="AtPattern_8h.html" title=" " alt="" coords="829,393,915,420"/>
+<area shape="rect" title=" " alt="" coords="1287,319,1369,345"/>
+<area shape="rect" href="AtEstimatorMethods_8h.html" title=" " alt="" coords="2845,244,2995,271"/>
+<area shape="rect" href="AtPatternTypes_8h.html" title=" " alt="" coords="2596,169,2719,196"/>
+<area shape="rect" href="AtSampleMethods_8h.html" title=" " alt="" coords="2216,169,2355,196"/>
+<area shape="rect" href="AtChargeWeighted_8h.html" title=" " alt="" coords="2053,319,2193,345"/>
+<area shape="rect" href="AtSample_8h.html" title=" " alt="" coords="1833,468,1922,495"/>
+<area shape="rect" href="AtGaussian_8h.html" title=" " alt="" coords="1839,319,1939,345"/>
+<area shape="rect" href="AtUniform_8h.html" title=" " alt="" coords="2524,393,2615,420"/>
+<area shape="rect" href="AtWeightedGaussian_8h.html" title=" " alt="" coords="2045,244,2200,271"/>
+<area shape="rect" href="AtIndependentSample_8h.html" title=" " alt="" coords="2041,393,2201,420"/>
+<area shape="rect" href="AtSampleFromReference_8h.html" title=" " alt="" coords="1788,393,1967,420"/>
 </map>
 </div>
 </div>
@@ -191,14 +201,14 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtPRA_8cxx_source.html#l00199">199</a> of file <a class="el" href="AtPRA_8cxx_source.html">AtPRA.cxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtPRA_8cxx_source.html#l00193">193</a> of file <a class="el" href="AtPRA_8cxx_source.html">AtPRA.cxx</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 11 2022 02:51:50 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 11 2022 17:23:22 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

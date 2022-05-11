@@ -1,5 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" title=" " alt="" coords="5,1069,73,1096"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,1044,73,1071"/>
 <area shape="rect" id="node2" href="$classAtCalibration.html" title=" " alt="" coords="160,5,256,32"/>
 <area shape="rect" id="node3" href="$classAtCore2.html" title=" " alt="" coords="173,56,243,83"/>
 <area shape="rect" id="node4" href="$classAtCoreSpecMAT.html" title=" " alt="" coords="148,107,268,133"/>
@@ -11,38 +11,37 @@
 <area shape="rect" id="node15" href="$classAtPatterns_1_1AtPattern.html" title="Describes a shape in 3D space." alt="" coords="135,411,281,437"/>
 <area shape="rect" id="node18" href="$classAtPedestal.html" title=" " alt="" coords="165,461,251,488"/>
 <area shape="rect" id="node19" href="$classAtProtoQuadrant.html" title=" " alt="" coords="149,512,267,539"/>
-<area shape="rect" id="node20" href="$classAtRANSACN_1_1AtRansac.html" title=" " alt="" coords="127,563,289,589"/>
-<area shape="rect" id="node21" href="$classAtSimulatedPoint.html" title=" " alt="" coords="147,613,269,640"/>
-<area shape="rect" id="node24" href="$classAtSpaceChargeModel.html" title=" " alt="" coords="134,664,282,691"/>
-<area shape="rect" id="node26" href="$classAtTools_1_1AtELossManager.html" title=" " alt="" coords="121,715,295,741"/>
-<area shape="rect" id="node27" href="$classAtTools_1_1AtKinematics.html" title=" " alt="" coords="133,765,283,792"/>
-<area shape="rect" id="node28" href="$classAtTools_1_1AtParsers.html" title=" " alt="" coords="143,816,273,843"/>
-<area shape="rect" id="node29" href="$classAtTools_1_1AtVirtualTerminal.html" title=" " alt="" coords="121,867,295,893"/>
-<area shape="rect" id="node30" href="$classAtTPCXSManager.html" title=" " alt="" coords="143,917,273,944"/>
-<area shape="rect" id="node31" href="$classAtTrack.html" title=" " alt="" coords="174,968,242,995"/>
-<area shape="rect" id="node32" href="$classAtTrigger.html" title=" " alt="" coords="171,1019,245,1045"/>
-<area shape="rect" id="node33" href="$classAtUnpacker.html" title=" " alt="" coords="163,1069,253,1096"/>
-<area shape="rect" id="node37" href="$classAtVertexPropagator.html" title=" " alt="" coords="141,1120,275,1147"/>
-<area shape="rect" id="node38" href="$classCRDC.html" title=" " alt="" coords="179,1171,237,1197"/>
-<area shape="rect" id="node39" href="$classGCrdc.html" title=" " alt="" coords="179,1221,237,1248"/>
-<area shape="rect" id="node40" href="$classGCrdc__test.html" title=" " alt="" coords="164,1272,252,1299"/>
-<area shape="rect" id="node41" href="$classGETFrameInfo.html" title=" " alt="" coords="155,1323,261,1349"/>
-<area shape="rect" id="node42" href="$classGETHeaderBase.html" title=" " alt="" coords="148,1373,268,1400"/>
-<area shape="rect" id="node48" href="$classGHodoscope.html" title=" " alt="" coords="159,1424,257,1451"/>
-<area shape="rect" id="node49" href="$classGIonChamber.html" title=" " alt="" coords="157,1475,259,1501"/>
-<area shape="rect" id="node50" href="$classGMultiHitTOF.html" title=" " alt="" coords="157,1525,259,1552"/>
-<area shape="rect" id="node51" href="$classGScintillator.html" title=" " alt="" coords="161,1576,255,1603"/>
-<area shape="rect" id="node52" href="$classGTimeOfFlight.html" title=" " alt="" coords="155,1627,261,1653"/>
-<area shape="rect" id="node53" href="$classGTrigger.html" title=" " alt="" coords="172,1677,244,1704"/>
-<area shape="rect" id="node54" href="$classHODOSCOPE.html" title=" " alt="" coords="155,1728,261,1755"/>
-<area shape="rect" id="node55" href="$classIC.html" title=" " alt="" coords="189,1779,227,1805"/>
-<area shape="rect" id="node56" href="$classMultiHitTOF.html" title=" " alt="" coords="161,1829,255,1856"/>
-<area shape="rect" id="node57" href="$classS800.html" title=" " alt="" coords="182,1880,234,1907"/>
-<area shape="rect" id="node58" href="$classS800Event.html" title=" " alt="" coords="165,1931,251,1957"/>
-<area shape="rect" id="node59" href="$classS800Settings.html" title=" " alt="" coords="158,1981,258,2008"/>
-<area shape="rect" id="node60" href="$classSCINT.html" title=" " alt="" coords="177,2032,239,2059"/>
-<area shape="rect" id="node61" href="$classTOF.html" title=" " alt="" coords="184,2083,232,2109"/>
-<area shape="rect" id="node62" href="$classTrigger.html" title=" " alt="" coords="177,2133,239,2160"/>
+<area shape="rect" id="node20" href="$classAtSimulatedPoint.html" title=" " alt="" coords="147,563,269,589"/>
+<area shape="rect" id="node23" href="$classAtSpaceChargeModel.html" title=" " alt="" coords="134,613,282,640"/>
+<area shape="rect" id="node25" href="$classAtTools_1_1AtELossManager.html" title=" " alt="" coords="121,664,295,691"/>
+<area shape="rect" id="node26" href="$classAtTools_1_1AtKinematics.html" title=" " alt="" coords="133,715,283,741"/>
+<area shape="rect" id="node27" href="$classAtTools_1_1AtParsers.html" title=" " alt="" coords="143,765,273,792"/>
+<area shape="rect" id="node28" href="$classAtTools_1_1AtVirtualTerminal.html" title=" " alt="" coords="121,816,295,843"/>
+<area shape="rect" id="node29" href="$classAtTPCXSManager.html" title=" " alt="" coords="143,867,273,893"/>
+<area shape="rect" id="node30" href="$classAtTrack.html" title=" " alt="" coords="174,917,242,944"/>
+<area shape="rect" id="node31" href="$classAtTrigger.html" title=" " alt="" coords="171,968,245,995"/>
+<area shape="rect" id="node32" href="$classAtUnpacker.html" title=" " alt="" coords="163,1019,253,1045"/>
+<area shape="rect" id="node36" href="$classAtVertexPropagator.html" title=" " alt="" coords="141,1069,275,1096"/>
+<area shape="rect" id="node37" href="$classCRDC.html" title=" " alt="" coords="179,1120,237,1147"/>
+<area shape="rect" id="node38" href="$classGCrdc.html" title=" " alt="" coords="179,1171,237,1197"/>
+<area shape="rect" id="node39" href="$classGCrdc__test.html" title=" " alt="" coords="164,1221,252,1248"/>
+<area shape="rect" id="node40" href="$classGETFrameInfo.html" title=" " alt="" coords="155,1272,261,1299"/>
+<area shape="rect" id="node41" href="$classGETHeaderBase.html" title=" " alt="" coords="148,1323,268,1349"/>
+<area shape="rect" id="node47" href="$classGHodoscope.html" title=" " alt="" coords="159,1373,257,1400"/>
+<area shape="rect" id="node48" href="$classGIonChamber.html" title=" " alt="" coords="157,1424,259,1451"/>
+<area shape="rect" id="node49" href="$classGMultiHitTOF.html" title=" " alt="" coords="157,1475,259,1501"/>
+<area shape="rect" id="node50" href="$classGScintillator.html" title=" " alt="" coords="161,1525,255,1552"/>
+<area shape="rect" id="node51" href="$classGTimeOfFlight.html" title=" " alt="" coords="155,1576,261,1603"/>
+<area shape="rect" id="node52" href="$classGTrigger.html" title=" " alt="" coords="172,1627,244,1653"/>
+<area shape="rect" id="node53" href="$classHODOSCOPE.html" title=" " alt="" coords="155,1677,261,1704"/>
+<area shape="rect" id="node54" href="$classIC.html" title=" " alt="" coords="189,1728,227,1755"/>
+<area shape="rect" id="node55" href="$classMultiHitTOF.html" title=" " alt="" coords="161,1779,255,1805"/>
+<area shape="rect" id="node56" href="$classS800.html" title=" " alt="" coords="182,1829,234,1856"/>
+<area shape="rect" id="node57" href="$classS800Event.html" title=" " alt="" coords="165,1880,251,1907"/>
+<area shape="rect" id="node58" href="$classS800Settings.html" title=" " alt="" coords="158,1931,258,1957"/>
+<area shape="rect" id="node59" href="$classSCINT.html" title=" " alt="" coords="177,1981,239,2008"/>
+<area shape="rect" id="node60" href="$classTOF.html" title=" " alt="" coords="184,2032,232,2059"/>
+<area shape="rect" id="node61" href="$classTrigger.html" title=" " alt="" coords="177,2083,239,2109"/>
 <area shape="rect" id="node6" href="$classAtFITTER_1_1AtGenfit.html" title=" " alt="" coords="377,157,511,184"/>
 <area shape="rect" id="node8" href="$classAtHitCluster.html" title=" " alt="" coords="397,208,491,235"/>
 <area shape="rect" id="node11" href="$classAtAuxPad.html" title=" " alt="" coords="404,259,484,285"/>
@@ -50,15 +49,15 @@
 <area shape="rect" id="node14" href="$classAtPATTERN_1_1AtTrackFinderHC.html" title=" " alt="" coords="343,360,545,387"/>
 <area shape="rect" id="node16" href="$classAtPatterns_1_1AtPatternCircle2D.html" title="Describes a circle track projected to the XY plane." alt="" coords="347,411,541,437"/>
 <area shape="rect" id="node17" href="$classAtPatterns_1_1AtPatternLine.html" title="Describes a linear track." alt="" coords="359,461,529,488"/>
-<area shape="rect" id="node22" href="$classAtSimulatedElectron.html" title=" " alt="" coords="374,563,514,589"/>
-<area shape="rect" id="node23" href="$classAtSimulatedLine.html" title=" " alt="" coords="385,613,503,640"/>
-<area shape="rect" id="node25" href="$classAtLineChargeModel.html" title=" " alt="" coords="376,664,512,691"/>
-<area shape="rect" id="node34" href="$classAtGRAWUnpacker.html" title=" " alt="" coords="379,1019,509,1045"/>
-<area shape="rect" id="node35" href="$classAtHDFUnpacker.html" title=" " alt="" coords="385,1069,503,1096"/>
-<area shape="rect" id="node36" href="$classAtROOTUnpacker.html" title=" " alt="" coords="380,1120,508,1147"/>
-<area shape="rect" id="node43" href="$classGETBasicFrameHeader.html" title=" " alt="" coords="364,1323,524,1349"/>
-<area shape="rect" id="node45" href="$classGETLayerHeader.html" title=" " alt="" coords="383,1373,505,1400"/>
-<area shape="rect" id="node47" href="$classGETTopologyFrame.html" title=" " alt="" coords="375,1424,513,1451"/>
-<area shape="rect" id="node44" href="$classGETBasicFrame.html" title=" " alt="" coords="599,1323,718,1349"/>
-<area shape="rect" id="node46" href="$classGETLayeredFrame.html" title=" " alt="" coords="593,1373,724,1400"/>
+<area shape="rect" id="node21" href="$classAtSimulatedElectron.html" title=" " alt="" coords="374,512,514,539"/>
+<area shape="rect" id="node22" href="$classAtSimulatedLine.html" title=" " alt="" coords="385,563,503,589"/>
+<area shape="rect" id="node24" href="$classAtLineChargeModel.html" title=" " alt="" coords="376,613,512,640"/>
+<area shape="rect" id="node33" href="$classAtGRAWUnpacker.html" title=" " alt="" coords="379,968,509,995"/>
+<area shape="rect" id="node34" href="$classAtHDFUnpacker.html" title=" " alt="" coords="385,1019,503,1045"/>
+<area shape="rect" id="node35" href="$classAtROOTUnpacker.html" title=" " alt="" coords="380,1069,508,1096"/>
+<area shape="rect" id="node42" href="$classGETBasicFrameHeader.html" title=" " alt="" coords="364,1272,524,1299"/>
+<area shape="rect" id="node44" href="$classGETLayerHeader.html" title=" " alt="" coords="383,1323,505,1349"/>
+<area shape="rect" id="node46" href="$classGETTopologyFrame.html" title=" " alt="" coords="375,1373,513,1400"/>
+<area shape="rect" id="node43" href="$classGETBasicFrame.html" title=" " alt="" coords="599,1272,718,1299"/>
+<area shape="rect" id="node45" href="$classGETLayeredFrame.html" title=" " alt="" coords="593,1323,724,1349"/>
 </map>

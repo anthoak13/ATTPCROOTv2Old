@@ -126,12 +126,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac9bbfe6eb0c8d9abcf8fe918e8bfdc1d"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="AtHit_8h.html#acdbe604dea12970b4e97a316f9046ae7">XYZPoint</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtPatterns_1_1AtPattern.html#ac9bbfe6eb0c8d9abcf8fe918e8bfdc1d">GetPointAt</a> (double t) const =0</td></tr>
 <tr class="memdesc:ac9bbfe6eb0c8d9abcf8fe918e8bfdc1d"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structPoint.html">Point</a> on pattern at t.  <a href="classAtPatterns_1_1AtPattern.html#ac9bbfe6eb0c8d9abcf8fe918e8bfdc1d">More...</a><br /></td></tr>
 <tr class="separator:ac9bbfe6eb0c8d9abcf8fe918e8bfdc1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae2100a65fec43ca45d313f57eb0285c4"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; TEveLine &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtPatterns_1_1AtPattern.html#ae2100a65fec43ca45d313f57eb0285c4">GetEveLine</a> (double tMin, double tMax, int n) const</td></tr>
-<tr class="memdesc:ae2100a65fec43ca45d313f57eb0285c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get visual representation of pattern.  <a href="classAtPatterns_1_1AtPattern.html#ae2100a65fec43ca45d313f57eb0285c4">More...</a><br /></td></tr>
-<tr class="separator:ae2100a65fec43ca45d313f57eb0285c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a31b43409bb44f15d9edcb5a8185d0aed"><td class="memItemLeft" align="right" valign="top">virtual std::unique_ptr&lt; TEveLine &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtPatterns_1_1AtPattern.html#a31b43409bb44f15d9edcb5a8185d0aed">GetEveLine</a> () const =0</td></tr>
-<tr class="memdesc:a31b43409bb44f15d9edcb5a8185d0aed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get visual representation of pattern.  <a href="classAtPatterns_1_1AtPattern.html#a31b43409bb44f15d9edcb5a8185d0aed">More...</a><br /></td></tr>
-<tr class="separator:a31b43409bb44f15d9edcb5a8185d0aed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8612d65b73061f768aaa2b87b2c87a3"><td class="memItemLeft" align="right" valign="top">TEveLine *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtPatterns_1_1AtPattern.html#ae8612d65b73061f768aaa2b87b2c87a3">GetEveLine</a> (double tMin, double tMax, int n) const</td></tr>
+<tr class="memdesc:ae8612d65b73061f768aaa2b87b2c87a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get visual representation of pattern.  <a href="classAtPatterns_1_1AtPattern.html#ae8612d65b73061f768aaa2b87b2c87a3">More...</a><br /></td></tr>
+<tr class="separator:ae8612d65b73061f768aaa2b87b2c87a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31445bb38f0b3bf7ceb80d5014f7c453"><td class="memItemLeft" align="right" valign="top">virtual TEveLine *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtPatterns_1_1AtPattern.html#a31445bb38f0b3bf7ceb80d5014f7c453">GetEveLine</a> () const =0</td></tr>
+<tr class="memdesc:a31445bb38f0b3bf7ceb80d5014f7c453"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get visual representation of pattern.  <a href="classAtPatterns_1_1AtPattern.html#a31445bb38f0b3bf7ceb80d5014f7c453">More...</a><br /></td></tr>
+<tr class="separator:a31445bb38f0b3bf7ceb80d5014f7c453"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a725971eeaa11b09ce0cd68c7bc96ecbe"><td class="memItemLeft" align="right" valign="top">virtual std::unique_ptr&lt; <a class="el" href="classAtPatterns_1_1AtPattern.html">AtPattern</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtPatterns_1_1AtPattern.html#a725971eeaa11b09ce0cd68c7bc96ecbe">Clone</a> () const =0</td></tr>
 <tr class="separator:a725971eeaa11b09ce0cd68c7bc96ecbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2fab6a0c676cfeb0bb52d5984e09609d"><td class="memItemLeft" align="right" valign="top">Int_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtPatterns_1_1AtPattern.html#a2fab6a0c676cfeb0bb52d5984e09609d">GetNumPoints</a> () const</td></tr>
@@ -495,8 +495,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a31b43409bb44f15d9edcb5a8185d0aed"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a31b43409bb44f15d9edcb5a8185d0aed">&#9670;&nbsp;</a></span>GetEveLine() <span class="overload">[1/2]</span></h2>
+<a id="a31445bb38f0b3bf7ceb80d5014f7c453"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31445bb38f0b3bf7ceb80d5014f7c453">&#9670;&nbsp;</a></span>GetEveLine() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -505,7 +505,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual std::unique_ptr&lt;TEveLine&gt; AtPatterns::AtPattern::GetEveLine </td>
+          <td class="memname">virtual TEveLine* AtPatterns::AtPattern::GetEveLine </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -521,18 +521,18 @@ Protected Attributes</h2></td></tr>
 <p>Get visual representation of pattern. </p>
 <p>Calls GetEveLine(double tMin, double tMax, int n) with reasonable defaults for the shape </p>
 
-<p>Implemented in <a class="el" href="classAtPatterns_1_1AtPatternLine.html#ab5684a856fbad8e0cbba90e1607cb5d6">AtPatterns::AtPatternLine</a>, and <a class="el" href="classAtPatterns_1_1AtPatternCircle2D.html#ada351a518b036710582b42633112d104">AtPatterns::AtPatternCircle2D</a>.</p>
+<p>Implemented in <a class="el" href="classAtPatterns_1_1AtPatternLine.html#a2a7261c17f861ba6aa87e5d4cb404dc6">AtPatterns::AtPatternLine</a>, and <a class="el" href="classAtPatterns_1_1AtPatternCircle2D.html#a9564d55a3862a7681b61ad1d025710ef">AtPatterns::AtPatternCircle2D</a>.</p>
 
 </div>
 </div>
-<a id="ae2100a65fec43ca45d313f57eb0285c4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae2100a65fec43ca45d313f57eb0285c4">&#9670;&nbsp;</a></span>GetEveLine() <span class="overload">[2/2]</span></h2>
+<a id="ae8612d65b73061f768aaa2b87b2c87a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8612d65b73061f768aaa2b87b2c87a3">&#9670;&nbsp;</a></span>GetEveLine() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::unique_ptr&lt; TEveLine &gt; AtPattern::GetEveLine </td>
+          <td class="memname">TEveLine * AtPattern::GetEveLine </td>
           <td>(</td>
           <td class="paramtype">double&#160;</td>
           <td class="paramname"><em>tMin</em>, </td>
@@ -848,7 +848,7 @@ Protected Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 11 2022 02:51:51 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 11 2022 17:23:23 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

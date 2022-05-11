@@ -105,10 +105,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a87e2b6316bfaeb93d457023633351390"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a134b6d898a3233cd8be96809738afb3d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtPATTERN_1_1AtTrackFinderHC.html#a134b6d898a3233cd8be96809738afb3d">~AtTrackFinderHC</a> ()=default</td></tr>
 <tr class="separator:a134b6d898a3233cd8be96809738afb3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2dad3a69d01d4dc0b13a4c8f4baec74b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtPATTERN_1_1AtTrackFinderHC.html#a2dad3a69d01d4dc0b13a4c8f4baec74b">FindTracks</a> (<a class="el" href="classAtEvent.html">AtEvent</a> &amp;event, <a class="el" href="classAtPatternEvent.html">AtPatternEvent</a> *patternEvent)</td></tr>
-<tr class="separator:a2dad3a69d01d4dc0b13a4c8f4baec74b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a37fc0d3ef3479014a9c022f3d6bf870a"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classAtTrack.html">AtTrack</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtPATTERN_1_1AtTrackFinderHC.html#a37fc0d3ef3479014a9c022f3d6bf870a">GetTrackCand</a> ()</td></tr>
-<tr class="separator:a37fc0d3ef3479014a9c022f3d6bf870a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae46b1241f81f53617a805b4ba46d3db0"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classAtPatternEvent.html">AtPatternEvent</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtPATTERN_1_1AtTrackFinderHC.html#ae46b1241f81f53617a805b4ba46d3db0">FindTracks</a> (<a class="el" href="classAtEvent.html">AtEvent</a> &amp;event) override</td></tr>
+<tr class="separator:ae46b1241f81f53617a805b4ba46d3db0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99a0e97f3b727ba8b5dc0ebce951a1c9"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classAtTrack.html">AtTrack</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtPATTERN_1_1AtTrackFinderHC.html#a99a0e97f3b727ba8b5dc0ebce951a1c9">GetTrackCand</a> () override</td></tr>
+<tr class="separator:a99a0e97f3b727ba8b5dc0ebce951a1c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af30050a6aa7a3c4bd5f3bdcae4a836b0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtPATTERN_1_1AtTrackFinderHC.html#af30050a6aa7a3c4bd5f3bdcae4a836b0">SetScluster</a> (float s)</td></tr>
 <tr class="separator:af30050a6aa7a3c4bd5f3bdcae4a836b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb35490ec65d966de08545eb011e0c77"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtPATTERN_1_1AtTrackFinderHC.html#afb35490ec65d966de08545eb011e0c77">SetKtriplet</a> (size_t k)</td></tr>
@@ -230,8 +230,8 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a2dad3a69d01d4dc0b13a4c8f4baec74b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2dad3a69d01d4dc0b13a4c8f4baec74b">&#9670;&nbsp;</a></span>FindTracks()</h2>
+<a id="ae46b1241f81f53617a805b4ba46d3db0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae46b1241f81f53617a805b4ba46d3db0">&#9670;&nbsp;</a></span>FindTracks()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -240,39 +240,29 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool AtPATTERN::AtTrackFinderHC::FindTracks </td>
+          <td class="memname">std::unique_ptr&lt; <a class="el" href="classAtPatternEvent.html">AtPatternEvent</a> &gt; AtPATTERN::AtTrackFinderHC::FindTracks </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classAtEvent.html">AtEvent</a> &amp;&#160;</td>
-          <td class="paramname"><em>event</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><em>event</em></td><td>)</td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classAtPatternEvent.html">AtPatternEvent</a> *&#160;</td>
-          <td class="paramname"><em>patternEvent</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 <p>TODO: Convert hit patern</p>
 
-<p>Implements <a class="el" href="classAtPATTERN_1_1AtPRA.html#a24bdcbfdc55c5dc505379405a5045b53">AtPATTERN::AtPRA</a>.</p>
+<p>Implements <a class="el" href="classAtPATTERN_1_1AtPRA.html#a58844460d193013ef9abe2456c6723a2">AtPATTERN::AtPRA</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="AtTrackFinderHC_8cxx_source.html#l00036">36</a> of file <a class="el" href="AtTrackFinderHC_8cxx_source.html">AtTrackFinderHC.cxx</a>.</p>
 
 </div>
 </div>
-<a id="a37fc0d3ef3479014a9c022f3d6bf870a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a37fc0d3ef3479014a9c022f3d6bf870a">&#9670;&nbsp;</a></span>GetTrackCand()</h2>
+<a id="a99a0e97f3b727ba8b5dc0ebce951a1c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99a0e97f3b727ba8b5dc0ebce951a1c9">&#9670;&nbsp;</a></span>GetTrackCand()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -289,7 +279,7 @@ Additional Inherited Members</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -324,7 +314,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtTrackFinderHC_8h_source.html#l00079">79</a> of file <a class="el" href="AtTrackFinderHC_8h_source.html">AtTrackFinderHC.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtTrackFinderHC_8h_source.html#l00085">85</a> of file <a class="el" href="AtTrackFinderHC_8h_source.html">AtTrackFinderHC.h</a>.</p>
 
 </div>
 </div>
@@ -352,7 +342,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtTrackFinderHC_8h_source.html#l00075">75</a> of file <a class="el" href="AtTrackFinderHC_8h_source.html">AtTrackFinderHC.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtTrackFinderHC_8h_source.html#l00081">81</a> of file <a class="el" href="AtTrackFinderHC_8h_source.html">AtTrackFinderHC.h</a>.</p>
 
 </div>
 </div>
@@ -380,7 +370,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtTrackFinderHC_8h_source.html#l00077">77</a> of file <a class="el" href="AtTrackFinderHC_8h_source.html">AtTrackFinderHC.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtTrackFinderHC_8h_source.html#l00083">83</a> of file <a class="el" href="AtTrackFinderHC_8h_source.html">AtTrackFinderHC.h</a>.</p>
 
 </div>
 </div>
@@ -408,7 +398,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtTrackFinderHC_8h_source.html#l00076">76</a> of file <a class="el" href="AtTrackFinderHC_8h_source.html">AtTrackFinderHC.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtTrackFinderHC_8h_source.html#l00082">82</a> of file <a class="el" href="AtTrackFinderHC_8h_source.html">AtTrackFinderHC.h</a>.</p>
 
 </div>
 </div>
@@ -436,7 +426,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtTrackFinderHC_8h_source.html#l00081">81</a> of file <a class="el" href="AtTrackFinderHC_8h_source.html">AtTrackFinderHC.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtTrackFinderHC_8h_source.html#l00087">87</a> of file <a class="el" href="AtTrackFinderHC_8h_source.html">AtTrackFinderHC.h</a>.</p>
 
 </div>
 </div>
@@ -464,7 +454,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtTrackFinderHC_8h_source.html#l00078">78</a> of file <a class="el" href="AtTrackFinderHC_8h_source.html">AtTrackFinderHC.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtTrackFinderHC_8h_source.html#l00084">84</a> of file <a class="el" href="AtTrackFinderHC_8h_source.html">AtTrackFinderHC.h</a>.</p>
 
 </div>
 </div>
@@ -492,7 +482,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtTrackFinderHC_8h_source.html#l00074">74</a> of file <a class="el" href="AtTrackFinderHC_8h_source.html">AtTrackFinderHC.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtTrackFinderHC_8h_source.html#l00080">80</a> of file <a class="el" href="AtTrackFinderHC_8h_source.html">AtTrackFinderHC.h</a>.</p>
 
 </div>
 </div>
@@ -520,7 +510,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtTrackFinderHC_8h_source.html#l00080">80</a> of file <a class="el" href="AtTrackFinderHC_8h_source.html">AtTrackFinderHC.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtTrackFinderHC_8h_source.html#l00086">86</a> of file <a class="el" href="AtTrackFinderHC_8h_source.html">AtTrackFinderHC.h</a>.</p>
 
 </div>
 </div>
@@ -531,7 +521,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 11 2022 02:51:51 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 11 2022 17:23:23 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

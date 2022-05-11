@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['doubly_5flinked_5flist_2855',['doubly_linked_list',['../classdoubly__linked__list.html',1,'']]]
+  ['doubly_5flinked_5flist_2788',['doubly_linked_list',['../classdoubly__linked__list.html',1,'']]]
 ];

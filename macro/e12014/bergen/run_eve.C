@@ -7,20 +7,23 @@
 #include "FairRunAna.h"
 */
 
-void run_eve(int runNum = 210, TString OutputDataFile = "./output/output.reco_display.root")
+void run_eve(int runNum = 210, bool displayFilteredData = true, TString OutputDataFile = "output.reco_display.root")
 {
-   TString InputDataFile = TString::Format("/mnt/analysis/e12014/TPC/unpackedCalibrated/run_%04d.root", runNum);
+   TString InputDataFile;
+   InputDataFile = TString::Format("/mnt/analysis/e12014/TPC/unpackedReducedFiltered/run_%04d.root", runNum);
 
+   // InputDataFile = "./run_0200.root";
    std::cout << "Opening: " << InputDataFile << std::endl;
 
+   FairLogger *fLogger = FairLogger::GetLogger();
+   fLogger->SetLogToScreen(kTRUE);
+   fLogger->SetLogVerbosityLevel("MEDIUM");
    TString dir = getenv("VMCWORKDIR");
    TString geoFile = "ATTPC_v1.1_geomanager.root";
-   TString mapFile = "e12014_pad_mapping.xml";
 
    TString InputDataPath = InputDataFile;
    TString OutputDataPath = OutputDataFile;
    TString GeoDataPath = dir + "/geometry/" + geoFile;
-   TString mapDir = dir + "/scripts/" + mapFile;
 
    FairRunAna *fRun = new FairRunAna();
    FairRootFileSink *sink = new FairRootFileSink(OutputDataFile);
@@ -34,17 +37,18 @@ void run_eve(int runNum = 210, TString OutputDataFile = "./output/output.reco_di
    // parIo1->open("param.dummy.root");
    rtdb->setFirstInput(parIo1);
 
-   auto fMap = std::make_shared<AtTpcMap>();
-   fMap->ParseXMLMap(mapDir.Data());
+   FairRootManager *ioman = FairRootManager::Instance();
 
    AtEventManager *eveMan = new AtEventManager();
    AtEventDrawTask *eve = new AtEventDrawTask();
-   eve->SetMap(fMap);
    eve->Set3DHitStyleBox();
    eve->SetMultiHit(100); // Set the maximum number of multihits in the visualization
-   // eve->SetSaveTextData();
-   eve->SetRawEventBranch("AtRawEventCal");
-   eve->SetEventBranch("AtEventH");
+   eve->SetSaveTextData();
+   if (displayFilteredData) {
+      eve->SetRawEventBranch("AtRawEventFiltered");
+      eve->SetEventBranch("AtEventFiltered");
+   }
+   // eve->UnpackHoughSpace();
 
    eveMan->AddTask(eve);
    eveMan->Init();

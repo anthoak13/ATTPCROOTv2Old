@@ -1,5 +1,5 @@
 <map id="/github/workspace/AtData/AtRawEvent.h" name="/github/workspace/AtData/AtRawEvent.h">
-<area shape="rect" id="node1" title=" " alt="" coords="3508,5,3680,47"/>
+<area shape="rect" id="node1" title=" " alt="" coords="3764,5,3936,47"/>
 <area shape="rect" id="node2" href="$AtEvent_8cxx.html" title=" " alt="" coords="5,95,177,136"/>
 <area shape="rect" id="node3" href="$AtRawEvent_8cxx.html" title=" " alt="" coords="201,95,373,136"/>
 <area shape="rect" id="node4" href="$AtPulseTask_8cxx.html" title=" " alt="" coords="398,95,606,136"/>
@@ -17,21 +17,23 @@
 <area shape="rect" id="node16" href="$AtLinkDAQTask_8cxx.html" title=" " alt="" coords="3350,95,3582,136"/>
 <area shape="rect" id="node17" href="$AtPSAtask_8cxx.html" title=" " alt="" coords="3606,95,3838,136"/>
 <area shape="rect" id="node18" href="$AtPSAFull_8cxx.html" title=" " alt="" coords="3862,95,4094,136"/>
-<area shape="rect" id="node19" href="$AtPSAProto_8cxx.html" title=" " alt="" coords="4118,95,4350,136"/>
-<area shape="rect" id="node20" href="$AtPSAProtoFull_8cxx.html" title=" " alt="" coords="4375,95,4613,136"/>
-<area shape="rect" id="node21" href="$AtPSASimple_8cxx.html" title=" " alt="" coords="4638,95,4870,136"/>
-<area shape="rect" id="node22" href="$AtPSASimple2_8cxx.html" title=" " alt="" coords="4894,95,5129,136"/>
-<area shape="rect" id="node23" href="$AtMergeTask_8cxx.html" title=" " alt="" coords="5153,95,5328,136"/>
-<area shape="rect" id="node24" href="$AtGRAWUnpacker_8cxx.html" title=" " alt="" coords="5352,95,5543,136"/>
-<area shape="rect" id="node25" href="$AtHDFUnpacker_8cxx.html" title=" " alt="" coords="5567,95,5757,136"/>
-<area shape="rect" id="node26" href="$AtROOTUnpacker_8cxx.html" title=" " alt="" coords="5781,95,5972,136"/>
-<area shape="rect" id="node27" href="$AtUnpackTask_8cxx.html" title=" " alt="" coords="5996,95,6187,136"/>
-<area shape="rect" id="node28" href="$AtCore2_8h.html" title=" " alt="" coords="6211,95,6401,136"/>
-<area shape="rect" id="node30" href="$AtDecoder2Task_8h.html" title=" " alt="" coords="6225,184,6427,225"/>
-<area shape="rect" id="node32" href="$AtCoreSpecMAT_8h.html" title=" " alt="" coords="6477,95,6679,136"/>
-<area shape="rect" id="node34" href="$AtDecoderSpecMATTask_8h.html" title=" " alt="" coords="6689,184,6941,225"/>
-<area shape="rect" id="node29" href="$AtCore2_8cxx.html" title=" " alt="" coords="6011,184,6201,225"/>
-<area shape="rect" id="node31" href="$AtDecoder2Task_8cxx.html" title=" " alt="" coords="6219,273,6433,315"/>
-<area shape="rect" id="node33" href="$AtCoreSpecMAT_8cxx.html" title=" " alt="" coords="6451,184,6665,225"/>
-<area shape="rect" id="node35" href="$AtDecoderSpecMATTask_8cxx.html" title=" " alt="" coords="6683,273,6947,315"/>
+<area shape="rect" id="node19" href="$AtPSAHitPerTB_8cxx.html" title=" " alt="" coords="4119,95,4360,136"/>
+<area shape="rect" id="node20" href="$AtPSAMax_8cxx.html" title=" " alt="" coords="4385,95,4617,136"/>
+<area shape="rect" id="node21" href="$AtPSASimple_8cxx.html" title=" " alt="" coords="4641,95,4873,136"/>
+<area shape="rect" id="node22" href="$AtPSASimple2_8cxx.html" title=" " alt="" coords="4897,95,5131,136"/>
+<area shape="rect" id="node23" href="$AtPSASpectrum_8cxx.html" title=" " alt="" coords="5155,95,5398,136"/>
+<area shape="rect" id="node24" href="$AtPSATBAvg_8cxx.html" title=" " alt="" coords="5422,95,5654,136"/>
+<area shape="rect" id="node25" href="$AtMergeTask_8cxx.html" title=" " alt="" coords="5679,95,5853,136"/>
+<area shape="rect" id="node26" href="$AtGRAWUnpacker_8cxx.html" title=" " alt="" coords="5877,95,6068,136"/>
+<area shape="rect" id="node27" href="$AtHDFUnpacker_8cxx.html" title=" " alt="" coords="6092,95,6283,136"/>
+<area shape="rect" id="node28" href="$AtROOTUnpacker_8cxx.html" title=" " alt="" coords="6307,95,6497,136"/>
+<area shape="rect" id="node29" href="$AtUnpackTask_8cxx.html" title=" " alt="" coords="6521,95,6712,136"/>
+<area shape="rect" id="node30" href="$AtCore2_8h.html" title=" " alt="" coords="6736,95,6927,136"/>
+<area shape="rect" id="node32" href="$AtDecoder2Task_8h.html" title=" " alt="" coords="6751,184,6952,225"/>
+<area shape="rect" id="node34" href="$AtCoreSpecMAT_8h.html" title=" " alt="" coords="7002,95,7205,136"/>
+<area shape="rect" id="node36" href="$AtDecoderSpecMATTask_8h.html" title=" " alt="" coords="7215,184,7467,225"/>
+<area shape="rect" id="node31" href="$AtCore2_8cxx.html" title=" " alt="" coords="6536,184,6727,225"/>
+<area shape="rect" id="node33" href="$AtDecoder2Task_8cxx.html" title=" " alt="" coords="6745,273,6958,315"/>
+<area shape="rect" id="node35" href="$AtCoreSpecMAT_8cxx.html" title=" " alt="" coords="6976,184,7191,225"/>
+<area shape="rect" id="node37" href="$AtDecoderSpecMATTask_8cxx.html" title=" " alt="" coords="7209,273,7473,315"/>
 </map>

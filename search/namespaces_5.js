@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['sampleconsensus_2855',['SampleConsensus',['../namespaceSampleConsensus.html',1,'']]]
+  ['randomsample_3000',['RandomSample',['../namespaceRandomSample.html',1,'']]]
 ];

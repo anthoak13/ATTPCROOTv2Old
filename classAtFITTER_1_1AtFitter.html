@@ -112,12 +112,19 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a0436744fb20662aff1349332ef5f06b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a276b1d765fd13a4059b3a4ae8b9617a4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtFITTER_1_1AtFitter.html#a276b1d765fd13a4059b3a4ae8b9617a4">MergeTracks</a> (std::vector&lt; <a class="el" href="classAtTrack.html">AtTrack</a> &gt; *trackCandSource, std::vector&lt; <a class="el" href="classAtTrack.html">AtTrack</a> &gt; *trackJunkSource, std::vector&lt; <a class="el" href="classAtTrack.html">AtTrack</a> &gt; *trackDest, bool fitDirection, bool simulationConv)</td></tr>
 <tr class="separator:a276b1d765fd13a4059b3a4ae8b9617a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afded4cc33a4403b032fb1763b6c512ba"><td class="memItemLeft" align="right" valign="top">Bool_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtFITTER_1_1AtFitter.html#afded4cc33a4403b032fb1763b6c512ba">MergeTracks</a> (std::vector&lt; <a class="el" href="classAtTrack.html">AtTrack</a> * &gt; *trackCandSource, std::vector&lt; <a class="el" href="classAtTrack.html">AtTrack</a> &gt; *trackDest, Bool_t enableSingleVertexTrack)</td></tr>
+<tr class="separator:afded4cc33a4403b032fb1763b6c512ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08ac3fac319be73d3d6fb0a4fcbfd4f3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtFITTER_1_1AtFitter.html#a08ac3fac319be73d3d6fb0a4fcbfd4f3">ClusterizeSmooth3D</a> (<a class="el" href="classAtTrack.html">AtTrack</a> &amp;track, Float_t distance, Float_t radius)</td></tr>
+<tr class="separator:a08ac3fac319be73d3d6fb0a4fcbfd4f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:a1c262f7840f6a9da9bb0938b8e09db19"><td class="memItemLeft" align="right" valign="top">std::tuple&lt; Double_t, Double_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtFITTER_1_1AtFitter.html#a1c262f7840f6a9da9bb0938b8e09db19">GetMomFromBrho</a> (Double_t A, Double_t Z, Double_t brho)</td></tr>
 <tr class="memdesc:a1c262f7840f6a9da9bb0938b8e09db19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns momentum (in GeV) from Brho assuming M (amu) and Z;.  <a href="classAtFITTER_1_1AtFitter.html#a1c262f7840f6a9da9bb0938b8e09db19">More...</a><br /></td></tr>
 <tr class="separator:a1c262f7840f6a9da9bb0938b8e09db19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a503d051422d739c487f4e2646a9ae78b"><td class="memItemLeft" align="right" valign="top">Bool_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtFITTER_1_1AtFitter.html#a503d051422d739c487f4e2646a9ae78b">FindVertexTrack</a> (<a class="el" href="classAtTrack.html">AtTrack</a> *trA, <a class="el" href="classAtTrack.html">AtTrack</a> *trB)</td></tr>
+<tr class="memdesc:a503d051422d739c487f4e2646a9ae78b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lambda function to find track closer to vertex.  <a href="classAtFITTER_1_1AtFitter.html#a503d051422d739c487f4e2646a9ae78b">More...</a><br /></td></tr>
+<tr class="separator:a503d051422d739c487f4e2646a9ae78b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab85a01ffc4df9a1f76870c62f1bc6b27"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAtFITTER_1_1AtFitter.html#ab85a01ffc4df9a1f76870c62f1bc6b27">ClassDef</a> (<a class="el" href="classAtFITTER_1_1AtFitter.html">AtFitter</a>, 1)</td></tr>
 <tr class="separator:ab85a01ffc4df9a1f76870c62f1bc6b27"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -221,6 +228,82 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a08ac3fac319be73d3d6fb0a4fcbfd4f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08ac3fac319be73d3d6fb0a4fcbfd4f3">&#9670;&nbsp;</a></span>ClusterizeSmooth3D()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void AtFITTER::AtFitter::ClusterizeSmooth3D </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classAtTrack.html">AtTrack</a> &amp;&#160;</td>
+          <td class="paramname"><em>track</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Float_t&#160;</td>
+          <td class="paramname"><em>distance</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Float_t&#160;</td>
+          <td class="paramname"><em>radius</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="AtFitter_8cxx_source.html#l00165">165</a> of file <a class="el" href="AtFitter_8cxx_source.html">AtFitter.cxx</a>.</p>
+
+</div>
+</div>
+<a id="a503d051422d739c487f4e2646a9ae78b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a503d051422d739c487f4e2646a9ae78b">&#9670;&nbsp;</a></span>FindVertexTrack()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Bool_t AtFITTER::AtFitter::FindVertexTrack </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classAtTrack.html">AtTrack</a> *&#160;</td>
+          <td class="paramname"><em>trA</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classAtTrack.html">AtTrack</a> *&#160;</td>
+          <td class="paramname"><em>trB</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Lambda function to find track closer to vertex. </p>
+
+<p class="definition">Definition at line <a class="el" href="AtFitter_8cxx_source.html#l00041">41</a> of file <a class="el" href="AtFitter_8cxx_source.html">AtFitter.cxx</a>.</p>
+
+</div>
+</div>
 <a id="a51b5475029b32731b592270d81ef304a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a51b5475029b32731b592270d81ef304a">&#9670;&nbsp;</a></span>FitTracks()</h2>
 
@@ -291,7 +374,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Returns momentum (in GeV) from Brho assuming M (amu) and Z;. </p>
 
-<p class="definition">Definition at line <a class="el" href="AtFitter_8cxx_source.html#l00021">21</a> of file <a class="el" href="AtFitter_8cxx_source.html">AtFitter.cxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtFitter_8cxx_source.html#l00031">31</a> of file <a class="el" href="AtFitter_8cxx_source.html">AtFitter.cxx</a>.</p>
 
 </div>
 </div>
@@ -322,8 +405,44 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="afded4cc33a4403b032fb1763b6c512ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afded4cc33a4403b032fb1763b6c512ba">&#9670;&nbsp;</a></span>MergeTracks() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Bool_t AtFITTER::AtFitter::MergeTracks </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="classAtTrack.html">AtTrack</a> * &gt; *&#160;</td>
+          <td class="paramname"><em>trackCandSource</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="classAtTrack.html">AtTrack</a> &gt; *&#160;</td>
+          <td class="paramname"><em>trackDest</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Bool_t&#160;</td>
+          <td class="paramname"><em>enableSingleVertexTrack</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="AtFitter_8cxx_source.html#l00061">61</a> of file <a class="el" href="AtFitter_8cxx_source.html">AtFitter.cxx</a>.</p>
+
+</div>
+</div>
 <a id="a276b1d765fd13a4059b3a4ae8b9617a4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a276b1d765fd13a4059b3a4ae8b9617a4">&#9670;&nbsp;</a></span>MergeTracks()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a276b1d765fd13a4059b3a4ae8b9617a4">&#9670;&nbsp;</a></span>MergeTracks() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -366,7 +485,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AtFitter_8cxx_source.html#l00031">31</a> of file <a class="el" href="AtFitter_8cxx_source.html">AtFitter.cxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtFitter_8cxx_source.html#l00409">409</a> of file <a class="el" href="AtFitter_8cxx_source.html">AtFitter.cxx</a>.</p>
 
 </div>
 </div>
@@ -393,7 +512,7 @@ Protected Attributes</h2></td></tr>
 
 <p>logger pointer </p>
 
-<p class="definition">Definition at line <a class="el" href="AtFitter_8h_source.html#l00036">36</a> of file <a class="el" href="AtFitter_8h_source.html">AtFitter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtFitter_8h_source.html#l00039">39</a> of file <a class="el" href="AtFitter_8h_source.html">AtFitter.h</a>.</p>
 
 </div>
 </div>
@@ -419,7 +538,7 @@ Protected Attributes</h2></td></tr>
 
 <p>parameter container </p>
 
-<p class="definition">Definition at line <a class="el" href="AtFitter_8h_source.html#l00037">37</a> of file <a class="el" href="AtFitter_8h_source.html">AtFitter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AtFitter_8h_source.html#l00040">40</a> of file <a class="el" href="AtFitter_8h_source.html">AtFitter.h</a>.</p>
 
 </div>
 </div>
@@ -430,7 +549,7 @@ Protected Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 11 2022 17:34:25 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jun 14 2022 23:48:10 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

@@ -297,7 +297,7 @@ $(function() {
 </ul>
 <p>[ ] <a class="el" href="classAtFitterTask.html">AtFitterTask</a></p><ul>
 <li>[ ] AtLinkDAQtask</li>
-<li>[ ] <a class="el" href="classAtPRAtask.html">AtPRAtask</a><ul>
+<li>[ ] <a class="el" href="classAtPRAtask.html" title="Task for finding patterns in hit clouds.">AtPRAtask</a><ul>
 <li>[ ] AtLmedsMod</li>
 </ul>
 </li>
@@ -314,17 +314,17 @@ $(function() {
 </ul>
 <p>[ ] AtPSAFilter</p><ul>
 <li>[ ] <a class="el" href="classAtPSAFull.html">AtPSAFull</a></li>
-<li>[ ] <a class="el" href="classAtPSAProto.html">AtPSAProto</a></li>
-<li>[ ] <a class="el" href="classAtPSAProtoFull.html">AtPSAProtoFull</a><ul>
+<li>[ ] AtPSAProto</li>
+<li>[ ] AtPSAProtoFull<ul>
 <li>[x] <a class="el" href="classAtPSASimple2.html">AtPSASimple2</a></li>
 </ul>
 </li>
-<li>[ ] <a class="el" href="classAtPSASimple.html">AtPSASimple</a></li>
+<li>[ ] AtPSASimple</li>
 </ul>
 <p>[x] <a class="el" href="classAtRansacTask.html">AtRansacTask</a></p><ul>
 <li>[x] AtRansac</li>
 </ul>
-<p>[ ] <a class="el" href="classAtTrackFinderHCTask.html">AtTrackFinderHCTask</a></p>
+<p>[ ] AtTrackFinderHCTask</p>
 <h1>Creating geometry files</h1>
 <h3>Adding materials</h3>
 <p>Each material that can be used in a detector is defined in the global file <code>geometry/media.geo</code>. If you would like to add any new materials, it can be done in that file. The header has detailed instructions for adding new materials.</p>
@@ -387,20 +387,11 @@ $(function() {
 <p>There are many diffrent options for this task depending on how you want to treat the wavefrom (the standard ATTPC version is ATPSASimple2), but in general:</p>
 <p>Waveform on pads (TClonesArray of ATRawEvent) -&gt; record of hits, 3D position and charge in tpc, (ATHit) on pad (TClonesArray of ATEvent) Output is named: "ATEventH"</p>
 <p>This task uses the parameters in the ATTPC .par files. In particular this loads (bolded are used by PSASimple):</p><ul>
-<li>PadPlaneX (?)</li>
-<li>PadSizeX (?)</li>
-<li>PadPlaneZ (?)</li>
-<li>PadSizeZ (?)</li>
-<li>PadRows (?)</li>
-<li>PadLayers (?)</li>
 <li><b>NumTbs (Number of time buckets)</b></li>
 <li><b>TBTTime (Sampling rate in ns)</b></li>
 <li><b>DriftVelocity (cm/us)</b></li>
-<li>MaxDriftLength (Length of TPC)</li>
 <li>BField</li>
 <li>EField</li>
-<li>TiltAng</li>
-<li>TB0 (Depricated: time bucket refrence for micromegas)</li>
 <li>EntTB (position in time buckets for detector entrance)</li>
 </ul>
 <h4>ATPRATask</h4>
@@ -410,7 +401,7 @@ $(function() {
 </div><!-- PageDoc -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 11 2022 17:34:24 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jun 14 2022 23:48:09 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

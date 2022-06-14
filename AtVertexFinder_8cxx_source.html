@@ -240,22 +240,23 @@ $(function() {
 <div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;   <span class="keywordtype">double</span> t1 = (pt2 - pt1).Dot(n2) / (d1.Dot(n2));</div>
 <div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;   <span class="keywordtype">double</span> t2 = (pt1 - pt2).Dot(n1) / (d2.Dot(n1));</div>
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;   TVector3 c1 = pt1 + t1 * d1;</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;   TVector3 c2 = pt2 + t2 * d2;</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;   TVector3 meanpoint = 0.5 * (c1 + c2);</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;   TVector3 <a class="code" href="AtRadialChargeModel_8cxx.html#ab77e17ff6558fc3e863f0b0dc4b4e233">c2</a> = pt2 + t2 * d2;</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;   TVector3 meanpoint = 0.5 * (c1 + <a class="code" href="AtRadialChargeModel_8cxx.html#ab77e17ff6558fc3e863f0b0dc4b4e233">c2</a>);</div>
 <div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160; </div>
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;   <span class="keywordflow">return</span> meanpoint;</div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aAtVertexFinder_8h_html"><div class="ttname"><a href="AtVertexFinder_8h.html">AtVertexFinder.h</a></div></div>
+<div class="ttc" id="aAtRadialChargeModel_8cxx_html_ab77e17ff6558fc3e863f0b0dc4b4e233"><div class="ttname"><a href="AtRadialChargeModel_8cxx.html#ab77e17ff6558fc3e863f0b0dc4b4e233">c2</a></div><div class="ttdeci">constexpr auto c2</div><div class="ttdef"><b>Definition:</b> <a href="AtRadialChargeModel_8cxx_source.html#l00014">AtRadialChargeModel.cxx:14</a></div></div>
 <div class="ttc" id="aclassAtVertexFinder_html_a6b8b5c08747168177454f29695c2fe33"><div class="ttname"><a href="classAtVertexFinder.html#a6b8b5c08747168177454f29695c2fe33">AtVertexFinder::fLineDistThreshold</a></div><div class="ttdeci">double fLineDistThreshold</div><div class="ttdef"><b>Definition:</b> <a href="AtVertexFinder_8h_source.html#l00015">AtVertexFinder.h:15</a></div></div>
 <div class="ttc" id="aclassAtTrack_html"><div class="ttname"><a href="classAtTrack.html">AtTrack</a></div><div class="ttdef"><b>Definition:</b> <a href="AtTrack_8h_source.html#l00026">AtTrack.h:26</a></div></div>
-<div class="ttc" id="aclassAtTrack_html_a3dd1d49714b9b4f289aae670e7768d0d"><div class="ttname"><a href="classAtTrack.html#a3dd1d49714b9b4f289aae670e7768d0d">AtTrack::GetTrackID</a></div><div class="ttdeci">Int_t GetTrackID() const</div><div class="ttdef"><b>Definition:</b> <a href="AtTrack_8h_source.html#l00050">AtTrack.h:50</a></div></div>
+<div class="ttc" id="aclassAtTrack_html_a3dd1d49714b9b4f289aae670e7768d0d"><div class="ttname"><a href="classAtTrack.html#a3dd1d49714b9b4f289aae670e7768d0d">AtTrack::GetTrackID</a></div><div class="ttdeci">Int_t GetTrackID() const</div><div class="ttdef"><b>Definition:</b> <a href="AtTrack_8h_source.html#l00052">AtTrack.h:52</a></div></div>
 <div class="ttc" id="aclassAtVertexFinder_html_a544341472c0b736da0aee39328ba8186"><div class="ttname"><a href="classAtVertexFinder.html#a544341472c0b736da0aee39328ba8186">AtVertexFinder::FindVertex</a></div><div class="ttdeci">XYZPoint FindVertex(const std::vector&lt; AtTrack &gt; &amp;tracks)</div><div class="ttdef"><b>Definition:</b> <a href="AtVertexFinder_8cxx_source.html#l00005">AtVertexFinder.cxx:5</a></div></div>
 <div class="ttc" id="aclassAtVertexFinder_html_a225364ae8f246579809cce231b6c5f6b"><div class="ttname"><a href="classAtVertexFinder.html#a225364ae8f246579809cce231b6c5f6b">AtVertexFinder::XYZPoint</a></div><div class="ttdeci">ROOT::Math::XYZPoint XYZPoint</div><div class="ttdef"><b>Definition:</b> <a href="AtVertexFinder_8h_source.html#l00014">AtVertexFinder.h:14</a></div></div>
 <div class="ttc" id="aclassAtVertexFinder_html_a299f6669b31850ae0591c0fd06830ce7"><div class="ttname"><a href="classAtVertexFinder.html#a299f6669b31850ae0591c0fd06830ce7">AtVertexFinder::FindVertexOnePerTrack</a></div><div class="ttdeci">std::vector&lt; AtTrack &gt; FindVertexOnePerTrack(const std::vector&lt; AtTrack &gt; &amp;tracks)</div><div class="ttdef"><b>Definition:</b> <a href="AtVertexFinder_8cxx_source.html#l00093">AtVertexFinder.cxx:93</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 11 2022 17:34:23 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jun 14 2022 23:48:09 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

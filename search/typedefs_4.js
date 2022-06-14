@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['hitptr_5268',['hitPtr',['../AtEvent_8h.html#a01a97ddc0dfe2a67c55b58c050dce1f0',1,'AtEvent.h']]],
-  ['hitvector_5269',['hitVector',['../AtEvent_8h.html#a7d4eefd40266a92db433dbf1d558d9bb',1,'AtEvent.h']]]
+  ['fileptr_5522',['filePtr',['../AtFilterCalibrate_8h.html#ac51559a070730d0fb780f1d215a9bd0f',1,'AtFilterCalibrate.h']]],
+  ['freqranges_5523',['FreqRanges',['../classAtFilterFFT.html#ab0d65f118e2818087c3515ab4ca7eca2',1,'AtFilterFFT']]]
 ];

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['hash_3c_20atpadreference_20_3e_2809',['hash&lt; AtPadReference &gt;',['../structstd_1_1hash_3_01AtPadReference_01_4.html',1,'std']]],
-  ['hc_5fparams_2810',['hc_params',['../structhc__params.html',1,'']]],
-  ['hodoscope_2811',['HODOSCOPE',['../classHODOSCOPE.html',1,'']]]
+  ['hash_3c_20atpadreference_20_3e_2947',['hash&lt; AtPadReference &gt;',['../structstd_1_1hash_3_01AtPadReference_01_4.html',1,'std']]],
+  ['hc_5fparams_2948',['hc_params',['../structAtPATTERN_1_1hc__params.html',1,'AtPATTERN::hc_params'],['../structhc__params.html',1,'hc_params']]],
+  ['hodoscope_2949',['HODOSCOPE',['../classHODOSCOPE.html',1,'']]]
 ];

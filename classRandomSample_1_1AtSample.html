@@ -92,6 +92,7 @@ Inheritance diagram for RandomSample::AtSample:</div>
 <area shape="rect" href="classRandomSample_1_1AtSampleFromReference.html" title="Sample when PDF depends on reference." alt="" coords="231,71,437,112"/>
 <area shape="rect" href="classRandomSample_1_1AtUniform.html" title="Uniformly sample a collection of AtHits." alt="" coords="245,137,423,163"/>
 <area shape="rect" href="classRandomSample_1_1AtChargeWeighted.html" title="Sample AtHits according to charge." alt="" coords="485,13,713,39"/>
+<area shape="rect" href="classRandomSample_1_1AtWeightedY.html" title="Sample AtHits according to charge for Y shaped tracks." alt="" coords="761,13,957,39"/>
 <area shape="rect" href="classRandomSample_1_1AtGaussian.html" title="Sample AtHits in gaussian from reference." alt="" coords="505,70,693,97"/>
 <area shape="rect" href="classRandomSample_1_1AtWeightedGaussian.html" title="Sample with a charge&#45;weighted gaussian." alt="" coords="506,121,693,163"/>
 </map>
@@ -118,7 +119,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a05f973bb9f6201604cc53c4a5a607963"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="classAtHit.html">AtHit</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRandomSample_1_1AtSample.html#a05f973bb9f6201604cc53c4a5a607963">SampleHits</a> (int N)</td></tr>
 <tr class="memdesc:a05f973bb9f6201604cc53c4a5a607963"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sample hits (<a class="el" href="classAtHit.html">AtHit</a>) from fHits.  <a href="classRandomSample_1_1AtSample.html#a05f973bb9f6201604cc53c4a5a607963">More...</a><br /></td></tr>
 <tr class="separator:a05f973bb9f6201604cc53c4a5a607963"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8e128b16a1ea75af270cc7ec56ac0184"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="AtSpaceChargeModel_8h.html#acdbe604dea12970b4e97a316f9046ae7">ROOT::Math::XYZPoint</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRandomSample_1_1AtSample.html#a8e128b16a1ea75af270cc7ec56ac0184">SamplePoints</a> (int N)</td></tr>
+<tr class="memitem:a8e128b16a1ea75af270cc7ec56ac0184"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="AtRadialChargeModel_8cxx.html#acdbe604dea12970b4e97a316f9046ae7">ROOT::Math::XYZPoint</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRandomSample_1_1AtSample.html#a8e128b16a1ea75af270cc7ec56ac0184">SamplePoints</a> (int N)</td></tr>
 <tr class="memdesc:a8e128b16a1ea75af270cc7ec56ac0184"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sample spacial locations (XYZPoints) from fHits.  <a href="classRandomSample_1_1AtSample.html#a8e128b16a1ea75af270cc7ec56ac0184">More...</a><br /></td></tr>
 <tr class="separator:a8e128b16a1ea75af270cc7ec56ac0184"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8005edc238a32bdb3e914205e5b69012"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRandomSample_1_1AtSample.html#a8005edc238a32bdb3e914205e5b69012">SetHitsToSample</a> (const std::vector&lt; <a class="el" href="classAtHit.html">AtHit</a> &gt; *hits)=0</td></tr>
@@ -366,7 +367,7 @@ template&lt;typename T &gt; </div>
 <p>Sample hits (<a class="el" href="classAtHit.html">AtHit</a>) from fHits. </p>
 <p>Assumes fCDF is already setup and we are just using it. </p>
 
-<p>Reimplemented in <a class="el" href="classRandomSample_1_1AtSampleFromReference.html#afb3c4068a6e802fa7ca08b816e4efff4">RandomSample::AtSampleFromReference</a>, and <a class="el" href="classRandomSample_1_1AtUniform.html#aeb4be05d3bcb912cbf59bd754d427aac">RandomSample::AtUniform</a>.</p>
+<p>Reimplemented in <a class="el" href="classRandomSample_1_1AtSampleFromReference.html#afb3c4068a6e802fa7ca08b816e4efff4">RandomSample::AtSampleFromReference</a>, <a class="el" href="classRandomSample_1_1AtWeightedY.html#a42f208f92a9b451c848a40841aabd672">RandomSample::AtWeightedY</a>, and <a class="el" href="classRandomSample_1_1AtUniform.html#aeb4be05d3bcb912cbf59bd754d427aac">RandomSample::AtUniform</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="AtSample_8cxx_source.html#l00019">19</a> of file <a class="el" href="AtSample_8cxx_source.html">AtSample.cxx</a>.</p>
 
@@ -425,7 +426,7 @@ template&lt;typename T &gt; </div>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt; <a class="el" href="AtSpaceChargeModel_8h.html#acdbe604dea12970b4e97a316f9046ae7">ROOT::Math::XYZPoint</a> &gt; AtSample::SamplePoints </td>
+          <td class="memname">std::vector&lt; <a class="el" href="AtRadialChargeModel_8cxx.html#acdbe604dea12970b4e97a316f9046ae7">ROOT::Math::XYZPoint</a> &gt; AtSample::SamplePoints </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>N</em></td><td>)</td>
@@ -465,7 +466,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classRandomSample_1_1AtWeightedGaussian.html#a4c5f6a2fc2e67008911dfe4903995042">RandomSample::AtWeightedGaussian</a>, <a class="el" href="classRandomSample_1_1AtSampleFromReference.html#ac209ce3cc92cd8ad3b2f53340727552a">RandomSample::AtSampleFromReference</a>, <a class="el" href="classRandomSample_1_1AtIndependentSample.html#a93c3b41181ebfa4cfe02a4fac6a36fdf">RandomSample::AtIndependentSample</a>, and <a class="el" href="classRandomSample_1_1AtUniform.html#a869a0f108f28989d9f3a1fe6d198e197">RandomSample::AtUniform</a>.</p>
+<p>Implemented in <a class="el" href="classRandomSample_1_1AtWeightedGaussian.html#a4c5f6a2fc2e67008911dfe4903995042">RandomSample::AtWeightedGaussian</a>, <a class="el" href="classRandomSample_1_1AtSampleFromReference.html#ac209ce3cc92cd8ad3b2f53340727552a">RandomSample::AtSampleFromReference</a>, <a class="el" href="classRandomSample_1_1AtWeightedY.html#a37e3524e3e48ecdb6c8496a65f05dbd2">RandomSample::AtWeightedY</a>, <a class="el" href="classRandomSample_1_1AtIndependentSample.html#a93c3b41181ebfa4cfe02a4fac6a36fdf">RandomSample::AtIndependentSample</a>, and <a class="el" href="classRandomSample_1_1AtUniform.html#a869a0f108f28989d9f3a1fe6d198e197">RandomSample::AtUniform</a>.</p>
 
 </div>
 </div>
@@ -577,7 +578,7 @@ template&lt;typename T &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 11 2022 17:34:25 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jun 14 2022 23:48:10 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

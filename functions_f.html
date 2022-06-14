@@ -108,6 +108,9 @@ $(function() {
 <li>fAtMapPtr
 : <a class="el" href="classAtEventDrawTaskS800.html#a8adfa1645e2e4dd4c608a3f55906b646">AtEventDrawTaskS800</a>
 </li>
+<li>fAtPadCoordPtr
+: <a class="el" href="classAtMap.html#a408e915d7649f831848c151c14870ecf">AtMap</a>
+</li>
 <li>fAuxChannels
 : <a class="el" href="classAtEventDrawTask.html#acb807d49b4cefcee206b5ab1126632d4">AtEventDrawTask</a>
 , <a class="el" href="classAtEventDrawTaskProto.html#a3643f7ff3bd302d733297892f9c33313">AtEventDrawTaskProto</a>
@@ -115,11 +118,11 @@ $(function() {
 <li>fAuxName
 : <a class="el" href="classAtAuxPad.html#ac026e880b6a7ab03580f6282e3ea8c6f">AtAuxPad</a>
 </li>
+<li>fAuxPadMap
+: <a class="el" href="classAtMap.html#ae076069dec3ae1e2842d71ca47961bbb">AtMap</a>
+</li>
 <li>fBadFile
 : <a class="el" href="classS800Settings.html#a433033e91a8d6aa500ecb1ea98719ebf">S800Settings</a>
-</li>
-<li>fBaseCorr
-: <a class="el" href="classAtHit.html#af22f9d3f5d12d93046337152679e6d81">AtHit</a>
 </li>
 <li>fBeginFact
 : <a class="el" href="structAtFilterFFT_1_1AtFreqRange.html#a973996e3ad83ad0b87b0701bb80f0ae6">AtFilterFFT::AtFreqRange</a>
@@ -139,9 +142,6 @@ $(function() {
 </li>
 <li>fCalFileIC
 : <a class="el" href="classS800Settings.html#a09e1440852b3450c8acc8ee6efb5a4ab">S800Settings</a>
-</li>
-<li>fCalibration
-: <a class="el" href="classAtPSA.html#a66522e7aef3db8f5e19f6bc3c292c648">AtPSA</a>
 </li>
 <li>fcathode
 : <a class="el" href="classCRDC.html#ad0bd920b5fc2846f6557dd95695b3073">CRDC</a>
@@ -163,6 +163,9 @@ $(function() {
 </li>
 <li>fChargeSample
 : <a class="el" href="classRandomSample_1_1AtWeightedGaussian.html#aec3c1ec7b75750b1c9c2fdd295944c5a">RandomSample::AtWeightedGaussian</a>
+</li>
+<li>fChargeVariance
+: <a class="el" href="classAtHit.html#a9f02ce6a5ad6dc1cb7536de870f66ee5">AtHit</a>
 </li>
 <li>fChi2
 : <a class="el" href="classAtPatterns_1_1AtPattern.html#a14b91f38a2a78530f3418807ce023c24">AtPatterns::AtPattern</a>
@@ -403,7 +406,7 @@ $(function() {
 : <a class="el" href="structAtFilterFFT_1_1AtFreqRange.html#a29845665216e3cfe17c969f54a00e20d">AtFilterFFT::AtFreqRange</a>
 </li>
 <li>fEndTB
-: <a class="el" href="classAtPSA.html#ae87496d4f9c7d14683644c0c68e1005d">AtPSA</a>
+: <a class="el" href="classAtPSAHitPerTB.html#ad620254513f1ff669468141ef368467e">AtPSAHitPerTB</a>
 </li>
 <li>fEnergy
 : <a class="el" href="classAtApolloCrystalCalData.html#a20256b4409e49bafbfb4738c6ec852b2">AtApolloCrystalCalData</a>
@@ -679,12 +682,16 @@ $(function() {
 <li>FindTracks()
 : <a class="el" href="classAtPATTERN_1_1AtPRA.html#a58844460d193013ef9abe2456c6723a2">AtPATTERN::AtPRA</a>
 , <a class="el" href="classAtPATTERN_1_1AtTrackFinderHC.html#ae46b1241f81f53617a805b4ba46d3db0">AtPATTERN::AtTrackFinderHC</a>
+, <a class="el" href="classAtPATTERN_1_1AtTrackFinderTC.html#a14803828b69d8ee4fc8973c7d3a7b4a3">AtPATTERN::AtTrackFinderTC</a>
 </li>
 <li>FindVertex()
 : <a class="el" href="classAtVertexFinder.html#a544341472c0b736da0aee39328ba8186">AtVertexFinder</a>
 </li>
 <li>FindVertexOnePerTrack()
 : <a class="el" href="classAtVertexFinder.html#a299f6669b31850ae0591c0fd06830ce7">AtVertexFinder</a>
+</li>
+<li>FindVertexTrack()
+: <a class="el" href="classAtFITTER_1_1AtFitter.html#a503d051422d739c487f4e2646a9ae78b">AtFITTER::AtFitter</a>
 </li>
 <li>fIniHit
 : <a class="el" href="classAtEventDrawTask.html#a4e61cc480451665262df30e533df8a29">AtEventDrawTask</a>
@@ -695,10 +702,12 @@ $(function() {
 : <a class="el" href="classAtEventDrawTask.html#a922240ce885b52725dc403d7bbf2938c">AtEventDrawTask</a>
 , <a class="el" href="classAtEventDrawTaskS800.html#aed7861e8c8ae9f93e8120efbb0825484">AtEventDrawTaskS800</a>
 </li>
+<li>fIniPads
+: <a class="el" href="classAtMap.html#a61c11920853e3bff61023b847cfe6e70">AtMap</a>
+</li>
 <li>Finish()
 : <a class="el" href="classAtLinkDAQTask.html#af0000979d37cff55143de84b024b2fdd">AtLinkDAQTask</a>
 , <a class="el" href="classAtPRAtask.html#a26d1154724797ecc10b6aa11cbf1b9ee">AtPRAtask</a>
-, <a class="el" href="classAtTrackFinderHCTask.html#a734ccd1111ba5bd86c6c84201b092c60">AtTrackFinderHCTask</a>
 </li>
 <li>FinishEvent()
 : <a class="el" href="classAtApolloDigitizer.html#a1f63b42de7a2d4301441949fcd9abe99">AtApolloDigitizer</a>
@@ -716,7 +725,7 @@ $(function() {
 , <a class="el" href="classAtSiArray.html#a8529b71635499456a06fd296dafd93fb">AtSiArray</a>
 </li>
 <li>fIniTB
-: <a class="el" href="classAtPSA.html#a0dab08870ecc3632115f3af7a8072b2f">AtPSA</a>
+: <a class="el" href="classAtPSAHitPerTB.html#a555d9212c25844d0489e49bee8b84aa8">AtPSAHitPerTB</a>
 </li>
 <li>fInputBranchName
 : <a class="el" href="classAtSpaceChargeTask.html#a55a944c233949f7ef7bff3f535becd58">AtSpaceChargeTask</a>
@@ -734,9 +743,6 @@ $(function() {
 : <a class="el" href="classAtEventDrawTask.html#a2f155b5dabbd6d2e7ecec37ebdb1aadc">AtEventDrawTask</a>
 , <a class="el" href="classAtEventDrawTaskS800.html#a000651baaaeebebf368d213a725ca678">AtEventDrawTaskS800</a>
 </li>
-<li>fIsAux
-: <a class="el" href="classAtHit.html#af936733b06df14d4f4494ef98915f99b">AtHit</a>
-</li>
 <li>fIsCircularHough
 : <a class="el" href="classAtEventDrawTaskProto.html#a09c52044709d3a848f4b04bfc15236a3">AtEventDrawTaskProto</a>
 , <a class="el" href="classAtEventDrawTaskS800.html#a4bd285810b5105aff258030592322ba6">AtEventDrawTaskS800</a>
@@ -746,18 +752,19 @@ $(function() {
 </li>
 <li>fIsGainCalibrated
 : <a class="el" href="classAtCalibration.html#a9de5a87fd377b2217e63e765ed760263">AtCalibration</a>
-, <a class="el" href="classAtPSA.html#aeb1978da1b5802eacbbbc36862303cb6">AtPSA</a>
 </li>
 <li>fIsInCut
 : <a class="el" href="classS800Calc.html#a9db58d13b081c6b0a54e1519513bd11c">S800Calc</a>
 </li>
 <li>fIsJitterCalibrated
 : <a class="el" href="classAtCalibration.html#af91cadb0a00cd2b22240e6c523600207">AtCalibration</a>
-, <a class="el" href="classAtPSA.html#a095c7212bb833476ca8f0f3c460d0dd4">AtPSA</a>
 </li>
 <li>fIsLinearHough
 : <a class="el" href="classAtEventDrawTaskProto.html#ad55f863b65d159a349332a98142e1ff1">AtEventDrawTaskProto</a>
 , <a class="el" href="classAtEventDrawTaskS800.html#a5325998aa276ff8fe0ec5d1c5b37fc33">AtEventDrawTaskS800</a>
+</li>
+<li>fIsMerged
+: <a class="el" href="classAtTrack.html#aa21c14c3f636968f70c325fdf49916b5">AtTrack</a>
 </li>
 <li>fIsNegativePolarity
 : <a class="el" href="classAtGRAWUnpacker.html#a6f17579da1543e882519b603c7083ba6">AtGRAWUnpacker</a>
@@ -792,6 +799,7 @@ $(function() {
 : <a class="el" href="classAtPatterns_1_1AtPattern.html#a47bc46c5ce6dd13cb037065cef67bc6c">AtPatterns::AtPattern</a>
 , <a class="el" href="classAtPatterns_1_1AtPatternCircle2D.html#a1f262d4a8c1eb8fcc7a07ad2d1174732">AtPatterns::AtPatternCircle2D</a>
 , <a class="el" href="classAtPatterns_1_1AtPatternLine.html#a08191091cb5f98992500709fc46da354">AtPatterns::AtPatternLine</a>
+, <a class="el" href="classAtPatterns_1_1AtPatternY.html#aded202b39a35085f92fa804d30b86f89">AtPatterns::AtPatternY</a>
 </li>
 <li>fits
 : <a class="el" href="classS800.html#ac772f02a8534355f91f99ae07912ce99">S800</a>
@@ -843,9 +851,6 @@ $(function() {
 <li>fLogger
 : <a class="el" href="classAtFITTER_1_1AtFitter.html#a1ac47152a2500d0ca3137c92d3786108">AtFITTER::AtFitter</a>
 </li>
-<li>fLorentzVector
-: <a class="el" href="classAtPSA.html#ac2bd97f314a7b5c39f9ba0ca28c2ca45">AtPSA</a>
-</li>
 <li>fLowGainFactor
 : <a class="el" href="classAtPulseTask.html#a07c9aa0394f8db2dc5cfb65b3f54fef2">AtPulseTask</a>
 </li>
@@ -865,9 +870,6 @@ $(function() {
 </li>
 <li>fMaxClusterWidth
 : <a class="el" href="classCRDC.html#ad00d5a32b4bce1d932326964bf296de2">CRDC</a>
-</li>
-<li>fMaxDriftLength
-: <a class="el" href="classAtPSA.html#ae4d5db4d8b7a48741a4c46333d5bbbd1">AtPSA</a>
 </li>
 <li>fMaxHits
 : <a class="el" href="classAtPATTERN_1_1AtPRA.html#ae1a19b06ffc8fb3fce38b2c1e88747c1">AtPATTERN::AtPRA</a>
@@ -1002,6 +1004,9 @@ $(function() {
 <li>fNQuads
 : <a class="el" href="classAtEventDrawTaskS800.html#a6945a849956dded48533fc29d0fef3f8">AtEventDrawTaskS800</a>
 </li>
+<li>fNumberPads
+: <a class="el" href="classAtMap.html#a0824f4238853ea94354b51849fb714bc">AtMap</a>
+</li>
 <li>fNumClusters
 : <a class="el" href="classCRDC.html#acec1f09aebb05f23175de622a66b5865">CRDC</a>
 </li>
@@ -1053,8 +1058,11 @@ $(function() {
 <li>fPadCoord
 : <a class="el" href="classAtPad.html#ad6e5c50868f390eaf40f90665f2a32bf">AtPad</a>
 </li>
-<li>fPadLayers
-: <a class="el" href="classAtPSA.html#adfef2542092ae8311b77cc625768f67f">AtPSA</a>
+<li>fPadMap
+: <a class="el" href="classAtMap.html#af327caaa32de321487965eff33b82f35">AtMap</a>
+</li>
+<li>fPadMapInverse
+: <a class="el" href="classAtMap.html#a6818510aa45f025dc6e1ce22ae04240e">AtMap</a>
 </li>
 <li>fPadNum
 : <a class="el" href="classAtCalibration.html#ade9b2feb42297f2984b8a9f16d861348">AtCalibration</a>
@@ -1066,24 +1074,19 @@ $(function() {
 : <a class="el" href="classAtEventDrawTask.html#a493d1e839b981fca4c87ad4d5faefd4e">AtEventDrawTask</a>
 , <a class="el" href="classAtEventDrawTaskProto.html#a346523ce270b639237ca7d2c82136e34">AtEventDrawTaskProto</a>
 , <a class="el" href="classAtEventDrawTaskS800.html#a1c5225a224eaef6fa67f473273a840ed">AtEventDrawTaskS800</a>
+, <a class="el" href="classAtMap.html#a82a27c79c29211e86ef672b094902949">AtMap</a>
 , <a class="el" href="classAtPulseTask.html#a96a63b181f459beb6cc070179d808b0a">AtPulseTask</a>
+</li>
+<li>fPadPlaneCanvas
+: <a class="el" href="classAtMap.html#a085929248a0358d5bb4b26563ddfc797">AtMap</a>
 </li>
 <li>fPadPlanePal
 : <a class="el" href="classAtEventDrawTask.html#a1f39601138fbab4ab2ff7cfeb883ce08">AtEventDrawTask</a>
 , <a class="el" href="classAtEventDrawTaskProto.html#ac7a49aef370b80b2bca7220a46e80348">AtEventDrawTaskProto</a>
 , <a class="el" href="classAtEventDrawTaskS800.html#a46a4746adbcdc182a80c46746867805f">AtEventDrawTaskS800</a>
 </li>
-<li>fPadPlaneX
-: <a class="el" href="classAtPSA.html#ae42dd503714fc655d9458da11dd99b91">AtPSA</a>
-</li>
-<li>fPadRows
-: <a class="el" href="classAtPSA.html#a2b9fc17b016ece30f3711d271a899ba8">AtPSA</a>
-</li>
-<li>fPadSizeX
-: <a class="el" href="classAtPSA.html#ae2220b3672d92a8747552ce77e1a17db">AtPSA</a>
-</li>
-<li>fPadSizeZ
-: <a class="el" href="classAtPSA.html#a490d86ee6140232528767a96b3c751f1">AtPSA</a>
+<li>fPadSizeMap
+: <a class="el" href="classAtMap.html#a03d4aff12bd1f6aa2306cf5bc5fff43a">AtMap</a>
 </li>
 <li>fPadWave
 : <a class="el" href="classAtEventDrawTask.html#a10383c8ef662122b41a40eb45a849ed6">AtEventDrawTask</a>
@@ -1094,8 +1097,6 @@ $(function() {
 : <a class="el" href="classAtClusterizeTask.html#a1f1627a6be250b3d7b7e779cdad63520">AtClusterizeTask</a>
 , <a class="el" href="classAtFITTER_1_1AtFitter.html#aa7e5e47b8da7e89bfcb252453a386d94">AtFITTER::AtFitter</a>
 , <a class="el" href="classAtPATTERN_1_1AtPRA.html#a23a9d29b3ac72ea34fdd22e4a836f388">AtPATTERN::AtPRA</a>
-, <a class="el" href="classAtPSA.html#a5f4b6cc164785aaa0074deab6ab27d97">AtPSA</a>
-, <a class="el" href="classAtPulseTask.html#a80f4117ce9fb57d8b4f072c1af46d14c">AtPulseTask</a>
 , <a class="el" href="classAtSpaceChargeTask.html#a953192ff1f10381f827e76bf3fddf99e">AtSpaceChargeTask</a>
 </li>
 <li>fPar0_fit
@@ -1155,27 +1156,15 @@ $(function() {
 <li>fPIDFull
 : <a class="el" href="classAtEventManagerS800.html#afc6bdccb169886d39eb29c6830452ad8">AtEventManagerS800</a>
 </li>
-<li>fPOCAX
-: <a class="el" href="classAtHitCluster.html#aa808beb3ba7fd69ee8357a6a51c624a5">AtHitCluster</a>
-</li>
-<li>fPOCAY
-: <a class="el" href="classAtHitCluster.html#ab8d0125d74f77f95090c7b1454e0df09">AtHitCluster</a>
-</li>
-<li>fPOCAZ
-: <a class="el" href="classAtHitCluster.html#aa8fb5b1ba6403347a542b288e9c9f8ea">AtHitCluster</a>
-</li>
 <li>fPosition
 : <a class="el" href="classAtHit.html#ae260f2eeffa0382f0c2b65d9b7dc7919">AtHit</a>
 , <a class="el" href="classAtSimulatedPoint.html#a524b09631508d987bfb83f3ff3f74e56">AtSimulatedPoint</a>
 </li>
-<li>fPositionCorr
-: <a class="el" href="classAtHit.html#a1993db3df5cdfae4008847df1e953881">AtHit</a>
-</li>
 <li>fPositionFinal
 : <a class="el" href="classAtSimulatedLine.html#a10e481c5314d5444d98b0805f701701a">AtSimulatedLine</a>
 </li>
-<li>fPositionSigma
-: <a class="el" href="classAtHit.html#a729bab3253c6632e00e7db14bce02b85">AtHit</a>
+<li>fPositionVariance
+: <a class="el" href="classAtHit.html#a7493902321fcbdbd0ac049f3eda6153a">AtHit</a>
 </li>
 <li>fPrevPoint
 : <a class="el" href="classAtClusterizeTask.html#ad984c7e501423015239eb756ebfc363d">AtClusterizeTask</a>
@@ -1383,9 +1372,6 @@ $(function() {
 <li>fSizeID
 : <a class="el" href="classAtPad.html#a3381ef3561fb00b97b9d2c56f8572d22">AtPad</a>
 </li>
-<li>fSlopeCnt
-: <a class="el" href="classAtHit.html#aa114b728fe6b2308a2d9697907891060">AtHit</a>
-</li>
 <li>fSpaceChargePointArray
 : <a class="el" href="classAtSpaceChargeTask.html#a842f110946f7caecb8ac1e758e43182e">AtSpaceChargeTask</a>
 </li>
@@ -1433,9 +1419,6 @@ $(function() {
 : <a class="el" href="classAtEventDrawTask.html#a58da2a883745efe4793e700b59a73bcf">AtEventDrawTask</a>
 , <a class="el" href="classAtEventDrawTaskS800.html#adfcad9952b7aef2155a778322c3537fb">AtEventDrawTaskS800</a>
 </li>
-<li>fThetaPad
-: <a class="el" href="classAtPSA.html#a254f538b41bb42d51d7929885d541154">AtPSA</a>
-</li>
 <li>fThetaxPhi
 : <a class="el" href="classAtEventDrawTask.html#a4f634f2c3792effe6d7b8a665fd9032b">AtEventDrawTask</a>
 , <a class="el" href="classAtEventDrawTaskS800.html#a05972fc5daf392c2470b43258df46a8f">AtEventDrawTaskS800</a>
@@ -1455,9 +1438,6 @@ $(function() {
 </li>
 <li>fThresholdlow
 : <a class="el" href="classAtPSA.html#a824db6c57af51dbdbc89ae3ec4de6c0f">AtPSA</a>
-</li>
-<li>fTiltAng
-: <a class="el" href="classAtPSA.html#aec2ab96e54661b27c1979e825ed2693f">AtPSA</a>
 </li>
 <li>fTime
 : <a class="el" href="classAtApolloCrystalCalData.html#a1d0562b1f2572071d035affafe805d4c">AtApolloCrystalCalData</a>
@@ -1507,6 +1487,9 @@ $(function() {
 <li>fTraceIntegral
 : <a class="el" href="classAtHit.html#abecd79044e003cdde8e400bbac7b16b8">AtHit</a>
 </li>
+<li>fTrackCand
+: <a class="el" href="classAtPATTERN_1_1AtPRA.html#a72502184a33b329f5f7a8beb81bccae5">AtPATTERN::AtPRA</a>
+</li>
 <li>fTrackFinderHC
 : <a class="el" href="classAtEventDrawTaskS800.html#aa02a886be82dcb2c1ab265773bbd7c24">AtEventDrawTaskS800</a>
 </li>
@@ -1514,8 +1497,7 @@ $(function() {
 : <a class="el" href="classAtEventDrawTaskS800.html#ac0c4af420fd302f618b799dba6eb4cbc">AtEventDrawTaskS800</a>
 </li>
 <li>fTrackID
-: <a class="el" href="classAtHit.html#a9b3ba98b177a0f2c7b917466b97f25cd">AtHit</a>
-, <a class="el" href="classAtTrack.html#a3dc0550ffce879e013e2b53f8254dc9d">AtTrack</a>
+: <a class="el" href="classAtTrack.html#a3dc0550ffce879e013e2b53f8254dc9d">AtTrack</a>
 </li>
 <li>fTrackingEventAna
 : <a class="el" href="classAtEventDrawTaskS800.html#a0083576cecb918234b48a31d9aebbf72">AtEventDrawTaskS800</a>
@@ -1581,6 +1563,15 @@ $(function() {
 </li>
 <li>fVertex13
 : <a class="el" href="classAtProtoEventAna.html#a53f6b26a164dc48c4bab05ca144b56d8">AtProtoEventAna</a>
+</li>
+<li>fVertexToZDist
+: <a class="el" href="classAtTrack.html#a77b3f12fa7f8e1bb3c87a370b457b95c">AtTrack</a>
+</li>
+<li>fVetoIn
+: <a class="el" href="classRandomSample_1_1AtWeightedY.html#a2a60147b97e7f45d37db964a9be6a483">RandomSample::AtWeightedY</a>
+</li>
+<li>fVetoOut
+: <a class="el" href="classRandomSample_1_1AtWeightedY.html#af4feec99d05ae1b595f69ae830d7e15b">RandomSample::AtWeightedY</a>
 </li>
 <li>fVolName
 : <a class="el" href="classAtMCPoint.html#a41e0965d3da9f77bc97904842e2a058b">AtMCPoint</a>
@@ -1657,7 +1648,7 @@ $(function() {
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 11 2022 17:34:25 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jun 14 2022 23:48:10 for ATTPCROOT by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

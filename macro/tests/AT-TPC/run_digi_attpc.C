@@ -38,7 +38,7 @@ void run_digi_attpc()
    auto mapping = std::make_shared<AtTpcMap>();
    mapping->ParseXMLMap(mapParFile.Data());
    mapping->GeneratePadPlane();
-   mapping->ParseInhibitMap("./data/inhibit.txt", AtMap::kTotal);
+   mapping->ParseInhibitMap("./data/inhibit.txt", AtMap::InhibitType::kTotal);
 
    // __ AT digi tasks___________________________________
    AtClusterizeLineTask *clusterizer = new AtClusterizeLineTask();
@@ -54,21 +54,18 @@ void run_digi_attpc()
    reduceTask->SetInputBranch("AtRawEvent");
    reduceTask->SetReductionFunction(&reduceFunc);
 
-   AtPSASimple2 *psa = new AtPSASimple2();
+   auto psa = std::make_unique<AtPSAMax>();
    psa->SetThreshold(0);
-   psa->SetMaxFinder();
 
    // Create PSA task
-   AtPSAtask *psaTask = new AtPSAtask(psa);
+   AtPSAtask *psaTask = new AtPSAtask(std::move(psa));
    psaTask->SetPersistence(kTRUE);
 
    AtRansacTask *ransacTask = new AtRansacTask();
    ransacTask->SetPersistence(kTRUE);
    ransacTask->SetVerbose(kFALSE);
    ransacTask->SetDistanceThreshold(20.0);
-   ransacTask->SetTiltAngle(0);
    ransacTask->SetMinHitsLine(10);
-   ransacTask->SetFullMode();
 
    fRun->AddTask(clusterizer);
    fRun->AddTask(pulse);

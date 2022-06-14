@@ -48,12 +48,12 @@ constexpr auto cNORMAL = "\033[0m";
 constexpr auto cGREEN = "\033[1;32m";
 
 AtFITTER::AtGenfit::AtGenfit(Float_t magfield, Float_t minbrho, Float_t maxbrho, std::string eLossFile,
-                             Float_t gasMediumDensity, Int_t minit, Int_t maxit)
+                             Float_t gasMediumDensity, Int_t pdg, Int_t minit, Int_t maxit)
    : fEnergyLossFile(std::move(eLossFile)),
      fMeasurementProducer(
         new genfit::MeasurementProducer<AtHitCluster, genfit::AtSpacepointMeasurement>(fHitClusterArray)),
      fMeasurementFactory(new genfit::MeasurementFactory<genfit::AbsMeasurement>()), fMinIterations(minit),
-     fMaxIterations(maxit), fMinBrho(minbrho), fMaxBrho(maxbrho), fMagneticField(10.0 * magfield),
+     fMaxIterations(maxit), fMinBrho(minbrho), fMaxBrho(maxbrho), fMagneticField(10.0 * magfield), fPDGCode(pdg),
      fGenfitTrackArray(new TClonesArray("genfit::Track")), fHitClusterArray(new TClonesArray("AtHitCluster"))
 {
    fKalmanFitter = std::make_shared<genfit::KalmanFitterRefTrack>();
@@ -147,6 +147,10 @@ TClonesArray *AtFITTER::AtGenfit::GetGenfitTrackArray()
    return fGenfitTrackArray;
 }
 
+/**
+ * Angles from track are used to construct the direction of the initial momentum of the track.
+ * Radius from track is used to construct the magnitude of the initial momentum of the track.
+ */
 genfit::Track *AtFITTER::AtGenfit::FitTracks(AtTrack *track)
 {
 
@@ -180,10 +184,6 @@ genfit::Track *AtFITTER::AtGenfit::FitTracks(AtTrack *track)
                 << " - Phi : " << TMath::RadToDeg() * track->GetGeoPhi() << "\n";
    }
 
-   // Saving original PRA angles
-   // Double_t thetaPRA = track->GetGeoTheta();
-   // Double_t phiPRA = track->GetGeoPhi();
-
    // New angle convention
    Double_t theta = 0.0;
    Double_t phi = 0.0;
@@ -196,7 +196,7 @@ genfit::Track *AtFITTER::AtGenfit::FitTracks(AtTrack *track)
       thetaConv = track->GetGeoTheta();
    }
 
-   if (thetaConv < 90.0 * TMath::DegToRad()) { // Forward (Backward) for experiment (simulation)
+   if (IsForwardTrack(thetaConv)) { // Forward (Backward) for experiment (simulation)
 
       if (fSimulationConv) {
          theta = 180.0 * TMath::DegToRad() - track->GetGeoTheta();
@@ -261,16 +261,16 @@ genfit::Track *AtFITTER::AtGenfit::FitTracks(AtTrack *track)
                    << "\n";
       }
 
-      if (thetaConv < 90.0 * TMath::DegToRad()) { // Experiment forward
+      if (IsForwardTrack(thetaConv)) { // Experiment forward
          if (fSimulationConv)
-            clusterClone.SetPosition(pos.X(), pos.Y(), 1000.0 - pos.Z());
+            clusterClone.SetPosition({pos.X(), pos.Y(), 1000.0 - pos.Z()});
          else
-            clusterClone.SetPosition(-pos.X(), pos.Y(), 1000.0 - pos.Z());
+            clusterClone.SetPosition({-pos.X(), pos.Y(), 1000.0 - pos.Z()});
       } else if (thetaConv > 90.0 * TMath::DegToRad()) {
          if (fSimulationConv)
-            clusterClone.SetPosition(pos.X(), pos.Y(), pos.Z());
+            clusterClone.SetPosition({pos.X(), pos.Y(), pos.Z()});
          else
-            clusterClone.SetPosition(-pos.X(), pos.Y(), pos.Z());
+            clusterClone.SetPosition({-pos.X(), pos.Y(), pos.Z()});
       }
 
       Int_t idx = fHitClusterArray->GetEntriesFast();
@@ -291,7 +291,7 @@ genfit::Track *AtFITTER::AtGenfit::FitTracks(AtTrack *track)
    XYZPoint iniPos;
 
    // Initial track position
-   if (thetaConv < 90.0 * TMath::DegToRad()) {
+   if (IsForwardTrack(thetaConv)) {
       iniCluster = hitClusterArray->front();
       // iniCluster = hitClusterArray->back();
       iniPos = iniCluster.GetPosition();
@@ -384,8 +384,6 @@ genfit::Track *AtFITTER::AtGenfit::FitTracks(AtTrack *track)
       std::cout << " AtGenfit -  Exception caught from Kalman Fitter : " << e.what() << "\n";
       return nullptr;
    }
-
-   // gfTrack->prune("FCW");
 
    genfit::FitStatus *fitStatus;
    try {

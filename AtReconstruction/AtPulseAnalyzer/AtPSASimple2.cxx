@@ -1,20 +1,19 @@
 #include "AtPSASimple2.h"
 
-#include <FairLogger.h>
-
-// AtTPCROOT classes
 #include "AtCalibration.h"
 #include "AtEvent.h"
 #include "AtHit.h"
 #include "AtPad.h"
 #include "AtRawEvent.h"
 
-// ROOT classes
+#include <FairLogger.h>
+
 #include <Math/Point2D.h>
+#include <Math/Point3D.h>    // for PositionVector3D
+#include <Math/Point3Dfwd.h> // for XYZPoint
 #include <Math/Rotation3D.h>
 #include <TSpectrum.h>
-#include <TVector3.h>
-// STL
+
 #include <algorithm>
 #include <array> // for array
 #include <cmath>
@@ -27,7 +26,7 @@
 //#ifdef _OPENMP
 //#include <omp.h>
 //#endif
-
+using XYZPoint = ROOT::Math::XYZPoint;
 ClassImp(AtPSASimple2);
 
 void AtPSASimple2::Analyze(AtRawEvent *rawEvent, AtEvent *event)
@@ -67,12 +66,6 @@ void AtPSASimple2::Analyze(AtRawEvent *rawEvent, AtEvent *event)
 
       auto pos = pad->GetPadCoord();
       Double_t zPos = 0;
-      Double_t xPosRot = 0;
-      Double_t yPosRot = 0;
-      Double_t zPosRot = 0;
-      Double_t xPosCorr = 0;
-      Double_t yPosCorr = 0;
-      Double_t zPosCorr = 0;
       Double_t charge = 0;
       Int_t maxAdcIdx = 0;
       Int_t numPeaks = 0;
@@ -81,8 +74,6 @@ void AtPSASimple2::Analyze(AtRawEvent *rawEvent, AtEvent *event)
          LOG(debug) << "Skipping pad, position is invalid";
          continue;
       }
-
-      CalcLorentzVector();
 
       if (!(pad->IsPedestalSubtracted())) {
          LOG(ERROR) << "Pedestal should be subtracted to use this class!";
@@ -96,12 +87,11 @@ void AtPSASimple2::Analyze(AtRawEvent *rawEvent, AtEvent *event)
       dummy.fill(0);
       bg.fill(0);
 
-      // TODO: Add in warning that fCalibration is depricated in favor of AtFilter framework
-      if (fCalibration->IsGainFile()) {
-         adc = fCalibration->CalibrateGain(adc, PadNum);
+      if (fCalibration.IsGainFile()) {
+         adc = fCalibration.CalibrateGain(adc, PadNum);
       }
-      if (fCalibration->IsJitterFile()) {
-         adc = fCalibration->CalibrateJitter(adc, PadNum);
+      if (fCalibration.IsJitterFile()) {
+         adc = fCalibration.CalibrateJitter(adc, PadNum);
       }
 
       for (Int_t iTb = 0; iTb < fNumTbs; iTb++) {
@@ -224,16 +214,13 @@ void AtPSASimple2::Analyze(AtRawEvent *rawEvent, AtEvent *event)
                if (iPeak == 0)
                   QEventTot += QHitTot;
 
-               TVector3 posRot = RotateDetector(pos.X(), pos.Y(), zPos, maxAdcIdx);
-
-               auto hit = event->AddHit(PadNum, XYZPoint(pos.X(), pos.Y(), zPos), charge);
+               auto &hit = event->AddHit(PadNum, XYZPoint(pos.X(), pos.Y(), zPos), charge);
                LOG(debug) << "Added hit with ID" << hit.GetHitID();
-               hit.SetPositionCorr(posRot.X(), posRot.Y(), posRot.Z());
+
                hit.SetTimeStamp(maxAdcIdx);
                hit.SetTimeStampCorr(TBCorr);
                hit.SetTimeStampCorrInter(timemax);
-               hit.SetBaseCorr(basecorr / 10.0);
-               hit.SetSlopeCnt(slope_cnt);
+
                hit.SetTraceIntegral(QHitTot);
                // TODO: The charge of each hit is the total charge of the spectrum, so for double
                // structures this is unrealistic.

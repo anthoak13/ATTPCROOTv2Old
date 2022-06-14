@@ -6,11 +6,11 @@
 #include <Math/Vector2D.h>    // for DisplacementVector2D
 #include <Math/Vector3D.h>    // for DisplacementVector3D
 #include <Math/Vector3Dfwd.h> // for RhoZPhiVector
-#include <TEveLine.h>
 
 #include <algorithm> // for max
 #include <cmath>     // for fabs, isfinite, sqrt
 #include <memory>    // for allocator_traits<>::value_type
+class TEveLine;
 
 using XYPoint = ROOT::Math::XYPoint;
 using namespace AtPatterns;
@@ -18,7 +18,7 @@ using namespace AtPatterns;
 AtPatternCircle2D::AtPatternCircle2D() : AtPattern(3) {}
 TEveLine *AtPatternCircle2D::GetEveLine() const
 {
-   return AtPattern::GetEveLine(0, M_2_PI, 100);
+   return AtPattern::GetEveLine(0, 2 * M_PI, 1000);
 }
 
 void AtPatternCircle2D::DefinePattern(const std::vector<XYZPoint> &points)

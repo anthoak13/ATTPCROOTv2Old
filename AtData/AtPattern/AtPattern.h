@@ -1,20 +1,22 @@
 #ifndef ATPATTERN_H
 #define ATPATTERN_H
 
-#include "AtHit.h"
-
-#include <Rtypes.h> // for Double_t, Int_t, THashConsistencyHolder, ClassDef
+#include <Math/Point3D.h>
+#include <Math/Point3Dfwd.h> // for XYZPoint
+#include <Rtypes.h>          // for Double_t, Int_t, THashConsistencyHolder, ClassDef
 #include <TObject.h>
 
 #include <algorithm> // for max
 #include <cmath>     // for NAN
 #include <memory>
-#include <vector> // for vector
+#include <utility> // for move
+#include <vector>  // for vector
 
 class TBuffer;
 class TClass;
 class TMemberInspector;
 class TEveLine;
+class AtHit;
 
 /**
  * @defgroup AtPattern Track Patterns
@@ -35,6 +37,9 @@ namespace AtPatterns {
  * @ingroup AtPattern
  */
 class AtPattern : public TObject {
+public:
+   using XYZPoint = ROOT::Math::XYZPoint;
+
 protected:
    std::vector<Double_t> fPatternPar; //< Description of pattern
    Double_t fChi2{NAN};               //< How good the pattern is at describing the data
@@ -45,6 +50,10 @@ protected:
 
 public:
    AtPattern(Int_t numPoints = 0);
+   AtPattern(const AtPattern &) = default;
+   AtPattern(AtPattern &&) = default;
+   virtual ~AtPattern() = default;
+
    Double_t FitPattern(const std::vector<AtHit> &pointsToFit, Double_t qThreshold = -1);
    Double_t FitPattern(const std::vector<XYZPoint> &pointsToFit);
 
@@ -100,6 +109,7 @@ public:
    virtual TEveLine *GetEveLine() const = 0;
 
    virtual std::unique_ptr<AtPattern> Clone() const = 0;
+
    /**
     * @brief Number of points to define the pattern.
     *

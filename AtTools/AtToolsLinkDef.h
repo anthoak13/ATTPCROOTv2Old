@@ -15,6 +15,7 @@
 
 #pragma link C++ class AtSpaceChargeModel + ;
 #pragma link C++ class AtLineChargeModel + ;
+#pragma link C++ class AtRadialChargeModel - !;
 
 #pragma link C++ class AtTools::AtKinematics + ;
 #pragma link C++ class AtTools::AtVirtualTerminal + ;
@@ -25,5 +26,6 @@
 #pragma link C++ class RandomSample::AtChargeWeighted - !;
 #pragma link C++ class RandomSample::AtGaussian - !;
 #pragma link C++ class RandomSample::AtWeightedGaussian - !;
+#pragma link C++ class RandomSample::AtWeightedY - !;
 
 #endif

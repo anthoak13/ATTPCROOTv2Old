@@ -4,25 +4,24 @@
 #pragma link off all classes;
 #pragma link off all functions;
 
+#pragma link C++ class AtFilter - !;
 #pragma link C++ class AtFilterFFT - !; // Don't generate any IO
 #pragma link C++ class AtFilterCalibrate - !;
+#pragma link C++ class AtFilterSubtraction - !;
 
 #pragma link C++ class AtPSA + ;
-#pragma link C++ class AtPSASimple + ;
-#pragma link C++ class AtPSASimple2 + ;
-#pragma link C++ class AtPSAProto + ;
-#pragma link C++ class AtPSAProtoFull + ;
-#pragma link C++ class AtPSAFilter + ;
+#pragma link C++ class AtPSASpectrum + ;
+#pragma link C++ class AtPSAHitPerTB + ;
 #pragma link C++ class AtPSAFull + ;
-#pragma link C++ class AtCalibration + ;
+#pragma link C++ class AtPSATBAvg + ;
+#pragma link C++ class AtPSAMax + ;
+#pragma link C++ class AtPSASimple2 + ;
 
 #pragma link C++ nestedclass;
 #pragma link C++ nestedtypedef;
-#pragma link C++ namespace AtRANSACN;
-#pragma link C++ class AtRANSACN::AtRansac + ;
-#pragma link C++ struct AtRANSACN::AtRansac::PairedLines + ;
 
 #pragma link C++ class AtPATTERN::AtTrackFinderHC + ;
+#pragma link C++ class AtPATTERN::AtTrackFinderTC + ;
 #pragma link C++ class AtPATTERN::AtPRA + ;
 #pragma link C++ namespace AtPATTERN;
 
@@ -36,16 +35,12 @@
 #pragma link C++ namespace AtFITTER;
 #pragma link C++ class AtFitterTask + ;
 
+/* Tasks in AtReconstruction */
 #pragma link C++ class AtPSAtask + ;
-
 #pragma link C++ class AtPRAtask + ;
-
 #pragma link C++ class AtRansacTask + ;
-
 #pragma link C++ class AtDataReductionTask + ;
-
 #pragma link C++ class AtSpaceChargeCorrectionTask + ;
-
-//#pragma link C++ function AtHoughSpaceLine::CalcGenHoughSpace<AtEvent*>(GenHough event);
+#pragma link C++ class AtFilterTask + ;
 
 #endif

@@ -28,23 +28,25 @@ class AtTrack : public TObject {
 protected:
    // Attributes shared by all track finding algorithms
    Int_t fTrackID{-1};
-   std::vector<AtHit> fHitArray; // TrackHC, AtGenfit, all ransacs
+   std::vector<AtHit> fHitArray;
    std::unique_ptr<AtPatterns::AtPattern> fPattern{nullptr};
+   Bool_t fIsMerged{false};
+   Double_t fVertexToZDist{0};
 
    // Used by AtPRA
-   Double_t fGeoThetaAngle{};                // Geometrical scattering angle with respect to the detector FitParameters
-   Double_t fGeoPhiAngle{};                  //  " azimuthal "
-   Double_t fGeoRadius{};                    // Initial radius of curvature
-   std::pair<Double_t, Double_t> fGeoCenter; // Center of the spiral track
-   std::vector<AtHitCluster> fHitClusterArray; ///< Clusterized hits container
+   Double_t fGeoThetaAngle{};                //< Geometrical scattering angle with respect to the detector FitParameters
+   Double_t fGeoPhiAngle{};                  //<  " azimuthal "
+   Double_t fGeoRadius{};                    //< Initial radius of curvature
+   std::pair<Double_t, Double_t> fGeoCenter; //< Center of the spiral track
+   std::vector<AtHitCluster> fHitClusterArray; //< Clusterized hits container
 
 public:
    AtTrack() = default;
    AtTrack(const AtTrack &obj);
-   AtTrack &operator=(const AtTrack &obj) { return *this; };
+   AtTrack &operator=(AtTrack obj);
    AtTrack(AtTrack &&) = default;
-   AtTrack &operator=(AtTrack &&) = default;
    ~AtTrack() = default;
+   friend void swap(AtTrack &a, AtTrack &b) noexcept;
 
    // Getters
    Int_t GetTrackID() const { return fTrackID; }
@@ -58,6 +60,9 @@ public:
    std::pair<Double_t, Double_t> GetGeoCenter() const { return fGeoCenter; }
    std::vector<AtHitCluster> *GetHitClusterArray() { return &fHitClusterArray; }
 
+   Bool_t GetIsMerged() const { return fIsMerged; }
+   Double_t GetVertexToZDist() const { return fVertexToZDist; }
+
    // Setters
    void SetTrackID(Int_t val) { fTrackID = val; }
    void AddHit(const AtHit &hit) { fHitArray.push_back(hit); }
@@ -69,6 +74,9 @@ public:
    void SetGeoRadius(Double_t radius) { fGeoRadius = radius; }
    void SetGeoCenter(std::pair<Double_t, Double_t> center) { fGeoCenter = center; }
    void AddClusterHit(std::shared_ptr<AtHitCluster> hitCluster);
+
+   void SetIsMerged(bool val) { fIsMerged = val; }
+   void SetVertexToZDist(Double_t val) { fVertexToZDist = val; }
 
    // Operations
    void ResetHitClusterArray() { fHitClusterArray.clear(); }

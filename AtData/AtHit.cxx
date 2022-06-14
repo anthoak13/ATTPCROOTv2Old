@@ -2,6 +2,7 @@
 
 #include <Rtypes.h>
 
+#include <cmath>
 #include <utility>
 
 ClassImp(AtHit);
@@ -14,3 +15,8 @@ AtHit::AtHit(Int_t hitID, Int_t PadNum, XYZPoint loc, Double_t charge)
 }
 
 AtHit::AtHit(Int_t padNum, XYZPoint loc, Double_t charge) : AtHit(-1, padNum, std::move(loc), charge) {}
+
+AtHit::XYZVector AtHit::GetPositionSigma() const
+{
+   return {std::sqrt(fPositionVariance.X()), std::sqrt(fPositionVariance.Y()), std::sqrt(fPositionVariance.Z())};
+}

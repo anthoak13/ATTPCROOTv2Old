@@ -3,11 +3,11 @@
 #include <FairLogger.h>
 
 #include <Math/Vector3D.h> // for DisplacementVector3D, operator*
-#include <TEveLine.h>
 #include <TMath.h>
 
 #include <algorithm> // for min
 #include <cmath>     // for cos, sin, pow, sqrt, acos, atan, fabs
+class TEveLine;
 
 using namespace AtPatterns;
 
@@ -31,7 +31,7 @@ double AtPatternLine::parameterAtPoint(const XYZPoint &compPoint) const
    return (compPoint - GetPoint()).Dot(GetDirection()) / GetDirection().Mag2();
 }
 
-XYZPoint AtPatternLine::ClosestPointOnPattern(const XYZPoint &point) const
+AtPatternLine::XYZPoint AtPatternLine::ClosestPointOnPattern(const XYZPoint &point) const
 {
    auto t = parameterAtPoint(point);
    return GetPoint() + t * GetDirection();
@@ -54,12 +54,14 @@ void AtPatternLine::DefinePattern(const std::vector<XYZPoint> &points)
 
    auto fPoint = points[0];
    auto fDirection = points[1] - points[0];
-   auto tZ = -fPoint.Z() / fDirection.Z();
-   fPoint += fDirection * tZ;
 
    // If not perpendicular to z-axis rescale direction
-   if (fDirection.Z() != 0)
+   /*if (fDirection.Z() != 0) {
+      auto tZ = -fPoint.Z() / fDirection.Z();
+      fPoint += fDirection * tZ;
+
       fDirection /= fDirection.Z();
+      }*/
    fPatternPar = {fPoint.X(), fPoint.Y(), fPoint.Z(), fDirection.X(), fDirection.Y(), fDirection.Z()};
 }
 
@@ -71,7 +73,7 @@ void AtPatternLine::DefinePattern(const std::vector<XYZPoint> &points)
  *
  * @param[in] z Location of point at z [mm]
  */
-XYZPoint AtPatternLine::GetPointAt(double z) const
+AtPatternLine::XYZPoint AtPatternLine::GetPointAt(double z) const
 {
    return GetPoint() + z * GetDirection();
 }

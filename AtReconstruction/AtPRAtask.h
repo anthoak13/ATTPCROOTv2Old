@@ -8,7 +8,6 @@
 
 #include <stddef.h> // for size_t
 class AtDigiPar;
-class FairLogger;
 class TBuffer;
 class TClass;
 class TMemberInspector;
@@ -16,12 +15,16 @@ namespace AtPATTERN {
 class AtPRA;
 }
 
+/**
+ * @brief Task for finding patterns in hit clouds.
+ *
+ * Logic is in class AtPRA and derived types.
+ */
 class AtPRAtask : public FairTask {
 private:
    TClonesArray *fEventHArray{};
    TClonesArray fPatternEventArray;
 
-   FairLogger *fLogger;
    AtDigiPar *fPar;
 
    AtPATTERN::AtPRA *fPRA{};
@@ -77,7 +80,6 @@ public:
    void SetkNN(Double_t knn) { fKNN = knn; }
    void SetStdDevMulkNN(Double_t stdDevMul) { fStdDevMulkNN = stdDevMul; }
    void SetkNNDist(Double_t dist) { fkNNDist = dist; }
-
    ClassDef(AtPRAtask, 1);
 };
 

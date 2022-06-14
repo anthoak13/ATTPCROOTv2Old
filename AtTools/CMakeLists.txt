@@ -9,11 +9,11 @@ set(SRCS
   AtEulerTransformation.cxx
   AtSpaceChargeModel.cxx
   AtLineChargeModel.cxx
+  AtRadialChargeModel.cxx
   AtVirtualTerminal.cxx
   AtKinematics.cxx
 
   AtFormat.cxx
-  AtRandomSample.cxx
   AtContainerManip.cxx
   AtHitSampling/AtSample.cxx
   AtHitSampling/AtSampleMethods.cxx
@@ -23,6 +23,7 @@ set(SRCS
   AtHitSampling/AtSampleFromReference.cxx
   AtHitSampling/AtGaussian.cxx
   AtHitSampling/AtWeightedGaussian.cxx
+  AtHitSampling/AtWeightedY.cxx
   )
 
 Set(DEPENDENCIES
@@ -31,6 +32,7 @@ Set(DEPENDENCIES
   
   FairRoot::FairTools
   ATTPCROOT::AtData
+  ATTPCROOT::AtParameter
 )
 
 generate_target_and_root_library(${LIBRARY_NAME}

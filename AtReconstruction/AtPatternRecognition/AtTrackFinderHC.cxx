@@ -3,6 +3,7 @@
 #include "AtEvent.h"        // for AtEvent
 #include "AtHit.h"          // for AtHit
 #include "AtPatternEvent.h" // for AtPatternEvent
+#include "AtTrack.h"        // for AtTrack
 
 #include <Math/Point3D.h> // for PositionVector3D
 
@@ -20,6 +21,7 @@
 #include <cmath>    // for sqrt
 #include <iostream> // for cout, cerr
 #include <memory>   // for allocator_traits<>::value_...
+#include <utility>  // for move
 
 constexpr auto cRED = "\033[1;31m";
 constexpr auto cYELLOW = "\033[1;33m";
@@ -28,31 +30,12 @@ constexpr auto cGREEN = "\033[1;32m";
 
 AtPATTERN::AtTrackFinderHC::AtTrackFinderHC() : AtPATTERN::AtPRA() {}
 
-std::vector<AtTrack> AtPATTERN::AtTrackFinderHC::GetTrackCand()
-{
-   return fTrackCand;
-}
-
 std::unique_ptr<AtPatternEvent> AtPATTERN::AtTrackFinderHC::FindTracks(AtEvent &event)
 {
 
    int opt_verbose = 0;
 
-   hc_params opt_params{};
-
-   // hc_params bestParams;
-   // AtTPC
-   // Defaultvalues
-   // bestParams.s = -1.0;
-   // bestParams.r = -1.0;
-   // bestParams.k = 19;
-   // bestParams.n = 3;
-   // bestParams.a = 0.03;
-   // bestParams.t = 3.5;
-   // bestParams.m = 8;
-   // opt_params = bestParams;
-
-   opt_params = inputParams;
+   hc_params opt_params = inputParams;
 
    // Parse AtTPCROOT date into PCL format
    pcl::PointCloud<pcl::PointXYZI>::Ptr cloud_xyzti(new pcl::PointCloud<pcl::PointXYZI>());
@@ -99,8 +82,6 @@ std::unique_ptr<AtPatternEvent> AtPATTERN::AtTrackFinderHC::FindTracks(AtEvent &
    cluster = use_hc(cloud_xyzti_smooth, triplets, opt_params.s, opt_params.t, opt_params.m, opt_verbose);
 
    // Adapt clusters to AtTrack
-   // fTrackCand = clustersToTrack(cloud_xyzti,cluster,event);
-
    return clustersToTrack(cloud_xyzti, cluster, event);
 }
 

@@ -29,7 +29,6 @@ void run_eve(TString InputDataFileName = "run_0160")
 
    auto fMap = std::make_shared<AtTpcMap>();
    fMap->ParseXMLMap(mapDir.Data());
-
    AtEventManager *eveMan = new AtEventManager();
    AtEventDrawTask *eve = new AtEventDrawTask();
    eve->SetMap(fMap);

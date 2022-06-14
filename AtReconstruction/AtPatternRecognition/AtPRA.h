@@ -1,25 +1,37 @@
 #ifndef AtPRA_H
 #define AtPRA_H
 
+#include "AtTrack.h" // for AtTrack
+
 #include <Rtypes.h>  // for Double_t, Float_t, Int_t, THashConsistencyHolder
 #include <TObject.h> // for TObject
 
+#include <algorithm> // for max
 #include <memory>
-#include <vector> // for vector
+#include <type_traits> // for false_type, is_signed, true_type
+#include <vector>      // for vector
 
 class AtDigiPar;
 class AtEvent;
 class AtHit;
 class AtPatternEvent;
-class AtTrack;
 class TBuffer;
 class TClass;
 class TMemberInspector;
 
 namespace AtPATTERN {
 
+/**
+ * @brief Find patterns in hit clouds.
+ *
+ * Base class for finding tracks in a hit cloud. Right now, just supports HC.
+ *
+ *
+ */
 class AtPRA : public TObject {
 protected:
+   std::vector<AtTrack> fTrackCand; //< Candidate tracks
+
    AtDigiPar *fPar; ///< parameter container
 
    Int_t fMaxHits{5000};
@@ -33,27 +45,55 @@ protected:
 
 public:
    virtual ~AtPRA() = default;
-   virtual std::vector<AtTrack> GetTrackCand() = 0;
-   virtual std::unique_ptr<AtPatternEvent> FindTracks(AtEvent &event) = 0;
 
-   void SetTrackInitialParameters(AtTrack &track);
-   void PruneTrack(AtTrack &track);
+   // Getters
+   virtual std::vector<AtTrack> GetTrackCand() const { return fTrackCand; }
+
+   // Setters
    void SetMaxHits(Int_t maxHits) { fMaxHits = maxHits; }
    void SetMinHits(Int_t minHits) { fMinHits = minHits; }
    void SetMeanDistance(Float_t meanDistance) { fMeanDistance = meanDistance; }
-   bool kNN(const std::vector<AtHit> &hits, AtHit &hit, int k);
-
    void SetkNN(Double_t knn) { fKNN = knn; }
    void SetStdDevMulkNN(Double_t stdDevMul) { fStdDevMulkNN = stdDevMul; }
    void SetkNNDist(Double_t dist) { fkNNDist = dist; }
    void SetPrunning() { kSetPrunning = kTRUE; }
 
+   virtual std::unique_ptr<AtPatternEvent> FindTracks(AtEvent &event) = 0;
+
+   void PruneTrack(AtTrack &track);
+   bool kNN(const std::vector<AtHit> &hits, AtHit &hit, int k);
+
 protected:
-   void SetTrackCurvature(AtTrack &track);
+   // Functions that need to be moved to another class. They assume a curved track
+   /*
+    * Takes track and sets fGeo... parameters using SampleConsensus. I think these are then used
+    * as initial guesses for GenFit. Probably, this should be moved into the fitting classes instead of
+    * here. At the very least, it needs to be in a subclass that only deals with curved tracks, it
+    * would make no sense to apply this function to straight tracks.
+    */
+   void SetTrackInitialParameters(AtTrack &track);
+
+   // Clusterization methods
    void Clusterize(AtTrack &track);
    void Clusterize3D(AtTrack &track);
    void Clusterize3D(AtTrack &track, Float_t distance, Float_t radius);
    void ClusterizeSmooth3D(AtTrack &track, Float_t distance, Float_t radius);
+
+   template <typename T>
+   inline constexpr int GetSign(T num, std::true_type is_signed)
+   {
+      return (T(0) < num) - (num < T(0));
+   }
+   template <typename T>
+   inline constexpr int GetSign(T num, std::false_type is_signed)
+   {
+      return (T(0) < num);
+   }
+   template <typename T>
+   inline constexpr int GetSign(T num)
+   {
+      return GetSign(num, std::is_signed<T>());
+   }
 
    ClassDef(AtPRA, 1)
 };

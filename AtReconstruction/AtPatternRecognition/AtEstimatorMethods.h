@@ -14,12 +14,20 @@ namespace SampleConsensus {
  * All implemented estimators for AtSampleConsensus.
  * @ingroup SampleConsensus
  */
-enum class Estimators { kRANSAC, kLMedS, kMLESAC };
-
+enum class Estimators { kRANSAC, kLMedS, kMLESAC, kWRANSAC, kChi2 };
 /**
- * @brief Implementation of RANSAC estimator
+ * @brief Implementation of RANSAC estimator.
+ *
+ * Maximizes the number of inliers.
  */
 int EvaluateRansac(AtPatterns::AtPattern *model, const std::vector<AtHit> &hitArray, double distanceThreshold);
+/**
+ * @brief Implementation of estimator that minimizes chi2.
+ *
+ * Used to minimize avg(error^2) for all inliers.
+ */
+int EvaluateChi2(AtPatterns::AtPattern *model, const std::vector<AtHit> &hitArray, double distanceThreshold);
+
 /**
  * @brief Implementation of MLESAC estimator
  */
@@ -28,6 +36,10 @@ int EvaluateMlesac(AtPatterns::AtPattern *model, const std::vector<AtHit> &hitAr
  * @brief Implementation of LMedS estimator
  */
 int EvaluateLmeds(AtPatterns::AtPattern *model, const std::vector<AtHit> &hitArray, double distanceThreshold);
+/**
+ * @brief Implementation of RANSAC estimator using charge weighting
+ */
+int EvaluateWeightedRansac(AtPatterns::AtPattern *model, const std::vector<AtHit> &hitArray, double distanceThreshold);
 
 } // namespace SampleConsensus
 #endif //#ifndef ATESTIMATORMETHODS_H

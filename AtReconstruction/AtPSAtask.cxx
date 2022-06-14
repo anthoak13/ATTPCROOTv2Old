@@ -1,21 +1,16 @@
 #include "AtPSAtask.h"
 
-// FairRoot Classes
-#include <FairLogger.h>
-
-// Root Classes
 #include "AtEvent.h"
 #include "AtPSA.h"
 #include "AtRawEvent.h"
 
+#include <FairLogger.h>
 #include <FairRootManager.h> // for FairRootManager
 
+#include <TClonesArray.h>
 #include <TObject.h> // for TObject
 
-#include <map> // for allocator, operator!=, _Rb_tree_const_i...
-
-// AtTPCRoot Classes
-#include <TClonesArray.h>
+#include <utility> // for move
 
 /*
 #ifdef _OPENMP
@@ -30,13 +25,12 @@ constexpr auto cGREEN = "\033[1;32m";
 
 ClassImp(AtPSAtask);
 
-AtPSAtask::AtPSAtask(AtPSA *psa)
-   : fEventHArray(new TClonesArray("AtEvent")), fInputBranchName("AtRawEvent"), fOutputBranchName("AtEventH"),
-     fSimulatedPointBranchName("AtTpcPoint"), fPSA(psa), fIsPersistence(false)
+AtPSAtask::AtPSAtask(AtPSA *psa) : AtPSAtask(psa->Clone()) {}
+AtPSAtask::AtPSAtask(std::unique_ptr<AtPSA> psa)
+   : fInputBranchName("AtRawEvent"), fOutputBranchName("AtEventH"), fSimulatedPointBranchName("AtTpcPoint"),
+     fEventArray(TClonesArray("AtEvent", 1)), fPSA(std::move(psa))
 {
 }
-
-AtPSAtask::~AtPSAtask() = default;
 
 void AtPSAtask::SetPersistence(Bool_t value)
 {
@@ -82,22 +76,21 @@ InitStatus AtPSAtask::Init()
                 << fSimulatedPointBranchName;
    }
 
-   ioMan->Register(fOutputBranchName, "AtTPC", fEventHArray, fIsPersistence);
+   ioMan->Register(fOutputBranchName, "AtTPC", &fEventArray, fIsPersistence);
 
    return kSUCCESS;
 }
 
 void AtPSAtask::Exec(Option_t *opt)
 {
-   fEventHArray->Delete();
-
    if (fRawEventArray->GetEntriesFast() == 0) {
       LOG(debug) << "Skipping PSA because raw event array is empty";
       return;
    }
 
    auto *rawEvent = dynamic_cast<AtRawEvent *>(fRawEventArray->At(0));
-   auto *event = (AtEvent *)new ((*fEventHArray)[0]) AtEvent(*rawEvent);
+   auto *event = dynamic_cast<AtEvent *>(fEventArray.ConstructedAt(0, "C")); // Get and clear old event
+   event->CopyFrom(*rawEvent);
 
    if (!rawEvent->IsGood()) {
       LOG(debug) << "Event " << rawEvent->GetEventID() << " is not good, skipping PSA";

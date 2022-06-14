@@ -16,11 +16,8 @@
 #include "AtPadReference.h"
 #include "AtPattern.h"
 #include "AtPatternEvent.h" // for AtPatternEvent
-#include "AtPatternLine.h"
-//#include "AtRansac.h"         // for AtRansac, operator<<, AtRansac::Pair...
-#include "AtRawEvent.h"         // for AtRawEvent, AuxPadMap
-#include "AtTrack.h"            // for AtTrack, operator<<
-#include "AtTrackingEventAna.h" // for AtTrackingEventAna
+#include "AtRawEvent.h"     // for AtRawEvent, AuxPadMap
+#include "AtTrack.h"        // for AtTrack, operator<<
 
 #include <FairLogger.h>      // for Logger, LOG
 #include <FairRootManager.h> // for FairRootManager
@@ -38,7 +35,6 @@
 #include <TEveRGBAPalette.h> // for TEveRGBAPalette
 #include <TEveTrans.h>       // for TEveTrans
 #include <TEveTreeTools.h>   // for TEvePointSelectorConsumer, TEvePoint...
-#include <TF1.h>             // for TF1
 #include <TGraph.h>          // for TGraph
 #include <TH1.h>             // for TH1D, TH1I, TH1F
 #include <TH2.h>             // for TH2F
@@ -53,7 +49,6 @@
 #include <TRandom.h>         // for TRandom
 #include <TSeqCollection.h>  // for TSeqCollection
 #include <TStyle.h>          // for TStyle, gStyle
-#include <TVector3.h>        // for TVector3
 #include <TVirtualPad.h>     // for TVirtualPad, gPad
 #include <TVirtualX.h>       // for TVirtualX
 
@@ -424,20 +419,12 @@ void AtEventDrawTask::DrawHitPoints()
       if (PadMultHit > fMultiHit)
          continue;
       auto position = hit.GetPosition();
-      auto positioncorr = hit.GetPositionCorr();
 
       if (!fEventManager->GetToggleCorrData()) {
          fHitSet->SetMarkerColor(fHitColor);
          fHitSet->SetNextPoint(position.X() / 10., position.Y() / 10., position.Z() / 10.); // Convert into cm
          fHitSet->SetPointId(new TNamed(Form("Hit %d", iHit), ""));
          fPadPlane->Fill(position.X(), position.Y(), hit.GetCharge());
-
-      } else if (fEventManager->GetToggleCorrData()) {
-         fHitSet->SetMarkerColor(kBlue);
-         fHitSet->SetNextPoint(positioncorr.X() / 10., positioncorr.Y() / 10.,
-                               positioncorr.Z() / 10.); // Convert into ccm
-         fHitSet->SetPointId(new TNamed(Form("Corrected Hit %d", iHit), ""));
-         fPadPlane->Fill(positioncorr.X(), positioncorr.Y(), hit.GetCharge());
       }
 
       if (fIsRawData) {
@@ -457,9 +444,6 @@ void AtEventDrawTask::DrawHitPoints()
          if (!fEventManager->GetToggleCorrData())
             dumpEvent << position.X() << " " << position.Y() << " " << position.Z() << " " << hit.GetTimeStamp() << " "
                       << hit.GetCharge() << std::endl;
-         else if (fEventManager->GetToggleCorrData())
-            dumpEvent << positioncorr.X() << " " << positioncorr.Y() << " " << positioncorr.Z() << " "
-                      << hit.GetTimeStamp() << " " << hit.GetCharge() << std::endl;
       }
    }
 
@@ -496,7 +480,6 @@ void AtEventDrawTask::DrawHitPoints()
 
       AtHit hit = event->GetHitArray().at(iHit);
       auto position = hit.GetPosition();
-      auto positioncorr = hit.GetPositionCorr();
 
       if (f3DHitStyle == 0) {
 
@@ -507,10 +490,6 @@ void AtEventDrawTask::DrawHitPoints()
          if (!fEventManager->GetToggleCorrData()) {
             fhitBoxSet->AddBox(position.X() / 10. - HitBoxXDim / 2.0, position.Y() / 10.,
                                position.Z() / 10. - HitBoxZDim / 2.0, HitBoxXDim, HitBoxYDim,
-                               HitBoxZDim); // This coordinates are x,y,z in our system
-         } else if (fEventManager->GetToggleCorrData()) {
-            fhitBoxSet->AddBox(positioncorr.X() / 10. - HitBoxXDim / 2.0, positioncorr.Y() / 10.,
-                               positioncorr.Z() / 10. - HitBoxZDim / 2.0, HitBoxXDim, HitBoxYDim,
                                HitBoxZDim); // This coordinates are x,y,z in our system
          }
 
@@ -523,10 +502,6 @@ void AtEventDrawTask::DrawHitPoints()
          if (!fEventManager->GetToggleCorrData()) {
             fhitBoxSet->AddBox(position.X() / 10. - HitBoxXDim / 2.0, position.Y() / 10. - HitBoxYDim / 2.0,
                                position.Z() / 10. - HitBoxZDim / 2.0, HitBoxXDim, HitBoxYDim,
-                               HitBoxZDim); // This coordinates are x,y,z in our system
-         } else if (fEventManager->GetToggleCorrData()) {
-            fhitBoxSet->AddBox(positioncorr.X() / 10. - HitBoxXDim / 2.0, positioncorr.Y() / 10. - HitBoxYDim / 2.0,
-                               positioncorr.Z() / 10. - HitBoxZDim / 2.0, HitBoxXDim, HitBoxYDim,
                                HitBoxZDim); // This coordinates are x,y,z in our system
          }
       }

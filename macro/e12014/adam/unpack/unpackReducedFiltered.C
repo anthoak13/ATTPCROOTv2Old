@@ -48,11 +48,12 @@ void unpackReducedFiltered(int runNumber)
    std::cout << "Setting par file: " << digiParFile << std::endl;
    parIo1->open(digiParFile.Data(), "in");
    rtdb->setSecondInput(parIo1);
+   rtdb->getContainer("AtDigiPar");
 
    // Create the detector map
    auto mapping = std::make_shared<AtTpcMap>();
    mapping->ParseXMLMap(mapDir.Data());
-   mapping->GenerateAtTpc();
+   mapping->GeneratePadPlane();
 
    /**** Should not have to change code between this line and the above star comment ****/
    mapping->AddAuxPad({10, 0, 0, 0}, "MCP_US");
@@ -61,13 +62,13 @@ void unpackReducedFiltered(int runNumber)
    mapping->AddAuxPad({10, 0, 2, 34}, "IC");
 
    // Create the unpacker task
-   AtHDFParserTask *HDFParserTask = new AtHDFParserTask();
-   HDFParserTask->SetPersistence(kTRUE);
-   HDFParserTask->SetMap(mapping);
-   HDFParserTask->SetFileName(inputFile.Data());
-   HDFParserTask->SetOldFormat(false);
-   HDFParserTask->SetNumberTimestamps(2);
-   HDFParserTask->SetBaseLineSubtraction(kTRUE);
+   auto unpacker = std::make_unique<AtHDFUnpacker>(mapping);
+   unpacker->SetInputFileName(inputFile.Data());
+   unpacker->SetNumberTimestamps(2);
+   unpacker->SetBaseLineSubtraction(true);
+
+   auto unpackTask = new AtUnpackTask(std::move(unpacker));
+   unpackTask->SetPersistence(true);
 
    // Create data reduction task
    AtDataReductionTask *reduceTask = new AtDataReductionTask();
@@ -78,42 +79,35 @@ void unpackReducedFiltered(int runNumber)
 
    AtFilterSubtraction *filter = new AtFilterSubtraction(mapping);
    filter->SetThreshold(threshold);
+   filter->SetIsGood(false);
    AtFilterTask *filterTask = new AtFilterTask(filter);
-   filterTask->SetPersistence(kTRUE);
+   filterTask->SetPersistence(true);
    filterTask->SetFilterAux(true);
 
-   AtTrapezoidFilter *auxFilter = new AtTrapezoidFilter();
-   auxFilter->SetM(17.5);
-   auxFilter->SetRiseTime(4);
-   auxFilter->SetTopTime(10);
-   AtAuxFilterTask *auxFilterTask = new AtAuxFilterTask(auxFilter);
-   auxFilterTask->SetInputBranchName("AtRawEventFiltered");
-   auxFilterTask->AddAuxPad("IC");
-
-   AtPSASimple2 *psa = new AtPSASimple2();
+   // auto psa = new AtPSASimple2();
+   auto psa = std::make_unique<AtPSAMax>();
    psa->SetThreshold(threshold);
-   psa->SetMaxFinder();
+   // psa->SetMaxFinder();
 
-   // Create PSA task
-   AtPSAtask *psaTask = new AtPSAtask(psa);
+   AtPSAtask *psaTask = new AtPSAtask(std::move(psa));
+   // AtPSAtask *psaTask = new AtPSAtask(psa);
    psaTask->SetInputBranch("AtRawEventFiltered");
    psaTask->SetOutputBranch("AtEventFiltered");
-   psaTask->SetPersistence(kTRUE);
+   psaTask->SetPersistence(true);
 
    // Add unpacker to the run
-   run->AddTask(HDFParserTask);
-   run->AddTask(reduceTask);
+   run->AddTask(unpackTask);
+   // run->AddTask(reduceTask);
    run->AddTask(filterTask);
-   run->AddTask(auxFilterTask);
    run->AddTask(psaTask);
 
    run->Init();
 
    // Get the number of events and unpack the whole run
-   auto numEvents = HDFParserTask->GetNumEvents() / 2;
+   auto numEvents = unpackTask->GetNumEvents();
 
    // numEvents = 1700;//217;
-   // numEvents = 200;
+   numEvents = 10000;
 
    std::cout << "Unpacking " << numEvents << " events. " << std::endl;
 

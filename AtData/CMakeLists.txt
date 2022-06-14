@@ -8,6 +8,7 @@ Set(DEPENDENCIES
   ROOT::XMLParser
   ROOT::GenVector
   ROOT::Physics #For TVector3
+  ROOT::Eve
   )
 
 set(SRCS
@@ -30,6 +31,7 @@ set(SRCS
   AtPattern/AtPattern.cxx
   AtPattern/AtPatternLine.cxx
   AtPattern/AtPatternCircle2D.cxx
+  AtPattern/AtPatternY.cxx
   AtPattern/AtPatternTypes.cxx
   )
 

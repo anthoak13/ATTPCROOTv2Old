@@ -4,6 +4,7 @@
 #include "AtFitter.h"
 
 #include <Rtypes.h>
+#include <TMath.h> // for DegToRad
 #include <Track.h>
 
 #include <memory>
@@ -60,7 +61,7 @@ private:
 
 public:
    AtGenfit(Float_t magfield, Float_t minbrho, Float_t maxbrho, std::string eLossFile, Float_t gasMediumDensity,
-            Int_t minit = 5, Int_t maxit = 20);
+            Int_t pdg = 2212, Int_t minit = 5, Int_t maxit = 20);
    ~AtGenfit();
 
    genfit::Track *FitTracks(AtTrack *track) override;
@@ -85,6 +86,9 @@ public:
    TClonesArray *GetGenfitTrackArray();
    Int_t GetPDGCode() { return fPDGCode; }
    std::string &GetIonName() { return fIonName; }
+
+protected:
+   inline bool IsForwardTrack(double theta) { return theta < 90.0 * TMath::DegToRad(); }
    ClassDefOverride(AtGenfit, 1);
 };
 

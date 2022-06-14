@@ -8,8 +8,8 @@
 #include <cmath>     // for exp, sqrt, isinf, log, M_PI
 using namespace SampleConsensus;
 
-int SampleConsensus::EvaluateRansac(AtPatterns::AtPattern *model, const std::vector<AtHit> &hitArray,
-                                    double distanceThreshold)
+int SampleConsensus::EvaluateChi2(AtPatterns::AtPattern *model, const std::vector<AtHit> &hitArray,
+                                  double distanceThreshold)
 {
    int nbInliers = 0;
    double weight = 0;
@@ -24,6 +24,21 @@ int SampleConsensus::EvaluateRansac(AtPatterns::AtPattern *model, const std::vec
       }
    }
    model->SetChi2(weight / nbInliers);
+   return nbInliers;
+}
+int SampleConsensus::EvaluateRansac(AtPatterns::AtPattern *model, const std::vector<AtHit> &hitArray,
+                                    double distanceThreshold)
+{
+   int nbInliers = 0;
+   for (const auto &hit : hitArray) {
+      auto &pos = hit.GetPosition();
+      double error = model->DistanceToPattern(pos);
+      error = error * error;
+      if (error < (distanceThreshold * distanceThreshold)) {
+         nbInliers++;
+      }
+   }
+   model->SetChi2(1.0 / nbInliers);
    return nbInliers;
 }
 
@@ -99,4 +114,25 @@ int SampleConsensus::EvaluateLmeds(AtPatterns::AtPattern *model, const std::vect
    }
    model->SetChi2(AtTools::GetMedian(errorsVec) / errorsVec.size());
    return errorsVec.size();
+}
+
+int SampleConsensus::EvaluateWeightedRansac(AtPatterns::AtPattern *model, const std::vector<AtHit> &hitArray,
+                                            double distanceThreshold)
+{
+   int nbInliers = 0;
+   double totalCharge = 0;
+   double weight = 0;
+
+   for (const auto &hit : hitArray) {
+      auto &pos = hit.GetPosition();
+      double error = model->DistanceToPattern(pos);
+      error = error * error;
+      if (error < (distanceThreshold * distanceThreshold)) {
+         nbInliers++;
+         totalCharge += hit.GetCharge();
+         weight += error * hit.GetCharge();
+      }
+   }
+   model->SetChi2(weight / totalCharge);
+   return nbInliers;
 }

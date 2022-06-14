@@ -13,7 +13,7 @@ void unpack_e20020_full(TString fileName = "run_0160")
 
    TString parameterFile = "ATTPC.e20020.par";
    TString mappath = "";
-   TString filepath = "/mnt/analysis/attpc/";
+   TString filepath = "/mnt/rawdata/e20020/h5/";
    TString fileExt = ".h5";
    TString inputFile = filepath + fileName + fileExt;
    TString scriptfile = "e12014_pad_mapping.xml";
@@ -43,7 +43,6 @@ void unpack_e20020_full(TString fileName = "run_0160")
    // We must get the container before initializing a run
    rtdb->getContainer("AtDigiPar");
 
-   // Create the detector map
    auto fAtMapPtr = std::make_shared<AtTpcMap>();
    fAtMapPtr->ParseXMLMap(mapDir.Data());
    fAtMapPtr->GeneratePadPlane();
@@ -56,23 +55,33 @@ void unpack_e20020_full(TString fileName = "run_0160")
    auto unpackTask = new AtUnpackTask(std::move(unpacker));
    unpackTask->SetPersistence(false);
 
+   AtFilterSubtraction *filter = new AtFilterSubtraction(fAtMapPtr);
+   filter->SetThreshold(50);
+   filter->SetIsGood(false);
+
+   AtFilterTask *filterTask = new AtFilterTask(filter);
+   filterTask->SetPersistence(false);
+   filterTask->SetFilterAux(false);
+
    auto threshold = 20;
 
-   AtPSASimple2 *psa = new AtPSASimple2();
+   // auto psa = new AtPSASimple2();
+   auto psa = new AtPSAMax();
    psa->SetThreshold(threshold);
-   psa->SetMaxFinder();
+   // psa->SetMaxFinder();
 
    // Create PSA task
    AtPSAtask *psaTask = new AtPSAtask(psa);
    psaTask->SetPersistence(kTRUE);
+   psaTask->SetInputBranch("AtRawEventFiltered");
 
    AtPRAtask *praTask = new AtPRAtask();
    praTask->SetPersistence(kTRUE);
-   praTask->SetTcluster(5.0);
    praTask->SetMaxNumHits(3000);
    praTask->SetMinNumHits(200);
 
    run->AddTask(unpackTask);
+   run->AddTask(filterTask);
    run->AddTask(psaTask);
    run->AddTask(praTask);
 
@@ -82,10 +91,7 @@ void unpack_e20020_full(TString fileName = "run_0160")
 
    // Get the number of events and unpack the whole run
    auto numEvents = unpackTask->GetNumEvents();
-   numEvents = 200;
    std::cout << "Unpacking " << numEvents << " events. " << std::endl;
-
-   // return;
 
    run->Run(0, numEvents);
 
